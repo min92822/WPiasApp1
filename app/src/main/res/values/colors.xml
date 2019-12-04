@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#34469b</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="black">#000000</color>
+    <color name="cornflower_blue">#5494d2</color>
+    <color name="seafoam_blue">#66d2bb</color>
+    <color name="dark_sky_blue">#2ca3dd</color>
+    <color name="denim_blue">#34469b</color>
+
 </resources>
