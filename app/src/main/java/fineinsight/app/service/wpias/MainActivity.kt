@@ -1,7 +1,5 @@
 package fineinsight.app.service.wpias
 
-import android.app.Activity
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -29,18 +27,19 @@ class MainActivity : AppCompatActivity() {
     fun viewPager() {
 
         mainViewPager.adapter = mainViewPagerSetting(supportFragmentManager)
-//        mainViewPager.setPageTransformer(false, ViewPager.PageTransformer { page, position ->
-//
-//            page.translationX = page.width * -position
-//
-//            if(position <= -1.0F || position >= 1.0F){
-//                page.alpha = 0.0F
-//            } else if(position == 0.0F) {
-//                page.alpha = 1.0F
-//            } else {
-//                page.alpha = 1.0F - Math.abs(position)
-//            }
-//        })
+        mainViewPager.setPageTransformer(false, ViewPager.PageTransformer { page, position ->
+
+            page.translationX = page.width * -position
+
+            if(position <= -1.0F || position >= 1.0F){
+                page.alpha = 0.0F
+            } else if(position == 0.0F) {
+                page.alpha = 1.0F
+            } else {
+                page.alpha = 1.0F - Math.abs(position)
+            }
+        })
+        mainViewPager.currentItem = 1
     }
 
     fun setTransparentBar(){
