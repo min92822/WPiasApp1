@@ -21,9 +21,9 @@ class MainFragment1 : Fragment() {
 
     private fun buttonSetting() {
 
-        activity!!.btn_burn_info.setOnClickListener {
-
-        }
+//        activity!!.btn_burn_info.setOnClickListener {
+//
+//        }
 
     }
 

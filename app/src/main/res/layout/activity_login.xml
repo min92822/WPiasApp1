@@ -28,6 +28,7 @@
         android:background="@drawable/edit_text_shape"
         android:paddingLeft="15dp"
         android:drawableLeft="@drawable/id"
+        android:textColor="@color/warm_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -40,6 +41,7 @@
         android:background="@drawable/edit_text_shape"
         android:paddingLeft="15dp"
         android:drawableLeft="@drawable/pw"
+        android:textColor="@color/warm_grey"
         app:layout_constraintEnd_toEndOf="@+id/loginId"
         app:layout_constraintStart_toStartOf="@+id/loginId"
         app:layout_constraintTop_toBottomOf="@+id/loginId" />

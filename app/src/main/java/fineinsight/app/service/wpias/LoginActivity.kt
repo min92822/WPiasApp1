@@ -22,9 +22,26 @@ class LoginActivity : RootActivity(){
 
         PubVariable.init()
 
+        loginStateCheck()
+
         setTransparentBar()
 
         loginSubmit()
+
+    }
+
+    //로그인 상태 체크 앱 실행시 메인으로 바로 진행할지 여부를 결정하는 펑션
+    fun loginStateCheck(){
+
+        if(FirebaseAuth.getInstance().currentUser != null){
+
+            PubVariable.uid = FirebaseAuth.getInstance().currentUser?.uid!!
+
+            finish()
+
+            getUserinfo()
+
+        }
 
     }
 
@@ -69,7 +86,7 @@ class LoginActivity : RootActivity(){
 
         var map = HashMap<String,String>()
 
-        map["IDKEY"] = PubVariable.uid
+        map["IDKEY"] = FirebaseAuth.getInstance().currentUser?.uid!!
 
         ApiUtill().getSELECT_USER().select_user(map).enqueue(object : Callback<ArrayList<UserInfo>>{
 
@@ -83,6 +100,8 @@ class LoginActivity : RootActivity(){
                     if(response.body()?.size != 0){
 
                         PubVariable.userInfo = response.body()!![0]
+
+                        finish()
 
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
