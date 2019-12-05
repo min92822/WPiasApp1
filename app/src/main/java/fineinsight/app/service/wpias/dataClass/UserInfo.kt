@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class UserInfo (@SerializedName("IDKEY") @Expose var idkey : String,
-                     @SerializedName("EMIAL") @Expose var emial : String,
+                     @SerializedName("EMAIL") @Expose var email : String,
                      @SerializedName("NICKNAME") @Expose var nickname : String,
                      @SerializedName("GENDER") @Expose var gender : String,
                      @SerializedName("BIRTHDAY") @Expose var birthday : String,
