@@ -26,7 +26,8 @@
         android:layout_marginEnd="53dp"
         android:layout_marginRight="53dp"
         android:background="@drawable/edit_text_shape"
-        android:paddingLeft="26dp"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -37,7 +38,8 @@
         android:layout_height="45dp"
         android:layout_marginTop="26dp"
         android:background="@drawable/edit_text_shape"
-        android:paddingLeft="26dp"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/pw"
         app:layout_constraintEnd_toEndOf="@+id/loginId"
         app:layout_constraintStart_toStartOf="@+id/loginId"
         app:layout_constraintTop_toBottomOf="@+id/loginId" />

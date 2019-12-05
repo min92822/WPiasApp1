@@ -1,0 +1,191 @@
+{
+  "project_info": {
+    "project_number": "97343186628",
+    "firebase_url": "https://wpias-94d18.firebaseio.com",
+    "project_id": "wpias-94d18",
+    "storage_bucket": "wpias-94d18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97343186628:android:6d3d038025110aca3a4b91",
+        "android_client_info": {
+          "package_name": "com.example.wpias_migration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97343186628-4jnc7n70a9bhs775rqi1fh1nhfktd545.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wpias_migration",
+            "certificate_hash": "eb5eede199c197a3ea62e66777b375906c1d8043"
+          }
+        },
+        {
+          "client_id": "97343186628-sppbi930hph2ddg1fi71rprdt07b9iu1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC80Lp68pR7AgjA8R_Z-7s8Cb7pNQUGcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97343186628-sppbi930hph2ddg1fi71rprdt07b9iu1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "97343186628-obh8jc138jst6igemvmqqks7hccaj9t1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fineinsight.WPIAS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97343186628:android:f7b0ff529ce4ee95",
+        "android_client_info": {
+          "package_name": "com.phonegap.WPIAS"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97343186628-o9qrkt7lb0qk5hs7euhdednslei4hmnj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.WPIAS",
+            "certificate_hash": "0f95f50b30b3eea4e985ee30b0ec98a64c607eee"
+          }
+        },
+        {
+          "client_id": "97343186628-etg7coepvdhbahg4tl5ueirv6ddhd8rq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.WPIAS",
+            "certificate_hash": "47ed6ced1d4379630cde06e29e4951cc57c7fb4f"
+          }
+        },
+        {
+          "client_id": "97343186628-f0c2v9m8vqhthibtah9q8u6a2v9a0rc5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.WPIAS",
+            "certificate_hash": "a5f1a2d6e9825528792e0fa4ee5aeb28720c3c19"
+          }
+        },
+        {
+          "client_id": "97343186628-9vuvgtefsba0vjqkm076m24o61chrboq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.WPIAS",
+            "certificate_hash": "4187316b37e27dd1b5c1edac1f8fadb14d69e0ae"
+          }
+        },
+        {
+          "client_id": "97343186628-lh899c556u52vfs8tn4rbh4js66lr70h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.WPIAS",
+            "certificate_hash": "e5fcb611abd53be07d40f12a8c162fd7ad94c0a2"
+          }
+        },
+        {
+          "client_id": "97343186628-8oudad5vsn7rngp41ito4b5lsn47dsg6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.WPIAS",
+            "certificate_hash": "73f4576023b3e597af7803bde9b1f33d97fcbb6d"
+          }
+        },
+        {
+          "client_id": "97343186628-dsvalnjh7gm6feq6c989k0iftp1m22pq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phonegap.WPIAS",
+            "certificate_hash": "cc800e5e00fab638cb1ae96cd4b0e08a22c9c87b"
+          }
+        },
+        {
+          "client_id": "97343186628-sppbi930hph2ddg1fi71rprdt07b9iu1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC80Lp68pR7AgjA8R_Z-7s8Cb7pNQUGcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97343186628-sppbi930hph2ddg1fi71rprdt07b9iu1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "97343186628-obh8jc138jst6igemvmqqks7hccaj9t1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fineinsight.WPIAS"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97343186628:android:1c74c5fac68ddb1b3a4b91",
+        "android_client_info": {
+          "package_name": "fineinsight.app.service.wpias"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97343186628-rkfbcv5jn9nnp4pnnhf9nfeg8m4gursa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fineinsight.app.service.wpias",
+            "certificate_hash": "4187316b37e27dd1b5c1edac1f8fadb14d69e0ae"
+          }
+        },
+        {
+          "client_id": "97343186628-sppbi930hph2ddg1fi71rprdt07b9iu1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC80Lp68pR7AgjA8R_Z-7s8Cb7pNQUGcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97343186628-sppbi930hph2ddg1fi71rprdt07b9iu1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "97343186628-obh8jc138jst6igemvmqqks7hccaj9t1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fineinsight.WPIAS"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

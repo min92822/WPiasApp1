@@ -1,6 +1,8 @@
 package fineinsight.app.service.wpias
 
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
 open class RootActivity : AppCompatActivity() {
@@ -9,6 +11,13 @@ open class RootActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
+    }
+
+    fun setTransparentBar(){
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+//        window.statusBarColor(Color.argb())
     }
 
 }

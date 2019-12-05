@@ -14,7 +14,7 @@ import fineinsight.app.service.wpias.mainFragments.MainFragment3
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : RootActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +41,6 @@ class MainActivity : AppCompatActivity() {
         })
         mainViewPager.currentItem = 1
     }
-
-    fun setTransparentBar(){
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//        window.statusBarColor(Color.argb())
-    }
-
 
     class mainViewPagerSetting(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
