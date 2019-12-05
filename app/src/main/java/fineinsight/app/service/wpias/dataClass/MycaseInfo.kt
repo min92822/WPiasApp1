@@ -3,7 +3,7 @@ package fineinsight.app.service.wpias.dataClass
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class mycaseInfo(@SerializedName("CKEY") @Expose var ckey : String,
+data class MycaseInfo(@SerializedName("CKEY") @Expose var ckey : String,
                       @SerializedName("CNUMBER") @Expose var cnumber : String,
                       @SerializedName("CASEDATE") @Expose var casedate : String,
                       @SerializedName("DIRECTION") @Expose var direction : String,

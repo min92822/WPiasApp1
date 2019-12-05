@@ -3,7 +3,7 @@ package fineinsight.app.service.wpias.dataClass
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class userInfo (@SerializedName("IDKEY") @Expose var idkey : String,
+data class UserInfo (@SerializedName("IDKEY") @Expose var idkey : String,
                      @SerializedName("EMIAL") @Expose var emial : String,
                      @SerializedName("NICKNAME") @Expose var nickname : String,
                      @SerializedName("GENDER") @Expose var gender : String,

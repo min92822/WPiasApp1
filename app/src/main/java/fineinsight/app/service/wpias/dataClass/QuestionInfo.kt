@@ -3,7 +3,7 @@ package fineinsight.app.service.wpias.dataClass
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class questionInfo (@SerializedName("QKEY") @Expose var qkey : String,
+data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
                          @SerializedName("TITLE") @Expose var title : String,
                          @SerializedName("UUID") @Expose var uuid : String,
                          @SerializedName("INSERTDATE") @Expose var insertdate : String,
