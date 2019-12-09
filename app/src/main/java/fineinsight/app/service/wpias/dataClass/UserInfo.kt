@@ -17,7 +17,7 @@ data class UserInfo (@SerializedName("IDKEY") @Expose var idkey : String,
 
 /*
     IDKEY		UUID
-    EMIAL		이메일
+    EMAIL		이메일
     NICKNAME	닉네임(이름)
     GENDER		성별
     BIRTHDAY	생년월일

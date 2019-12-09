@@ -9,6 +9,7 @@ import fineinsight.app.service.wpias.mainFragments.MainFragment1
 import fineinsight.app.service.wpias.mainFragments.MainFragment2
 import fineinsight.app.service.wpias.mainFragments.MainFragment3
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.abs
 
 
 class MainActivity : RootActivity() {
@@ -17,13 +18,19 @@ class MainActivity : RootActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewPager()
-        setTransparentBar()
+        mainViewPager()
+        SetTransparentBar()
     }
 
-    fun viewPager() {
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        CloseAlert(this)
+    }
 
-        mainViewPager.adapter = mainViewPagerSetting(supportFragmentManager)
+    fun mainViewPager() {
+
+        mainViewPager.adapter = MainViewPagerSetting(supportFragmentManager)
+        mainViewPager.currentItem = 1
         mainViewPager.setPageTransformer(false, ViewPager.PageTransformer { page, position ->
 
             page.translationX = page.width * -position
@@ -33,13 +40,13 @@ class MainActivity : RootActivity() {
             } else if(position == 0.0F) {
                 page.alpha = 1.0F
             } else {
-                page.alpha = 1.0F - Math.abs(position)
+                page.alpha = 1.0F - abs(position)
             }
         })
-        mainViewPager.currentItem = 1
+
     }
 
-    class mainViewPagerSetting(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    class MainViewPagerSetting(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         var fragment = arrayOf(MainFragment1(), MainFragment2(), MainFragment3())
 

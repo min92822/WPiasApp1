@@ -7,7 +7,7 @@
     android:background="@color/white_two">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/btn_myquestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -18,29 +18,31 @@
 
     <EditText
         android:id="@+id/loginId"
-        android:layout_width="254dp"
+        android:layout_width="0dp"
         android:layout_height="45dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginLeft="53dp"
+        android:layout_marginStart="75dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginRight="53dp"
+        android:layout_marginEnd="75dp"
         android:background="@drawable/edit_text_shape"
-        android:paddingLeft="15dp"
         android:drawableLeft="@drawable/id"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:singleLine="true"
         android:textColor="@color/warm_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_myquestion" />
 
     <EditText
         android:id="@+id/loginPw"
-        android:layout_width="254dp"
+        android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginTop="26dp"
         android:background="@drawable/edit_text_shape"
-        android:paddingLeft="15dp"
         android:drawableLeft="@drawable/pw"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:textColor="@color/warm_grey"
         app:layout_constraintEnd_toEndOf="@+id/loginId"
         app:layout_constraintStart_toStartOf="@+id/loginId"
@@ -48,14 +50,16 @@
 
     <Button
         android:id="@+id/loginSubmit"
-        android:layout_width="254dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="0dp"
         android:layout_height="61dp"
         android:layout_marginTop="43dp"
+        android:background="@drawable/btn_login_gra"
+        android:lineHeight="44dp"
         android:text="로그인"
         android:textColor="@color/white"
         android:textSize="22dp"
-        android:lineHeight="44dp"
-        android:background="@drawable/btn_login_gra"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/loginPw"
         app:layout_constraintStart_toStartOf="@+id/loginPw"
         app:layout_constraintTop_toBottomOf="@+id/loginPw" />
@@ -80,7 +84,7 @@
         android:layout_marginTop="10dp"
         android:lineHeight="44dp"
         android:text="회원가입"
-        android:textColor="@color/warm_grey"
+        android:textColor="@color/dark_sky_blue"
         android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="@+id/textView"
         app:layout_constraintStart_toStartOf="@+id/textView"

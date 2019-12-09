@@ -4,15 +4,27 @@
     <color name="colorPrimaryDark">#34469b</color>
     <color name="colorAccent">#D81B60</color>
 
+    <!-- Black ~ White -->
     <color name="white">#ffffff</color>
     <color name="white_two">#f2f2f2</color>
     <color name="warm_grey">#9a9a9a</color>
-
+    <color name="warm_grey_three">#8f8f8f</color>
+    <color name="warm_grey_two">#777777</color>
+    <color name="greyish_brown">#444444</color>
     <color name="black">#000000</color>
+
     <color name="cornflower_blue">#5494d2</color>
     <color name="seafoam_blue">#66d2bb</color>
     <color name="dark_sky_blue">#2ca3dd</color>
     <color name="denim_blue">#34469b</color>
     <color name="light_navy_blue">#33499d</color>
+    <color name="pale_grey">#eaecf5</color>
+    <color name="salmon_pink">#fe7274</color>
+
+    <!--  버튼색  -->
+    <color name="windows_blue">#3a97d2</color>
+    <color name="easter_purple">#a463fd</color>
+    <color name="pale_red">#d23a3a</color>
+    <color name="white_three">#dcdcdc</color>
 
 </resources>

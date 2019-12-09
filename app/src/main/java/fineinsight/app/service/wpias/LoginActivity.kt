@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.ArrayList
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.collections.set
 
 class LoginActivity : RootActivity(){
 
@@ -24,7 +26,7 @@ class LoginActivity : RootActivity(){
 
         loginStateCheck()
 
-        setTransparentBar()
+        SetDarkBar()
 
         loginSubmit()
 
@@ -120,6 +122,13 @@ class LoginActivity : RootActivity(){
             }
 
         })
+
+    }
+
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        CloseAlert(this)
 
     }
 
