@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import fineinsight.app.service.wpias.mainFragments.MainFragment1
 import fineinsight.app.service.wpias.mainFragments.MainFragment2
@@ -29,7 +31,7 @@ class MainActivity : RootActivity() {
 
     fun mainViewPager() {
 
-        mainViewPager.adapter = MainViewPagerSetting(supportFragmentManager)
+        mainViewPager.adapter = MainViewPagerAdapter(supportFragmentManager)
         mainViewPager.currentItem = 1
         mainViewPager.setPageTransformer(false, ViewPager.PageTransformer { page, position ->
 
@@ -44,9 +46,12 @@ class MainActivity : RootActivity() {
             }
         })
 
+        indicator.setViewPager(mainViewPager)
+
+
     }
 
-    class MainViewPagerSetting(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    class MainViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         var fragment = arrayOf(MainFragment1(), MainFragment2(), MainFragment3())
 
@@ -56,6 +61,10 @@ class MainActivity : RootActivity() {
 
         override fun getCount(): Int {
             return fragment.size
+        }
+
+        override fun getItemPosition(`object`: Any): Int {
+            return POSITION_NONE
         }
 
     }

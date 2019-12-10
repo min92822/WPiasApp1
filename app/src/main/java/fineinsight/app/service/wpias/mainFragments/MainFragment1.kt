@@ -14,10 +14,12 @@ import kotlinx.android.synthetic.main.main_fragment_1.view.*
 
 class MainFragment1 : Fragment() {
 
+    var v : View? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         var view = inflater.inflate(R.layout.main_fragment_1, container, false)
-
+        v = view
         buttonSetting(view)
 
         return view
@@ -37,6 +39,13 @@ class MainFragment1 : Fragment() {
             startActivity(Intent(activity, SettingActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if(v !=null){
+
+        }
     }
 
 }

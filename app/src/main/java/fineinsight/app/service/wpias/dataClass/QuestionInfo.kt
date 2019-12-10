@@ -22,6 +22,7 @@ data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
                          @SerializedName("BURNNM") @Expose var burnnm : String,
                          @SerializedName("IMAGEURL1") @Expose var imageurl1 : String,
                          @SerializedName("IMAGEURL2") @Expose var imageurl2 : String,
+                         @SerializedName("CONTENTS") @Expose var contents : String,
                          @SerializedName("DETAILNM") @Expose var detailnm : String)
 
 /*

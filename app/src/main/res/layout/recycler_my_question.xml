@@ -6,9 +6,9 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
+        android:id="@+id/wrap_my_question"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="325dp"
         android:layout_margin="8dp"
         android:background="@drawable/bg_my_question"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/txt_my_case_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -42,13 +42,13 @@
                 android:text="Case | Date"
                 android:textColor="@color/warm_grey"
                 android:textSize="12dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView7"
+                app:layout_constraintBottom_toTopOf="@+id/txt_my_title"
                 app:layout_constraintStart_toEndOf="@+id/constraintLayout8"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/txt_my_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Title"
@@ -56,8 +56,8 @@
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintStart_toStartOf="@+id/txt_my_case_date"
+                app:layout_constraintTop_toBottomOf="@+id/txt_my_case_date" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -66,9 +66,9 @@
             android:layout_height="1dp"
             android:alpha="0.15"
             android:background="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
@@ -80,37 +80,37 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/img_my_left"
                 android:layout_width="165dp"
                 android:layout_height="165dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                app:layout_constraintEnd_toStartOf="@+id/img_my_right"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/img_my_right"
                 android:layout_width="165dp"
                 android:layout_height="165dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/img_my_left"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/txt_my_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
                 android:text="detail"
                 android:textColor="@color/black"
                 android:textSize="14dp"
-                android:layout_marginLeft="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/img_my_left" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
