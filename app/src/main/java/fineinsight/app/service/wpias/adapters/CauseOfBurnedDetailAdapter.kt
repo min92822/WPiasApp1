@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.R
 import kotlinx.android.synthetic.main.cause_of_burned_detail.view.*
 
-class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CauseOfBurnedDetailAdapter(category : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var viewArr = ArrayList<View>()
 
     var arr = ArrayList<String>()
 
@@ -59,13 +61,19 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
 
     }
 
-    class CauseOfBurnedDetailViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    inner class CauseOfBurnedDetailViewHolder(view : View) : RecyclerView.ViewHolder(view){
 
         var causeOfBurnedDetailWrapper = view.causeOfBurnedDetailWrapper
         var causeOfBurnedDetailCheckWrapper = view.causeOfBurnedDetailCheckWrapper
         var causeOfBurnedDetailImage = view.causeOfBurnedDetailImage
         var causeDetail = view.causeDetail
         var appCompatCheckBox = view.appCompatCheckBox
+
+        init {
+
+            viewArr.add(view)
+
+        }
 
     }
 

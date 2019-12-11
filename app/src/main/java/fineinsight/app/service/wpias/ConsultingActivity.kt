@@ -24,22 +24,25 @@ class ConsultingActivity : RootActivity(){
 
         bodyPartCheck()
 
+        genderTouch()
+
         causeRecyclerViewActivated()
 
-        bodyPartInit()
+        eventInit()
 
     }
 
     //신체 부위 리싸이클러뷰 활성화 및 부위 버튼 활성화
-    fun bodyPartInit(){
+    fun eventInit(){
 
         bodyFront.isChecked = true
 
-        frontActivated()
+        male.isChecked = true
 
     }
 
     //앞 뒤 구분 버튼 체크 이벤트
+    //버튼 및 버튼 글자 색 변환이 이벤트에 걸려있음
     fun bodyPartCheck(){
 
         bodyFront.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -70,7 +73,7 @@ class ConsultingActivity : RootActivity(){
 
     }
 
-    //앞 버튼 활성화시 실행되는 리싸이클러 뷰
+    //앞 버튼 터치시 실행되는 리싸이클러 뷰
     fun frontActivated(){
 
         var partListAdapter = PartListAdapter(bodyPartFront)
@@ -80,13 +83,42 @@ class ConsultingActivity : RootActivity(){
 
     }
 
-    //뒤 버튼 활성화시 실행되는 리싸이클러 뷰
+    //뒤 버튼 터치시 실행되는 리싸이클러 뷰
     fun backActivated(){
 
-        var partListAdapter = PartListAdapter(bodyPartFront)
+        var partListAdapter = PartListAdapter(bodyPartBack)
 
         bodyPartRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         bodyPartRecyclerView.adapter = partListAdapter
+
+    }
+
+    //성별 버튼 터치 펑션
+    fun genderTouch(){
+
+        male.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
+                female.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+            }else{
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                female.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
+
+        }
+
+        female.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
+                male.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+            }else{
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                male.setTextColor(ContextCompat.getColor(this, R.color.white))
+            }
+
+        }
 
     }
 

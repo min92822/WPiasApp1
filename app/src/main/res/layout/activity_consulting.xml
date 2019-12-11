@@ -18,6 +18,7 @@
         android:fillViewport="true"
         android:layout_marginTop="85dp"
         android:background="@color/white"
+        android:overScrollMode="never"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -249,6 +250,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="18dp"
+                android:paddingLeft="9dp"
                 android:background="@drawable/edit_text_shape2"
                 android:drawableRight="@drawable/ck_box"
                 android:focusable="false"
@@ -423,6 +425,312 @@
                 app:layout_constraintTop_toBottomOf="@+id/causeOfBurnedRecyclerView"
                 app:layout_constraintStart_toStartOf="@+id/causeOfBurnedRecyclerView"
                 app:layout_constraintEnd_toEndOf="@+id/causeOfBurnedRecyclerView" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="25dp"
+                android:lineHeight="27dp"
+                android:text="환자의 정보"
+                android:textAlignment="textStart"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/causeOfBurnedDetailRecyclerView" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/textView19"
+                app:layout_constraintStart_toStartOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineHeight="24dp"
+                android:text="본인이 아닐 경우 체크박스를 해제해 주세요."
+                android:textSize="16dp"
+                android:textColor="@color/greyish_brown"
+                app:layout_constraintStart_toStartOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView20">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/appCompatCheckBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chk_blue"
+                    android:button="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineHeight="19dp"
+                    android:text="본인"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="13dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatCheckBox3"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatCheckBox3"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatCheckBox3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:lineHeight="24dp"
+                android:text="성별"
+                android:textSize="16dp"
+                android:textColor="@color/greyish_brown"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout13"
+                android:layout_width="156dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView21">
+
+                <RadioGroup
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/male"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/rd_front"
+                        android:button="@null"
+                        android:text="남자"
+                        android:textAlignment="center"
+                        android:textSize="15dp" />
+
+                    <RadioButton
+                        android:id="@+id/female"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/rd_back"
+                        android:button="@null"
+                        android:text="여자"
+                        android:textAlignment="center"
+                        android:textSize="15dp" />
+
+                </RadioGroup>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:lineHeight="24dp"
+                android:text="연령"
+                android:textSize="16dp"
+                android:textColor="@color/greyish_brown"
+                app:layout_constraintStart_toStartOf="@+id/textView11"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="15dp"
+                android:paddingLeft="9dp"
+                android:background="@drawable/edit_text_shape2"
+                android:drawableRight="@drawable/ck_box"
+                android:focusable="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView22"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginEnd="25dp"
+                android:lineHeight="27dp"
+                android:text="상세한 질문 내용"
+                android:textAlignment="textStart"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/textView23"
+                app:layout_constraintStart_toStartOf="@+id/textView23"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineHeight="24dp"
+                android:text="질문 방향을 선택해주세요."
+                android:textSize="16dp"
+                android:textColor="@color/greyish_brown"
+                app:layout_constraintStart_toStartOf="@+id/textView23"
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="15dp"
+                android:paddingLeft="9dp"
+                android:background="@drawable/edit_text_shape2"
+                android:drawableRight="@drawable/ck_box"
+                android:focusable="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineHeight="24dp"
+                android:text="제목"
+                android:textSize="16dp"
+                android:textColor="@color/greyish_brown"
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/editText3" />
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/edit_text_shape2"
+                android:focusable="false"
+                android:hint="예 : 커피에 화상"
+                android:paddingLeft="9dp"
+                android:textColorHint="@color/warm_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView25"
+                app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineHeight="24dp"
+                android:text="제목"
+                android:textSize="16dp"
+                android:textColor="@color/greyish_brown"
+                app:layout_constraintStart_toStartOf="@+id/textView25"
+                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+            <EditText
+                android:id="@+id/editText5"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/edit_text_shape2"
+                android:focusable="false"
+                android:hint="예 : 식탁 위에서 뜨거운 커피를 손에 쏟았습니다."
+                android:paddingLeft="9dp"
+                android:textColorHint="@color/warm_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:lineHeight="20dp"
+                android:text="* 질문 작성시에 가격문의, 비속어, 불필요한 상담요청\n시 운영자에 의해 수정 또는 제재 될 수 있습니다."
+                android:textSize="14dp"
+                android:textColor="@color/dark_sky_blue_five"
+                app:layout_constraintStart_toStartOf="@+id/editText5"
+                app:layout_constraintTop_toBottomOf="@+id/editText5" />
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:lineHeight="20dp"
+                android:text="* 답변 내용은 참고용으로 전문가 및 위피아스의 법적\n책임은 없으며, 의학적 판단이나 진료행위로 해석할 수\n없습니다."
+                android:textSize="14dp"
+                android:textColor="@color/dark_sky_blue_five"
+                app:layout_constraintStart_toStartOf="@+id/textView27"
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/consultingSubmit"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bg_titlebar_1"
+                app:layout_constraintTop_toBottomOf="@+id/textView28"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineHeight="24dp"
+                    android:text="등록하기"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
