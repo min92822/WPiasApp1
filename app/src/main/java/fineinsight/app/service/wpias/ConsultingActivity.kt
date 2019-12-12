@@ -25,11 +25,15 @@ class ConsultingActivity : RootActivity(){
 
         SetTransparentBar()
 
+        burnedHistory()
+
         bodyPartCheck()
 
         genderTouch()
 
         causeRecyclerViewActivated()
+
+        identifyCheckBox()
 
         deptRecyclerViewActivated()
 
@@ -150,6 +154,54 @@ class ConsultingActivity : RootActivity(){
 
         questionRecyclerView.layoutManager = GridLayoutManager(this, 3)
         questionRecyclerView.adapter = QuestionAdapter()
+
+    }
+
+    //화상입은 시기 체크박스 이벤트
+    fun burnedHistory(){
+
+        recentlyBurnedWrapper.setOnClickListener {
+
+            recentlyBurned.isChecked = true
+
+        }
+
+        pastBurnedWrapper.setOnClickListener {
+
+            pastBurned.isChecked = true
+
+        }
+
+        recentlyBurned.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                pastBurned.isChecked = false
+
+            }
+
+        }
+
+        pastBurned.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                recentlyBurned.isChecked = false
+
+            }
+
+        }
+
+    }
+
+    //본인 체크박스 이벤트
+    fun identifyCheckBox(){
+
+        checkIdentifyWrapper.setOnClickListener {
+
+            checkIdentify.isChecked = !checkIdentify.isChecked
+
+        }
 
     }
 

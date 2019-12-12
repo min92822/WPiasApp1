@@ -173,14 +173,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout10"
+                android:id="@+id/recentlyBurnedWrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toBottomOf="@+id/textView12">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/appCompatCheckBox"
+                    android:id="@+id/recentlyBurned"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chk_blue"
@@ -196,21 +196,22 @@
                     android:text="현재 입은 화상"
                     android:textColor="@color/greyish_brown"
                     android:textSize="13dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatCheckBox"
-                    app:layout_constraintStart_toEndOf="@+id/appCompatCheckBox"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatCheckBox" />
+                    app:layout_constraintBottom_toBottomOf="@+id/recentlyBurned"
+                    app:layout_constraintStart_toEndOf="@+id/recentlyBurned"
+                    app:layout_constraintTop_toTopOf="@+id/recentlyBurned" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/pastBurnedWrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout10"
-                app:layout_constraintTop_toTopOf="@+id/constraintLayout10">
+                app:layout_constraintStart_toEndOf="@+id/recentlyBurnedWrapper"
+                app:layout_constraintTop_toTopOf="@+id/recentlyBurnedWrapper">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/appCompatCheckBox2"
+                    android:id="@+id/pastBurned"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chk_blue"
@@ -226,9 +227,9 @@
                     android:text="이전의 화상 흉터"
                     android:textColor="@color/greyish_brown"
                     android:textSize="13dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatCheckBox2"
-                    app:layout_constraintStart_toEndOf="@+id/appCompatCheckBox2"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatCheckBox2" />
+                    app:layout_constraintBottom_toBottomOf="@+id/pastBurned"
+                    app:layout_constraintStart_toEndOf="@+id/pastBurned"
+                    app:layout_constraintTop_toTopOf="@+id/pastBurned" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -242,7 +243,7 @@
                 android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout10" />
+                app:layout_constraintTop_toBottomOf="@+id/recentlyBurnedWrapper" />
 
             <EditText
                 android:id="@+id/editText"
@@ -465,7 +466,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view4" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout12"
+                android:id="@+id/checkIdentifyWrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -473,7 +474,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView20">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/appCompatCheckBox3"
+                    android:id="@+id/checkIdentify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chk_blue"
@@ -489,9 +490,9 @@
                     android:text="본인"
                     android:textColor="@color/greyish_brown"
                     android:textSize="13dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatCheckBox3"
-                    app:layout_constraintStart_toEndOf="@+id/appCompatCheckBox3"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatCheckBox3" />
+                    app:layout_constraintBottom_toBottomOf="@+id/checkIdentify"
+                    app:layout_constraintStart_toEndOf="@+id/checkIdentify"
+                    app:layout_constraintTop_toTopOf="@+id/checkIdentify" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -504,8 +505,8 @@
                 android:text="성별"
                 android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
-                app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
+                app:layout_constraintStart_toStartOf="@+id/checkIdentifyWrapper"
+                app:layout_constraintTop_toBottomOf="@+id/checkIdentifyWrapper" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout13"
@@ -652,7 +653,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="@color/white_three"
+                android:textColor="#a4a4a4"
                 android:text="* 기타 궁금하신 사항은 내용에 자세히 입력해주세요"
                 app:layout_constraintTop_toBottomOf="@+id/questionRecyclerView"
                 app:layout_constraintStart_toStartOf="@+id/questionRecyclerView"/>

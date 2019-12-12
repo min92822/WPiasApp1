@@ -101,7 +101,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/txt_my_question_detail_title" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout12"
+                        android:id="@+id/checkIdentifyWrapper"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
@@ -180,7 +180,7 @@
                         app:layout_constraintBottom_toTopOf="@+id/btn_my_question_detail_plus"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
+                        app:layout_constraintTop_toBottomOf="@+id/checkIdentifyWrapper">
 
                         <ExpandableListView
                             android:id="@+id/listView"

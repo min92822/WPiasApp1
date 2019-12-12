@@ -44,7 +44,7 @@ class QuestionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             questionWrapper.setOnClickListener {
 
-                viewArr[adapterPosition].appCompatCheckBox.isChecked = true
+                viewArr[adapterPosition].appCompatCheckBox.isChecked = !viewArr[adapterPosition].appCompatCheckBox.isChecked
 
             }
 
