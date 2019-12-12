@@ -25,6 +25,9 @@ class BurnInfoActivity : RootActivity() {
     private fun burnViewPager() {
 
         txt_title.text = "화상정보"
+        btn_back.setOnClickListener {
+            onBackPressed()
+        }
 
         burn_viewPager.adapter = BurnViewPagerSetting(supportFragmentManager)
 

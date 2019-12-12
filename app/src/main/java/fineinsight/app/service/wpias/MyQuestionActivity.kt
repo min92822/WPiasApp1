@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import fineinsight.app.service.wpias.adapters.MyQuestionAdapter
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.restApi.ApiUtill
@@ -27,6 +28,9 @@ class MyQuestionActivity : RootActivity() {
     fun myViewSetting(){
 
         txt_title.text = "상담내역 보기"
+        btn_back.setOnClickListener {
+            onBackPressed()
+        }
         txt_my_name.text = PubVariable.userInfo.nickname
 
         var myGender : String
@@ -58,17 +62,18 @@ class MyQuestionActivity : RootActivity() {
                     layout_my_question.visibility = View.VISIBLE
 
                     recycler_my_question.layoutManager = LinearLayoutManager(this@MyQuestionActivity)
-                    recycler_my_question.adapter = MyQuestionAdater(arr, this@MyQuestionActivity)
+                    recycler_my_question.adapter =
+                        MyQuestionAdapter(
+                            arr,
+                            this@MyQuestionActivity
+                        )
 
                 } else {
-
+                    Toast.makeText(this@MyQuestionActivity, "질문이 없습니다.", Toast.LENGTH_SHORT).show()
                 }
 
             }
         })
-
-
-
 
     }
 }
