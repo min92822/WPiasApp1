@@ -9,7 +9,7 @@ import fineinsight.app.service.wpias.R
 import kotlinx.android.synthetic.main.visit_dept.view.*
 import kotlinx.android.synthetic.main.visit_dept.view.appCompatCheckBox
 
-class DeptAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DeptAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var arr = arrayListOf("화상병원", "외과", "성형외과", "피부과", "응급실", "해당없음", "기타사항")
     var viewArr = ArrayList<View>()

@@ -108,7 +108,7 @@ class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<Recycl
                 for((i, bodyPartView) in viewArr.withIndex()){
 
                     if(i == adapterPosition){
-                        bodyPartView.bodyPart.setTextColor(ContextCompat.getColor(context, R.color.dark_sky_blue))
+                        bodyPartView.bodyPart.setTextColor(ContextCompat.getColor(context, R.color.ocean_blue))
                     }else{
                         bodyPartView.bodyPart.setTextColor(ContextCompat.getColor(context, R.color.black))
                     }

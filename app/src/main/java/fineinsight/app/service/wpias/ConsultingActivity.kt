@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.adapters.CauseOfBurnedAdapter
 import fineinsight.app.service.wpias.adapters.DeptAdapter
 import fineinsight.app.service.wpias.adapters.PartListAdapter
+import fineinsight.app.service.wpias.adapters.QuestionAdapter
 import kotlinx.android.synthetic.main.activity_consulting.*
+import kotlinx.android.synthetic.main.question.*
 
 class ConsultingActivity : RootActivity(){
 
@@ -29,7 +31,9 @@ class ConsultingActivity : RootActivity(){
 
         causeRecyclerViewActivated()
 
-        deptRecyclerViewAcivated()
+        deptRecyclerViewActivated()
+
+        questionRecyclerViewActivated()
 
         eventInit()
 
@@ -52,10 +56,10 @@ class ConsultingActivity : RootActivity(){
 
             if(isChecked){
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                bodyBack.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                bodyBack.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 frontActivated()
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 bodyBack.setTextColor(ContextCompat.getColor(this, R.color.white))
             }
 
@@ -65,10 +69,10 @@ class ConsultingActivity : RootActivity(){
 
             if(isChecked){
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                bodyFront.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                bodyFront.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 backActivated()
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 bodyFront.setTextColor(ContextCompat.getColor(this, R.color.white))
             }
 
@@ -103,9 +107,9 @@ class ConsultingActivity : RootActivity(){
 
             if(isChecked){
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                female.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                female.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 female.setTextColor(ContextCompat.getColor(this, R.color.white))
             }
 
@@ -115,9 +119,9 @@ class ConsultingActivity : RootActivity(){
 
             if(isChecked){
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                male.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                male.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.dark_sky_blue_four))
+                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 male.setTextColor(ContextCompat.getColor(this, R.color.white))
             }
 
@@ -134,10 +138,18 @@ class ConsultingActivity : RootActivity(){
     }
 
     //최근 치료받은 진료과 뿌려주는 펑션
-    fun deptRecyclerViewAcivated(){
+    fun deptRecyclerViewActivated(){
 
-        recentlyVisit.layoutManager = GridLayoutManager(this, 3)
-        recentlyVisit.adapter = DeptAdapter()
+        recentlyVisitRecyclerView.layoutManager = GridLayoutManager(this, 3)
+        recentlyVisitRecyclerView.adapter = DeptAdapter()
+
+    }
+
+    //질문 사항 체크박스
+    fun questionRecyclerViewActivated(){
+
+        questionRecyclerView.layoutManager = GridLayoutManager(this, 3)
+        questionRecyclerView.adapter = QuestionAdapter()
 
     }
 
