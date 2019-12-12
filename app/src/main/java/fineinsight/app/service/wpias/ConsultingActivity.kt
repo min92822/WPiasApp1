@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.adapters.CauseOfBurnedAdapter
+import fineinsight.app.service.wpias.adapters.DeptAdapter
 import fineinsight.app.service.wpias.adapters.PartListAdapter
 import kotlinx.android.synthetic.main.activity_consulting.*
 
@@ -27,6 +28,8 @@ class ConsultingActivity : RootActivity(){
         genderTouch()
 
         causeRecyclerViewActivated()
+
+        deptRecyclerViewAcivated()
 
         eventInit()
 
@@ -127,6 +130,14 @@ class ConsultingActivity : RootActivity(){
 
         causeOfBurnedRecyclerView.layoutManager = GridLayoutManager(this, 4)
         causeOfBurnedRecyclerView.adapter = CauseOfBurnedAdapter(causeCategory)
+
+    }
+
+    //최근 치료받은 진료과 뿌려주는 펑션
+    fun deptRecyclerViewAcivated(){
+
+        recentlyVisit.layoutManager = GridLayoutManager(this, 3)
+        recentlyVisit.adapter = DeptAdapter()
 
     }
 

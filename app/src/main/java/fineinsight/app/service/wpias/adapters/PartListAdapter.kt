@@ -45,7 +45,8 @@ class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<Recycl
     //리싸이클러 뷰 실행시 이미지 및 부위 설정을 설정하는 펑션
     fun whenLoad(position: Int){
 
-        //강제로 이벤트 발생시킴
+        //강제로 터치 이벤트 발생시킴
+        //무한 반복 boolean으로 막음
         if(position == 0 && isFirst){
 
             viewArr[0].dispatchTouchEvent(
@@ -104,12 +105,12 @@ class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<Recycl
 
                 //온 클릭 이벤트에 viewArr 반복문을 실행하고
                 //index 위치와 adapter position을 비교해 같으면 색을 띄운다
-                for((i, view) in viewArr.withIndex()){
+                for((i, bodyPartView) in viewArr.withIndex()){
 
                     if(i == adapterPosition){
-                        view.bodyPart.setTextColor(ContextCompat.getColor(context, R.color.dark_sky_blue))
+                        bodyPartView.bodyPart.setTextColor(ContextCompat.getColor(context, R.color.dark_sky_blue))
                     }else{
-                        view.bodyPart.setTextColor(ContextCompat.getColor(context, R.color.black))
+                        bodyPartView.bodyPart.setTextColor(ContextCompat.getColor(context, R.color.black))
                     }
 
                 }

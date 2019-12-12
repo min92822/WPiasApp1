@@ -112,7 +112,7 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
                     }
                     "음부" -> {
                         arr = privatePart
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.umbu)
+                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.umbu_f)
                     }
                     "다리" -> {
                         arr = fLegs
