@@ -113,7 +113,7 @@
                             android:id="@+id/imageView5"
                             android:layout_width="75dp"
                             android:layout_height="75dp"
-                            android:src="@drawable/male_2"
+                            android:src="@drawable/s_male"
                             app:layout_constraintEnd_toStartOf="@+id/imageView2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -153,7 +153,7 @@
                             android:id="@+id/imageView17"
                             android:layout_width="75dp"
                             android:layout_height="75dp"
-                            android:src="@drawable/sun_b"
+                            android:src="@drawable/s_sun_b"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView2"
                             app:layout_constraintTop_toTopOf="@+id/imageView2" />
