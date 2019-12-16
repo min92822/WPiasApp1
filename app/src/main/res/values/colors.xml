@@ -24,6 +24,7 @@
     <color name="dark_sky_blue_three">#2fb1e5</color>
     <color name="dark_sky_blue_four">#50bfeb</color>
     <color name="dark_sky_blue_five">#27b0e7</color>
+    <color name="light_blue_grey">#DAE7F0</color>
 
     <!--  버튼색  -->
     <color name="windows_blue">#3a97d2</color>
