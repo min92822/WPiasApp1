@@ -3,15 +3,22 @@ package fineinsight.app.service.wpias
 import android.os.Bundle
 import android.view.View
 import android.widget.ExpandableListView
+import androidx.recyclerview.widget.LinearLayoutManager
 import fineinsight.app.service.wpias.adapters.ExpandableListAdapter
+import fineinsight.app.service.wpias.dataClass.QuestionInfo
+import kotlinx.android.synthetic.main.activity_my_question_detail.*
 import kotlinx.android.synthetic.main.title_bar_skyblue.*
 
 
 class MyQuestionDetailActivity : RootActivity() {
 
+    var m_questionInfo: QuestionInfo? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_question_detail)
+
+        m_questionInfo = intent.getSerializableExtra("myQuestion") as QuestionInfo
 
         SetTransparentBar()
 
@@ -25,6 +32,14 @@ class MyQuestionDetailActivity : RootActivity() {
         btn_back.setOnClickListener {
             onBackPressed()
         }
+
+        txt_my_question_detail_title.text = m_questionInfo!!.title
+        txt_my_question_detail_date.text = "화상입은 날짜 : ${m_questionInfo!!.burndate}"
+
+        txt_my_question_detail_age.text = m_questionInfo!!.age
+        txt_my_question_detail_burn.text = "${m_questionInfo!!.burnnm}화상"
+        txt_my_question_detail_body.text = m_questionInfo!!.detailnm
+
 
         // ExpandableListView Setting
         var expandableListView = findViewById<ExpandableListView>(R.id.listView)
@@ -47,6 +62,7 @@ class MyQuestionDetailActivity : RootActivity() {
         }
 
         // 상처 경과기록
+        recycler_my_question_detail.layoutManager = LinearLayoutManager(this@MyQuestionDetailActivity)
 
 
     }

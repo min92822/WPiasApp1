@@ -190,6 +190,7 @@
                             android:dividerHeight="0dp"
                             android:layoutDirection="rtl"
                             android:listSelector="@android:color/transparent"
+                            android:scrollbars="none"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

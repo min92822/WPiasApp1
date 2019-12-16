@@ -43,7 +43,7 @@ class MyQuestionAdapter(var arr:ArrayList<QuestionInfo>, var activity: Activity)
 
         holder.wrapper.setOnClickListener {
 
-            activity.startActivity(Intent(activity, MyQuestionDetailActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+            activity.startActivity(Intent(activity, MyQuestionDetailActivity::class.java).putExtra("myQuestion", arr[position]).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
         }
 
