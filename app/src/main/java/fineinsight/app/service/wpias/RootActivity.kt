@@ -1,19 +1,14 @@
 package fineinsight.app.service.wpias
 
-import android.R.color
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.StatusBarManager
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
-import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -22,13 +17,8 @@ import kotlinx.android.synthetic.main.custom_alert.*
 
 open class RootActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-
-        super.onCreate(savedInstanceState)
-
-    }
-
     // 투명 상태바
+    @SuppressLint("ObsoleteSdkInt")
     fun SetTransparentBar(){
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -78,6 +68,7 @@ open class RootActivity : AppCompatActivity() {
 
 
     // 종료 alert
+    @SuppressLint("SetTextI18n")
     fun CloseAlert(context:Context){
 
         var dialog = Dialog(context)

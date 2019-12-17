@@ -85,87 +85,93 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
         when(fb){
 
             "front" -> {
+
+                (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.f)
+
                 when(part){
                     "머리" -> {
                         arr = fHead
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.mori_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.mori)
                     }
                     "어깨" -> {
                         arr = fShoulder
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.akke_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.akke)
                     }
                     "가슴" -> {
                         arr = chest
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.gasem_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.gasem)
                     }
                     "배" -> {
                         arr = belly
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.bae_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.bae)
                     }
                     "팔" -> {
                         arr = fArms
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.arm_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.arm)
                     }
                     "손" -> {
                         arr = fHands
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.sun_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.sun)
                     }
                     "음부" -> {
                         arr = privatePart
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.umbu_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.umbu_f)
                     }
                     "다리" -> {
                         arr = fLegs
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.dari_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.dari_f)
                     }
                     "발" -> {
                         arr = fFoot
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.bar_f)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.bar)
                     }
                     "호흡기" -> {
                         arr = respiratory
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.hohm)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.hohm)
                     }
                 }
             }
 
             "back" -> {
+
+                (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.b)
+
                 when(part){
                     "머리" -> {
                         arr = bHead
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.mori_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.mori)
                     }
                     "어깨" -> {
                         arr = bShoulder
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.akke_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.akke)
                     }
                     "등" -> {
                         arr = back
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.gasem_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.gasem)
                     }
                     "허리" -> {
                         arr = waist
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.bae_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.bae)
                     }
                     "팔" -> {
                         arr = bArms
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.arm_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.arm)
                     }
                     "손" -> {
                         arr = bHands
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.sun_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.sun)
                     }
                     "엉덩이" -> {
                         arr = hip
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.umbu_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.umbu_b)
                     }
                     "다리" -> {
                         arr = bLegs
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.dari_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.dari_b)
                     }
                     "발" -> {
                         arr = bFoot
-                        (context as ConsultingActivity).bodyImage.setImageResource(R.drawable.bar_b)
+                        (context as ConsultingActivity).bodyImage.setBackgroundResource(R.drawable.bar)
                     }
                 }
             }

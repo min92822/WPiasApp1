@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/include2"
-        layout="@layout/title_bar_skyblue"
+        layout="@layout/title_bar_darkblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,24 +64,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView2"
+                android:id="@+id/shortDistanceShot"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="13dp"
-                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintEnd_toStartOf="@+id/longDistanceShot"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView"
+                android:id="@+id/longDistanceShot"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                app:layout_constraintBottom_toBottomOf="@+id/shortDistanceShot"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-                app:layout_constraintTop_toTopOf="@+id/appCompatImageView2" />
+                app:layout_constraintStart_toEndOf="@+id/shortDistanceShot"
+                app:layout_constraintTop_toTopOf="@+id/shortDistanceShot" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout9"
@@ -90,7 +90,7 @@
                 android:layout_marginTop="13dp"
                 android:background="@drawable/bg_notice"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2">
+                app:layout_constraintTop_toBottomOf="@+id/shortDistanceShot">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -349,7 +349,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="65dp"
                 android:layout_marginTop="41dp"
-                android:src="@drawable/mori_f"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout11"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
@@ -741,7 +740,7 @@
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/bg_titlebar_1"
+                android:background="@drawable/bg_titlebar_2"
                 app:layout_constraintTop_toBottomOf="@+id/textView28"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
