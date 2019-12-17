@@ -15,16 +15,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator"
-        app:ci_drawable="@drawable/main_page_dot_default"
-        app:ci_height="7dp"
-        app:ci_width="7dp"
-        app:ci_margin="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="50dp"
-        android:layout_width="50dp" />
+<!--    <me.relex.circleindicator.CircleIndicator-->
+<!--        android:id="@+id/indicator"-->
+<!--        app:ci_drawable="@drawable/main_page_dot_default"-->
+<!--        app:ci_height="7dp"-->
+<!--        app:ci_width="7dp"-->
+<!--        app:ci_margin="4dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_width="50dp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

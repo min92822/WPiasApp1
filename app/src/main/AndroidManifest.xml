@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyCaseActivity"></activity>
+        <activity android:name=".BurnInfoDetailActivity"></activity>
+        <activity android:name=".MyCaseActivity" />
         <activity android:name=".MyQuestionDetailActivity" />
         <activity android:name=".MyQuestionActivity" />
         <activity android:name=".SettingActivity" />

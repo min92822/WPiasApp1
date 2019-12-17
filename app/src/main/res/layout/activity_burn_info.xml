@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/img_burn_info_top"
         android:layout_width="0dp"
         android:layout_height="215dp"
         android:src="@drawable/btn_gray"
@@ -28,8 +28,8 @@
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:tabIndicatorColor="@color/denim_blue"
+        app:layout_constraintTop_toBottomOf="@+id/img_burn_info_top"
+        app:tabIndicatorColor="@color/windows_blue"
         app:tabIndicatorHeight="5dp" />
 
     <androidx.viewpager.widget.ViewPager

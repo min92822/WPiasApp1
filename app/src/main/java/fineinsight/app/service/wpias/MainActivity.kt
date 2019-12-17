@@ -46,7 +46,7 @@ class MainActivity : RootActivity() {
             }
         })
 
-        indicator.setViewPager(mainViewPager)
+//        indicator.setViewPager(mainViewPager)
 
 
     }

@@ -7,13 +7,13 @@
     <!-- Black ~ White -->
     <color name="white">#ffffff</color>
     <color name="white_two">#f2f2f2</color>
-    <color name="warm_grey">#9a9a9a</color>
+    <color name="warm_grey">#9A9A9A</color>
     <color name="warm_grey_three">#8f8f8f</color>
     <color name="warm_grey_two">#777777</color>
     <color name="greyish_brown">#444444</color>
     <color name="black">#000000</color>
 
-    <color name="cornflower_blue">#5494d2</color>
+    <color name="cornflower_blue">#5494D2</color>
     <color name="seafoam_blue">#66d2bb</color>
     <color name="dark_sky_blue">#2ca3dd</color>
     <color name="denim_blue">#34469b</color>

@@ -33,7 +33,7 @@ class BurnInfoActivity : RootActivity() {
 
         burn_tabLayout.addTab(burn_tabLayout.newTab().setText("화상종류"))
         burn_tabLayout.addTab(burn_tabLayout.newTab().setText("화상응급처치"))
-        burn_tabLayout.addTab(burn_tabLayout.newTab().setText("화상통계"))
+//        burn_tabLayout.addTab(burn_tabLayout.newTab().setText("화상통계"))
 
         burn_tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(p0: TabLayout.Tab?) {
@@ -46,6 +46,12 @@ class BurnInfoActivity : RootActivity() {
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 burn_viewPager.currentItem = p0!!.position
+
+                if(p0.position == 0) {
+                    img_burn_info_top.setImageResource(R.color.easter_purple)
+                } else if(p0.position == 1){
+                    img_burn_info_top.setImageResource(R.color.light_blue_grey)
+                }
             }
         })
 
@@ -54,7 +60,7 @@ class BurnInfoActivity : RootActivity() {
 
     class BurnViewPagerSetting(fm:FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 
-        var fragment = arrayOf(BurnFragment1(), BurnFragment2(), BurnFragment3())
+        var fragment = arrayOf(BurnFragment1(), BurnFragment2()) //, BurnFragment3())
 
         override fun getItem(position: Int): Fragment {
             return fragment[position]
