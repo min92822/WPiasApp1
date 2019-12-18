@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
+import fineinsight.app.service.wpias.ConsultingActivity
 import fineinsight.app.service.wpias.R
 import kotlinx.android.synthetic.main.question.view.*
 
@@ -45,6 +46,8 @@ class QuestionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             questionWrapper.setOnClickListener {
 
                 viewArr[adapterPosition].appCompatCheckBox.isChecked = !viewArr[adapterPosition].appCompatCheckBox.isChecked
+
+                ConsultingActivity.directionV = (adapterPosition + 1).toString().padStart(2, '0')
 
             }
 

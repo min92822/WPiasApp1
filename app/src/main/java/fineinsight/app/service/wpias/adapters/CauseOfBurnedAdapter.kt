@@ -121,6 +121,7 @@ class CauseOfBurnedAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<R
 
                 }
 
+                ConsultingActivity.burnStyleV = (adapterPosition + 1).toString().padStart(2, '0')
                 whenLoad(adapterPosition)
 
             }

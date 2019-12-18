@@ -2,61 +2,121 @@ package fineinsight.app.service.wpias
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
 import android.graphics.Matrix
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import android.view.Window
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.microsoft.azure.storage.CloudStorageAccount
-import com.microsoft.azure.storage.blob.CloudBlobContainer
 import fineinsight.app.service.wpias.adapters.CauseOfBurnedAdapter
 import fineinsight.app.service.wpias.adapters.DeptAdapter
 import fineinsight.app.service.wpias.adapters.PartListAdapter
 import fineinsight.app.service.wpias.adapters.QuestionAdapter
-import fineinsight.app.service.wpias.dataClass.UserInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.shot_distance_popup.*
-import java.io.ByteArrayOutputStream
+import kotlinx.android.synthetic.main.title_bar_darkblue.*
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.lang.Exception
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ConsultingActivity : RootActivity(){
 
-    val REQUEST_TAKE_PHOTO = 1
-    val GET_IMAGE_FROM_GALLERY = 2
+    //on Activity Result Request Code 상수
+    val REQUEST_TAKE_PHOTO_10 = 1
+    val REQUEST_TAKE_PHOTO_20 = 2
+    val GET_IMAGE_FROM_GALLERY_10 = 3
+    val GET_IMAGE_FROM_GALLERY_20 = 4
 
+    //storage 문자열
     val storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=storagewpias;AccountKey=G+ZyYwRLvxTFebMpLqsSeNI/V+1ALImJqs1MAG1rD315BN1TRO7Q8CpcKv0KOmRB9hasKF4pJqZkTEJ3TEAlPw=="
 
+    //AzureAsyncTask에 들어가는 image uri 및 input stream 배열
     lateinit var imageUri : Uri
-    lateinit var inputStream : InputStream
-    var imageLength = 0
     lateinit var imageUri2 : Uri
-    lateinit var inputStream2 : InputStream
-    var imageLength2 = 0
+    var inputStreamArr = ArrayList<InputStream>()
+    var imageLengthArr = ArrayList<Int>()
 
+    //사진 원본파일 이미지 저장용 path
     var currentPhotoPath = ""
+
+    //촬영 모드 구분용도
+    var cameraMode = ""
+
+    var MYyear = 0
+    var MYmonth = 0
+    var MYday = 0
+
+    //validation 용도
+    //일부 validation이 adapter에 checkBox들의 값에 의하기 때문에
+    companion object {
+
+        var consultingTitleV = ""
+        var burnDateV = ""
+        var ageV = ""
+        var genderV = ""
+        var bodyStyleV = ""
+        var bodyDetailV = ""
+        var bodyGitaV = ""
+        var burnStyleV = ""
+        var burnDetailV = ""
+        var burnGitaV = ""
+        var scarStyleV = ""
+        var proStatusV = "Q"
+        var directionV = ""
+        var imageUrl1V = ""
+        var imageUrl2V = ""
+        var contentsV = ""
+
+    }
 
     var bodyPartFront = arrayListOf("머리", "어깨", "가슴", "배", "팔", "손", "음부", "다리", "발", "호흡기")
     var bodyPartBack = arrayListOf("머리", "어깨", "등", "허리", "팔", "손", "엉덩이", "다리", "발")
     var causeCategory = arrayListOf("열탕", "화염", "전기", "접촉", "저온", "화학", "증기", "마찰", "햇빛", "흡입")
+
+    init {
+
+        consultingTitleV = ""
+        burnDateV = ""
+        ageV = ""
+        genderV = ""
+        bodyStyleV = ""
+        bodyDetailV = ""
+        bodyGitaV = ""
+        burnStyleV = ""
+        burnDetailV = ""
+        burnGitaV = ""
+        scarStyleV = ""
+        proStatusV = "Q"
+        directionV = ""
+        imageUrl1V = ""
+        imageUrl2V = ""
+        contentsV = ""
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -67,11 +127,19 @@ class ConsultingActivity : RootActivity(){
 
         SetTransparentBar()
 
+        setTitle()
+
+        popupCalendar()
+
         burnedHistory()
 
         bodyPartCheck()
 
         genderTouch()
+
+        identifySetSpinnerAndGender()
+
+        ageSpinnerPopup()
 
         causeRecyclerViewActivated()
 
@@ -90,11 +158,61 @@ class ConsultingActivity : RootActivity(){
     }
 
     //신체 부위 리싸이클러뷰 활성화 및 부위 버튼 활성화
+    //validation을 위한 이벤트 이 펑션에 등록
+    @SuppressLint("SimpleDateFormat")
     fun eventInit(){
 
         bodyFront.isChecked = true
 
         male.isChecked = true
+
+        whenBurned.addTextChangedListener(object : TextWatcher{
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                burnDateV = s.toString()
+
+            }
+
+        })
+
+        consultingTitle.addTextChangedListener(object : TextWatcher{
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                 consultingTitleV = s.toString()
+
+            }
+
+        })
+
+        consultingContents.addTextChangedListener(object : TextWatcher{
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                contentsV = s.toString()
+
+            }
+
+        })
 
     }
 
@@ -179,6 +297,91 @@ class ConsultingActivity : RootActivity(){
 
     }
 
+    //연령 spinner 펑션
+    fun ageSpinnerPopup(){
+
+        var arrayAdapter : ArrayAdapter<String>? = null
+
+        var generation = arrayListOf("", "0~3세", "4~6세", "7~15세", "16~20세", "21~30세", "31~40세", "41~50세", "51~60세", "61세이상")
+
+        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, generation)
+
+        age.adapter = arrayAdapter
+
+        age.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                ageV = if(position == 0){
+
+                    ""
+
+                }else{
+
+                    age.selectedItem.toString()
+
+                }
+            }
+        }
+
+
+    }
+
+    //본인 눌렀을때 펑션
+    //spinner age에 본인 연령대에 맞는 아이템으로 셀렉션을 한다.
+    fun identifySetSpinnerAndGender(){
+
+        checkIdentify.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                when{
+
+                    getAge(PubVariable.userInfo.birthday) > 60 -> age.setSelection(9)
+                    getAge(PubVariable.userInfo.birthday) > 50 -> age.setSelection(8)
+                    getAge(PubVariable.userInfo.birthday) > 40 -> age.setSelection(7)
+                    getAge(PubVariable.userInfo.birthday) > 30 -> age.setSelection(6)
+                    getAge(PubVariable.userInfo.birthday) > 20 -> age.setSelection(5)
+                    getAge(PubVariable.userInfo.birthday) > 16 -> age.setSelection(4)
+                    getAge(PubVariable.userInfo.birthday) > 6 -> age.setSelection(3)
+                    getAge(PubVariable.userInfo.birthday) > 3 -> age.setSelection(2)
+                    getAge(PubVariable.userInfo.birthday) >= 0 -> age.setSelection(1)
+
+                }
+
+                when(PubVariable.userInfo.gender){
+                    "M" -> male.isChecked = true
+                    "F" -> female.isChecked = true
+                }
+
+            }else{
+
+                age.setSelection(0)
+
+            }
+
+        }
+
+    }
+
+    //나이 구하는 펑션
+    fun getAge(birthYear : String) : Int{
+
+        var current = Calendar.getInstance()
+        var currentYear  = current.get(Calendar.YEAR)
+
+        var age = currentYear - birthYear.substring(0,4).toInt()
+
+        return age
+    }
+
     //화상 원인 버튼 카테고리 뿌려주는 펑션
     fun causeRecyclerViewActivated() {
 
@@ -203,18 +406,62 @@ class ConsultingActivity : RootActivity(){
 
     }
 
+    //화상입은 시기 캘린더 팝업 이벤트
+    @SuppressLint("SetTextI18n")
+    fun popupCalendar(){
+
+        var now = LocalDate.now().toString()
+
+        var year = now.split("-")[0]
+        var month = (now.split("-")[1]).toString().padStart(2, '0')
+        var day = now.split("-")[2].toString().padStart(2, '0')
+
+        MYyear = year.toInt()
+        MYmonth = month.toInt()
+        MYday = day.toInt()
+
+        whenBurned.setOnClickListener{
+
+            val dp = DatePickerDialog(
+                this,
+                android.app.AlertDialog.THEME_HOLO_DARK,
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    whenBurned.setText("${year}년 ${(month + 1).toString().padStart(2,'0')}월 ${dayOfMonth.toString().padStart(2, '0')}일")
+                    burnDateV = "$year + ${month + 1} + $dayOfMonth"
+                },
+                MYyear,
+                MYmonth,
+                MYday
+
+            )
+
+            dp.setOnCancelListener {
+
+            }
+
+            dp.datePicker.maxDate = Calendar.getInstance().timeInMillis
+
+            dp.show()
+
+        }
+
+    }
+
     //화상입은 시기 체크박스 이벤트
+    @SuppressLint("SetTextI18n")
     fun burnedHistory(){
 
         recentlyBurnedWrapper.setOnClickListener {
 
             recentlyBurned.isChecked = true
+            burnStyleV = "burn"
 
         }
 
         pastBurnedWrapper.setOnClickListener {
 
             pastBurned.isChecked = true
+            burnStyleV = "scar"
 
         }
 
@@ -223,6 +470,10 @@ class ConsultingActivity : RootActivity(){
             if(isChecked){
 
                 pastBurned.isChecked = false
+                whenBurned.setText("$MYyear.$MYmonth.$MYday")
+                whenBurned.isEnabled = false
+
+                burnDateV = whenBurned.text.toString()
 
             }
 
@@ -233,10 +484,15 @@ class ConsultingActivity : RootActivity(){
             if(isChecked){
 
                 recentlyBurned.isChecked = false
+                whenBurned.setText("")
+                whenBurned.hint = "화상을 입은 날짜를 입력해주세요."
+                whenBurned.isEnabled = true
 
             }
 
         }
+
+        recentlyBurned.isChecked =true
 
     }
 
@@ -257,10 +513,13 @@ class ConsultingActivity : RootActivity(){
         shortDistanceShot.setOnClickListener { shortDistancePopup() }
 
         longDistanceShot.setOnClickListener { longDistancePopup() }
+
     }
 
     //부위 촬영 팝업(10cm)
     fun shortDistancePopup(){
+
+        cameraMode = "short"
 
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -290,13 +549,44 @@ class ConsultingActivity : RootActivity(){
     }
 
     //부위 촬영 팝업(20cm)
+    @SuppressLint("SetTextI18n")
     fun longDistancePopup(){
 
+        cameraMode = "long"
 
+        var dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.shot_distance_popup)
+        dialog.window!!.setBackgroundDrawableResource(R.drawable.bg_alert2)
+
+        dialog.imageView.setImageResource(R.drawable.pic_20_cm)
+        dialog.textView31.text = "2단계 상세 촬영"
+        dialog.textView32.text = "상처 부위로부터 약 20cm 가량 위에서 촬영해주세요."
+
+        dialog.takeShotWrapper.setOnClickListener {
+
+            dispatchTakePictureIntent()
+
+        }
+
+        dialog.chooseFromGalleryWrapper.setOnClickListener {
+
+            fromAlbum()
+
+        }
+
+        dialog.cancelWrapper.setOnClickListener {
+
+            dialog.dismiss()
+
+        }
+
+        dialog.show()
 
     }
 
     //핸드폰에 내장된 카메라 관련 어플들을 불러오는 펑션
+    //촬영 모드 구분
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
@@ -315,7 +605,11 @@ class ConsultingActivity : RootActivity(){
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
+                    if(cameraMode == "short") {
+                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO_10)
+                    }else{
+                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO_20)
+                    }
                 }
             }
         }
@@ -324,7 +618,17 @@ class ConsultingActivity : RootActivity(){
     //앨범에서 이미지 가져오는 펑션
     fun fromAlbum(){
 
-        startActivityForResult(Intent(Intent.ACTION_PICK).setType(MediaStore.Images.Media.CONTENT_TYPE), GET_IMAGE_FROM_GALLERY)
+        if(cameraMode == "short") {
+            startActivityForResult(
+                Intent(Intent.ACTION_PICK).setType(MediaStore.Images.Media.CONTENT_TYPE),
+                GET_IMAGE_FROM_GALLERY_10
+            )
+        }else{
+            startActivityForResult(
+                Intent(Intent.ACTION_PICK).setType(MediaStore.Images.Media.CONTENT_TYPE),
+                GET_IMAGE_FROM_GALLERY_20
+            )
+        }
 
     }
 
@@ -334,19 +638,43 @@ class ConsultingActivity : RootActivity(){
         super.onActivityResult(requestCode, resultCode, data)
 
         //사진 촬영으로 이미지 가져옴
-        if(requestCode == REQUEST_TAKE_PHOTO && resultCode == Activity.RESULT_OK){
+        if(resultCode == Activity.RESULT_OK){
 
+            var bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+            bitmapToFile(bitmap)
             var file = File(currentPhotoPath)
 
-            imageUri = Uri.fromFile(file)
+            when(requestCode) {
+
+                REQUEST_TAKE_PHOTO_10 -> {
+                    imageUri = Uri.fromFile(file)
+                }
+                REQUEST_TAKE_PHOTO_20 -> {
+                    imageUri2 = Uri.fromFile(file)
+                }
+
+            }
 
         }
 
         //앨범에서 이미지 가져옴
-        if(requestCode == GET_IMAGE_FROM_GALLERY && resultCode == Activity.RESULT_OK){
+        if(resultCode == Activity.RESULT_OK){
 
-            imageUri = data?.data!!
+            when(requestCode) {
 
+                GET_IMAGE_FROM_GALLERY_10 -> imageUri = data?.data!!
+                GET_IMAGE_FROM_GALLERY_20 -> imageUri2 = data?.data!!
+
+            }
+
+        }
+
+        if(imageUri.toString().isNotEmpty()){
+            imageUrl1V = "1"
+        }
+
+        if(imageUri2.toString().isNotEmpty()){
+            imageUrl2V = "2"
         }
 
     }
@@ -358,12 +686,50 @@ class ConsultingActivity : RootActivity(){
 
         consultingSubmit.setOnClickListener {
 
-            inputStream = contentResolver.openInputStream(imageUri)!!
-            imageLength = inputStream.available()
+            if(validationConsulting()) {
 
-            AzureAsyncTask(inputStream, imageLength).execute(storageConnectionString)
+                inputStreamArr.add(contentResolver.openInputStream(imageUri)!!)
+                inputStreamArr.add(contentResolver.openInputStream(imageUri2)!!)
+
+                for (inputStream in inputStreamArr) {
+                    imageLengthArr.add(inputStream.available())
+                }
+
+                AzureAsyncTask(inputStreamArr, imageLengthArr).execute(storageConnectionString)
+
+            }else{
+
+                when{
+
+                    burnDateV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
+                    ageV.isEmpty() -> Toast.makeText(this, "연령을 확인해주세요", Toast.LENGTH_LONG).show()
+                    genderV.isEmpty() -> Toast.makeText(this, "성별을 확인해주세요", Toast.LENGTH_LONG).show()
+                    bodyStyleV.isEmpty() -> Toast.makeText(this, "신체부위를 확인해주세요", Toast.LENGTH_LONG).show()
+                    bodyDetailV.isEmpty() -> Toast.makeText(this, "자세한 신체부위를 확인해주세요", Toast.LENGTH_LONG).show()
+                    bodyGitaV.isEmpty() -> Toast.makeText(this, "신체부위 기타를 확인해주세요", Toast.LENGTH_LONG).show()
+                    burnStyleV.isEmpty() -> Toast.makeText(this, "화상원인을 선택해주세요", Toast.LENGTH_LONG).show()
+                    burnDetailV.isEmpty() -> Toast.makeText(this, "자세한 화상원인을 선택해주세요", Toast.LENGTH_LONG).show()
+                    burnGitaV.isEmpty() -> Toast.makeText(this, "화상 기타를 확인해주세요", Toast.LENGTH_LONG).show()
+                    scarStyleV.isEmpty() -> Toast.makeText(this, "화상 시기를 확인해주세요", Toast.LENGTH_LONG).show()
+                    directionV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
+                    burnDateV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
+                    burnDateV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
+
+                }
+
+            }
 
         }
+
+    }
+
+    //등록하기전 app 내 validation 체크
+    fun validationConsulting() : Boolean{
+
+        return burnDateV.isNotEmpty() && ageV.isNotEmpty() && genderV.isNotEmpty() && (bodyDetailV.isNotEmpty() || bodyGitaV.isNotEmpty())
+                && burnStyleV.isNotEmpty() && (burnDetailV.isNotEmpty() || burnGitaV.isNotEmpty())
+                && scarStyleV.isNotEmpty() && proStatusV.isNotEmpty() && directionV.isNotEmpty()
+                && imageUrl1V.isNotEmpty() && imageUrl2V.isNotEmpty() && contentsV.isNotEmpty()
 
     }
 
@@ -395,12 +761,46 @@ class ConsultingActivity : RootActivity(){
 
     }
 
+    //비트맵을 다시 파일로 바꾸는 펑션
+    fun bitmapToFile(bitmap: Bitmap){
+
+        var file = File(currentPhotoPath)
+        var out = FileOutputStream(file)
+
+        try{
+
+            file.createNewFile()
+
+            imageRotate(bitmap)
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out)
+
+        }catch (e : Exception){
+            e.printStackTrace()
+        }finally {
+            try {
+                out.close()
+            }catch (e : IOException){
+                e.printStackTrace()
+            }
+        }
+
+    }
+
     //퍼미션 체크
     fun setupPermissions() {
 
         val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
         ActivityCompat.requestPermissions(this, permissions, 0)
 
+    }
+
+    //타이틀바 set Text 펑션
+    fun setTitle(){
+        txt_title.text = "상처상담하기"
+        btn_back.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 }

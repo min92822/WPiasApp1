@@ -25,5 +25,11 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_mycase(@FieldMap sql : Map<String, String>) : Call<ArrayList<MycaseInfo>>
 
+    // 사용자 질문케이스조회
+    @POST("https://wpias.azurewebsites.net/INSERT_QUESTION")
+    @FormUrlEncoded
+    fun insert_question(@FieldMap sql : Map<String, String>) : Call<Any>
+
+
 
 }

@@ -22,6 +22,10 @@ class ApiUtill {
         return ApiRequest().getResponse(select_mycase_url)!!.create(ApiInterface::class.java)
     }
 
+    val insert_question_url : String = "https://wpias.azurewebsites.net/INSERT_QUESTION/"
 
+    fun getINSERT_QUESTION() : ApiInterface{
+        return ApiRequest().getStringResponse(insert_question_url)!!.create(ApiInterface::class.java)
+    }
 
 }
