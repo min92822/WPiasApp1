@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import fineinsight.app.service.wpias.mainFragments.MainFragment1
 import fineinsight.app.service.wpias.mainFragments.MainFragment2
 import fineinsight.app.service.wpias.mainFragments.MainFragment3
@@ -35,14 +36,15 @@ class MainActivity : RootActivity() {
         mainViewPager.currentItem = 1
         mainViewPager.setPageTransformer(false, ViewPager.PageTransformer { page, position ->
 
-            page.translationX = page.width * -position
-
             if(position <= -1.0F || position >= 1.0F){
                 page.alpha = 0.0F
+                page.translationX = 0.0F
             } else if(position == 0.0F) {
                 page.alpha = 1.0F
+                page.translationX = 1.0F
             } else {
                 page.alpha = 1.0F - abs(position)
+                page.translationX = page.width * -position
             }
         })
 

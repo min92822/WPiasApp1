@@ -29,8 +29,10 @@ class MyQuestionAdapter(var arr:ArrayList<QuestionInfo>, var activity: Activity)
 
         holder as viewHolder
 
+        var writeDate = "${arr[position].insertdate.substring(0, 4)}년 ${arr[position].insertdate.substring(4, 6)}월 ${arr[position].insertdate.substring(6, 8)}일"
+
         holder.title.text = arr[position].title
-        holder.case_date.text = "${arr[position].burnnm}화상 | ${arr[position].insertdate}"
+        holder.case_date.text = "${arr[position].burnnm}화상 | $writeDate"
         holder.content.text = arr[position].contents
 
         Glide.with(activity)

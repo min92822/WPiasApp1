@@ -41,11 +41,5 @@ class MainFragment1 : Fragment() {
 
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        if(v !=null){
-
-        }
-    }
 
 }

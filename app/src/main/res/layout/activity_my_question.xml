@@ -35,6 +35,17 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="현재 작성된 질문이 없습니다."
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
                 android:layout_width="0dp"
@@ -62,17 +73,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="4dp"
                     android:text="Name"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     app:layout_constraintBottom_toTopOf="@id/txt_my_gender_question"
                     app:layout_constraintStart_toEndOf="@+id/img_my_profile"
-                    app:layout_constraintTop_toTopOf="@+id/img_my_profile" />
+                    app:layout_constraintTop_toTopOf="@+id/img_my_profile"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
                     android:id="@+id/txt_my_gender_question"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:text="Gender | Question : Count"
                     android:textColor="@color/warm_grey"
                     android:textSize="16dp"
@@ -87,6 +101,7 @@
                 android:id="@+id/recycler_my_question"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:background="@color/white"
                 android:clipToPadding="false"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"

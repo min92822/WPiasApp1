@@ -21,8 +21,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView7"
@@ -53,8 +53,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView8"
@@ -87,8 +87,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView9"
@@ -121,8 +121,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView10"
@@ -155,8 +155,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView11"
@@ -189,8 +189,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView12"
@@ -223,8 +223,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView13"
@@ -257,8 +257,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView14"
@@ -291,8 +291,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView15"
@@ -325,8 +325,8 @@
             android:layout_gravity="fill"
             android:layout_margin="4dp"
             android:background="@color/white"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <ImageView
                 android:id="@+id/imageView16"

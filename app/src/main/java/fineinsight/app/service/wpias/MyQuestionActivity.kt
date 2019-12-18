@@ -61,12 +61,15 @@ class MyQuestionActivity : RootActivity() {
                     txt_my_gender_question.text = myGender + " | 질문수 : " + arr.size
                     layout_my_question.visibility = View.VISIBLE
 
-                    recycler_my_question.layoutManager = LinearLayoutManager(this@MyQuestionActivity)
-                    recycler_my_question.adapter =
-                        MyQuestionAdapter(
-                            arr,
-                            this@MyQuestionActivity
-                        )
+                    if(arr.size == 0){
+
+                        recycler_my_question.visibility = View.GONE
+
+                    } else {
+                        recycler_my_question.layoutManager = LinearLayoutManager(this@MyQuestionActivity)
+                        recycler_my_question.adapter = MyQuestionAdapter(arr, this@MyQuestionActivity)
+                    }
+
 
                 } else {
                     Toast.makeText(this@MyQuestionActivity, "질문이 없습니다.", Toast.LENGTH_SHORT).show()
