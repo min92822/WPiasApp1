@@ -48,9 +48,9 @@ class BurnInfoActivity : RootActivity() {
                 burn_viewPager.currentItem = p0!!.position
 
                 if(p0.position == 0) {
-                    img_burn_info_top.setImageResource(R.color.easter_purple)
+                    img_burn_info_top.setImageResource(R.drawable.info_top_1)
                 } else if(p0.position == 1){
-                    img_burn_info_top.setImageResource(R.color.light_blue_grey)
+                    img_burn_info_top.setImageResource(R.drawable.info_top_2)
                 }
             }
         })

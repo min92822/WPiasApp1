@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <include
+        android:id="@+id/include16"
+        layout="@layout/title_bar_darkblue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include16">
+
+        <EditText
+            android:id="@+id/txt_sign_up_email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:hint="E-mail (인증을 위해 유효한 이메일을 기입해주세요.)"
+            android:inputType="textPersonName"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/txt_sign_up_pw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="비밀번호(6글자이상)"
+            android:inputType="textPersonName"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_email"
+            app:layout_constraintStart_toStartOf="@+id/txt_sign_up_email"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sign_up_email" />
+
+        <EditText
+            android:id="@+id/txt_sign_up_pw_comfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="비밀번호 확인"
+            android:inputType="textPersonName"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_pw"
+            app:layout_constraintStart_toStartOf="@+id/txt_sign_up_pw"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sign_up_pw" />
+
+        <EditText
+            android:id="@+id/txt_sign_up_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="이름(정확한 이름을 적어주세요.)"
+            android:inputType="textPersonName"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_pw_comfirm"
+            app:layout_constraintStart_toStartOf="@+id/txt_sign_up_pw_comfirm"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sign_up_pw_comfirm" />
+
+        <EditText
+            android:id="@+id/txt_sign_up_birth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="생년월일을 선택해주세요"
+            android:inputType="none"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_name"
+            app:layout_constraintStart_toStartOf="@+id/txt_sign_up_name"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sign_up_name" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/txt_sign_up_birth"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sign_up_birth">
+
+            <RadioButton
+                android:id="@+id/chk_sign_up_male"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:button="@drawable/chk_blue"
+                android:checked="true"
+                android:text="남" />
+
+            <RadioButton
+                android:id="@+id/chk_sign_up_female"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/chk_blue"
+                android:text="여" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/wrap_datepicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_alert"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <DatePicker
+                android:id="@+id/sign_up_datepicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_birth"
+                app:layout_constraintStart_toStartOf="@+id/txt_sign_up_birth"
+                tools:layout_editor_absoluteY="295dp" />
+
+            <Button
+                android:id="@+id/btn_sign_up_date"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/btn_blue"
+                android:text="선택"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="@drawable/bg_titlebar_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textView91"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="가입하기"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

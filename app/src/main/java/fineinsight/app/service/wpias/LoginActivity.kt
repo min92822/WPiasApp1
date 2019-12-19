@@ -17,6 +17,8 @@ import kotlin.collections.set
 
 class LoginActivity : RootActivity(){
 
+    var m_TOKEN = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -30,6 +32,7 @@ class LoginActivity : RootActivity(){
 
         loginSubmit()
 
+        signUp()
     }
 
     //로그인 상태 체크 앱 실행시 메인으로 바로 진행할지 여부를 결정하는 펑션
@@ -125,6 +128,13 @@ class LoginActivity : RootActivity(){
 
     }
 
+    fun signUp(){
+
+        btn_sign_up.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, SignUpPreActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        }
+
+    }
 
     override fun onBackPressed() {
 //        super.onBackPressed()

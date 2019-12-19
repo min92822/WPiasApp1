@@ -10,6 +10,11 @@ import retrofit2.http.POST
 
 interface ApiInterface {
 
+    // 회원가입
+    @POST("https://wpias.azurewebsites.net/INSERT_USER")
+    @FormUrlEncoded
+    fun insert_user(@FieldMap sql : Map<String, String>) : Call<String>
+
     // 회원정보조회
     @POST("https://wpias.azurewebsites.net/SELECT_USER")
     @FormUrlEncoded
@@ -25,7 +30,7 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_mycase(@FieldMap sql : Map<String, String>) : Call<ArrayList<MycaseInfo>>
 
-    // 사용자 질문케이스조회
+    // 사용자 질문등록
     @POST("https://wpias.azurewebsites.net/INSERT_QUESTION")
     @FormUrlEncoded
     fun insert_question(@FieldMap sql : Map<String, String>) : Call<String>

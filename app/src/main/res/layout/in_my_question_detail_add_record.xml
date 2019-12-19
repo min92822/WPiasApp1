@@ -31,9 +31,11 @@
 
         <ImageView
             android:id="@+id/imageView20"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="120dp"
-            android:background="@color/light_blue_grey"
+            android:scaleType="centerCrop"
+            android:scrollY="-10dp"
+            android:src="@drawable/close"
             app:layout_constraintEnd_toStartOf="@+id/imageView19"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +43,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="심한부위 상세촬영하기"
             android:textColor="@color/windows_blue"
             android:textSize="14dp"
@@ -52,9 +53,11 @@
 
         <ImageView
             android:id="@+id/imageView19"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="120dp"
-            android:background="@color/light_blue_grey"
+            android:scaleType="centerCrop"
+            android:scrollY="-10dp"
+            android:src="@drawable/over"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView20"
             app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +65,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="모든부위 전체촬영하기"
             android:textColor="@color/windows_blue"
             android:textSize="14dp"
@@ -79,7 +81,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="추가 질문 여부를 선택해주세요."
         android:textColor="@color/windows_blue"
@@ -209,15 +211,15 @@
         app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/txt_record_content_add"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_shape2"
         android:ems="10"
-        android:gravity="top"
+        android:gravity="start|top"
         android:hint="내용을 입력해주세요."
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:padding="12dp"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="@+id/textView32"
@@ -225,7 +227,7 @@
         app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_add_record_cancle"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -236,13 +238,13 @@
         android:text="취소"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add_record_add"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/editText3"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintStart_toStartOf="@+id/txt_record_content_add"
+        app:layout_constraintTop_toBottomOf="@+id/txt_record_content_add" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_add_record_add"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -251,9 +253,9 @@
         android:text="확인"
         android:textColor="@color/white"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/editText3"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/txt_record_content_add"
+        app:layout_constraintStart_toEndOf="@+id/btn_add_record_cancle"
+        app:layout_constraintTop_toTopOf="@+id/btn_add_record_cancle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

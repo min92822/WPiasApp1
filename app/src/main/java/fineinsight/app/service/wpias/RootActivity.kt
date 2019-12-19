@@ -42,7 +42,7 @@ open class RootActivity : AppCompatActivity() {
 
     // 반투명 상태바
     fun SetDarkBar(){
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -59,7 +59,7 @@ class MainFragment3 : Fragment() {
         img.setImageResource(R.drawable.alert_end)
 
         title.text = "준비중"
-        sub.text = "업데이트를 준비중입니다."
+        sub.text = "업데이트 준비중입니다."
 
         btn_left.visibility = View.GONE
 

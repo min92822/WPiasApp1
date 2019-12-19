@@ -35,7 +35,7 @@ class SettingActivity : RootActivity() {
             PubVariable.init()
             FirebaseAuth.getInstance().signOut()
             startActivity(Intent(this@SettingActivity, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
-
+            finish()
         }
 
         btnChangePwWrapper.setOnClickListener {

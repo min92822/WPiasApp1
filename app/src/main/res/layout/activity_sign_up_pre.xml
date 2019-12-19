@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".SignUpPreActivity">
+
+    <include
+        android:id="@+id/include15"
+        layout="@layout/title_bar_darkblue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sign_up_pre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include15">
+
+        <TextView
+            android:id="@+id/textView54"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="모든 동의과정은 필수입니다."
+            android:textColor="@color/warm_grey"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white_three"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView54">
+
+            <CheckBox
+                android:id="@+id/chk_sign_up_pre_1"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:button="@drawable/chk_blue"
+                android:text="개인정보의 수집 및 이용에 동의합니다."
+                android:textSize="14dp" />
+
+            <CheckBox
+                android:id="@+id/chk_sign_up_pre_2"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:button="@drawable/chk_blue"
+                android:text="민감정보 수집 및 이용에 동의합니다."
+                android:textSize="14dp" />
+
+            <CheckBox
+                android:id="@+id/chk_sign_up_pre_3"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white"
+                android:button="@drawable/chk_blue"
+                android:text="WPIAS 서비스 이용에 동의합니다."
+                android:textSize="14dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="24dp"
+            android:background="@color/white_three"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+            <Button
+                android:id="@+id/btn_sign_up_pre_open_1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="center|right"
+                android:text="약관 보기"
+                android:textColor="@color/warm_grey"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btn_sign_up_pre_open_2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="center|right"
+                android:text="약관 보기"
+                android:textColor="@color/warm_grey"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/btn_sign_up_pre_open_3"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="1dp"
+                android:background="@color/white"
+                android:drawableRight="@drawable/arrow_right"
+                android:gravity="center|right"
+                android:text="약관 보기"
+                android:textColor="@color/warm_grey"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+
+        <CheckBox
+            android:id="@+id/chk_sign_up_pre_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:button="@drawable/chk_blue"
+            android:text="전체 동의"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_sign_up_pre"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="@drawable/bg_titlebar_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/in_sign_up_pre_1"
+        layout="@layout/in_sign_up_pre_1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/in_sign_up_pre_2"
+        layout="@layout/in_sign_up_pre_2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/in_sign_up_pre_3"
+        layout="@layout/in_sign_up_pre_3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

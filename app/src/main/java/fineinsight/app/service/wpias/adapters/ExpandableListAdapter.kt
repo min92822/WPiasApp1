@@ -9,10 +9,10 @@ import android.widget.TextView
 import fineinsight.app.service.wpias.R
 
 
-class ExpandableListAdapter(var context: Context, var titleList:List<String>, var dataList:HashMap<String,List<String>>) : BaseExpandableListAdapter() {
+class ExpandableListAdapter(var context: Context, var titleList:List<String>, var dataList:HashMap<Int, HashMap<String, String>>) : BaseExpandableListAdapter() {
 
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
-        return this.dataList[this.titleList[listPosition]]!![expandedListPosition]
+        return this.dataList[listPosition]!![this.titleList[listPosition]]!!
     }
 
     override fun getChildId(listPosition: Int, expandedListPosition: Int): Long {
@@ -26,13 +26,13 @@ class ExpandableListAdapter(var context: Context, var titleList:List<String>, va
             val layoutInflater = this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             convertView = layoutInflater.inflate(R.layout.list_my_question_detail_item, null)
         }
-        val expandedListTextView = convertView!!.findViewById<TextView>(R.id.listItem)
-        expandedListTextView.text = expandedListText
+        convertView!!.findViewById<TextView>(R.id.listItem).text = "$expandedListText"
+        println(expandedListText)
         return convertView
     }
 
     override fun getChildrenCount(listPosition: Int): Int {
-        return this.dataList[this.titleList[listPosition]]!!.size
+        return this.dataList[listPosition]!!.size
     }
 
     override fun getGroup(listPosition: Int): Any {

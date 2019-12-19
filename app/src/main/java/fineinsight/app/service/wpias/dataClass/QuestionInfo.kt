@@ -24,7 +24,11 @@ data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
                          @SerializedName("IMAGEURL1") @Expose var imageurl1 : String,
                          @SerializedName("IMAGEURL2") @Expose var imageurl2 : String,
                          @SerializedName("CONTENTS") @Expose var contents : String,
-                         @SerializedName("DETAILNM") @Expose var detailnm : String) : Serializable
+                         @SerializedName("DETAILNM") @Expose var detailnm : String,
+                         @SerializedName("BODYSOLUTION") @Expose var bodysolution : String,
+                         @SerializedName("BURNSOLUTION") @Expose var burnsolution : String,
+                         @SerializedName("BURNPOINT") @Expose var burnpoint : String,
+                         @SerializedName("BLISTERSOLUTION") @Expose var blistersolution : String) : Serializable
 
 /*
     QKEY		질문 KEY
@@ -46,6 +50,11 @@ data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
     BURNNM
     IMAGEURL1
     IMAGEURL2
-    DETAILNM
+    CONTENTS	    	질문 내용
+    DETAILNM		    화상부위 이름
+    BODYSOLUTION		부위별 대처방법
+    BURNSOLUTION		화상원인 대처방법
+    BURNPOINT	    	화상원인 특징
+    BLISTERSOLUTION		화상부위 이름
 
  */

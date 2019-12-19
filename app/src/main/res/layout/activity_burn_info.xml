@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".BurnInfoActivity">
 
     <include
@@ -17,7 +18,8 @@
         android:id="@+id/img_burn_info_top"
         android:layout_width="0dp"
         android:layout_height="215dp"
-        android:src="@drawable/btn_gray"
+        android:scaleType="fitXY"
+        android:src="@drawable/info_top_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include3" />
@@ -26,6 +28,9 @@
         android:id="@+id/burn_tabLayout"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:background="@color/white"
+        android:elevation="3dp"
+        android:translationZ="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_burn_info_top"
@@ -37,7 +42,6 @@
         android:id="@+id/burn_viewPager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/pale_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
