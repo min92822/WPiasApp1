@@ -87,7 +87,7 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
 
                 buttonView.isClickable = false
 
-                ConsultingActivity.burnDetailV = (position + 1).toString().padStart(2, '0')
+                ConsultingActivity.burnDetailV = (position + 1).toString().padStart(3, '0')
 
                 if(viewArr[position].causeDetail.text == "기타"){
 

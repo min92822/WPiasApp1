@@ -69,7 +69,7 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
 
                 buttonView.isClickable = false
 
-                ConsultingActivity.bodyDetailV = (position + 1).toString().padStart(2, '0')
+                ConsultingActivity.bodyDetailV = (position + 1).toString().padStart(3, '0')
 
                 if(chkBoxArr[position].detailPart.text == "기타"){
 

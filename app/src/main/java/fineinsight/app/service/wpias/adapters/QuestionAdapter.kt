@@ -32,6 +32,20 @@ class QuestionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         holder.question.text = arr[position]
 
+        viewArr[position].appCompatCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                ConsultingActivity.directionV.add((position + 1).toString())
+
+            }else{
+
+                ConsultingActivity.directionV.remove((position + 1).toString())
+
+            }
+
+        }
+
     }
 
     inner class QuestionViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -46,8 +60,6 @@ class QuestionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             questionWrapper.setOnClickListener {
 
                 viewArr[adapterPosition].appCompatCheckBox.isChecked = !viewArr[adapterPosition].appCompatCheckBox.isChecked
-
-                ConsultingActivity.directionV = (adapterPosition + 1).toString().padStart(2, '0')
 
             }
 

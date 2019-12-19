@@ -117,7 +117,7 @@ class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<Recycl
                 }
 
                 whenLoad(adapterPosition)
-                ConsultingActivity.bodyStyleV = (adapterPosition + 1).toString().padStart(2, '0')
+                ConsultingActivity.bodyStyleV = (adapterPosition + 1).toString().padStart(3, '0')
 
             }
 

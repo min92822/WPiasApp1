@@ -7,10 +7,13 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Matrix
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
@@ -31,6 +34,7 @@ import fineinsight.app.service.wpias.adapters.PartListAdapter
 import fineinsight.app.service.wpias.adapters.QuestionAdapter
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import kotlinx.android.synthetic.main.activity_consulting.*
+import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.shot_distance_popup.*
 import kotlinx.android.synthetic.main.title_bar_darkblue.*
 import java.io.File
@@ -70,6 +74,8 @@ class ConsultingActivity : RootActivity(){
     var MYmonth = 0
     var MYday = 0
 
+    var popup = false
+
     //validation 용도
     //일부 validation이 adapter에 checkBox들의 값에 의하기 때문에
     companion object {
@@ -84,9 +90,11 @@ class ConsultingActivity : RootActivity(){
         var burnStyleV = ""
         var burnDetailV = ""
         var burnGitaV = ""
+        var careStyleV = ""
+        var careGitaV = ""
         var scarStyleV = ""
         var proStatusV = "Q"
-        var directionV = ""
+        var directionV = ArrayList<String>()
         var imageUrl1V = ""
         var imageUrl2V = ""
         var contentsV = ""
@@ -111,7 +119,7 @@ class ConsultingActivity : RootActivity(){
         burnGitaV = ""
         scarStyleV = ""
         proStatusV = "Q"
-        directionV = ""
+        directionV = ArrayList<String>()
         imageUrl1V = ""
         imageUrl2V = ""
         contentsV = ""
@@ -276,6 +284,7 @@ class ConsultingActivity : RootActivity(){
             if(isChecked){
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
                 female.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
+                genderV = "M"
             }else{
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 female.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -288,6 +297,7 @@ class ConsultingActivity : RootActivity(){
             if(isChecked){
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
                 male.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
+                genderV = "F"
             }else{
                 buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
                 male.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -413,8 +423,8 @@ class ConsultingActivity : RootActivity(){
         var now = LocalDate.now().toString()
 
         var year = now.split("-")[0]
-        var month = (now.split("-")[1]).toString().padStart(2, '0')
-        var day = now.split("-")[2].toString().padStart(2, '0')
+        var month = (now.split("-")[1]).padStart(2, '0')
+        var day = now.split("-")[2].padStart(2, '0')
 
         MYyear = year.toInt()
         MYmonth = month.toInt()
@@ -426,7 +436,7 @@ class ConsultingActivity : RootActivity(){
                 this,
                 android.app.AlertDialog.THEME_HOLO_DARK,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    whenBurned.setText("${year}년 ${(month + 1).toString().padStart(2,'0')}월 ${dayOfMonth.toString().padStart(2, '0')}일")
+                    whenBurned.setText("${year}-${(month + 1).toString().padStart(2,'0')}-${dayOfMonth.toString().padStart(2, '0')}")
                     burnDateV = "$year + ${month + 1} + $dayOfMonth"
                 },
                 MYyear,
@@ -454,14 +464,12 @@ class ConsultingActivity : RootActivity(){
         recentlyBurnedWrapper.setOnClickListener {
 
             recentlyBurned.isChecked = true
-            burnStyleV = "burn"
 
         }
 
         pastBurnedWrapper.setOnClickListener {
 
             pastBurned.isChecked = true
-            burnStyleV = "scar"
 
         }
 
@@ -470,10 +478,11 @@ class ConsultingActivity : RootActivity(){
             if(isChecked){
 
                 pastBurned.isChecked = false
-                whenBurned.setText("$MYyear.$MYmonth.$MYday")
+                whenBurned.setText("$MYyear-$MYmonth-$MYday")
                 whenBurned.isEnabled = false
 
                 burnDateV = whenBurned.text.toString()
+                scarStyleV = "burn"
 
             }
 
@@ -487,6 +496,7 @@ class ConsultingActivity : RootActivity(){
                 whenBurned.setText("")
                 whenBurned.hint = "화상을 입은 날짜를 입력해주세요."
                 whenBurned.isEnabled = true
+                scarStyleV = "scar"
 
             }
 
@@ -648,9 +658,15 @@ class ConsultingActivity : RootActivity(){
 
                 REQUEST_TAKE_PHOTO_10 -> {
                     imageUri = Uri.fromFile(file)
+                    if(imageUri.toString().isNotEmpty()){
+                        imageUrl1V = imageUri.toString()
+                    }
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
                     imageUri2 = Uri.fromFile(file)
+                    if(imageUri2.toString().isNotEmpty()){
+                        imageUrl2V = imageUri2.toString()
+                    }
                 }
 
             }
@@ -662,25 +678,27 @@ class ConsultingActivity : RootActivity(){
 
             when(requestCode) {
 
-                GET_IMAGE_FROM_GALLERY_10 -> imageUri = data?.data!!
-                GET_IMAGE_FROM_GALLERY_20 -> imageUri2 = data?.data!!
+                GET_IMAGE_FROM_GALLERY_10 -> {
+                    imageUri = data?.data!!
+                    if(imageUri.toString().isNotEmpty()){
+                        imageUrl1V = imageUri.toString()
+                    }
+                }
+                GET_IMAGE_FROM_GALLERY_20 -> {
+                    imageUri2 = data?.data!!
+                    if(imageUri2.toString().isNotEmpty()){
+                        imageUrl2V = imageUri2.toString()
+                    }
+                }
 
             }
 
         }
 
-        if(imageUri.toString().isNotEmpty()){
-            imageUrl1V = "1"
-        }
-
-        if(imageUri2.toString().isNotEmpty()){
-            imageUrl2V = "2"
-        }
-
     }
 
     //최종적으로 글 올리는 펑션
-    //1차 이미지 업로드만
+    //inputStream 배열에 imageUri를 다 넣은다음 imageuri와 imageurlv를 초기화 한다
     @SuppressLint("SimpleDateFormat")
     fun submitBurnConsulting(){
 
@@ -691,29 +709,36 @@ class ConsultingActivity : RootActivity(){
                 inputStreamArr.add(contentResolver.openInputStream(imageUri)!!)
                 inputStreamArr.add(contentResolver.openInputStream(imageUri2)!!)
 
+                imageUri = Uri.EMPTY
+                imageUri2 = Uri.EMPTY
+                imageUrl1V = ""
+                imageUrl2V = ""
+
                 for (inputStream in inputStreamArr) {
                     imageLengthArr.add(inputStream.available())
                 }
 
-                AzureAsyncTask(inputStreamArr, imageLengthArr).execute(storageConnectionString)
+                AzureAsyncTask(this, inputStreamArr, imageLengthArr).execute(storageConnectionString)
 
             }else{
 
                 when{
 
-                    burnDateV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
-                    ageV.isEmpty() -> Toast.makeText(this, "연령을 확인해주세요", Toast.LENGTH_LONG).show()
-                    genderV.isEmpty() -> Toast.makeText(this, "성별을 확인해주세요", Toast.LENGTH_LONG).show()
-                    bodyStyleV.isEmpty() -> Toast.makeText(this, "신체부위를 확인해주세요", Toast.LENGTH_LONG).show()
-                    bodyDetailV.isEmpty() -> Toast.makeText(this, "자세한 신체부위를 확인해주세요", Toast.LENGTH_LONG).show()
-                    bodyGitaV.isEmpty() -> Toast.makeText(this, "신체부위 기타를 확인해주세요", Toast.LENGTH_LONG).show()
-                    burnStyleV.isEmpty() -> Toast.makeText(this, "화상원인을 선택해주세요", Toast.LENGTH_LONG).show()
-                    burnDetailV.isEmpty() -> Toast.makeText(this, "자세한 화상원인을 선택해주세요", Toast.LENGTH_LONG).show()
-                    burnGitaV.isEmpty() -> Toast.makeText(this, "화상 기타를 확인해주세요", Toast.LENGTH_LONG).show()
-                    scarStyleV.isEmpty() -> Toast.makeText(this, "화상 시기를 확인해주세요", Toast.LENGTH_LONG).show()
-                    directionV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
-                    burnDateV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
-                    burnDateV.isEmpty() -> Toast.makeText(this, "화상입은 날짜를 확인해주세요", Toast.LENGTH_LONG).show()
+                    imageUrl1V.isEmpty() -> failAlert("10cm 사진 촬영을 진행해주세요")
+                    imageUrl2V.isEmpty() -> failAlert("20cm 사진 촬영을 진행해주세요")
+                    scarStyleV.isEmpty() -> failAlert("화상 시기를 확인해주세요")
+                    burnDateV.isEmpty() -> failAlert("화상입은 날짜를 확인해주세요")
+                    bodyStyleV.isEmpty() -> failAlert("신체부위를 확인해주세요")
+                    bodyDetailV.isEmpty() -> failAlert("상세 촬영부위를 확인해주세요")
+//                    bodyGitaV.isEmpty() -> Toast.makeText(this, "신체부위 기타를 확인해주세요", Toast.LENGTH_LONG).show()
+                    burnStyleV.isEmpty() -> failAlert("화상원인을 선택해주세요")
+                    burnDetailV.isEmpty() -> failAlert("자세한 화상원인을 선택해주세요")
+//                    burnGitaV.isEmpty() -> Toast.makeText(this, "화상 기타를 확인해주세요", Toast.LENGTH_LONG).show()
+                    careStyleV.isEmpty() -> failAlert("최근에 치료받은곳을 선택해주세요")
+                    genderV.isEmpty() -> failAlert("성별을 확인해주세요")
+                    ageV.isEmpty() -> failAlert("연령을 확인해주세요")
+                    consultingTitleV.isEmpty() -> failAlert("상담 제목을 입력해주세요")
+                    contentsV.isEmpty() -> failAlert("상담 내용을 입력해주세요")
 
                 }
 
@@ -726,10 +751,51 @@ class ConsultingActivity : RootActivity(){
     //등록하기전 app 내 validation 체크
     fun validationConsulting() : Boolean{
 
-        return burnDateV.isNotEmpty() && ageV.isNotEmpty() && genderV.isNotEmpty() && (bodyDetailV.isNotEmpty() || bodyGitaV.isNotEmpty())
+        return consultingTitleV.isNotEmpty() && burnDateV.isNotEmpty() && ageV.isNotEmpty() && genderV.isNotEmpty()
+                && (bodyDetailV.isNotEmpty() || bodyGitaV.isNotEmpty())
                 && burnStyleV.isNotEmpty() && (burnDetailV.isNotEmpty() || burnGitaV.isNotEmpty())
-                && scarStyleV.isNotEmpty() && proStatusV.isNotEmpty() && directionV.isNotEmpty()
+                && (careStyleV.isNotEmpty() || careGitaV.isNotEmpty())
+                && scarStyleV.isNotEmpty() && proStatusV.isNotEmpty()
                 && imageUrl1V.isNotEmpty() && imageUrl2V.isNotEmpty() && contentsV.isNotEmpty()
+
+    }
+
+    //업로드 실패 알럿
+    fun failAlert(ment : String){
+
+        var dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_alert)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        var img = dialog.img_alert
+        var title = dialog.txt_alert_title
+        var sub = dialog.txt_alert_sub
+        var btn_left = dialog.btn_alert_left
+        var btn_right = dialog.btn_alert_right
+
+        img.setImageResource(R.drawable.alert_ck_x)
+
+        title.text = "실패"
+        sub.text = ment
+
+        btn_left.visibility = View.GONE
+
+        btn_right.text = "OK"
+        btn_right.setBackgroundResource(R.drawable.btn_blue)
+
+        popup = true
+
+        dialog.setOnDismissListener {
+            popup = false
+            dialog = Dialog(this)
+        }
+
+        btn_right.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
 
     }
 
