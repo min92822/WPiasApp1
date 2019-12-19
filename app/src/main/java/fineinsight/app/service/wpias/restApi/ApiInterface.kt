@@ -30,6 +30,14 @@ interface ApiInterface {
     @FormUrlEncoded
     fun insert_question(@FieldMap sql : Map<String, String>) : Call<String>
 
+    // 설정창 스위치1 상태 변경
+    @POST("https://wpias.azurewebsites.net/UPDATE_SWITCH1")
+    @FormUrlEncoded
+    fun update_switch1(@FieldMap sql : Map<String, String>) : Call<String>
 
+    // 설정창 스위치2 상태 변경
+    @POST("https://wpias.azurewebsites.net/UPDATE_SWITCH2")
+    @FormUrlEncoded
+    fun update_switch2(@FieldMap sql : Map<String, String>) : Call<String>
 
 }

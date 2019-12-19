@@ -28,4 +28,16 @@ class ApiUtill {
         return ApiRequest().getStringResponse(insert_question_url)!!.create(ApiInterface::class.java)
     }
 
+    val update_switch1_url : String = "https://wpias.azurewebsites.net/UPDATE_SWITCH1/"
+
+    fun getUPDATE_SWITCH1() : ApiInterface{
+        return ApiRequest().getStringResponse(update_switch1_url)!!.create(ApiInterface::class.java)
+    }
+
+    val update_switch2_url : String = "https://wpias.azurewebsites.net/UPDATE_SWITCH2/"
+
+    fun getUPDATE_SWITCH2() : ApiInterface{
+        return ApiRequest().getStringResponse(update_switch2_url)!!.create(ApiInterface::class.java)
+    }
+
 }
