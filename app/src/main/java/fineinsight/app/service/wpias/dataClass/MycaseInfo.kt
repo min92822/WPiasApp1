@@ -2,6 +2,7 @@ package fineinsight.app.service.wpias.dataClass
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class MycaseInfo(@SerializedName("CKEY") @Expose var ckey : String,
                       @SerializedName("CNUMBER") @Expose var cnumber : String,
@@ -22,7 +23,7 @@ data class MycaseInfo(@SerializedName("CKEY") @Expose var ckey : String,
                       @SerializedName("ANSWERDATE") @Expose var answerdate : String,
                       @SerializedName("ANSWERDOC") @Expose var answerdoc : String,
                       @SerializedName("ANSWERDOCNM") @Expose var answerdocnm : String,
-                      @SerializedName("ANSWERDOCCOUNT)") @Expose var answerdoccount : String)
+                      @SerializedName("ANSWERDOCCOUNT") @Expose var answerdoccount : Int) : Serializable
 
 /*
     CKEY		    질문 KEY

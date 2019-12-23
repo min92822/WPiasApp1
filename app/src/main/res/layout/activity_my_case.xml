@@ -14,15 +14,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout17"
-        android:layout_width="0dp"
-        android:layout_height="85dp"
-        android:background="@drawable/bg_titlebar_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="85dp"
@@ -46,12 +37,22 @@
                 android:layout_height="match_parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout17"
+                    android:layout_width="0dp"
+                    android:layout_height="85dp"
+                    android:background="@drawable/bg_titlebar_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_alert"
+                    android:paddingBottom="50dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,7 @@
 
 
                     <Button
-                        android:id="@+id/button3"
+                        android:id="@+id/btn_mycase_close"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
@@ -69,36 +70,38 @@
                         android:background="@color/windows_blue"
                         android:text="Close-up"
                         android:textColor="@color/white"
-                        app:layout_constraintEnd_toStartOf="@+id/button4"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_mycase_over"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/btn_mycase_over"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="0dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:background="@color/white"
+                        android:background="@drawable/btn_stroke"
                         android:text="Overview"
+                        android:textColor="@color/windows_blue"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/button3"
+                        app:layout_constraintStart_toEndOf="@+id/btn_mycase_close"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/img_mycase"
                         android:layout_width="0dp"
                         android:layout_height="350dp"
                         android:layout_marginTop="10dp"
                         android:scaleType="centerCrop"
-                        app:layout_constraintEnd_toEndOf="@+id/button4"
-                        app:layout_constraintStart_toStartOf="@+id/button3"
-                        app:layout_constraintTop_toBottomOf="@+id/button3"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/btn_mycase_over"
+                        app:layout_constraintStart_toStartOf="@+id/btn_mycase_close"
+                        app:layout_constraintTop_toBottomOf="@+id/btn_mycase_close"
                         app:srcCompat="@color/light_blue_grey" />
 
                     <TextView
-                        android:id="@+id/textView34"
+                        android:id="@+id/txt_mycase_content"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -106,9 +109,9 @@
                         android:layout_marginEnd="16dp"
                         android:text="TextView"
                         android:textSize="14dp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView"
-                        app:layout_constraintStart_toStartOf="@+id/imageView"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                        app:layout_constraintEnd_toEndOf="@+id/img_mycase"
+                        app:layout_constraintStart_toStartOf="@+id/img_mycase"
+                        app:layout_constraintTop_toBottomOf="@+id/img_mycase" />
 
                     <Button
                         android:id="@+id/button5"
@@ -120,14 +123,30 @@
                         android:text="내용수정"
                         android:textColor="@color/white"
                         android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView"
-                        app:layout_constraintStart_toStartOf="@+id/imageView"
-                        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                        app:layout_constraintEnd_toEndOf="@+id/img_mycase"
+                        app:layout_constraintStart_toStartOf="@+id/img_mycase"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_mycase_content" />
+
+                    <TextView
+                        android:id="@+id/lbl_no_answer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginEnd="24dp"
+                        android:text="답변을 요청하지 않은 경과입니다."
+                        android:textAlignment="center"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/wrap_mycase_answer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/button5">
@@ -136,46 +155,48 @@
                             android:id="@+id/constraintLayout18"
                             android:layout_width="0dp"
                             android:layout_height="80dp"
-                            android:background="@color/light_blue_grey"
+                            android:background="#BAE5FC"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
-                                android:id="@+id/imageView18"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
+                                android:id="@+id/img_mycase_dr"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
                                 android:layout_marginStart="24dp"
+                                android:src="@drawable/doctor_m"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:srcCompat="@tools:sample/avatars" />
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/textView35"
+                                android:id="@+id/txt_mycase_dr"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="24dp"
                                 android:text="Dr.OOO"
+                                android:textColor="@color/black"
                                 android:textSize="14dp"
-                                app:layout_constraintBottom_toTopOf="@+id/textView36"
-                                app:layout_constraintStart_toEndOf="@+id/imageView18"
-                                app:layout_constraintTop_toTopOf="@+id/imageView18"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toTopOf="@+id/txt_mycase_dr_detail"
+                                app:layout_constraintStart_toEndOf="@+id/img_mycase_dr"
+                                app:layout_constraintTop_toTopOf="@+id/img_mycase_dr"
                                 app:layout_constraintVertical_chainStyle="packed" />
 
                             <TextView
-                                android:id="@+id/textView36"
+                                android:id="@+id/txt_mycase_dr_detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="화상외과 | 답변수"
                                 android:textSize="12dp"
-                                app:layout_constraintBottom_toBottomOf="@+id/imageView18"
-                                app:layout_constraintStart_toStartOf="@+id/textView35"
-                                app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                                app:layout_constraintBottom_toBottomOf="@+id/img_mycase_dr"
+                                app:layout_constraintStart_toStartOf="@+id/txt_mycase_dr"
+                                app:layout_constraintTop_toBottomOf="@+id/txt_mycase_dr" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
-                            android:id="@+id/textView37"
+                            android:id="@+id/txt_mycase_answer"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="24dp"
@@ -196,7 +217,7 @@
                             android:background="@color/warm_grey"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView37">
+                            app:layout_constraintTop_toBottomOf="@+id/txt_mycase_answer">
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -210,68 +231,23 @@
                             app:layout_constraintStart_toStartOf="@+id/constraintLayout19"
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/constraintLayout20"
+                        <RatingBar
+                            android:id="@+id/rating_mycase"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
+
+                            android:rating="5.0"
+                            android:theme="@style/ratingBar"
                             app:layout_constraintEnd_toEndOf="@+id/textView38"
                             app:layout_constraintStart_toStartOf="@+id/textView38"
-                            app:layout_constraintTop_toBottomOf="@+id/textView38">
-
-                            <ImageView
-                                android:id="@+id/imageView21"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView22"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@android:drawable/btn_star_big_off" />
-
-                            <ImageView
-                                android:id="@+id/imageView22"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView23"
-                                app:layout_constraintStart_toEndOf="@+id/imageView21"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@android:drawable/btn_star_big_off" />
-
-                            <ImageView
-                                android:id="@+id/imageView23"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView24"
-                                app:layout_constraintStart_toEndOf="@+id/imageView22"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@android:drawable/btn_star_big_off" />
-
-                            <ImageView
-                                android:id="@+id/imageView24"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toStartOf="@+id/imageView25"
-                                app:layout_constraintStart_toEndOf="@+id/imageView23"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@android:drawable/btn_star_big_off" />
-
-                            <ImageView
-                                android:id="@+id/imageView25"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toEndOf="@+id/imageView24"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@android:drawable/btn_star_big_off" />
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                            app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
                         <EditText
-                            android:id="@+id/editText6"
+                            android:id="@+id/txt_mycase_review"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
                             android:layout_marginEnd="16dp"
                             android:ems="10"
                             android:hint="리뷰를 작성해주세요"
@@ -279,22 +255,20 @@
                             android:textSize="14dp"
                             app:layout_constraintEnd_toEndOf="@+id/constraintLayout19"
                             app:layout_constraintStart_toStartOf="@+id/constraintLayout19"
-                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout20" />
+                            app:layout_constraintTop_toBottomOf="@+id/rating_mycase" />
 
                         <Button
-                            android:id="@+id/button6"
+                            android:id="@+id/btn_mycase_review_submit"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginBottom="32dp"
                             android:background="@drawable/btn_blue"
                             android:text="확인"
                             android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/editText6"
-                            app:layout_constraintStart_toStartOf="@+id/editText6"
-                            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+                            app:layout_constraintEnd_toEndOf="@+id/txt_mycase_review"
+                            app:layout_constraintStart_toStartOf="@+id/txt_mycase_review"
+                            app:layout_constraintTop_toBottomOf="@+id/txt_mycase_review" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

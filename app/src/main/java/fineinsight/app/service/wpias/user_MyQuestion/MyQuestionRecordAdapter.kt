@@ -15,11 +15,7 @@ import kotlinx.android.synthetic.main.recycler_my_question_detail_record.view.*
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 
-class MyQuestionRecordAdapter(
-    var activity: Activity,
-    var arr: ArrayList<MycaseInfo>,
-    var qArr: ArrayList<QuestionInfo>
-) :
+class MyQuestionRecordAdapter(var activity: Activity, var arr: ArrayList<MycaseInfo>, var qArr: ArrayList<QuestionInfo>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -67,18 +63,26 @@ class MyQuestionRecordAdapter(
             .load(arr[position].imageurl1)
             .into(holder.img)
 
-        if (arr[position].answercontents.isNullOrEmpty()) {
-            holder.answer.text = "답변대기"
-            holder.answer.setTextColor(ContextCompat.getColor(activity, R.color.warm_grey))
+        when (arr[position].casestatus) {
+            "Q" -> {
+                holder.answer.text = "답변대기"
+                holder.answer.setTextColor(ContextCompat.getColor(activity, R.color.warm_grey))
+                holder.answer.setBackgroundResource(R.drawable.answer_stroke)
+            }
+            "P" -> {
+                holder.answer.text = "답변미요청"
+                holder.answer.setTextColor(ContextCompat.getColor(activity, R.color.warm_grey))
+                holder.answer.setBackgroundResource(R.drawable.answer_stroke)
+            }
+            "A" -> {
+
+            }
         }
 
+
+
         holder.wrap.setOnClickListener {
-            activity.startActivity(
-                Intent(
-                    activity,
-                    MyCaseActivity::class.java
-                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            )
+            activity.startActivity(Intent(activity, MyCaseActivity::class.java).putExtra("myCase", arr[position]).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
 
     }

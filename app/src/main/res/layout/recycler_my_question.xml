@@ -49,13 +49,17 @@
 
             <TextView
                 android:id="@+id/txt_my_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="Title"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/txt_my_case_date"
                 app:layout_constraintTop_toBottomOf="@+id/txt_my_case_date" />
 
@@ -74,6 +78,7 @@
             android:id="@+id/constraintLayout7"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:paddingBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +88,7 @@
                 android:id="@+id/img_my_left"
                 android:layout_width="165dp"
                 android:layout_height="165dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/img_my_right"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +99,7 @@
                 android:id="@+id/img_my_right"
                 android:layout_width="165dp"
                 android:layout_height="165dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_my_left"
                 app:layout_constraintTop_toTopOf="parent"
@@ -102,13 +107,17 @@
 
             <TextView
                 android:id="@+id/txt_my_content"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="detail"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img_my_left" />
         </androidx.constraintlayout.widget.ConstraintLayout>

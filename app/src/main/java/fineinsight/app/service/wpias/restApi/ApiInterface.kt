@@ -20,6 +20,7 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_user(@FieldMap sql : Map<String, String>) : Call<ArrayList<UserInfo>>
 
+
     // 사용자 질문조회
     @POST("https://wpias.azurewebsites.net/SELECT_MYQUESTION")
     @FormUrlEncoded
@@ -30,10 +31,17 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_mycase(@FieldMap sql : Map<String, String>) : Call<ArrayList<MycaseInfo>>
 
+    // 답변 리뷰 등록
+    @POST("https://wpias.azurewebsites.net/UPDATE_FEEDBACK")
+    @FormUrlEncoded
+    fun update_feedback(@FieldMap sql : Map<String, String>) : Call<String>
+
+
     // 사용자 질문등록
     @POST("https://wpias.azurewebsites.net/INSERT_QUESTION")
     @FormUrlEncoded
     fun insert_question(@FieldMap sql : Map<String, String>) : Call<String>
+
 
     // 설정창 스위치1 상태 변경
     @POST("https://wpias.azurewebsites.net/UPDATE_SWITCH1")

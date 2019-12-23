@@ -608,7 +608,7 @@ class ConsultingActivity : RootActivity(){
         dialog.setContentView(R.layout.shot_distance_popup)
         dialog.window!!.setBackgroundDrawableResource(R.drawable.bg_alert2)
 
-        dialog.imageView.setImageResource(R.drawable.pic_20_cm)
+        dialog.img_mycase.setImageResource(R.drawable.pic_20_cm)
         dialog.textView31.text = "2단계 상세 촬영"
         dialog.textView32.text = "상처 부위로부터 약 20cm 가량 위에서 촬영해주세요."
 

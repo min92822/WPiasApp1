@@ -1,5 +1,10 @@
 package fineinsight.app.service.wpias.restApi
 
+import retrofit2.Call
+import retrofit2.http.FieldMap
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
+
 class ApiUtill {
 
     // 회원가입
@@ -28,6 +33,13 @@ class ApiUtill {
 
     fun getSELECT_MYCASE() : ApiInterface{
         return ApiRequest().getResponse(select_mycase_url)!!.create(ApiInterface::class.java)
+    }
+
+    // 답변 리뷰 등록
+    val update_feedback_url : String = "https://wpias.azurewebsites.net/UPDATE_FEEDBACK/"
+
+    fun getUPDATE_FEEDBACK() : ApiInterface{
+        return ApiRequest().getStringResponse(update_feedback_url)!!.create(ApiInterface::class.java)
     }
 
     // 사용자 질문등록

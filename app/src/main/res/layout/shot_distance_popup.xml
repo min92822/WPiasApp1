@@ -6,7 +6,7 @@
     android:layout_height="590dp">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img_mycase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -25,9 +25,9 @@
         android:textColor="@color/greyish_brown"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/img_mycase"
+        app:layout_constraintStart_toStartOf="@+id/img_mycase"
+        app:layout_constraintTop_toBottomOf="@+id/img_mycase" />
 
     <TextView
         android:id="@+id/textView32"

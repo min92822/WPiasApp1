@@ -41,11 +41,21 @@ class MyQuestionDetailActivity : RootActivity() {
         addRecord()
     }
 
+    override fun onBackPressed() {
+        if(wrap_add_record.visibility == View.VISIBLE){
+            wrap_add_record.visibility = View.GONE
+            wrap_my_question_info.visibility = View.VISIBLE
+
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     fun myDetailSetting(){
 
         txt_title.text = "상담내역 보기"
         btn_back.setOnClickListener {
-            onBackPressed()
+            super.onBackPressed()
         }
 
         txt_my_question_detail_title.text = m_questionInfo!!.title
@@ -137,41 +147,41 @@ class MyQuestionDetailActivity : RootActivity() {
         )
 
         img_my_detail_bui.setImageResource(
-            when(m_questionInfo!!.detailnm){
-                "머리" -> {
+            when(m_questionInfo!!.bodystyle){
+                "001" -> {
                     R.drawable.s_mori_f
                 }
-                "어깨" -> {
+                "002" -> {
                     R.drawable.s_akke_f
                 }
-                "가슴" -> {
+                "003" -> {
                     R.drawable.s_gasum_f
                 }
-                "등" -> {
+                "004" -> {
                     R.drawable.s_gasum_b
                 }
-                "배" -> {
+                "005" -> {
                     R.drawable.s_bae_f
                 }
-                "허리" -> {
+                "006" -> {
                     R.drawable.s_bae_b
                 }
-                "팔" -> {
+                "007" -> {
                     R.drawable.s_8_f
                 }
-                "손" -> {
+                "008" -> {
                     R.drawable.s_sun_f
                 }
-                "음부" -> {
+                "009" -> {
                     R.drawable.s_umbu
                 }
-                "엉덩이" -> {
+                "010" -> {
                     R.drawable.s_bae_b
                 }
-                "다리" -> {
+                "011" -> {
                     R.drawable.s_dari_f
                 }
-                "발" -> {
+                "012" -> {
                     R.drawable.s_bar_f
                 }
                 else -> {
@@ -307,6 +317,9 @@ class MyQuestionDetailActivity : RootActivity() {
                 if(response.isSuccessful){
 
                     var arr = response.body() as ArrayList<MycaseInfo>
+                    arr.sortBy { mycaseInfo ->
+                        mycaseInfo.casedate
+                    }
 
                     var qArr = ArrayList<QuestionInfo>()
                     qArr.add(m_questionInfo!!)
