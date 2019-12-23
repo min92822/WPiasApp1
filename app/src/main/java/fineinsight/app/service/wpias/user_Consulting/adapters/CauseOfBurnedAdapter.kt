@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.adapters
+package fineinsight.app.service.wpias.user_Consulting.adapters
 
 import android.content.Context
 import android.os.SystemClock
@@ -76,7 +76,10 @@ class CauseOfBurnedAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<R
         }
 
         (context as ConsultingActivity).causeOfBurnedDetailRecyclerView.layoutManager = GridLayoutManager(context, 3)
-        (context as ConsultingActivity).causeOfBurnedDetailRecyclerView.adapter = CauseOfBurnedDetailAdapter(viewArr[position].cause.text.toString())
+        (context as ConsultingActivity).causeOfBurnedDetailRecyclerView.adapter =
+            CauseOfBurnedDetailAdapter(
+                viewArr[position].cause.text.toString()
+            )
 
     }
 

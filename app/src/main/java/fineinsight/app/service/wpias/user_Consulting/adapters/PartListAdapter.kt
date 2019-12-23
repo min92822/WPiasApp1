@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.adapters
+package fineinsight.app.service.wpias.user_Consulting.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -88,7 +88,11 @@ class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<Recycl
         (context as ConsultingActivity).bodyPartDetailRecyclerView.layoutManager =
             GridLayoutManager(context, 3)
         (context as ConsultingActivity).bodyPartDetailRecyclerView.adapter =
-            PartDetailAdapter(fb, arr[position], context)
+            PartDetailAdapter(
+                fb,
+                arr[position],
+                context
+            )
 
     }
 

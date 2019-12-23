@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_Consulting
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -12,9 +12,9 @@ import android.view.Window
 import com.microsoft.azure.storage.CloudStorageAccount
 import com.microsoft.azure.storage.StorageException
 import com.microsoft.azure.storage.blob.CloudBlobContainer
+import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.restApi.ApiUtill
-import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.user_Main.MainActivity
 import kotlinx.android.synthetic.main.custom_alert.*
 import retrofit2.Call

@@ -26,13 +26,12 @@ import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fineinsight.app.service.wpias.AzureAsyncTask
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.RootActivity
-import fineinsight.app.service.wpias.adapters.CauseOfBurnedAdapter
-import fineinsight.app.service.wpias.adapters.DeptAdapter
-import fineinsight.app.service.wpias.adapters.PartListAdapter
-import fineinsight.app.service.wpias.adapters.QuestionAdapter
+import fineinsight.app.service.wpias.user_Consulting.adapters.CauseOfBurnedAdapter
+import fineinsight.app.service.wpias.user_Consulting.adapters.DeptAdapter
+import fineinsight.app.service.wpias.user_Consulting.adapters.PartListAdapter
+import fineinsight.app.service.wpias.user_Consulting.adapters.QuestionAdapter
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.custom_alert.*
@@ -276,7 +275,8 @@ class ConsultingActivity : RootActivity(){
     //앞 버튼 터치시 실행되는 리싸이클러 뷰
     fun frontActivated(){
 
-        var partListAdapter = PartListAdapter(bodyPartFront)
+        var partListAdapter =
+            PartListAdapter(bodyPartFront)
 
         bodyPartRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         bodyPartRecyclerView.adapter = partListAdapter
@@ -286,7 +286,8 @@ class ConsultingActivity : RootActivity(){
     //뒤 버튼 터치시 실행되는 리싸이클러 뷰
     fun backActivated(){
 
-        var partListAdapter = PartListAdapter(bodyPartBack)
+        var partListAdapter =
+            PartListAdapter(bodyPartBack)
 
         bodyPartRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         bodyPartRecyclerView.adapter = partListAdapter
@@ -429,7 +430,10 @@ class ConsultingActivity : RootActivity(){
     fun causeRecyclerViewActivated() {
 
         causeOfBurnedRecyclerView.layoutManager = GridLayoutManager(this, 4)
-        causeOfBurnedRecyclerView.adapter = CauseOfBurnedAdapter(causeCategory)
+        causeOfBurnedRecyclerView.adapter =
+            CauseOfBurnedAdapter(
+                causeCategory
+            )
 
     }
 
@@ -437,7 +441,8 @@ class ConsultingActivity : RootActivity(){
     fun deptRecyclerViewActivated(){
 
         recentlyVisitRecyclerView.layoutManager = GridLayoutManager(this, 3)
-        recentlyVisitRecyclerView.adapter = DeptAdapter()
+        recentlyVisitRecyclerView.adapter =
+            DeptAdapter()
 
     }
 
@@ -445,7 +450,8 @@ class ConsultingActivity : RootActivity(){
     fun questionRecyclerViewActivated(){
 
         questionRecyclerView.layoutManager = GridLayoutManager(this, 3)
-        questionRecyclerView.adapter = QuestionAdapter()
+        questionRecyclerView.adapter =
+            QuestionAdapter()
 
     }
 
