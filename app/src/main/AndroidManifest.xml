@@ -31,7 +31,7 @@
         <activity android:name=".user_MyQuestion.MyCaseActivity" />
         <activity android:name=".user_MyQuestion.MyQuestionDetailActivity" />
         <activity android:name=".user_MyQuestion.MyQuestionActivity" />
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".user_Setting.SettingActivity" />
         <activity android:name=".user_BurnInfo.BurnInfoActivity" />
         <activity android:name=".user_Main.MainActivity" />
         <activity android:name=".LoginActivity">
@@ -44,7 +44,8 @@
         <activity android:name=".user_Consulting.ConsultingActivity"/>
         <activity android:name=".user_SignUp.SignUpActivity"/>
         <activity android:name=".user_SignUp.SignUpPreActivity"/>
-
+        <activity android:name=".user_Setting.ChangePasswordActivity"/>
+        <activity android:name=".user_Setting.WithdrawalActivity"/>
     </application>
 
 </manifest>

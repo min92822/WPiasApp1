@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.publicObject.Validation
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.cause_of_burned.view.*
 
@@ -124,7 +125,7 @@ class CauseOfBurnedAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<R
 
                 }
 
-                ConsultingActivity.burnStyleV = (adapterPosition + 1).toString().padStart(3, '0')
+                Validation.vali.burnStyleV = (adapterPosition + 1).toString().padStart(3, '0')
                 whenLoad(adapterPosition)
 
             }

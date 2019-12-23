@@ -13,6 +13,7 @@ import fineinsight.app.service.wpias.R
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.body_part_list.view.*
 import android.os.SystemClock
+import fineinsight.app.service.wpias.publicObject.Validation
 
 class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -120,7 +121,7 @@ class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<Recycl
                 }
 
                 whenLoad(adapterPosition)
-                ConsultingActivity.bodyStyleV = (adapterPosition + 1).toString().padStart(3, '0')
+                Validation.vali.bodyStyleV = (adapterPosition + 1).toString().padStart(3, '0')
 
             }
 

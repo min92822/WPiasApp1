@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.publicObject.Validation
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.body_part_detail.view.*
 
@@ -69,15 +70,15 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
 
                 buttonView.isClickable = false
 
-                ConsultingActivity.bodyDetailV = (position + 1).toString().padStart(3, '0')
+                Validation.vali.bodyDetailV = (position + 1).toString().padStart(3, '0')
 
                 if(chkBoxArr[position].detailPart.text == "기타"){
 
-                    ConsultingActivity.bodyGitaV = chkBoxArr[position].detailPart.text.toString()
+                    Validation.vali.bodyGitaV = chkBoxArr[position].detailPart.text.toString()
 
                 }else{
 
-                    ConsultingActivity.bodyGitaV = ""
+                    Validation.vali.bodyGitaV = ""
 
                 }
 

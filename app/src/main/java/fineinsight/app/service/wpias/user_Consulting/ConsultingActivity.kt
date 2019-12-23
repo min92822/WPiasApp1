@@ -33,6 +33,7 @@ import fineinsight.app.service.wpias.user_Consulting.adapters.DeptAdapter
 import fineinsight.app.service.wpias.user_Consulting.adapters.PartListAdapter
 import fineinsight.app.service.wpias.user_Consulting.adapters.QuestionAdapter
 import fineinsight.app.service.wpias.publicObject.PubVariable
+import fineinsight.app.service.wpias.publicObject.Validation
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.shot_distance_popup.*
@@ -76,53 +77,14 @@ class ConsultingActivity : RootActivity(){
 
     var popup = false
 
-    //validation 용도
-    //일부 validation이 adapter에 checkBox들의 값에 의하기 때문에
-    companion object {
-
-        var consultingTitleV = ""
-        var burnDateV = ""
-        var ageV = ""
-        var genderV = ""
-        var bodyStyleV = ""
-        var bodyDetailV = ""
-        var bodyGitaV = ""
-        var burnStyleV = ""
-        var burnDetailV = ""
-        var burnGitaV = ""
-        var careStyleV = ""
-        var careGitaV = ""
-        var scarStyleV = ""
-        var proStatusV = "Q"
-        var directionV = ArrayList<String>()
-        var imageUrl1V = ""
-        var imageUrl2V = ""
-        var contentsV = ""
-
-    }
-
     var bodyPartFront = arrayListOf("머리", "어깨", "가슴", "배", "팔", "손", "음부", "다리", "발", "호흡기")
     var bodyPartBack = arrayListOf("머리", "어깨", "등", "허리", "팔", "손", "엉덩이", "다리", "발")
     var causeCategory = arrayListOf("열탕", "화염", "전기", "접촉", "저온", "화학", "증기", "마찰", "햇빛", "흡입")
 
+    //액티비티 초기화될때 validation 전역 변수들을 초기화 시켜준다
     init {
 
-        consultingTitleV = ""
-        burnDateV = ""
-        ageV = ""
-        genderV = ""
-        bodyStyleV = ""
-        bodyDetailV = ""
-        bodyGitaV = ""
-        burnStyleV = ""
-        burnDetailV = ""
-        burnGitaV = ""
-        scarStyleV = ""
-        proStatusV = "Q"
-        directionV = ArrayList<String>()
-        imageUrl1V = ""
-        imageUrl2V = ""
-        contentsV = ""
+        Validation.valiInit()
 
     }
 
@@ -184,7 +146,7 @@ class ConsultingActivity : RootActivity(){
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                burnDateV = s.toString()
+                Validation.vali.burnDateV = s.toString()
 
             }
 
@@ -200,7 +162,7 @@ class ConsultingActivity : RootActivity(){
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                 consultingTitleV = s.toString()
+                Validation.vali.consultingTitleV = s.toString()
 
             }
 
@@ -216,7 +178,7 @@ class ConsultingActivity : RootActivity(){
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                contentsV = s.toString()
+                Validation.vali.contentsV = s.toString()
 
             }
 
@@ -306,7 +268,7 @@ class ConsultingActivity : RootActivity(){
                 female.setTextColor(ContextCompat.getColor(this,
                     R.color.ocean_blue
                 ))
-                genderV = "M"
+                Validation.vali.genderV = "M"
             }else{
                 buttonView.setTextColor(ContextCompat.getColor(this,
                     R.color.ocean_blue
@@ -327,7 +289,7 @@ class ConsultingActivity : RootActivity(){
                 male.setTextColor(ContextCompat.getColor(this,
                     R.color.ocean_blue
                 ))
-                genderV = "F"
+                Validation.vali.genderV = "F"
             }else{
                 buttonView.setTextColor(ContextCompat.getColor(this,
                     R.color.ocean_blue
@@ -363,7 +325,7 @@ class ConsultingActivity : RootActivity(){
                 position: Int,
                 id: Long
             ) {
-                ageV = if(position == 0){
+                Validation.vali.ageV = if(position == 0){
 
                     ""
 
@@ -476,7 +438,7 @@ class ConsultingActivity : RootActivity(){
                 android.app.AlertDialog.THEME_HOLO_DARK,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     whenBurned.setText("${year}-${(month + 1).toString().padStart(2,'0')}-${dayOfMonth.toString().padStart(2, '0')}")
-                    burnDateV = "$year + ${month + 1} + $dayOfMonth"
+                    Validation.vali.burnDateV = "$year + ${month + 1} + $dayOfMonth"
                 },
                 MYyear,
                 MYmonth,
@@ -520,8 +482,8 @@ class ConsultingActivity : RootActivity(){
                 whenBurned.setText("$MYyear-$MYmonth-$MYday")
                 whenBurned.isEnabled = false
 
-                burnDateV = whenBurned.text.toString()
-                scarStyleV = "burn"
+                Validation.vali.burnDateV = whenBurned.text.toString()
+                Validation.vali.scarStyleV = "burn"
 
             }
 
@@ -535,7 +497,7 @@ class ConsultingActivity : RootActivity(){
                 whenBurned.setText("")
                 whenBurned.hint = "화상을 입은 날짜를 입력해주세요."
                 whenBurned.isEnabled = true
-                scarStyleV = "scar"
+                Validation.vali.scarStyleV = "scar"
 
             }
 
@@ -698,13 +660,13 @@ class ConsultingActivity : RootActivity(){
                 REQUEST_TAKE_PHOTO_10 -> {
                     imageUri = Uri.fromFile(file)
                     if(imageUri.toString().isNotEmpty()){
-                        imageUrl1V = imageUri.toString()
+                        Validation.vali.imageUrl1V = imageUri.toString()
                     }
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
                     imageUri2 = Uri.fromFile(file)
                     if(imageUri2.toString().isNotEmpty()){
-                        imageUrl2V = imageUri2.toString()
+                        Validation.vali.imageUrl2V = imageUri2.toString()
                     }
                 }
 
@@ -720,13 +682,13 @@ class ConsultingActivity : RootActivity(){
                 GET_IMAGE_FROM_GALLERY_10 -> {
                     imageUri = data?.data!!
                     if(imageUri.toString().isNotEmpty()){
-                        imageUrl1V = imageUri.toString()
+                        Validation.vali.imageUrl1V = imageUri.toString()
                     }
                 }
                 GET_IMAGE_FROM_GALLERY_20 -> {
                     imageUri2 = data?.data!!
                     if(imageUri2.toString().isNotEmpty()){
-                        imageUrl2V = imageUri2.toString()
+                        Validation.vali.imageUrl2V = imageUri2.toString()
                     }
                 }
 
@@ -750,8 +712,8 @@ class ConsultingActivity : RootActivity(){
 
                 imageUri = Uri.EMPTY
                 imageUri2 = Uri.EMPTY
-                imageUrl1V = ""
-                imageUrl2V = ""
+                Validation.vali.imageUrl1V = ""
+                Validation.vali.imageUrl2V = ""
 
                 for (inputStream in inputStreamArr) {
                     imageLengthArr.add(inputStream.available())
@@ -767,21 +729,21 @@ class ConsultingActivity : RootActivity(){
 
                 when{
 
-                    imageUrl1V.isEmpty() -> failAlert("10cm 사진 촬영을 진행해주세요")
-                    imageUrl2V.isEmpty() -> failAlert("20cm 사진 촬영을 진행해주세요")
-                    scarStyleV.isEmpty() -> failAlert("화상 시기를 확인해주세요")
-                    burnDateV.isEmpty() -> failAlert("화상입은 날짜를 확인해주세요")
-                    bodyStyleV.isEmpty() -> failAlert("신체부위를 확인해주세요")
-                    bodyDetailV.isEmpty() -> failAlert("상세 촬영부위를 확인해주세요")
-//                    bodyGitaV.isEmpty() -> Toast.makeText(this, "신체부위 기타를 확인해주세요", Toast.LENGTH_LONG).show()
-                    burnStyleV.isEmpty() -> failAlert("화상원인을 선택해주세요")
-                    burnDetailV.isEmpty() -> failAlert("자세한 화상원인을 선택해주세요")
-//                    burnGitaV.isEmpty() -> Toast.makeText(this, "화상 기타를 확인해주세요", Toast.LENGTH_LONG).show()
-                    careStyleV.isEmpty() -> failAlert("최근에 치료받은곳을 선택해주세요")
-                    genderV.isEmpty() -> failAlert("성별을 확인해주세요")
-                    ageV.isEmpty() -> failAlert("연령을 확인해주세요")
-                    consultingTitleV.isEmpty() -> failAlert("상담 제목을 입력해주세요")
-                    contentsV.isEmpty() -> failAlert("상담 내용을 입력해주세요")
+                    Validation.vali.imageUrl1V.isEmpty() -> failAlert("10cm 사진 촬영을 진행해주세요")
+                    Validation.vali.imageUrl2V.isEmpty() -> failAlert("20cm 사진 촬영을 진행해주세요")
+                    Validation.vali.scarStyleV.isEmpty() -> failAlert("화상 시기를 확인해주세요")
+                    Validation.vali.burnDateV.isEmpty() -> failAlert("화상입은 날짜를 확인해주세요")
+                    Validation.vali.bodyStyleV.isEmpty() -> failAlert("신체부위를 확인해주세요")
+                    Validation.vali.bodyDetailV.isEmpty() -> failAlert("상세 촬영부위를 확인해주세요")
+//                    Validation.vali.bodyGitaV.isEmpty() -> Toast.makeText(this, "신체부위 기타를 확인해주세요", Toast.LENGTH_LONG).show()
+                    Validation.vali.burnStyleV.isEmpty() -> failAlert("화상원인을 선택해주세요")
+                    Validation.vali.burnDetailV.isEmpty() -> failAlert("자세한 화상원인을 선택해주세요")
+//                    Validation.vali.burnGitaV.isEmpty() -> Toast.makeText(this, "화상 기타를 확인해주세요", Toast.LENGTH_LONG).show()
+                    Validation.vali.careStyleV.isEmpty() -> failAlert("최근에 치료받은곳을 선택해주세요")
+                    Validation.vali.genderV.isEmpty() -> failAlert("성별을 확인해주세요")
+                    Validation.vali.ageV.isEmpty() -> failAlert("연령을 확인해주세요")
+                    Validation.vali.consultingTitleV.isEmpty() -> failAlert("상담 제목을 입력해주세요")
+                    Validation.vali.contentsV.isEmpty() -> failAlert("상담 내용을 입력해주세요")
 
                 }
 
@@ -794,12 +756,12 @@ class ConsultingActivity : RootActivity(){
     //등록하기전 app 내 validation 체크
     fun validationConsulting() : Boolean{
 
-        return consultingTitleV.isNotEmpty() && burnDateV.isNotEmpty() && ageV.isNotEmpty() && genderV.isNotEmpty()
-                && (bodyDetailV.isNotEmpty() || bodyGitaV.isNotEmpty())
-                && burnStyleV.isNotEmpty() && (burnDetailV.isNotEmpty() || burnGitaV.isNotEmpty())
-                && (careStyleV.isNotEmpty() || careGitaV.isNotEmpty())
-                && scarStyleV.isNotEmpty() && proStatusV.isNotEmpty()
-                && imageUrl1V.isNotEmpty() && imageUrl2V.isNotEmpty() && contentsV.isNotEmpty()
+        return Validation.vali.consultingTitleV.isNotEmpty() && Validation.vali.burnDateV.isNotEmpty() && Validation.vali.ageV.isNotEmpty()
+                && Validation.vali.genderV.isNotEmpty()&& (Validation.vali.bodyDetailV.isNotEmpty() || Validation.vali.bodyGitaV.isNotEmpty())
+                && Validation.vali.burnStyleV.isNotEmpty() && (Validation.vali.burnDetailV.isNotEmpty() || Validation.vali.burnGitaV.isNotEmpty())
+                && (Validation.vali.careStyleV.isNotEmpty() || Validation.vali.careGitaV.isNotEmpty())&& Validation.vali.scarStyleV.isNotEmpty()
+                && Validation.vali.proStatusV.isNotEmpty()&& Validation.vali.imageUrl1V.isNotEmpty() && Validation.vali.imageUrl2V.isNotEmpty()
+                && Validation.vali.contentsV.isNotEmpty()
 
     }
 

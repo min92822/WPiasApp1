@@ -14,6 +14,7 @@ import com.microsoft.azure.storage.StorageException
 import com.microsoft.azure.storage.blob.CloudBlobContainer
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.publicObject.PubVariable
+import fineinsight.app.service.wpias.publicObject.Validation
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import fineinsight.app.service.wpias.user_Main.MainActivity
 import kotlinx.android.synthetic.main.custom_alert.*
@@ -86,9 +87,9 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
                 //반환 받은 url을 각 imageurl1v imageurl2v에 넣고 insert_question을 실행한다
                 if(count == 2){
 
-                    ConsultingActivity.imageUrl1V =
+                    Validation.vali.imageUrl1V =
                         "https://storagewpias.blob.core.windows.net/container-wpias-question/${time}${PubVariable.uid}_1.jpg"
-                    ConsultingActivity.imageUrl2V =
+                    Validation.vali.imageUrl2V =
                         "https://storagewpias.blob.core.windows.net/container-wpias-question/${time}${PubVariable.uid}_2.jpg"
                     insert_question()
 
@@ -117,29 +118,29 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
 
         var map = HashMap<String, String>()
 
-        ConsultingActivity.directionV.sort()
+        Validation.vali.directionV.sort()
 
         map["QKEY"] = SimpleDateFormat("yyyyMMddhhmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
-        map["TITLE"] = ConsultingActivity.consultingTitleV
+        map["TITLE"] = Validation.vali.consultingTitleV
         map["UUID"] = PubVariable.uid
         map["INSERTDATE"] = SimpleDateFormat("yyyyMMddhhmmss").format(Calendar.getInstance().time)
-        map["BURNDATE"] = ConsultingActivity.burnDateV
-        map["AGE"] = ConsultingActivity.ageV
-        map["GENDER"] = ConsultingActivity.genderV
-        map["BODYSTYLE"] = ConsultingActivity.bodyStyleV
-        map["BODYDETAIL"] = ConsultingActivity.bodyDetailV
-        map["BODYGITA"] = ConsultingActivity.bodyGitaV
-        map["BURNSTYLE"] = ConsultingActivity.burnStyleV
-        map["BURNDETAIL"] = ConsultingActivity.burnDetailV
-        map["BURNGITA"] = ConsultingActivity.burnGitaV
-        map["CARESTYLE"] = ConsultingActivity.careStyleV
-        map["CAREGITA"] = ConsultingActivity.careGitaV
-        map["SCARSTYLE"] = ConsultingActivity.scarStyleV
-        map["PROSTATUS"] = ConsultingActivity.proStatusV
-        map["DIRECTION"] = ConsultingActivity.directionV.joinToString("-")
-        map["IMAGEURL1"] = ConsultingActivity.imageUrl1V
-        map["IMAGEURL2"] = ConsultingActivity.imageUrl2V
-        map["CONTENTS"] = ConsultingActivity.contentsV
+        map["BURNDATE"] = Validation.vali.burnDateV
+        map["AGE"] = Validation.vali.ageV
+        map["GENDER"] = Validation.vali.genderV
+        map["BODYSTYLE"] = Validation.vali.bodyStyleV
+        map["BODYDETAIL"] = Validation.vali.bodyDetailV
+        map["BODYGITA"] = Validation.vali.bodyGitaV
+        map["BURNSTYLE"] = Validation.vali.burnStyleV
+        map["BURNDETAIL"] = Validation.vali.burnDetailV
+        map["BURNGITA"] = Validation.vali.burnGitaV
+        map["CARESTYLE"] = Validation.vali.careStyleV
+        map["CAREGITA"] = Validation.vali.careGitaV
+        map["SCARSTYLE"] = Validation.vali.scarStyleV
+        map["PROSTATUS"] = Validation.vali.proStatusV
+        map["DIRECTION"] = Validation.vali.directionV.joinToString("-")
+        map["IMAGEURL1"] = Validation.vali.imageUrl1V
+        map["IMAGEURL2"] = Validation.vali.imageUrl2V
+        map["CONTENTS"] = Validation.vali.contentsV
 
         ApiUtill().getINSERT_QUESTION().insert_question(map).enqueue(object : Callback<String>{
 

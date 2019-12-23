@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.publicObject.Validation
 import kotlinx.android.synthetic.main.visit_dept.view.*
 import kotlinx.android.synthetic.main.visit_dept.view.appCompatCheckBox
 
@@ -42,15 +43,15 @@ class DeptAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 }
 
-                ConsultingActivity.careStyleV = (position + 1).toString().padStart(3, '0')
+                Validation.vali.careStyleV = (position + 1).toString().padStart(3, '0')
 
                 if(viewArr[position].dept.text == "기타사항"){
 
-                    ConsultingActivity.careGitaV = viewArr[position].dept.text.toString()
+                    Validation.vali.careGitaV = viewArr[position].dept.text.toString()
 
                 }else{
 
-                    ConsultingActivity.careGitaV = ""
+                    Validation.vali.careGitaV = ""
 
                 }
                 buttonView.isClickable = false

@@ -1,8 +1,11 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_Setting
 
 import android.content.Intent
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
+import fineinsight.app.service.wpias.LoginActivity
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -40,13 +43,13 @@ class SettingActivity : RootActivity() {
 
         btnChangePwWrapper.setOnClickListener {
 
-
+            startActivity(Intent(this@SettingActivity, ChangePasswordActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
         }
 
-        memberOut.setOnClickListener {
+        withDrawal.setOnClickListener {
 
-
+            startActivity(Intent(this@SettingActivity, WithdrawalActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
         }
 
@@ -67,6 +70,12 @@ class SettingActivity : RootActivity() {
                 updateSwitch2(isChecked)
 
             }
+
+        }
+
+        btn_back.setOnClickListener {
+
+            onBackPressed()
 
         }
 

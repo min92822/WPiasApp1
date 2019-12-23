@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.publicObject.Validation
 import kotlinx.android.synthetic.main.cause_of_burned_detail.view.*
 import kotlinx.android.synthetic.main.cause_of_burned_detail.view.appCompatCheckBox
 
@@ -86,15 +87,15 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
 
                 buttonView.isClickable = false
 
-                ConsultingActivity.burnDetailV = (position + 1).toString().padStart(3, '0')
+                Validation.vali.burnDetailV = (position + 1).toString().padStart(3, '0')
 
                 if(viewArr[position].causeDetail.text == "기타"){
 
-                    ConsultingActivity.burnGitaV = viewArr[position].causeDetail.text.toString()
+                    Validation.vali.burnGitaV = viewArr[position].causeDetail.text.toString()
 
                 }else{
 
-                    ConsultingActivity.burnGitaV = ""
+                    Validation.vali.burnGitaV = ""
 
                 }
 

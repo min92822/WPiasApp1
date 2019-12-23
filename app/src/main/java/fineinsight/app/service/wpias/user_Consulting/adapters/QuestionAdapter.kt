@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.publicObject.Validation
 import kotlinx.android.synthetic.main.question.view.*
 
 class QuestionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -35,11 +36,11 @@ class QuestionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             if(isChecked){
 
-                ConsultingActivity.directionV.add((position + 1).toString())
+                Validation.vali.directionV.add((position + 1).toString())
 
             }else{
 
-                ConsultingActivity.directionV.remove((position + 1).toString())
+                Validation.vali.directionV.remove((position + 1).toString())
 
             }
 

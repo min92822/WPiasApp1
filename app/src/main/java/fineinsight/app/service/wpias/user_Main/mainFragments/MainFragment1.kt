@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import fineinsight.app.service.wpias.user_BurnInfo.BurnInfoActivity
 import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionActivity
 import fineinsight.app.service.wpias.R
-import fineinsight.app.service.wpias.SettingActivity
+import fineinsight.app.service.wpias.user_Setting.SettingActivity
 import kotlinx.android.synthetic.main.main_fragment_1.view.*
 
 class MainFragment1 : Fragment() {

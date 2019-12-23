@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity">
+    tools:context=".user_Setting.SettingActivity">
 
     <include
         android:id="@+id/include15"
@@ -25,7 +25,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout21"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,15 +56,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/nameGuideline"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/userNickNameChange"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/pen"
-            app:layout_constraintBottom_toBottomOf="@+id/userNickName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/userNickName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -382,7 +373,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnChangePwWrapper" />
 
     <TextView
-        android:id="@+id/memberOut"
+        android:id="@+id/withDrawal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
