@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.adapters
+package fineinsight.app.service.wpias.user_MyQuestion
 
 import android.content.Context
 import android.view.LayoutInflater

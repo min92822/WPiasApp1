@@ -1,6 +1,8 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_BurnInfo
 
 import android.os.Bundle
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import kotlinx.android.synthetic.main.in_burn_info_hatbit.*
 import kotlinx.android.synthetic.main.in_burn_info_heubib.*
 import kotlinx.android.synthetic.main.in_burn_info_hwahag.*

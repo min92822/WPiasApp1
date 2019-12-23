@@ -1,13 +1,14 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_BurnInfo
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
-import fineinsight.app.service.wpias.burnInfoFragments.BurnFragment1
-import fineinsight.app.service.wpias.burnInfoFragments.BurnFragment2
-import fineinsight.app.service.wpias.burnInfoFragments.BurnFragment3
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
+import fineinsight.app.service.wpias.user_BurnInfo.burnInfoFragments.BurnFragment1
+import fineinsight.app.service.wpias.user_BurnInfo.burnInfoFragments.BurnFragment2
 import kotlinx.android.synthetic.main.activity_burn_info.*
 import kotlinx.android.synthetic.main.title_bar_skyblue.*
 
@@ -29,7 +30,10 @@ class BurnInfoActivity : RootActivity() {
             onBackPressed()
         }
 
-        burn_viewPager.adapter = BurnViewPagerSetting(supportFragmentManager)
+        burn_viewPager.adapter =
+            BurnViewPagerSetting(
+                supportFragmentManager
+            )
 
         burn_tabLayout.addTab(burn_tabLayout.newTab().setText("화상종류"))
         burn_tabLayout.addTab(burn_tabLayout.newTab().setText("화상응급처치"))
@@ -60,7 +64,10 @@ class BurnInfoActivity : RootActivity() {
 
     class BurnViewPagerSetting(fm:FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 
-        var fragment = arrayOf(BurnFragment1(), BurnFragment2()) //, BurnFragment3())
+        var fragment = arrayOf(
+            BurnFragment1(),
+            BurnFragment2()
+        ) //, BurnFragment3())
 
         override fun getItem(position: Int): Fragment {
             return fragment[position]

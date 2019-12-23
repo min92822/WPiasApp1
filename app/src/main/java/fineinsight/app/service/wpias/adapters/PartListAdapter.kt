@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import fineinsight.app.service.wpias.ConsultingActivity
+import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.R
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.body_part_list.view.*
 import android.os.SystemClock
-import kotlinx.android.synthetic.main.body_part_detail.view.*
 
 class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 

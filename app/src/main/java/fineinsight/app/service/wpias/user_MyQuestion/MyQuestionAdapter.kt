@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.adapters
+package fineinsight.app.service.wpias.user_MyQuestion
 
 import android.app.Activity
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import fineinsight.app.service.wpias.MyQuestionDetailActivity
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
 import kotlinx.android.synthetic.main.recycler_my_question.view.*

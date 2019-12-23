@@ -1,7 +1,8 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_MyQuestion
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import kotlinx.android.synthetic.main.title_bar_skyblue.*
 
 class MyCaseActivity : RootActivity() {

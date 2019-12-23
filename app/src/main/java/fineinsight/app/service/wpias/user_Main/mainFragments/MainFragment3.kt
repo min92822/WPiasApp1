@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.mainFragments
+package fineinsight.app.service.wpias.user_Main.mainFragments
 
 import android.app.Dialog
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.Fragment
-import fineinsight.app.service.wpias.MyQuestionActivity
+import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionActivity
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.SettingActivity
 import kotlinx.android.synthetic.main.custom_alert.*

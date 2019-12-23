@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_Consulting
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -13,7 +13,6 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.os.Handler
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,13 +20,15 @@ import android.view.View
 import android.view.Window
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fineinsight.app.service.wpias.AzureAsyncTask
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.adapters.CauseOfBurnedAdapter
 import fineinsight.app.service.wpias.adapters.DeptAdapter
 import fineinsight.app.service.wpias.adapters.PartListAdapter
@@ -231,12 +232,20 @@ class ConsultingActivity : RootActivity(){
         bodyFront.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                bodyBack.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
+                bodyBack.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
                 frontActivated()
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
-                bodyBack.setTextColor(ContextCompat.getColor(this, R.color.white))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
+                bodyBack.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
             }
 
         }
@@ -244,12 +253,20 @@ class ConsultingActivity : RootActivity(){
         bodyBack.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                bodyFront.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
+                bodyFront.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
                 backActivated()
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
-                bodyFront.setTextColor(ContextCompat.getColor(this, R.color.white))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
+                bodyFront.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
             }
 
         }
@@ -282,12 +299,20 @@ class ConsultingActivity : RootActivity(){
         male.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                female.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
+                female.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
                 genderV = "M"
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
-                female.setTextColor(ContextCompat.getColor(this, R.color.white))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
+                female.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
             }
 
         }
@@ -295,12 +320,20 @@ class ConsultingActivity : RootActivity(){
         female.setOnCheckedChangeListener { buttonView, isChecked ->
 
             if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.white))
-                male.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
+                male.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
                 genderV = "F"
             }else{
-                buttonView.setTextColor(ContextCompat.getColor(this, R.color.ocean_blue))
-                male.setTextColor(ContextCompat.getColor(this, R.color.white))
+                buttonView.setTextColor(ContextCompat.getColor(this,
+                    R.color.ocean_blue
+                ))
+                male.setTextColor(ContextCompat.getColor(this,
+                    R.color.white
+                ))
             }
 
         }
@@ -718,7 +751,11 @@ class ConsultingActivity : RootActivity(){
                     imageLengthArr.add(inputStream.available())
                 }
 
-                AzureAsyncTask(this, inputStreamArr, imageLengthArr).execute(storageConnectionString)
+                AzureAsyncTask(
+                    this,
+                    inputStreamArr,
+                    imageLengthArr
+                ).execute(storageConnectionString)
 
             }else{
 

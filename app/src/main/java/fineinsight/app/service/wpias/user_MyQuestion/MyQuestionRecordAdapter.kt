@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.adapters
+package fineinsight.app.service.wpias.user_MyQuestion
 
 import android.app.Activity
 import android.content.Intent
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import fineinsight.app.service.wpias.MyCaseActivity
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.dataClass.MycaseInfo
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
@@ -27,7 +26,9 @@ class MyQuestionRecordAdapter(
         var view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recycler_my_question_detail_record, parent, false)
 
-        return viewHolder(view)
+        return viewHolder(
+            view
+        )
 
     }
 

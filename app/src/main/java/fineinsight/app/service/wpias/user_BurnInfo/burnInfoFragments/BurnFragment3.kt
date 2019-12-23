@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.burnInfoFragments
+package fineinsight.app.service.wpias.user_BurnInfo.burnInfoFragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

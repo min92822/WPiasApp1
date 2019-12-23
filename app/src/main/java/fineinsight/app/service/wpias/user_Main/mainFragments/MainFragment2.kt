@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.mainFragments
+package fineinsight.app.service.wpias.user_Main.mainFragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import fineinsight.app.service.wpias.ConsultingActivity
-import fineinsight.app.service.wpias.MyQuestionActivity
+import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
+import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionActivity
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.SettingActivity
 import kotlinx.android.synthetic.main.main_fragment_2.view.*

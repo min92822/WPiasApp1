@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_MyQuestion
 
 import android.content.Context
 import android.os.Bundle
@@ -6,11 +6,10 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ExpandableListView
-import android.widget.ScrollView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import fineinsight.app.service.wpias.adapters.ExpandableListAdapter
-import fineinsight.app.service.wpias.adapters.MyQuestionRecordAdapter
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.dataClass.MycaseInfo
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
 import fineinsight.app.service.wpias.restApi.ApiUtill
@@ -68,7 +67,12 @@ class MyQuestionDetailActivity : RootActivity() {
                 titleList.add(listData[item.key]!!.keys.elementAt(0))
             }
 
-            var adapter = ExpandableListAdapter(this, titleList, listData)
+            var adapter =
+                ExpandableListAdapter(
+                    this,
+                    titleList,
+                    listData
+                )
 
             expandableListView!!.setAdapter(adapter)
 
@@ -99,34 +103,80 @@ class MyQuestionDetailActivity : RootActivity() {
 
         img_my_detail_burn.setImageResource(
             when(m_questionInfo!!.burnnm){
-                "열탕" -> {R.drawable.yultang_1}
-                "화염" -> {R.drawable.hwayum_1}
-                "전기" -> {R.drawable.jungi_1}
-                "접촉" -> {R.drawable.jubchok_1}
-                "저온" -> {R.drawable.juon_1}
-                "화학" -> {R.drawable.hwahag_1}
-                "증기" -> {R.drawable.junggi_1}
-                "마찰" -> {R.drawable.machar_1}
-                "햇빛" -> {R.drawable.hatbit_1}
-                else -> {R.drawable.heubib}
+                "열탕" -> {
+                    R.drawable.yultang_1
+                }
+                "화염" -> {
+                    R.drawable.hwayum_1
+                }
+                "전기" -> {
+                    R.drawable.jungi_1
+                }
+                "접촉" -> {
+                    R.drawable.jubchok_1
+                }
+                "저온" -> {
+                    R.drawable.juon_1
+                }
+                "화학" -> {
+                    R.drawable.hwahag_1
+                }
+                "증기" -> {
+                    R.drawable.junggi_1
+                }
+                "마찰" -> {
+                    R.drawable.machar_1
+                }
+                "햇빛" -> {
+                    R.drawable.hatbit_1
+                }
+                else -> {
+                    R.drawable.heubib
+                }
             }
         )
 
         img_my_detail_bui.setImageResource(
             when(m_questionInfo!!.detailnm){
-                "머리" -> {R.drawable.s_mori_f}
-                "어깨" -> {R.drawable.s_akke_f}
-                "가슴" -> {R.drawable.s_gasum_f}
-                "등" -> {R.drawable.s_gasum_b}
-                "배" -> {R.drawable.s_bae_f}
-                "허리" -> {R.drawable.s_bae_b}
-                "팔" -> {R.drawable.s_8_f}
-                "손" -> {R.drawable.s_sun_f}
-                "음부" -> {R.drawable.s_umbu}
-                "엉덩이" -> {R.drawable.s_bae_b}
-                "다리" -> {R.drawable.s_dari_f}
-                "발" -> {R.drawable.s_bar_f}
-                else -> {R.drawable.s_gasum_f}
+                "머리" -> {
+                    R.drawable.s_mori_f
+                }
+                "어깨" -> {
+                    R.drawable.s_akke_f
+                }
+                "가슴" -> {
+                    R.drawable.s_gasum_f
+                }
+                "등" -> {
+                    R.drawable.s_gasum_b
+                }
+                "배" -> {
+                    R.drawable.s_bae_f
+                }
+                "허리" -> {
+                    R.drawable.s_bae_b
+                }
+                "팔" -> {
+                    R.drawable.s_8_f
+                }
+                "손" -> {
+                    R.drawable.s_sun_f
+                }
+                "음부" -> {
+                    R.drawable.s_umbu
+                }
+                "엉덩이" -> {
+                    R.drawable.s_bae_b
+                }
+                "다리" -> {
+                    R.drawable.s_dari_f
+                }
+                "발" -> {
+                    R.drawable.s_bar_f
+                }
+                else -> {
+                    R.drawable.s_gasum_f
+                }
             }
         )
 
@@ -265,7 +315,12 @@ class MyQuestionDetailActivity : RootActivity() {
                     linearLayoutManager.reverseLayout = true
                     linearLayoutManager.stackFromEnd = true
                     recycler_my_question_detail.layoutManager = linearLayoutManager
-                    recycler_my_question_detail.adapter = MyQuestionRecordAdapter(this@MyQuestionDetailActivity, arr, qArr)
+                    recycler_my_question_detail.adapter =
+                        MyQuestionRecordAdapter(
+                            this@MyQuestionDetailActivity,
+                            arr,
+                            qArr
+                        )
 
                 } else {
 

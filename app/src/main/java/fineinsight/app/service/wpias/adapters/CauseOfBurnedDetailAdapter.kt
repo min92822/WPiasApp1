@@ -5,9 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.recyclerview.widget.RecyclerView
-import fineinsight.app.service.wpias.ConsultingActivity
+import fineinsight.app.service.wpias.user_Consulting.ConsultingActivity
 import fineinsight.app.service.wpias.R
-import kotlinx.android.synthetic.main.body_part_detail.view.*
 import kotlinx.android.synthetic.main.cause_of_burned_detail.view.*
 import kotlinx.android.synthetic.main.cause_of_burned_detail.view.appCompatCheckBox
 

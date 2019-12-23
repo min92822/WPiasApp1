@@ -6,7 +6,10 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import fineinsight.app.service.wpias.dataClass.UserInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
+import fineinsight.app.service.wpias.publicObject.UserToken
 import fineinsight.app.service.wpias.restApi.ApiUtill
+import fineinsight.app.service.wpias.user_Main.MainActivity
+import fineinsight.app.service.wpias.user_SignUp.SignUpPreActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,12 +20,14 @@ import kotlin.collections.set
 
 class LoginActivity : RootActivity(){
 
-    var m_TOKEN = ""
+    var authStateListener : FirebaseAuth.AuthStateListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        UserToken.token
 
         PubVariable.init()
 
@@ -38,17 +43,30 @@ class LoginActivity : RootActivity(){
     //로그인 상태 체크 앱 실행시 메인으로 바로 진행할지 여부를 결정하는 펑션
     fun loginStateCheck(){
 
-        if(FirebaseAuth.getInstance().currentUser != null){
+        authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            var user = firebaseAuth.currentUser
 
-            PubVariable.uid = FirebaseAuth.getInstance().currentUser?.uid!!
+            if(user != null) {
 
-            finish()
+                PubVariable.uid = user.uid
+                finish()
+                getUserinfo()
 
-            getUserinfo()
-
+            }
         }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        FirebaseAuth.getInstance().addAuthStateListener(authStateListener!!)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        FirebaseAuth.getInstance().removeAuthStateListener(authStateListener!!)
+    }
+
 
     //로그인
     fun login(id : String, pw : String){

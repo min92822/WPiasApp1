@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_SignUp
 
 import android.app.Dialog
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.CheckBox
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import kotlinx.android.synthetic.main.activity_sign_up_pre.*
 import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.in_sign_up_pre_1.*
@@ -41,7 +43,11 @@ class SignUpPreActivity : RootActivity() {
         btn_sign_up_pre_open_3.setOnClickListener { in_sign_up_pre_3.visibility = View.VISIBLE }
         btn_sign_up_pre_close_3.setOnClickListener { in_sign_up_pre_3.visibility = View.GONE }
 
+        checkVal()
 
+    }
+
+    fun checkVal(){
         var chkarr = arrayListOf<CheckBox>(chk_sign_up_pre_1, chk_sign_up_pre_2, chk_sign_up_pre_3)
 
         chk_sign_up_pre_all.setOnClickListener {

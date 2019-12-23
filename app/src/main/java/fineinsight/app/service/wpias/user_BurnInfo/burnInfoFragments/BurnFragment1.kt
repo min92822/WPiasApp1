@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.burnInfoFragments
+package fineinsight.app.service.wpias.user_BurnInfo.burnInfoFragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import fineinsight.app.service.wpias.BurnInfoDetailActivity
+import fineinsight.app.service.wpias.user_BurnInfo.BurnInfoDetailActivity
 import fineinsight.app.service.wpias.R
 import kotlinx.android.synthetic.main.burn_fragment_1.view.*
 

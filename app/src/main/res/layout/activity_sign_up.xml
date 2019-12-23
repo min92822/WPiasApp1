@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".user_SignUp.SignUpActivity">
 
     <include
         android:id="@+id/include16"
@@ -29,7 +29,8 @@
             android:layout_marginTop="50dp"
             android:ems="10"
             android:hint="E-mail (인증을 위해 유효한 이메일을 기입해주세요.)"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +42,8 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="비밀번호(6글자이상)"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_email"
             app:layout_constraintStart_toStartOf="@+id/txt_sign_up_email"
@@ -54,7 +56,8 @@
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="비밀번호 확인"
-            android:inputType="textPersonName"
+            android:inputType="textPassword"
+            android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_pw"
             app:layout_constraintStart_toStartOf="@+id/txt_sign_up_pw"
@@ -68,6 +71,8 @@
             android:ems="10"
             android:hint="이름(정확한 이름을 적어주세요.)"
             android:inputType="textPersonName"
+            android:maxLength="8"
+            android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_pw_comfirm"
             app:layout_constraintStart_toStartOf="@+id/txt_sign_up_pw_comfirm"
@@ -83,6 +88,7 @@
             android:focusable="false"
             android:hint="생년월일을 선택해주세요"
             android:inputType="none"
+            android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_name"
             app:layout_constraintStart_toStartOf="@+id/txt_sign_up_name"
@@ -113,16 +119,44 @@
                 android:text="여" />
         </RadioGroup>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_sign_up"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:background="@drawable/bg_titlebar_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textView91"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="가입하기"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wrap_datepicker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#55000000"
+        android:visibility="gone">
+
         <LinearLayout
-            android:id="@+id/wrap_datepicker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/bg_alert"
             android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/btn_sign_up"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -151,28 +185,23 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_sign_up"
-            android:layout_width="0dp"
-            android:layout_height="70dp"
-            android:background="@drawable/bg_titlebar_2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/textView91"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="가입하기"
-                android:textColor="@color/white"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ProgressBg"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

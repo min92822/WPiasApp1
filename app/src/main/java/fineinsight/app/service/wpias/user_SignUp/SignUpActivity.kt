@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_SignUp
 
 import android.app.Dialog
 import android.content.Intent
@@ -8,9 +8,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.view.View
 import android.view.Window
-import android.widget.DatePicker
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import fineinsight.app.service.wpias.LoginActivity
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
+import fineinsight.app.service.wpias.publicObject.UserToken
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.custom_alert.*
@@ -55,34 +58,38 @@ class SignUpActivity : RootActivity() {
             onBackPressed()
         }
 
-        btn_sign_up.setOnClickListener {
-            emailVal()
-        }
+        m_insertUserMap["OS"] = "Android"
+        m_insertUserMap["SWITCH1"] = "On"
+        m_insertUserMap["SWITCH2"] = "On"
+        m_insertUserMap["TOKEN"] = UserToken.token
+        m_insertUserMap["REMARK"] = "기타"
 
+
+        // date picker 보이기
         txt_sign_up_birth.setOnClickListener {
             wrap_datepicker.visibility = View.VISIBLE
         }
 
-        sign_up_datepicker.init(Calendar.getInstance().get(Calendar.YEAR),
-            Calendar.getInstance().get(Calendar.MONTH),
-            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
+        // date picker 선택
+        var today = Calendar.getInstance()
+
+        sign_up_datepicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH)){
                 datePicker, year, month, day ->
 
             var month = month +1
 
             btn_sign_up_date.setOnClickListener {
-                txt_sign_up_birth.text = Editable.Factory.getInstance().newEditable("$year-${String.format("%02d", month)}-$day")
+                txt_sign_up_birth.text = Editable.Factory.getInstance().newEditable("$year-${String.format("%02d", month)}-${String.format("%02d", day)}")
                 wrap_datepicker.visibility = View.GONE
             }
-
         }
 
+        // 회원가입 버튼
+        btn_sign_up.setOnClickListener {
+            Loading(ProgressBar, ProgressBg, true)
+            emailVal()
+        }
 
-        m_insertUserMap["OS"] = "Android"
-        m_insertUserMap["SWITCH1"] = "On"
-        m_insertUserMap["SWITCH2"] = "On"
-        m_insertUserMap["TOKEN"] = ""
-        m_insertUserMap["REMARK"] = "기타"
 
     }
 
@@ -98,15 +105,15 @@ class SignUpActivity : RootActivity() {
 
         } else {
 
-            if (!email.matches(emailPattern)){
-                // alert
-                valAlert("이메일", "유효한 이메일을 입력해주세요!")
+//            if (!email.matches(emailPattern)){
+//                // alert
+//                valAlert("이메일", "유효한 이메일을 입력해주세요!")
 
-            } else {
+//            } else {
                 m_insertUserMap["EMAIL"] = email
 
                 pwVal()
-            }
+//            }
         }
     }
 
@@ -176,6 +183,7 @@ class SignUpActivity : RootActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_alert)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
 
         var img = dialog.img_alert
         var title = dialog.txt_alert_title
@@ -204,16 +212,37 @@ class SignUpActivity : RootActivity() {
     fun signUpEmailId(){
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(txt_sign_up_email.text.toString(), txt_sign_up_pw.text.toString())
-            .addOnCompleteListener { task ->
-                if(task.isSuccessful){
+            .addOnSuccessListener {
+
+                if(it != null){
+
                     m_insertUserMap["IDKEY"] = FirebaseAuth.getInstance().currentUser!!.uid
 
-                    println(m_insertUserMap)
-                    //azureSignUp()
+                    println("*****************"+m_insertUserMap)
+                    azureSignUp()
 
                 } else {
-                    Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
                 }
+
+                it.user!!.uid
+            }
+            .addOnFailureListener {e ->
+
+                when (e.localizedMessage) {
+                    "The email address is badly formatted." -> {
+                        valAlert("이메일", "유효한 이메일을 입력해주세요!")
+
+                    }
+                    "The email address is already in use by another account." -> {
+                        valAlert("이메일", "이미 사용중인 이메일 입니다!")
+
+                    }
+                    else -> {
+                        valAlert("실패", "회원 가입에 실패하였습니다.")
+                    }
+                }
+
             }
 
     }
@@ -227,12 +256,10 @@ class SignUpActivity : RootActivity() {
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
-                if(response.message() == "S"){
+                if(response.body() == "S"){
 
                     // alert
-
-                    startActivity(Intent(this@SignUpActivity, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
-
+                    successAlert()
 
                 } else {
                     Toast.makeText(this@SignUpActivity, "회원가입 실패", Toast.LENGTH_SHORT).show()
@@ -241,4 +268,42 @@ class SignUpActivity : RootActivity() {
         })
 
     }
+
+    fun successAlert(){
+
+        var dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_alert)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(false)
+
+        var img = dialog.img_alert
+        var title = dialog.txt_alert_title
+        var sub = dialog.txt_alert_sub
+        var btn_left = dialog.btn_alert_left
+        var btn_right = dialog.btn_alert_right
+
+        img.setImageResource(R.drawable.alert_ck)
+
+        title.text = "성공"
+        sub.text = "회원가입이 완료되었습니다."
+
+        btn_left.visibility = View.GONE
+
+        btn_right.text = "확인"
+        btn_right.setBackgroundResource(R.drawable.btn_blue)
+
+        btn_right.setOnClickListener {
+
+            FirebaseAuth.getInstance().signOut()
+            finish()
+            startActivity(Intent(this@SignUpActivity, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+            Loading(ProgressBar, ProgressBg, false)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+    }
+
 }

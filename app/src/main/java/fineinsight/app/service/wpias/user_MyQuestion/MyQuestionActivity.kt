@@ -1,11 +1,12 @@
-package fineinsight.app.service.wpias
+package fineinsight.app.service.wpias.user_MyQuestion
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import fineinsight.app.service.wpias.adapters.MyQuestionAdapter
+import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.restApi.ApiUtill
@@ -67,7 +68,11 @@ class MyQuestionActivity : RootActivity() {
 
                     } else {
                         recycler_my_question.layoutManager = LinearLayoutManager(this@MyQuestionActivity)
-                        recycler_my_question.adapter = MyQuestionAdapter(arr, this@MyQuestionActivity)
+                        recycler_my_question.adapter =
+                            MyQuestionAdapter(
+                                arr,
+                                this@MyQuestionActivity
+                            )
                     }
 
 
