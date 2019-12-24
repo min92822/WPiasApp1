@@ -49,7 +49,6 @@ class LoginActivity : RootActivity(){
             if(user != null) {
 
                 PubVariable.uid = user.uid
-                finish()
                 getUserinfo()
 
             }
@@ -123,8 +122,6 @@ class LoginActivity : RootActivity(){
                     if(response.body()?.size != 0){
 
                         PubVariable.userInfo = response.body()!![0]
-
-                        finish()
 
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
