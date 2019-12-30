@@ -2,6 +2,7 @@ package fineinsight.app.service.wpias.user_MyQuestion
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -23,10 +24,12 @@ class MyQuestionActivity : RootActivity() {
         setContentView(R.layout.activity_my_question)
 
         SetTransparentBar()
-        myViewSetting()
+
     }
 
     fun myViewSetting(){
+
+        ProgressAction(true)
 
         txt_title.text = "상담내역 보기"
         btn_back.setOnClickListener {
@@ -63,10 +66,12 @@ class MyQuestionActivity : RootActivity() {
                     layout_my_question.visibility = View.VISIBLE
 
                     if(arr.size == 0){
+                        ProgressAction(false)
 
                         recycler_my_question.visibility = View.GONE
 
                     } else {
+                        ProgressAction(false)
                         recycler_my_question.layoutManager = LinearLayoutManager(this@MyQuestionActivity)
                         recycler_my_question.adapter =
                             MyQuestionAdapter(
@@ -77,6 +82,7 @@ class MyQuestionActivity : RootActivity() {
 
 
                 } else {
+                    ProgressAction(false)
                     Toast.makeText(this@MyQuestionActivity, "질문이 없습니다.", Toast.LENGTH_SHORT).show()
                 }
 
@@ -84,4 +90,28 @@ class MyQuestionActivity : RootActivity() {
         })
 
     }
+
+    fun ProgressAction(isShow:Boolean)
+    {
+        if(isShow)
+        {
+
+            Progress_circle.visibility = View.VISIBLE
+            Progress_bg.visibility = View.VISIBLE
+            this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+        else
+        {
+            Progress_circle.visibility = View.GONE
+            Progress_bg.visibility = View.GONE
+            this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        myViewSetting()
+    }
+
+
 }

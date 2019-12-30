@@ -79,7 +79,7 @@ class MyQuestionDetailActivity : RootActivity() {
 
         SetTransparentBar()
 
-        myDetailSetting()
+
 
     }
 
@@ -609,6 +609,8 @@ class MyQuestionDetailActivity : RootActivity() {
     // 상처 경과기록
     fun detailQuestion(){
 
+        ProgressAction(true)
+
         var map = HashMap<String, String>()
         map["CKEY"] = m_questionInfo!!.qkey
 
@@ -620,6 +622,8 @@ class MyQuestionDetailActivity : RootActivity() {
             override fun onResponse(call: Call<ArrayList<MycaseInfo>>, response: Response<ArrayList<MycaseInfo>>) {
 
                 if(response.isSuccessful){
+
+                    ProgressAction(false)
 
                     var arr = response.body() as ArrayList<MycaseInfo>
                     arr.sortBy { mycaseInfo ->
@@ -645,6 +649,7 @@ class MyQuestionDetailActivity : RootActivity() {
 
                 } else {
 
+                    ProgressAction(false)
                     Toast.makeText(this@MyQuestionDetailActivity, "상세 상담 불러오기 실패", Toast.LENGTH_SHORT).show()
 
                 }
@@ -668,6 +673,30 @@ class MyQuestionDetailActivity : RootActivity() {
 
         }
 
+    }
+
+
+    fun ProgressAction(isShow:Boolean)
+    {
+        if(isShow)
+        {
+
+            Progress_circle.visibility = View.VISIBLE
+            Progress_bg.visibility = View.VISIBLE
+            this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+        else
+        {
+            Progress_circle.visibility = View.GONE
+            Progress_bg.visibility = View.GONE
+            this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        myDetailSetting()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

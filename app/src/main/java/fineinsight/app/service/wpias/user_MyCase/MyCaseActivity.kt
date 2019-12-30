@@ -3,9 +3,11 @@ package fineinsight.app.service.wpias.user_MyCase
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -92,16 +94,35 @@ class MyCaseActivity : RootActivity() {
 
                 txt_mycase_answer.text = m_myCaseInfo!!.answercontents
 
-                rating_mycase.setOnRatingBarChangeListener { ratingBar, fl, b ->
-                    if(ratingBar.rating < 1F){
-                        ratingBar.rating = 1F
+
+
+                //피드백이 등록되어 있지 않을 때
+                if(m_myCaseInfo!!.feedbacktime.isNullOrEmpty())
+                {
+
+
+                    rating_mycase.setOnRatingBarChangeListener { ratingBar, fl, b ->
+                        if(ratingBar.rating < 1F){
+                            ratingBar.rating = 1F
+                        }
+                    }
+
+                    btn_mycase_review_submit.setOnClickListener {
+
+                        ratingAlert()
                     }
                 }
-
-                btn_mycase_review_submit.setOnClickListener {
-
-                    ratingAlert()
+                else//피드백이 등록되어 있을 때
+                {
+                    rating_mycase.isEnabled = false
+                    rating_mycase.rating = m_myCaseInfo!!.feedbackstar.toFloat()
+                    btn_mycase_review_submit.visibility = View.GONE
+                    txt_mycase_review.setText(m_myCaseInfo!!.feedbacktext)
+                    txt_mycase_review.isEnabled = false
+                    textView38.setText("소중한 리뷰 감사합니다.")
                 }
+
+
 
             }
             "P" -> {
@@ -115,6 +136,8 @@ class MyCaseActivity : RootActivity() {
     // 답변 리뷰
     fun feedbackSubmit(){
 
+        ProgressAction(true)
+
         var map = HashMap<String, String>()
 
         map["FEEDBACKSTAR"] = rating_mycase.rating.toString()
@@ -125,14 +148,21 @@ class MyCaseActivity : RootActivity() {
 
         ApiUtill().getUPDATE_FEEDBACK().update_feedback(map).enqueue(object : Callback<String>{
             override fun onFailure(call: Call<String>, t: Throwable) {
+                ProgressAction(false)
                 Toast.makeText(this@MyCaseActivity, t.message, Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
                 if(response.body() == "S"){
-                    successAlert()
+                    ProgressAction(false)
 
+                    rating_mycase.isIndicator
+                    btn_mycase_review_submit.visibility = View.GONE
+                    txt_mycase_review.isEnabled = false
+                    textView38.setText("소중한 리뷰 감사합니다.")
+
+                    successAlert()
                 }
             }
         })
@@ -202,6 +232,24 @@ class MyCaseActivity : RootActivity() {
 
         dialog.show()
     }
+
+    fun ProgressAction(isShow:Boolean)
+    {
+        if(isShow)
+        {
+
+            this.Progress_circle.visibility = View.VISIBLE
+            this!!.Progress_bg.visibility = View.VISIBLE
+            this!!.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+        else
+        {
+            this!!.Progress_circle.visibility = View.GONE
+            this!!.Progress_bg.visibility = View.GONE
+            this!!.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+    }
+
 
 
 }
