@@ -13,6 +13,7 @@ import com.microsoft.azure.storage.CloudStorageAccount
 import com.microsoft.azure.storage.StorageException
 import com.microsoft.azure.storage.blob.CloudBlobContainer
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.publicObject.Validation
 import fineinsight.app.service.wpias.restApi.ApiUtill
@@ -120,10 +121,10 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
 
         Validation.vali.directionV.sort()
 
-        map["QKEY"] = SimpleDateFormat("yyyyMMddhhmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
+        map["QKEY"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
         map["TITLE"] = Validation.vali.consultingTitleV
         map["UUID"] = PubVariable.uid
-        map["INSERTDATE"] = SimpleDateFormat("yyyyMMddhhmmss").format(Calendar.getInstance().time)
+        map["INSERTDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
         map["BURNDATE"] = Validation.vali.burnDateV
         map["AGE"] = Validation.vali.ageV
         map["GENDER"] = Validation.vali.genderV
@@ -187,11 +188,10 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
         title.text = "등록"
         sub.text = "글이 성공적으로 등록되었습니다."
 
+        btn_right.visibility = View.GONE
+
         btn_left.text = "확인"
         btn_left.setBackgroundResource(R.drawable.btn_blue)
-
-        btn_right.text = "내 글 보기"
-        btn_right.setBackgroundResource(R.drawable.btn_purple)
 
         popup = true
 

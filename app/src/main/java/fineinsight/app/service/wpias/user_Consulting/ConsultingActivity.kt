@@ -5,24 +5,25 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Matrix
+import android.graphics.*
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.view.Window
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.content.getSystemService
+import androidx.core.view.iterator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -83,9 +84,7 @@ class ConsultingActivity : RootActivity(){
 
     //액티비티 초기화될때 validation 전역 변수들을 초기화 시켜준다
     init {
-
         Validation.valiInit()
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,6 +122,8 @@ class ConsultingActivity : RootActivity(){
 
         submitBurnConsulting()
 
+        setDescendentViews(window.decorView.rootView)
+
         eventInit()
 
     }
@@ -131,6 +132,8 @@ class ConsultingActivity : RootActivity(){
     //validation을 위한 이벤트 이 펑션에 등록
     @SuppressLint("SimpleDateFormat")
     fun eventInit(){
+
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         bodyFront.isChecked = true
 
@@ -152,6 +155,19 @@ class ConsultingActivity : RootActivity(){
 
         })
 
+        consultingTitle.setOnTouchListener { v, event ->
+
+            if(v.id == R.id.consultingTitle){
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when(event.action){
+                    MotionEvent.ACTION_UP -> v.parent.requestDisallowInterceptTouchEvent(false)
+                }
+            }
+
+            return@setOnTouchListener false
+
+        }
+
         consultingTitle.addTextChangedListener(object : TextWatcher{
 
             override fun afterTextChanged(s: Editable?) {
@@ -168,6 +184,19 @@ class ConsultingActivity : RootActivity(){
 
         })
 
+        consultingContents.setOnTouchListener { v, event ->
+
+            if(v.id == R.id.consultingContents){
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when(event.action){
+                    MotionEvent.ACTION_UP -> v.parent.requestDisallowInterceptTouchEvent(false)
+                }
+            }
+
+            return@setOnTouchListener false
+
+        }
+
         consultingContents.addTextChangedListener(object : TextWatcher{
 
             override fun afterTextChanged(s: Editable?) {
@@ -183,6 +212,8 @@ class ConsultingActivity : RootActivity(){
             }
 
         })
+
+        checkIdentify.isChecked = true
 
     }
 
@@ -480,7 +511,6 @@ class ConsultingActivity : RootActivity(){
 
                 pastBurned.isChecked = false
                 whenBurned.setText("$MYyear-$MYmonth-$MYday")
-                whenBurned.isEnabled = false
 
                 Validation.vali.burnDateV = whenBurned.text.toString()
                 Validation.vali.scarStyleV = "burn"
@@ -496,7 +526,6 @@ class ConsultingActivity : RootActivity(){
                 recentlyBurned.isChecked = false
                 whenBurned.setText("")
                 whenBurned.hint = "화상을 입은 날짜를 입력해주세요."
-                whenBurned.isEnabled = true
                 Validation.vali.scarStyleV = "scar"
 
             }
@@ -540,12 +569,14 @@ class ConsultingActivity : RootActivity(){
         dialog.takeShotWrapper.setOnClickListener {
 
             dispatchTakePictureIntent()
+            dialog.dismiss()
 
         }
 
         dialog.chooseFromGalleryWrapper.setOnClickListener {
 
             fromAlbum()
+            dialog.dismiss()
 
         }
 
@@ -577,12 +608,14 @@ class ConsultingActivity : RootActivity(){
         dialog.takeShotWrapper.setOnClickListener {
 
             dispatchTakePictureIntent()
+            dialog.dismiss()
 
         }
 
         dialog.chooseFromGalleryWrapper.setOnClickListener {
 
             fromAlbum()
+            dialog.dismiss()
 
         }
 
@@ -653,6 +686,7 @@ class ConsultingActivity : RootActivity(){
 
             var bitmap = BitmapFactory.decodeFile(currentPhotoPath)
             bitmapToFile(bitmap)
+            imageRotate(bitmap)
             var file = File(currentPhotoPath)
 
             when(requestCode) {
@@ -662,12 +696,18 @@ class ConsultingActivity : RootActivity(){
                     if(imageUri.toString().isNotEmpty()){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
+
+                    shortDistanceShot.setImageBitmap(bitmap)
+
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
                     imageUri2 = Uri.fromFile(file)
                     if(imageUri2.toString().isNotEmpty()){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
+
+                    longDistanceShot.setImageBitmap(bitmap)
+
                 }
 
             }
@@ -677,19 +717,43 @@ class ConsultingActivity : RootActivity(){
         //앨범에서 이미지 가져옴
         if(resultCode == Activity.RESULT_OK){
 
+            var bitmap : Bitmap? = null
+
             when(requestCode) {
 
                 GET_IMAGE_FROM_GALLERY_10 -> {
+
                     imageUri = data?.data!!
                     if(imageUri.toString().isNotEmpty()){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
+
+                    bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, imageUri))
+                    }else{
+                        MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                    }
+
+                    imageRotate(bitmap!!)
+                    shortDistanceShot.setImageBitmap(bitmap)
+
                 }
                 GET_IMAGE_FROM_GALLERY_20 -> {
                     imageUri2 = data?.data!!
+
                     if(imageUri2.toString().isNotEmpty()){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
+
+                    bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, imageUri2))
+                    }else{
+                        MediaStore.Images.Media.getBitmap(contentResolver, imageUri2)
+                    }
+
+                    imageRotate(bitmap!!)
+                    shortDistanceShot.setImageBitmap(bitmap)
+
                 }
 
             }
@@ -719,18 +783,22 @@ class ConsultingActivity : RootActivity(){
                     imageLengthArr.add(inputStream.available())
                 }
 
+                Loading(ProgressBar, ProgressBg, true)
+
                 AzureAsyncTask(
                     this,
                     inputStreamArr,
                     imageLengthArr
                 ).execute(storageConnectionString)
 
+                Loading(ProgressBar, ProgressBg, false)
+
             }else{
 
                 when{
 
-                    Validation.vali.imageUrl1V.isEmpty() -> failAlert("10cm 사진 촬영을 진행해주세요")
-                    Validation.vali.imageUrl2V.isEmpty() -> failAlert("20cm 사진 촬영을 진행해주세요")
+                    Validation.vali.imageUrl1V.isEmpty() -> failAlert("상세사진 촬영을 진행해주세요")
+                    Validation.vali.imageUrl2V.isEmpty() -> failAlert("전체사진 촬영을 진행해주세요")
                     Validation.vali.scarStyleV.isEmpty() -> failAlert("화상 시기를 확인해주세요")
                     Validation.vali.burnDateV.isEmpty() -> failAlert("화상입은 날짜를 확인해주세요")
                     Validation.vali.bodyStyleV.isEmpty() -> failAlert("신체부위를 확인해주세요")
@@ -872,6 +940,56 @@ class ConsultingActivity : RootActivity(){
         btn_back.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    //에딧 텍스트 아닌 부분 클릭시 키보드 사라지는 펑션
+    fun hideKeyboard(){
+
+        var imm = (this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+
+        imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+
+        currentFocus?.clearFocus()
+
+    }
+
+    //최상위 뷰 태그 및 하위 뷰 태그에 hideKeboard를 적용하는 펑션
+    fun setDescendentViews(view : View){
+
+         if(view !is EditText) {
+             view.setOnTouchListener { v, event ->
+
+                 hideKeyboard()
+
+                 return@setOnTouchListener false
+
+             }
+         }
+
+        if(view is RecyclerView){
+
+            view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                    hideKeyboard()
+                }
+
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    hideKeyboard()
+                    return false
+                }
+
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                }
+            })
+
+        }
+
+        if(view is ViewGroup){
+            for(innerview in view) {
+                setDescendentViews(innerview)
+            }
+        }
+
     }
 
 }

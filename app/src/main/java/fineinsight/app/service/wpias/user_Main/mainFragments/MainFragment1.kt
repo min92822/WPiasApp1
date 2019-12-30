@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import fineinsight.app.service.wpias.user_BurnInfo.BurnInfoActivity
 import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionActivity
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.user_Main.MainActivity
 import fineinsight.app.service.wpias.user_Setting.SettingActivity
 import kotlinx.android.synthetic.main.main_fragment_1.view.*
 
@@ -37,6 +39,18 @@ class MainFragment1 : Fragment() {
 
         view.btn_setting.setOnClickListener {
             startActivity(Intent(activity, SettingActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        }
+
+        view.textView4.setOnClickListener {
+            MainActivity.viewPager?.currentItem = MainActivity.viewPager?.currentItem?.plus(1)!!
+        }
+
+        view.imageView.setOnClickListener {
+            MainActivity.viewPager?.currentItem = MainActivity.viewPager?.currentItem?.plus(1)!!
+        }
+
+        view.imageView3.setOnClickListener {
+            MainActivity.viewPager?.currentItem = MainActivity.viewPager?.currentItem?.plus(1)!!
         }
 
     }

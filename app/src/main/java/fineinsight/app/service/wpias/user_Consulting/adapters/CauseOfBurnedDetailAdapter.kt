@@ -18,7 +18,7 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
     var arr = ArrayList<String>()
 
     var boiling = arrayListOf("뜨거운 차, 커피", "정수기, 온수꼭지", "라면 등의 국물", "프라이팬 기름", "커피포트, 주전자", "끓는 국, 곰탕, 찌개", "국자 속 국물", "기타")
-    var boilingImage = arrayListOf(R.drawable.yultang_1, R.drawable.yultang_2, R.drawable.yultang_3, R.drawable.yultang_4, R.drawable.yultang_7, R.drawable.yultang_5, R.drawable.yultang_6, R.drawable.and)
+    var boilingImage = arrayListOf(R.drawable.yultang_1, R.drawable.yultang_2, R.drawable.yultang_3, R.drawable.yultang_4, R.drawable.yultang_6, R.drawable.yultang_7_2, R.drawable.yultang_7, R.drawable.and)
     var flame = arrayListOf("기름으로 인한 화염", "가스배너로 인한 화염", "시너 등으로 인한 화염", "성냥으로 인한 화염", "기타")
     var flameImage = arrayListOf(R.drawable.hwayum_1, R.drawable.hwayum_2, R.drawable.hwayum_3, R.drawable.hwayum_4, R.drawable.and)
     var electric = arrayListOf("전기 콘센트", "기타")
@@ -91,7 +91,7 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
 
                 if(viewArr[position].causeDetail.text == "기타"){
 
-                    Validation.vali.burnGitaV = viewArr[position].causeDetail.text.toString()
+                    Validation.vali.burnGitaV = "999"
 
                 }else{
 
@@ -203,6 +203,8 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
                 viewArr[adapterPosition].appCompatCheckBox.isChecked = true
 
             }
+
+            viewArr[0].appCompatCheckBox.isChecked = true
 
         }
 
