@@ -100,7 +100,6 @@ class MyCaseActivity : RootActivity() {
                 if(m_myCaseInfo!!.feedbacktime.isNullOrEmpty())
                 {
 
-
                     rating_mycase.setOnRatingBarChangeListener { ratingBar, fl, b ->
                         if(ratingBar.rating < 1F){
                             ratingBar.rating = 1F
