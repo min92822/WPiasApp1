@@ -28,8 +28,8 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
         <activity android:name=".user_BurnInfo.BurnInfoDetailActivity"></activity>
-        <activity android:name=".user_MyQuestion.MyCaseActivity" />
-        <activity android:name=".user_MyQuestion.MyQuestionDetailActivity" />
+        <activity android:name=".user_MyCase.MyCaseActivity" />
+        <activity android:name=".user_MyQuestionDetail.MyQuestionDetailActivity" />
         <activity android:name=".user_MyQuestion.MyQuestionActivity" />
         <activity android:name=".user_Setting.SettingActivity" />
         <activity android:name=".user_BurnInfo.BurnInfoActivity" />

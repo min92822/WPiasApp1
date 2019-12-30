@@ -2,6 +2,7 @@ package fineinsight.app.service.wpias
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import fineinsight.app.service.wpias.dataClass.UserInfo
@@ -48,6 +49,7 @@ class LoginActivity : RootActivity(){
 
             if(user != null) {
 
+                wrap_loading.visibility = View.VISIBLE
                 PubVariable.uid = user.uid
                 getUserinfo()
 

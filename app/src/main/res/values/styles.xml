@@ -19,4 +19,8 @@
         <item name="colorControlNormal">@color/white_three</item>
     </style>
 
+    <style name="datePickerTextSize">
+        <item name="android:textSize">16dp</item>
+    </style>
+
 </resources>

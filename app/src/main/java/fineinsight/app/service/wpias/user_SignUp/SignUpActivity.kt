@@ -1,13 +1,17 @@
 package fineinsight.app.service.wpias.user_SignUp
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
+import android.view.MotionEvent
 import android.view.View
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
+import android.widget.DatePicker
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import fineinsight.app.service.wpias.LoginActivity
@@ -65,24 +69,29 @@ class SignUpActivity : RootActivity() {
         m_insertUserMap["REMARK"] = "기타"
 
 
-        // date picker 보이기
+
+        // date picker 보이기 & 날짜 선택
         txt_sign_up_birth.setOnClickListener {
             wrap_datepicker.visibility = View.VISIBLE
-        }
 
-        // date picker 선택
-        var today = Calendar.getInstance()
+            var today = Calendar.getInstance()
+            var datePicker = findViewById(R.id.sign_up_datepicker) as DatePicker
 
-        sign_up_datepicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DAY_OF_MONTH)){
-                datePicker, year, month, day ->
+            datePicker.maxDate = today.timeInMillis
 
-            var month = month +1
+            datePicker.init(0, 0, 0){ datePicker, year, month, day ->
 
-            btn_sign_up_date.setOnClickListener {
-                txt_sign_up_birth.text = Editable.Factory.getInstance().newEditable("$year-${String.format("%02d", month)}-${String.format("%02d", day)}")
-                wrap_datepicker.visibility = View.GONE
+                btn_sign_up_date.setOnClickListener {
+                    txt_sign_up_birth.text = Editable.Factory.getInstance().newEditable("$year-${String.format("%02d", month+1)}-${String.format("%02d", day)}")
+                    wrap_datepicker.visibility = View.GONE
+                }
             }
+
+            datePicker.updateDate(today.get(Calendar.YEAR), 0,1)
         }
+
+        wrap_datepicker.setOnClickListener(null)
+
 
         // 회원가입 버튼
         btn_sign_up.setOnClickListener {
@@ -96,7 +105,6 @@ class SignUpActivity : RootActivity() {
     fun emailVal(){
 
         var email = txt_sign_up_email.text.toString()
-        var emailPattern = Regex("[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}")
 
         // 이메일 형식
         if(email.isNullOrEmpty()){
@@ -104,16 +112,9 @@ class SignUpActivity : RootActivity() {
             valAlert("이메일", "유효한 이메일을 입력해주세요!")
 
         } else {
-
-//            if (!email.matches(emailPattern)){
-//                // alert
-//                valAlert("이메일", "유효한 이메일을 입력해주세요!")
-
-//            } else {
                 m_insertUserMap["EMAIL"] = email
 
                 pwVal()
-//            }
         }
     }
 
@@ -179,6 +180,9 @@ class SignUpActivity : RootActivity() {
     }
 
     fun valAlert(strTitle:String, strSub:String){
+
+        Loading(ProgressBar, ProgressBg, false)
+
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_alert)
@@ -269,6 +273,8 @@ class SignUpActivity : RootActivity() {
 
     }
 
+
+    // 회원가입 성공 alert - 로그인 화면 이동
     fun successAlert(){
 
         var dialog = Dialog(this)
@@ -304,6 +310,26 @@ class SignUpActivity : RootActivity() {
 
         dialog.show()
 
+    }
+
+    // 뒤로가기 시 날짜 선택창 닫기
+    override fun onBackPressed() {
+
+        if(wrap_datepicker.visibility == View.VISIBLE){
+            wrap_datepicker.visibility = View.GONE
+
+        } else {
+            super.onBackPressed()
+
+        }
+    }
+
+    // 화면 터치시 키보드 내리기
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+
+        return true
     }
 
 }

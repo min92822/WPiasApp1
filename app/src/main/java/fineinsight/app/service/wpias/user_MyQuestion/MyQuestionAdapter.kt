@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
+import fineinsight.app.service.wpias.user_MyQuestionDetail.MyQuestionDetailActivity
 import kotlinx.android.synthetic.main.recycler_my_question.view.*
 
 class MyQuestionAdapter(var arr:ArrayList<QuestionInfo>, var activity: Activity):RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.user_MyQuestion
+package fineinsight.app.service.wpias.user_MyQuestionDetail
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.dataClass.MycaseInfo
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
+import fineinsight.app.service.wpias.user_MyCase.MyCaseActivity
 import kotlinx.android.synthetic.main.recycler_my_question_detail_record.view.*
 import java.text.SimpleDateFormat
 import kotlin.math.abs

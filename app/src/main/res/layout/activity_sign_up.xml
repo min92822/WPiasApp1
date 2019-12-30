@@ -83,7 +83,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:clickable="false"
             android:ems="10"
             android:focusable="false"
             android:hint="생년월일을 선택해주세요"
@@ -169,6 +168,7 @@
                 android:background="@color/white"
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
+                android:theme="@style/datePickerTextSize"
                 app:layout_constraintEnd_toEndOf="@+id/txt_sign_up_birth"
                 app:layout_constraintStart_toStartOf="@+id/txt_sign_up_birth"
                 tools:layout_editor_absoluteY="295dp" />
@@ -182,7 +182,8 @@
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/btn_blue"
                 android:text="선택"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="16dp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
