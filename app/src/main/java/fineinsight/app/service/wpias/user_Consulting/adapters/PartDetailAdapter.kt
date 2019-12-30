@@ -74,7 +74,8 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
 
                 if(chkBoxArr[position].detailPart.text == "기타"){
 
-                    Validation.vali.bodyGitaV = "999"
+                    Validation.vali.bodyDetailV = "999"
+                    Validation.vali.bodyGitaV = ""
 
                 }else{
 

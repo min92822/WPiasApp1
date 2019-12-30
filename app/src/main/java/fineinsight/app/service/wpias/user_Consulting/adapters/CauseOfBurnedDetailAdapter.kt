@@ -91,7 +91,8 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
 
                 if(viewArr[position].causeDetail.text == "기타"){
 
-                    Validation.vali.burnGitaV = "999"
+                    Validation.vali.burnDetailV = "999"
+                    Validation.vali.bodyGitaV = ""
 
                 }else{
 
