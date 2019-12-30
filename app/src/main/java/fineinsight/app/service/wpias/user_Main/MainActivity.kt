@@ -1,6 +1,8 @@
 package fineinsight.app.service.wpias.user_Main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -13,8 +15,12 @@ import fineinsight.app.service.wpias.user_Main.mainFragments.MainFragment3
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.abs
 
-
+@SuppressLint("StaticFieldLeak")
 class MainActivity : RootActivity() {
+
+    companion object {
+        var viewPager : ViewPager? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +37,14 @@ class MainActivity : RootActivity() {
 
     fun mainViewPager() {
 
+        viewPager = mainViewPager
+
         mainViewPager.adapter =
             MainViewPagerAdapter(
                 supportFragmentManager
             )
         mainViewPager.currentItem = 1
-        mainViewPager.setPageTransformer(false, ViewPager.PageTransformer { page, position ->
+        mainViewPager.setPageTransformer(false) { page, position ->
 
             if(position <= -1.0F || position >= 1.0F){
                 page.alpha = 0.0F
@@ -48,7 +56,7 @@ class MainActivity : RootActivity() {
                 page.alpha = 1.0F - abs(position)
                 page.translationX = page.width * -position
             }
-        })
+        }
 
 //        indicator.setViewPager(mainViewPager)
 

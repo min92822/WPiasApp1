@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import kotlinx.android.synthetic.main.custom_alert.*
 
-
 open class RootActivity : AppCompatActivity() {
 
     // 투명 상태바

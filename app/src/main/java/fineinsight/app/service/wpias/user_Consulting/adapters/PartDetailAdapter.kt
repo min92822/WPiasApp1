@@ -74,7 +74,7 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
 
                 if(chkBoxArr[position].detailPart.text == "기타"){
 
-                    Validation.vali.bodyGitaV = chkBoxArr[position].detailPart.text.toString()
+                    Validation.vali.bodyGitaV = "999"
 
                 }else{
 
@@ -205,6 +205,8 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
                 appCompatCheckBox.isChecked = true
 
             }
+
+            chkBoxArr[0].appCompatCheckBox.isChecked = true
 
         }
 

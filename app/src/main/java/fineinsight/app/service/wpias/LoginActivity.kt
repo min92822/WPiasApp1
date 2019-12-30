@@ -2,7 +2,6 @@ package fineinsight.app.service.wpias
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import fineinsight.app.service.wpias.dataClass.UserInfo
@@ -21,7 +20,7 @@ import kotlin.collections.set
 
 class LoginActivity : RootActivity(){
 
-    var authStateListener : FirebaseAuth.AuthStateListener? = null
+//    var authStateListener : FirebaseAuth.AuthStateListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -32,42 +31,12 @@ class LoginActivity : RootActivity(){
 
         PubVariable.init()
 
-        loginStateCheck()
-
         SetDarkBar()
 
         loginSubmit()
 
         signUp()
     }
-
-    //로그인 상태 체크 앱 실행시 메인으로 바로 진행할지 여부를 결정하는 펑션
-    fun loginStateCheck(){
-
-        authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
-            var user = firebaseAuth.currentUser
-
-            if(user != null) {
-
-                wrap_loading.visibility = View.VISIBLE
-                PubVariable.uid = user.uid
-                getUserinfo()
-
-            }
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        FirebaseAuth.getInstance().addAuthStateListener(authStateListener!!)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        FirebaseAuth.getInstance().removeAuthStateListener(authStateListener!!)
-    }
-
 
     //로그인
     fun login(id : String, pw : String){
