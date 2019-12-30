@@ -1,4 +1,4 @@
-package fineinsight.app.service.wpias.user_MyQuestion
+package fineinsight.app.service.wpias.user_MyCase
 
 import android.app.Dialog
 import android.graphics.Color
@@ -202,7 +202,6 @@ class MyCaseActivity : RootActivity() {
 
         dialog.show()
     }
-
 
 
 }

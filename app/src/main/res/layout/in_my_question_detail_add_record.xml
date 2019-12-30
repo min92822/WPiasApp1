@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/textView311"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -27,16 +27,14 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31">
+        app:layout_constraintTop_toBottomOf="@+id/textView311">
 
         <ImageView
-            android:id="@+id/imageView20"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:scrollY="-10dp"
+            android:id="@+id/btn_photo_close"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:src="@drawable/close"
-            app:layout_constraintEnd_toStartOf="@+id/imageView19"
+            app:layout_constraintEnd_toStartOf="@+id/btn_photo_over"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,19 +45,18 @@
             android:textColor="@color/windows_blue"
             android:textSize="14dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView20"
-            app:layout_constraintStart_toStartOf="@+id/imageView20"
-            app:layout_constraintTop_toBottomOf="@+id/imageView20" />
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/btn_photo_close"
+            app:layout_constraintStart_toStartOf="@+id/btn_photo_close"
+            app:layout_constraintTop_toBottomOf="@+id/btn_photo_close" />
 
         <ImageView
-            android:id="@+id/imageView19"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            android:scrollY="-10dp"
+            android:id="@+id/btn_photo_over"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:src="@drawable/over"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView20"
+            app:layout_constraintStart_toEndOf="@+id/btn_photo_close"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -69,19 +66,20 @@
             android:textColor="@color/windows_blue"
             android:textSize="14dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView19"
-            app:layout_constraintStart_toStartOf="@+id/imageView19"
-            app:layout_constraintTop_toBottomOf="@+id/imageView19" />
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/btn_photo_over"
+            app:layout_constraintStart_toStartOf="@+id/btn_photo_over"
+            app:layout_constraintTop_toBottomOf="@+id/btn_photo_over" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/textView322"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:text="추가 질문 여부를 선택해주세요."
         android:textColor="@color/windows_blue"
@@ -91,130 +89,151 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout16" />
 
-    <CheckBox
-        android:id="@+id/chk_dr"
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:button="@drawable/chk_blue"
-        android:text="의사 선생님에게 추가 답변요청을 합니다."
-        android:textSize="14dp"
-        app:layout_constraintStart_toStartOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+        app:layout_constraintStart_toStartOf="@+id/textView322"
+        app:layout_constraintTop_toBottomOf="@+id/textView322">
 
-    <CheckBox
-        android:id="@+id/chk_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/chk_blue"
-        android:text="경과만 추가합니다."
-        android:textSize="14dp"
-        app:layout_constraintStart_toStartOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/chk_dr" />
+        <RadioButton
+            android:id="@+id/chk_dr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="의사 선생님에게 추가 답변요청을 합니다."
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/textView33"
+        <RadioButton
+            android:id="@+id/chk_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="경과만 추가합니다."
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chk_dr" />
+
+    </RadioGroup>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/wrap_direction"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="궁금한 사항을 선택해주세요."
-        android:textColor="@color/windows_blue"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView32"
-        app:layout_constraintStart_toStartOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/chk_add" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView322"
+        app:layout_constraintStart_toStartOf="@+id/textView322"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:button="@drawable/chk_blue"
-        android:text="병원방문"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/textView33"
-        app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/chk_blue"
-        android:text="물집관리"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toTopOf="@+id/checkBox" />
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="궁금한 사항을 선택해주세요."
+            android:textColor="@color/windows_blue"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/chk_blue"
-        android:text="응급처치"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView33"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2"
-        app:layout_constraintTop_toTopOf="@+id/checkBox2" />
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:button="@drawable/chk_blue"
+            android:text="병원방문"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/checkBox2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/textView33"
+            app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
-    <CheckBox
-        android:id="@+id/checkBox4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/chk_blue"
-        android:text="사후관리"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox5"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="물집관리"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/checkBox3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/checkBox"
+            app:layout_constraintTop_toTopOf="@+id/checkBox" />
 
-    <CheckBox
-        android:id="@+id/checkBox5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/chk_blue"
-        android:text="상처상태"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox6"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBox4"
-        app:layout_constraintTop_toTopOf="@+id/checkBox4" />
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="응급처치"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView33"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/checkBox2"
+            app:layout_constraintTop_toTopOf="@+id/checkBox2" />
 
-    <CheckBox
-        android:id="@+id/checkBox6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/chk_blue"
-        android:text="흉터관리"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/checkBox3"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/checkBox5"
-        app:layout_constraintTop_toTopOf="@+id/checkBox5" />
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="사후관리"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/checkBox5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/checkBox"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
-    <CheckBox
-        android:id="@+id/checkBox7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:button="@drawable/chk_blue"
-        android:text="기타사항"
-        android:textSize="14dp"
-        app:layout_constraintStart_toStartOf="@+id/checkBox4"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+        <CheckBox
+            android:id="@+id/checkBox5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="상처상태"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/checkBox6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/checkBox4"
+            app:layout_constraintTop_toTopOf="@+id/checkBox4" />
+
+        <CheckBox
+            android:id="@+id/checkBox6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="흉터관리"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/checkBox3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/checkBox5"
+            app:layout_constraintTop_toTopOf="@+id/checkBox5" />
+
+        <CheckBox
+            android:id="@+id/checkBox7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/chk_blue"
+            android:text="기타사항"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/checkBox4"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <EditText
         android:id="@+id/txt_record_content_add"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_shape2"
         android:ems="10"
         android:gravity="start|top"
@@ -222,9 +241,10 @@
         android:inputType="textMultiLine"
         android:padding="12dp"
         android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView32"
-        app:layout_constraintStart_toStartOf="@+id/textView32"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView322"
+        app:layout_constraintStart_toStartOf="@+id/textView322"
+        app:layout_constraintTop_toBottomOf="@+id/wrap_direction" />
 
     <Button
         android:id="@+id/btn_add_record_cancle"

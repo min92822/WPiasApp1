@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_MyQuestion.MyCaseActivity">
+    tools:context=".user_MyCase.MyCaseActivity">
 
     <include
         android:id="@+id/include"
@@ -94,7 +94,6 @@
                         android:layout_height="350dp"
                         android:layout_marginTop="10dp"
                         android:scaleType="centerCrop"
-                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="@+id/btn_mycase_over"
                         app:layout_constraintStart_toStartOf="@+id/btn_mycase_close"
                         app:layout_constraintTop_toBottomOf="@+id/btn_mycase_close"
@@ -108,7 +107,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:text="TextView"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
                         app:layout_constraintEnd_toEndOf="@+id/img_mycase"
                         app:layout_constraintStart_toStartOf="@+id/img_mycase"
                         app:layout_constraintTop_toBottomOf="@+id/img_mycase" />
@@ -145,8 +144,8 @@
                         android:id="@+id/wrap_mycase_answer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:visibility="visible"
+                        android:layout_marginTop="50dp"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/button5">
@@ -203,6 +202,7 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="24dp"
                             android:text="TextView"
+                            android:textSize="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout18" />
@@ -227,6 +227,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="24dp"
                             android:text="답변이 어떠셨나요?"
+                            android:textSize="14dp"
                             app:layout_constraintEnd_toEndOf="@+id/constraintLayout19"
                             app:layout_constraintStart_toStartOf="@+id/constraintLayout19"
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
