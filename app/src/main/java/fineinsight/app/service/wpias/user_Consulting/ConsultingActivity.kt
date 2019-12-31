@@ -750,7 +750,7 @@ class ConsultingActivity : RootActivity(){
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri2)
                     }
 
-                    shortDistanceShot.setImageBitmap(imageRotate(bitmap!!))
+                    longDistanceShot.setImageBitmap(imageRotate(bitmap!!))
 
                 }
 
