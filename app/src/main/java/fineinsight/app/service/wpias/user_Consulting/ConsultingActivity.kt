@@ -888,7 +888,11 @@ class ConsultingActivity : RootActivity(){
 
         var matrix = Matrix()
 
-        matrix.postRotate(90f)
+        if(bitmap.width > bitmap.height){
+
+            matrix.postRotate(90f)
+
+        }
 
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 
