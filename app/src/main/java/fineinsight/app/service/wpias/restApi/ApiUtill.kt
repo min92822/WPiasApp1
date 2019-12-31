@@ -70,4 +70,10 @@ class ApiUtill {
         return ApiRequest().getInterAction(send_FCM_url)!!.create(ApiInterface::class.java)
     }
 
+    // 로그아웃시 토큰 공백으로 변경
+    val update_tokenlogout_url : String = "https://wpias.azurewebsites.net/UPDATE_TOKENLOGOUT/"
+
+    fun getUPDATE_TOKENLOGOUT() : ApiInterface{
+        return ApiRequest().getStringResponse(update_tokenlogout_url)!!.create(ApiInterface::class.java)
+    }
 }
