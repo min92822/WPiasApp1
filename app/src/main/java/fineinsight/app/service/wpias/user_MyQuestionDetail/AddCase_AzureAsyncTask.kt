@@ -151,6 +151,10 @@ class AddCase_AzureAsyncTask(var context : Context, var inputStreamArr : ArrayLi
 
                     successAlert()
 
+                }else{
+
+                    failAlert()
+
                 }
 
             }
@@ -189,12 +193,12 @@ class AddCase_AzureAsyncTask(var context : Context, var inputStreamArr : ArrayLi
 
         dialog.setOnDismissListener {
             popup = false
+            (context as MyQuestionDetailActivity).finish()
             dialog = Dialog(context)
         }
 
         btn_left.setOnClickListener {
 
-            context.startActivity(Intent(context, MyQuestionActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
             dialog.dismiss()
 
         }
@@ -231,6 +235,7 @@ class AddCase_AzureAsyncTask(var context : Context, var inputStreamArr : ArrayLi
 
         dialog.setOnDismissListener {
             popup = false
+            (context as MyQuestionDetailActivity).finish()
             dialog = Dialog(context)
         }
 

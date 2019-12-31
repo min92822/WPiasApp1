@@ -3,6 +3,7 @@ package fineinsight.app.service.wpias.user_MyQuestionDetail
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.*
@@ -12,22 +13,23 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ExpandableListView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.iterator
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.dataClass.MycaseInfo
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
 import fineinsight.app.service.wpias.publicObject.Validation
 import fineinsight.app.service.wpias.restApi.ApiUtill
-import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionActivity
 import kotlinx.android.synthetic.main.activity_my_question_detail.*
 import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.in_my_question_detail_add_record.*
@@ -36,6 +38,7 @@ import kotlinx.android.synthetic.main.title_bar_skyblue.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -83,6 +86,9 @@ class MyQuestionDetailActivity : RootActivity() {
         SetTransparentBar()
 
         myDetailSetting()
+
+        setDescendentViews(window.decorView.rootView)
+
     }
 
     override fun onBackPressed() {
@@ -601,6 +607,7 @@ class MyQuestionDetailActivity : RootActivity() {
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
+                    imageUri = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
                     btn_photo_close.setImageBitmap(imageRotate(bitmap))
 
                 }
@@ -612,6 +619,7 @@ class MyQuestionDetailActivity : RootActivity() {
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
+                    imageUri2 = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
                     btn_photo_over.setImageBitmap(imageRotate(bitmap))
 
                 }
@@ -670,7 +678,11 @@ class MyQuestionDetailActivity : RootActivity() {
 
         var matrix = Matrix()
 
-        matrix.postRotate(90f)
+        if(bitmap.width >= bitmap.height){
+
+            matrix.postRotate(90f)
+
+        }
 
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 
@@ -801,6 +813,64 @@ class MyQuestionDetailActivity : RootActivity() {
             Progress_bg.visibility = View.GONE
             this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
+    }
+
+
+    //에딧 텍스트 아닌 부분 클릭시 키보드 사라지는 펑션
+    fun hideKeyboard(){
+
+        var imm = (this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+
+        imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+
+        currentFocus?.clearFocus()
+
+    }
+
+    //최상위 뷰 태그 및 하위 뷰 태그에 hideKeboard를 적용하는 펑션
+    fun setDescendentViews(view : View){
+
+        if(view !is EditText) {
+            view.setOnTouchListener { v, event ->
+
+                hideKeyboard()
+
+                return@setOnTouchListener false
+
+            }
+        }
+
+        if(view is RecyclerView){
+
+            view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                    hideKeyboard()
+                }
+
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    hideKeyboard()
+                    return false
+                }
+
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                }
+            })
+
+        }
+
+        if(view is ViewGroup){
+            for(innerview in view) {
+                setDescendentViews(innerview)
+            }
+        }
+
+    }
+
+    fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri{
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path.toString())
     }
 
 }

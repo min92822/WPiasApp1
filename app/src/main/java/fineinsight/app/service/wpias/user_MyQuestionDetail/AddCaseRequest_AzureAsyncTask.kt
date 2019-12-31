@@ -160,6 +160,10 @@ class AddCaseRequest_AzureAsyncTask(var DOCTORUUID:String, var context : Context
 
                     successAlert()
 
+                }else{
+
+                    failAlert()
+
                 }
 
             }
@@ -242,12 +246,12 @@ class AddCaseRequest_AzureAsyncTask(var DOCTORUUID:String, var context : Context
 
         dialog.setOnDismissListener {
             popup = false
+            (context as MyQuestionDetailActivity).finish()
             dialog = Dialog(context)
         }
 
         btn_left.setOnClickListener {
 
-            context.startActivity(Intent(context, MyQuestionActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
             dialog.dismiss()
 
         }
@@ -283,6 +287,7 @@ class AddCaseRequest_AzureAsyncTask(var DOCTORUUID:String, var context : Context
 
         dialog.setOnDismissListener {
             popup = false
+            (context as MyQuestionDetailActivity).finish()
             dialog = Dialog(context)
         }
 
