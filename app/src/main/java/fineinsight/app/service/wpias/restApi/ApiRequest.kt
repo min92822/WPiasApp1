@@ -87,4 +87,18 @@ class ApiRequest {
     }
 
 
+    fun getInterAction(baseURL : String) : Retrofit? {
+
+        if (retrofit == null) {
+
+            retrofit = Retrofit.Builder()
+                .baseUrl(baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+        }
+
+        return retrofit
+
+    }
 }

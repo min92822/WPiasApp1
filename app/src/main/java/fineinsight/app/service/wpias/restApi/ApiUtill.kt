@@ -63,4 +63,11 @@ class ApiUtill {
         return ApiRequest().getStringResponse(update_switch2_url)!!.create(ApiInterface::class.java)
     }
 
+    //PUSH 메세지 전송
+    val send_FCM_url : String = "https://fcm.googleapis.com/fcm/send/"
+
+    fun sendFCM(): ApiInterface{
+        return ApiRequest().getInterAction(send_FCM_url)!!.create(ApiInterface::class.java)
+    }
+
 }

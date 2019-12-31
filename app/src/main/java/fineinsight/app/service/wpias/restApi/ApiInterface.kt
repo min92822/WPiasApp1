@@ -3,10 +3,10 @@ package fineinsight.app.service.wpias.restApi
 import fineinsight.app.service.wpias.dataClass.MycaseInfo
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
 import fineinsight.app.service.wpias.dataClass.UserInfo
+import fineinsight.app.service.wpias.public_function.FCM
+import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiInterface {
 
@@ -52,5 +52,15 @@ interface ApiInterface {
     @POST("https://wpias.azurewebsites.net/UPDATE_SWITCH2")
     @FormUrlEncoded
     fun update_switch2(@FieldMap sql : Map<String, String>) : Call<String>
+
+
+    // FCM 전송
+    @Headers("Authorization: key=AAAAFqobJsQ:APA91bEHj_c08w_2GrtOMFyOBwb6S6cUQx-K3E56VkoG4Tq6NBR48T64JFvQyMqczVbr6ZJjlMMNXEPQuu5Gb6XB6OYetxXxXS894Amv2j1CmsFFurVYp_T5CQjTTh9ofssUt9AHA7ju"
+        , "Content-Type:application/json")
+    @POST("https://fcm.googleapis.com/fcm/send")
+    fun sendFCM(@Body FCMInteraction : Any) : Call<ResponseBody>
+
+
+
 
 }

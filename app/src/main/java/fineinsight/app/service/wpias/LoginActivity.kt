@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import fineinsight.app.service.wpias.dataClass.UserInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.publicObject.UserToken
+import fineinsight.app.service.wpias.public_function.FCM
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import fineinsight.app.service.wpias.user_Main.MainActivity
 import fineinsight.app.service.wpias.user_SignUp.SignUpPreActivity
@@ -36,6 +37,7 @@ class LoginActivity : RootActivity(){
         loginSubmit()
 
         signUp()
+
     }
 
     //로그인
