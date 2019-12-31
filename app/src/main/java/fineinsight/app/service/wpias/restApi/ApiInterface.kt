@@ -1,8 +1,6 @@
 package fineinsight.app.service.wpias.restApi
 
-import fineinsight.app.service.wpias.dataClass.MycaseInfo
-import fineinsight.app.service.wpias.dataClass.QuestionInfo
-import fineinsight.app.service.wpias.dataClass.UserInfo
+import fineinsight.app.service.wpias.dataClass.*
 import fineinsight.app.service.wpias.public_function.FCM
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -31,7 +29,17 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_mycase(@FieldMap sql : Map<String, String>) : Call<ArrayList<MycaseInfo>>
 
-    // 답변 리뷰 등록
+    // 경과추가 답변미요청
+    @POST("https://wpias.azurewebsites.net/INSERT_CASE")
+    @FormUrlEncoded
+    fun insert_case(@FieldMap sql : Map<String, String>) : Call<String>
+
+    // 경과추가 답변요청
+    @POST("https://wpias.azurewebsites.net/INSERT_CASEREQUEST")
+    @FormUrlEncoded
+    fun insert_caserequest(@FieldMap sql : Map<String, String>) : Call<String>
+
+    // 의사 답변에 사용자가 리뷰 등록
     @POST("https://wpias.azurewebsites.net/UPDATE_FEEDBACK")
     @FormUrlEncoded
     fun update_feedback(@FieldMap sql : Map<String, String>) : Call<String>

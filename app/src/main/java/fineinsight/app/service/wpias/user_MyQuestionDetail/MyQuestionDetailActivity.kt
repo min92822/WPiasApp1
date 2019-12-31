@@ -5,10 +5,10 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
+import android.graphics.*
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -21,14 +21,15 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.dataClass.MycaseInfo
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
 import fineinsight.app.service.wpias.publicObject.Validation
 import fineinsight.app.service.wpias.restApi.ApiUtill
+import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionActivity
 import kotlinx.android.synthetic.main.activity_my_question_detail.*
+import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.in_my_question_detail_add_record.*
 import kotlinx.android.synthetic.main.shot_distance_popup.*
 import kotlinx.android.synthetic.main.title_bar_skyblue.*
@@ -36,7 +37,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 import java.io.InputStream
 import java.text.SimpleDateFormat
@@ -48,7 +48,6 @@ import kotlin.collections.HashMap
 class MyQuestionDetailActivity : RootActivity() {
 
     var m_questionInfo: QuestionInfo? = null
-    var m_caseInfo: MycaseInfo? = null
     var expandableListView : ExpandableListView? = null
 
     //촬영 모드 구분용도
@@ -64,10 +63,13 @@ class MyQuestionDetailActivity : RootActivity() {
     var currentPhotoPath = ""
 
     //AzureAsyncTask에 들어가는 image uri 및 input stream 배열
-    lateinit var imageUri : Uri
-    lateinit var imageUri2 : Uri
+    var imageUri : Uri? = null
+    var imageUri2 : Uri? = null
     var inputStreamArr = ArrayList<InputStream>()
     var imageLengthArr = ArrayList<Int>()
+
+    //storage 문자열
+    val storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=storagewpias;AccountKey=G+ZyYwRLvxTFebMpLqsSeNI/V+1ALImJqs1MAG1rD315BN1TRO7Q8CpcKv0KOmRB9hasKF4pJqZkTEJ3TEAlPw=="
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,6 +82,7 @@ class MyQuestionDetailActivity : RootActivity() {
 
         SetTransparentBar()
 
+        myDetailSetting()
     }
 
     override fun onBackPressed() {
@@ -310,7 +313,7 @@ class MyQuestionDetailActivity : RootActivity() {
         listView.requestLayout()
     }
 
-    // 경과 추가하기
+    // 경과 추가하기 setting
     fun addRecord(){
 
         // 경과추가하기 버튼
@@ -334,8 +337,8 @@ class MyQuestionDetailActivity : RootActivity() {
 
 
         // 추가 질문여부
-        if(m_caseInfo!!.casestatus == "A"){
-            chk_dr.text = "${m_caseInfo!!.answerdocnm} 의사 선생님에게 추가 답변요청을 합니다."
+        if(m_questionInfo!!.prostatus == "A"){
+            chk_dr.text = "${m_questionInfo!!.answerdocnm} 의사 선생님에게 추가 답변요청을 합니다."
             chk_dr.visibility = View.VISIBLE
             chk_dr.isChecked = true
             wrap_direction.visibility = View.VISIBLE
@@ -358,16 +361,79 @@ class MyQuestionDetailActivity : RootActivity() {
         // 사진 촬영
         photoGraphingAlert()
 
-        if (chk_dr.isChecked) {
 
-            var map = HashMap<String, String>()
+        // 경과 추가하기
+        btn_add_record_add.setOnClickListener {
 
-        } else {
 
+            if(imageUri == null || imageUri2 == null){
+
+                failAlert()
+
+            } else {
+
+                inputStreamArr.add(contentResolver.openInputStream(imageUri!!)!!)
+                inputStreamArr.add(contentResolver.openInputStream(imageUri2!!)!!)
+
+                for (inputStream in inputStreamArr) {
+                    imageLengthArr.add(inputStream.available())
+                }
+
+                // 경과추가 - 답변요청
+                if (chk_dr.isChecked) {
+
+                    var map = HashMap<String, String>()
+                    map["QKEY"] = m_questionInfo!!.qkey
+                    map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+                    map["CONTENTS"] = txt_record_content_add.text.toString()
+                    map["DIRECTION"] = direction()
+
+                    AddCaseRequest_AzureAsyncTask(this, inputStreamArr, imageLengthArr, map).execute(storageConnectionString)
+
+                    println(map)
+
+                } else {
+                    // 경과추가 - 답변미요청
+                    var map = HashMap<String, String>()
+                    map["QKEY"] = m_questionInfo!!.qkey
+                    map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+                    map["CONTENTS"] = txt_record_content_add.text.toString()
+
+                    println(map)
+
+                    AddCase_AzureAsyncTask(this, inputStreamArr, imageLengthArr, map).execute(storageConnectionString)
+
+                }
+
+            }
 
         }
 
     }
+
+
+    // 궁금한점 체크 -> String (ex. 1-2-4-7)
+    fun direction():String{
+        var direction = ""
+        var directionArr = arrayOf(chk_direction_1, chk_direction_2, chk_direction_3, chk_direction_4, chk_direction_5, chk_direction_6, chk_direction_7)
+
+
+        for (i in 0..directionArr.size-1){
+            if(directionArr[i].isChecked){
+                direction += "${i+1}-"
+            }
+        }
+
+        if (direction.length == 0){
+            return direction
+        } else {
+            return direction.substring(0, direction.length-1)
+        }
+
+
+
+    }
+
 
     //부위 촬영 클릭시 팝업 이벤트
     fun photoGraphingAlert(){
@@ -514,7 +580,10 @@ class MyQuestionDetailActivity : RootActivity() {
     }
 
 
+    @SuppressLint("SimpleDateFormat")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
 
         var bitmap : Bitmap? = null
 
@@ -556,25 +625,36 @@ class MyQuestionDetailActivity : RootActivity() {
             when(requestCode) {
 
                 GET_IMAGE_FROM_GALLERY_10 -> {
+
                     imageUri = data?.data!!
                     if(imageUri.toString().isNotEmpty()){
-
-                        Glide.with(this)
-                            .load(imageUri)
-                            .into(btn_photo_close)
-
-
+//                        Validation.vali.imageUrl1V = imageUri.toString()
                     }
+
+                    bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, imageUri!!))
+                    }else{
+                        MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
+                    }
+
+                    btn_photo_close.setImageBitmap(imageRotate(bitmap!!))
+
                 }
                 GET_IMAGE_FROM_GALLERY_20 -> {
                     imageUri2 = data?.data!!
+
                     if(imageUri2.toString().isNotEmpty()){
 //                        Validation.vali.imageUrl2V = imageUri2.toString()
-                        Glide.with(this)
-                            .load(imageUri)
-                            .into(btn_photo_over)
-
                     }
+
+                    bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, imageUri2!!))
+                    }else{
+                        MediaStore.Images.Media.getBitmap(contentResolver, imageUri2)
+                    }
+
+                    btn_photo_over.setImageBitmap(imageRotate(bitmap!!))
+
                 }
 
             }
@@ -592,32 +672,6 @@ class MyQuestionDetailActivity : RootActivity() {
         matrix.postRotate(90f)
 
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-
-    }
-
-    //비트맵을 다시 파일로 바꾸는 펑션
-    fun bitmapToFile(bitmap: Bitmap){
-
-        var file = File(currentPhotoPath)
-        var out = FileOutputStream(file)
-
-        try{
-
-            file.createNewFile()
-
-            imageRotate(bitmap)
-
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out)
-
-        }catch (e : Exception){
-            e.printStackTrace()
-        }finally {
-            try {
-                out.close()
-            }catch (e : IOException){
-                e.printStackTrace()
-            }
-        }
 
     }
 
@@ -643,10 +697,9 @@ class MyQuestionDetailActivity : RootActivity() {
 
                     var arr = response.body() as ArrayList<MycaseInfo>
                     arr.sortBy { mycaseInfo ->
-                        mycaseInfo.casedate
+                        mycaseInfo.cnumber
                     }
 
-                    m_caseInfo = arr[0]
                     addRecord()
 
                     var qArr = ArrayList<QuestionInfo>()
@@ -699,6 +752,38 @@ class MyQuestionDetailActivity : RootActivity() {
 
     }
 
+    //업로드 실패 알럿
+    fun failAlert(){
+
+        var dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_alert)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        var img = dialog.img_alert
+        var title = dialog.txt_alert_title
+        var sub = dialog.txt_alert_sub
+        var btn_left = dialog.btn_alert_left
+        var btn_right = dialog.btn_alert_right
+
+        img.setImageResource(R.drawable.alert_end)
+
+        title.text = "실패"
+        sub.text = "이미지를 등록해주세요."
+
+        btn_left.visibility = View.GONE
+
+        btn_right.text = "OK"
+        btn_right.setBackgroundResource(R.drawable.btn_blue)
+
+        btn_right.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+    }
+
 
     fun ProgressAction(isShow:Boolean)
     {
@@ -715,18 +800,6 @@ class MyQuestionDetailActivity : RootActivity() {
             Progress_bg.visibility = View.GONE
             this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        myDetailSetting()
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-
     }
 
 }

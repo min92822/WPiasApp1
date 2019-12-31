@@ -19,6 +19,7 @@ data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
                          @SerializedName("BURNGITA") @Expose var burngita : String,
                          @SerializedName("SCARSTYLE") @Expose var scarstyle : String,
                          @SerializedName("ANSWERDOC") @Expose var answerdoc : String,
+                         @SerializedName("ANSWERDOCNM") @Expose var answerdocnm : String,
                          @SerializedName("PROSTATUS") @Expose var prostatus : String,
                          @SerializedName("BURNNM") @Expose var burnnm : String,
                          @SerializedName("IMAGEURL1") @Expose var imageurl1 : String,
@@ -31,22 +32,23 @@ data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
                          @SerializedName("BLISTERSOLUTION") @Expose var blistersolution : String) : Serializable
 
 /*
-    QKEY		질문 KEY
-    TITLE		제목
-    UUID		작성자 UUID
-    INSERTDATE	작성시간 (yyyyMMddhhmmss)
-    BURNDATE	다친날짜
-    AGE	    	나이
-    GENDER		성별
-    BODYSTYLE	상처부위 코드
-    BODYDETAIL	상처부위 디테일 코드
-    BODYGITA	상처부위 기타내용
-    BURNSTYLE	상처원인 코드
-    BURNDETAIL	상처원인 디테일 코드
-    BURNGITA	상처원인 기타내용
-    SCARSTYLE	화상, 흉터 종류
-    ANSWERDOC	답변의사 UUID
-    PROSTATUS	답변상태
+    QKEY		        질문 KEY
+    TITLE		        제목
+    UUID		        작성자 UUID
+    INSERTDATE	        작성시간 (yyyyMMddhhmmss)
+    BURNDATE	        다친날짜
+    AGE	    	        나이
+    GENDER		        성별
+    BODYSTYLE	        상처부위 코드
+    BODYDETAIL	        상처부위 디테일 코드
+    BODYGITA	        상처부위 기타내용
+    BURNSTYLE	        상처원인 코드
+    BURNDETAIL	        상처원인 디테일 코드
+    BURNGITA	        상처원인 기타내용
+    SCARSTYLE	        화상, 흉터 종류
+    ANSWERDOC	        답변의사 UUID
+    ANSWERDOCNM	        답변의사 이름
+    PROSTATUS	        답변상태
     BURNNM
     IMAGEURL1
     IMAGEURL2

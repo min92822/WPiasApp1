@@ -141,7 +141,7 @@ class MyCaseActivity : RootActivity() {
 
         map["FEEDBACKSTAR"] = rating_mycase.rating.toString()
         map["FEEDBACKTEXT"] = txt_mycase_review.text.toString()
-        map["FEEDBACKTIME"] = SimpleDateFormat("yyyyMMddhhmmss").format(Calendar.getInstance().time)
+        map["FEEDBACKTIME"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
         map["CKEY"] = m_myCaseInfo!!.ckey
         map["CNUMBER"] = m_myCaseInfo!!.cnumber
 

@@ -113,5 +113,9 @@ class MyQuestionActivity : RootActivity() {
         myViewSetting()
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
+
 
 }
