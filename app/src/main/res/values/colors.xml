@@ -11,6 +11,7 @@
     <color name="warm_grey_three">#8f8f8f</color>
     <color name="warm_grey_two">#777777</color>
     <color name="greyish_brown">#444444</color>
+    <color name="progress">#33000000</color>
     <color name="black">#000000</color>
 
     <color name="cornflower_blue">#5494D2</color>

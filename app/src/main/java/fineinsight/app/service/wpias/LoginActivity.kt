@@ -36,6 +36,8 @@ class LoginActivity : RootActivity(){
 
         signUp()
 
+        findPassword()
+
     }
 
     //로그인
@@ -124,6 +126,14 @@ class LoginActivity : RootActivity(){
 
         btn_sign_up.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignUpPreActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        }
+
+    }
+
+    fun findPassword(){
+
+        btn_find_pw.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, FindPasswordActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
 
     }

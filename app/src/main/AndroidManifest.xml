@@ -7,8 +7,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-feature android:name="android.hardware.camera"
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -18,6 +20,8 @@
         android:roundIcon="@drawable/w_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".FindPasswordActivity"></activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="fineinsight.app.service.wpias.fileprovider"
@@ -25,23 +29,32 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".user_BurnInfo.BurnInfoDetailActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".user_MyCase.MyCaseActivity"
+
+        <activity
+            android:name=".user_BurnInfo.BurnInfoDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".user_MyQuestionDetail.MyQuestionDetailActivity"
+        <activity
+            android:name=".user_MyCase.MyCaseActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".user_MyQuestion.MyQuestionActivity"
+        <activity
+            android:name=".user_MyQuestionDetail.MyQuestionDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".user_Setting.SettingActivity"
+        <activity
+            android:name=".user_MyQuestion.MyQuestionActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".user_BurnInfo.BurnInfoActivity"
+        <activity
+            android:name=".user_Setting.SettingActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".user_Main.MainActivity"
+        <activity
+            android:name=".user_BurnInfo.BurnInfoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".LaunchActivity"
+        <activity
+            android:name=".user_Main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LaunchActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,19 +62,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".user_Consulting.ConsultingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".user_SignUp.SignUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".user_SignUp.SignUpPreActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".user_Setting.ChangePasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".user_Setting.WithdrawalActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".user_Consulting.ConsultingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user_SignUp.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user_SignUp.SignUpPreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user_Setting.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user_Setting.WithdrawalActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
