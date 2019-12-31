@@ -89,7 +89,7 @@ class FCM {
             {
                 FirebaseMessaging.getInstance().unsubscribeFromTopic(TOPIC.WpiasAll)
                     .addOnCompleteListener { task ->
-                        println("${TOPIC.WpiasAll} 구독 해")
+                        println("${TOPIC.WpiasAll} 구독 해제")
                     }
             }
 
@@ -106,7 +106,7 @@ class FCM {
                 {
                     FirebaseMessaging.getInstance().unsubscribeFromTopic(TOPIC.NewQuestion)
                         .addOnCompleteListener { task ->
-                            println("${TOPIC.NewQuestion} 구독 해")
+                            println("${TOPIC.NewQuestion} 구독 해제")
                         }
                 }
             }
