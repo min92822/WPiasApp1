@@ -56,6 +56,7 @@ class LoginActivity : RootActivity(){
 
         }.addOnFailureListener {
 
+            Loading(ProgressBar, ProgressBg, false)
             Toast.makeText(this, "계정정보를 확인해주세요", Toast.LENGTH_LONG).show()
 
         }
