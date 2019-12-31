@@ -2,10 +2,14 @@ package fineinsight.app.service.wpias
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
 import fineinsight.app.service.wpias.dataClass.UserInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
+import fineinsight.app.service.wpias.publicObject.UserToken
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import fineinsight.app.service.wpias.user_Main.MainActivity
 import retrofit2.Call
@@ -20,8 +24,24 @@ class LaunchActivity : RootActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        GetTOKEN()
         loginStateCheck()
 
+    }
+
+    fun GetTOKEN()
+    {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    println("TokenAccessFail")
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result!!.token
+                UserToken.token = token
+            })
     }
 
     //로그인 상태 체크 앱 실행시 메인으로 바로 진행할지 여부를 결정하는 펑션
@@ -32,10 +52,8 @@ class LaunchActivity : RootActivity() {
 
             if(user != null) {
 
-                getUserinfo()
-                startActivity(
-                    Intent(this@LaunchActivity, MainActivity::class.java).setFlags(
-                        Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                getUserinfo(user.uid)
+
 
             }else{
 
@@ -54,21 +72,24 @@ class LaunchActivity : RootActivity() {
         FirebaseAuth.getInstance().addAuthStateListener(authStateListener!!)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         FirebaseAuth.getInstance().removeAuthStateListener(authStateListener!!)
     }
 
     //로그인 후 파이어베이스에서 가져온 uuid를 파라미터로 azure 서버로 보내 회원 정보를 가져온다
-    fun getUserinfo(){
+    fun getUserinfo(UUID:String){
 
-        PubVariable.uid = FirebaseAuth.getInstance().currentUser?.uid!!
+        PubVariable.uid = UUID
 
         var map = HashMap<String,String>()
 
-        map["IDKEY"] = FirebaseAuth.getInstance().currentUser?.uid!!
+        map["IDKEY"] = UUID
+        map["TOKEN"] = UserToken.token
+        map["OS"] = "Android"
 
-        ApiUtill().getSELECT_USER().select_user(map).enqueue(object :
+
+        ApiUtill().getSELECT_USERWITHTOKENOS().select_userwithtokenos(map).enqueue(object :
             Callback<ArrayList<UserInfo>> {
 
             override fun onResponse(

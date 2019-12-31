@@ -15,9 +15,9 @@ class ApiUtill {
     }
 
     // 회원정보조회
-    val select_user_url : String = "https://wpias.azurewebsites.net/SELECT_USER/"
+    val select_user_url : String = "https://wpias.azurewebsites.net/SELECT_USERWITHTOKENOS/"
 
-    fun getSELECT_USER() : ApiInterface{
+    fun getSELECT_USERWITHTOKENOS() : ApiInterface{
         return ApiRequest().getResponse(select_user_url)!!.create(ApiInterface::class.java)
     }
 

@@ -28,8 +28,6 @@ class LoginActivity : RootActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        UserToken.token
-
         PubVariable.init()
 
         SetDarkBar()
@@ -47,7 +45,7 @@ class LoginActivity : RootActivity(){
 
             PubVariable.uid = it.user?.uid!!
 
-            getUserinfo()
+            getUserinfo(it.user?.uid!!)
 
         }.addOnFailureListener {
 
@@ -77,13 +75,17 @@ class LoginActivity : RootActivity(){
     }
 
     //로그인 후 파이어베이스에서 가져온 uuid를 파라미터로 azure 서버로 보내 회원 정보를 가져온다
-    fun getUserinfo(){
+    fun getUserinfo(UUID:String){
 
         var map = HashMap<String,String>()
 
-        map["IDKEY"] = FirebaseAuth.getInstance().currentUser?.uid!!
+        println("USERTOKEN: ${UserToken.token}")
 
-        ApiUtill().getSELECT_USER().select_user(map).enqueue(object : Callback<ArrayList<UserInfo>>{
+        map["IDKEY"] = UUID
+        map["TOKEN"] = UserToken.token
+        map["OS"] = "Android"
+
+        ApiUtill().getSELECT_USERWITHTOKENOS().select_userwithtokenos(map).enqueue(object : Callback<ArrayList<UserInfo>>{
 
             override fun onResponse(
                 call: Call<ArrayList<UserInfo>>,

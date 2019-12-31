@@ -16,9 +16,9 @@ interface ApiInterface {
     fun insert_user(@FieldMap sql : Map<String, String>) : Call<String>
 
     // 회원정보조회
-    @POST("https://wpias.azurewebsites.net/SELECT_USER")
+    @POST("https://wpias.azurewebsites.net/SELECT_USERWITHTOKENOS")
     @FormUrlEncoded
-    fun select_user(@FieldMap sql : Map<String, String>) : Call<ArrayList<UserInfo>>
+    fun select_userwithtokenos(@FieldMap sql : Map<String, String>) : Call<ArrayList<UserInfo>>
 
 
     // 사용자 질문조회
