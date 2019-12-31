@@ -26,6 +26,7 @@ import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.dataClass.MycaseInfo
 import fineinsight.app.service.wpias.dataClass.QuestionInfo
+import fineinsight.app.service.wpias.publicObject.Validation
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_my_question_detail.*
 import kotlinx.android.synthetic.main.in_my_question_detail_add_record.*
@@ -78,8 +79,6 @@ class MyQuestionDetailActivity : RootActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
         SetTransparentBar()
-
-
 
     }
 
@@ -334,6 +333,7 @@ class MyQuestionDetailActivity : RootActivity() {
         }
 
 
+        // 추가 질문여부
         if(m_caseInfo!!.casestatus == "A"){
             chk_dr.text = "${m_caseInfo!!.answerdocnm} 의사 선생님에게 추가 답변요청을 합니다."
             chk_dr.visibility = View.VISIBLE
@@ -355,16 +355,26 @@ class MyQuestionDetailActivity : RootActivity() {
 
         }
 
+        // 사진 촬영
         photoGraphingAlert()
+
+        if (chk_dr.isChecked) {
+
+            var map = HashMap<String, String>()
+
+        } else {
+
+
+        }
 
     }
 
     //부위 촬영 클릭시 팝업 이벤트
     fun photoGraphingAlert(){
-        btn_photo_close.setOnClickListener { setupPermissions() }
+        btn_photo_close.setOnClickListener { setupPermissions("short") }
 
 
-        btn_photo_over.setOnClickListener { longDistancePopup() }
+        btn_photo_over.setOnClickListener { setupPermissions("long") }
 
     }
 
@@ -381,13 +391,13 @@ class MyQuestionDetailActivity : RootActivity() {
         dialog.takeShotWrapper.setOnClickListener {
 
             dispatchTakePictureIntent()
-
+            dialog.dismiss()
         }
 
         dialog.chooseFromGalleryWrapper.setOnClickListener {
 
             fromAlbum()
-
+            dialog.dismiss()
         }
 
         dialog.cancelWrapper.setOnClickListener {
@@ -401,7 +411,6 @@ class MyQuestionDetailActivity : RootActivity() {
     }
 
     //부위 촬영 팝업(20cm)
-    @SuppressLint("SetTextI18n")
     fun longDistancePopup(){
 
         cameraMode = "long"
@@ -418,12 +427,14 @@ class MyQuestionDetailActivity : RootActivity() {
         dialog.takeShotWrapper.setOnClickListener {
 
             dispatchTakePictureIntent()
+            dialog.dismiss()
 
         }
 
         dialog.chooseFromGalleryWrapper.setOnClickListener {
 
             fromAlbum()
+            dialog.dismiss()
 
         }
 
@@ -502,36 +513,37 @@ class MyQuestionDetailActivity : RootActivity() {
 
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        super.onActivityResult(requestCode, resultCode, data)
+        var bitmap : Bitmap? = null
 
         //사진 촬영으로 이미지 가져옴
         if(resultCode == Activity.RESULT_OK){
 
-            var bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-            bitmapToFile(bitmap)
-            var file = File(currentPhotoPath)
-
             when(requestCode) {
 
                 REQUEST_TAKE_PHOTO_10 -> {
+                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                    var file = File(currentPhotoPath)
                     imageUri = Uri.fromFile(file)
                     if(imageUri.toString().isNotEmpty()){
-
-                        // 이미지 uri 처리
-                        Glide.with(this)
-                            .load(imageUri)
-                            .into(btn_photo_close)
-
-
+                        Validation.vali.imageUrl1V = imageUri.toString()
                     }
+
+                    btn_photo_close.setImageBitmap(imageRotate(bitmap))
+
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
+                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                    var file = File(currentPhotoPath)
                     imageUri2 = Uri.fromFile(file)
                     if(imageUri2.toString().isNotEmpty()){
-//                        Validation.vali.imageUrl2V = imageUri2.toString()
+                        Validation.vali.imageUrl2V = imageUri2.toString()
                     }
+
+                    btn_photo_over.setImageBitmap(imageRotate(bitmap))
+
                 }
 
             }
@@ -558,6 +570,10 @@ class MyQuestionDetailActivity : RootActivity() {
                     imageUri2 = data?.data!!
                     if(imageUri2.toString().isNotEmpty()){
 //                        Validation.vali.imageUrl2V = imageUri2.toString()
+                        Glide.with(this)
+                            .load(imageUri)
+                            .into(btn_photo_over)
+
                     }
                 }
 
@@ -659,7 +675,7 @@ class MyQuestionDetailActivity : RootActivity() {
     }
 
     // 퍼미션 체크
-    fun setupPermissions() {
+    fun setupPermissions(str: String) {
 
         val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
 
@@ -669,7 +685,15 @@ class MyQuestionDetailActivity : RootActivity() {
 
         } else {
 
-            shortDistancePopup()
+            if(str == "short"){
+
+                shortDistancePopup()
+
+            } else if (str == "long"){
+
+                longDistancePopup()
+
+            }
 
         }
 
