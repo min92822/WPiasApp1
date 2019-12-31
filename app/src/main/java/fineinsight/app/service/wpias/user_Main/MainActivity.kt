@@ -3,6 +3,7 @@ package fineinsight.app.service.wpias.user_Main
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
@@ -26,6 +27,7 @@ class MainActivity : RootActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupPermissions()
         mainViewPager()
         SetTransparentBar()
     }
@@ -60,6 +62,14 @@ class MainActivity : RootActivity() {
 
 //        indicator.setViewPager(mainViewPager)
 
+
+    }
+
+    //퍼미션 체크
+    fun setupPermissions() {
+
+        val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
+        ActivityCompat.requestPermissions(this, permissions, 0)
 
     }
 

@@ -3,6 +3,7 @@ package fineinsight.app.service.wpias
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
 import fineinsight.app.service.wpias.dataClass.UserInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
@@ -27,6 +28,8 @@ class LoginActivity : RootActivity(){
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        setupPermissions()
 
         PubVariable.init()
 
@@ -140,6 +143,14 @@ class LoginActivity : RootActivity(){
         btn_find_pw.setOnClickListener {
             startActivity(Intent(this@LoginActivity, FindPasswordActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
+
+    }
+
+    //퍼미션 체크
+    fun setupPermissions() {
+
+        val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
+        ActivityCompat.requestPermissions(this, permissions, 0)
 
     }
 

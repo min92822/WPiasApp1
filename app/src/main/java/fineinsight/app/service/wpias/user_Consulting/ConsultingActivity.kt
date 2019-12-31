@@ -93,8 +93,6 @@ class ConsultingActivity : RootActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_consulting)
 
-        setupPermissions()
-
         SetTransparentBar()
 
         setTitle()
@@ -691,7 +689,7 @@ class ConsultingActivity : RootActivity(){
 
                 REQUEST_TAKE_PHOTO_10 -> {
                     bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-                    var file = File(currentPhotoPath)
+                    var file = bitmapToFile(bitmap)
                     imageUri = Uri.fromFile(file)
                     if(imageUri.toString().isNotEmpty()){
                         Validation.vali.imageUrl1V = imageUri.toString()
@@ -924,14 +922,6 @@ class ConsultingActivity : RootActivity(){
                 e.printStackTrace()
             }
         }
-
-    }
-
-    //퍼미션 체크
-    fun setupPermissions() {
-
-        val permissions = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
-        ActivityCompat.requestPermissions(this, permissions, 0)
 
     }
 
