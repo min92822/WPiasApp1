@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fineinsight.app.service.wpias">
+    package="com.phonegap.WPIAS">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -24,7 +24,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="fineinsight.app.service.wpias.fileprovider"
+            android:authorities="com.phonegap.WPIAS.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
