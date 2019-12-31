@@ -113,8 +113,8 @@ class MyCaseActivity : RootActivity() {
                 }
                 else//피드백이 등록되어 있을 때
                 {
-                    rating_mycase.isEnabled = false
                     rating_mycase.rating = m_myCaseInfo!!.feedbackstar.toFloat()
+                    rating_mycase.setIsIndicator(true)
                     btn_mycase_review_submit.visibility = View.GONE
                     txt_mycase_review.setText(m_myCaseInfo!!.feedbacktext)
                     txt_mycase_review.isEnabled = false
@@ -156,7 +156,7 @@ class MyCaseActivity : RootActivity() {
                 if(response.body() == "S"){
                     ProgressAction(false)
 
-                    rating_mycase.isIndicator
+                    rating_mycase.setIsIndicator(true)
                     btn_mycase_review_submit.visibility = View.GONE
                     txt_mycase_review.isEnabled = false
                     textView38.setText("소중한 리뷰 감사합니다.")
