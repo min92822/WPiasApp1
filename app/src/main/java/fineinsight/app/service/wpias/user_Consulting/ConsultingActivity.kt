@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.*
 import android.graphics.drawable.ColorDrawable
@@ -40,10 +41,7 @@ import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.shot_distance_popup.*
 import kotlinx.android.synthetic.main.title_bar_darkblue.*
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -685,6 +683,7 @@ class ConsultingActivity : RootActivity(){
         //사진 촬영으로 이미지 가져옴
         if(resultCode == Activity.RESULT_OK){
 
+
             when(requestCode) {
 
                 REQUEST_TAKE_PHOTO_10 -> {
@@ -695,6 +694,7 @@ class ConsultingActivity : RootActivity(){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
+                    imageUri = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
                     shortDistanceShot.setImageBitmap(imageRotate(bitmap))
 
                 }
@@ -706,6 +706,7 @@ class ConsultingActivity : RootActivity(){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
+                    imageUri2 = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
                     longDistanceShot.setImageBitmap(imageRotate(bitmap))
 
                 }
@@ -981,6 +982,13 @@ class ConsultingActivity : RootActivity(){
             }
         }
 
+    }
+
+    fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri{
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path.toString())
     }
 
 }
