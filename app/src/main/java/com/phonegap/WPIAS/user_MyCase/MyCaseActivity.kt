@@ -115,7 +115,13 @@ class MyCaseActivity : RootActivity() {
                     rating_mycase.rating = m_myCaseInfo!!.feedbackstar.toFloat()
                     rating_mycase.setIsIndicator(true)
                     btn_mycase_review_submit.visibility = View.GONE
+
+                    if(m_myCaseInfo!!.feedbacktext.isNullOrEmpty()){
+                        txt_mycase_review.hint = ""
+                    }
+
                     txt_mycase_review.setText(m_myCaseInfo!!.feedbacktext)
+
                     txt_mycase_review.isEnabled = false
                     textView38.setText("소중한 리뷰 감사합니다.")
                 }
@@ -158,6 +164,7 @@ class MyCaseActivity : RootActivity() {
                     rating_mycase.setIsIndicator(true)
                     btn_mycase_review_submit.visibility = View.GONE
                     txt_mycase_review.isEnabled = false
+                    txt_mycase_review.hint = ""
                     textView38.setText("소중한 리뷰 감사합니다.")
 
                     successAlert()
