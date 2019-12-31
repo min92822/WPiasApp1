@@ -86,4 +86,12 @@ class ApiUtill {
     fun getUPDATE_TOKENLOGOUT() : ApiInterface{
         return ApiRequest().getStringResponse(update_tokenlogout_url)!!.create(ApiInterface::class.java)
     }
+
+
+    // 상대방 푸시정보 조회
+    val select_checkagree_url : String = "https://wpias.azurewebsites.net/SELECT_CHECKAGREE/"
+
+    fun getSELECT_CHECKAGREE() : ApiInterface{
+        return ApiRequest().getResponse(select_checkagree_url)!!.create(ApiInterface::class.java)
+    }
 }

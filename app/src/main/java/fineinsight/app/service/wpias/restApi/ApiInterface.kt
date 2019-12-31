@@ -74,4 +74,10 @@ interface ApiInterface {
     @FormUrlEncoded
     fun update_tokenlogout(@FieldMap sql : Map<String, String>) : Call<String>
 
+
+    // 상대방 푸시정보 조회
+    @POST("https://wpias.azurewebsites.net/SELECT_CHECKAGREE")
+    @FormUrlEncoded
+    fun select_checkagree(@FieldMap sql : Map<String, String>) : Call<ArrayList<pushinfo>>
+
 }

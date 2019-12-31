@@ -9,15 +9,24 @@ import android.graphics.drawable.ColorDrawable
 import android.os.AsyncTask
 import android.view.View
 import android.view.Window
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.microsoft.azure.storage.CloudStorageAccount
 import com.microsoft.azure.storage.StorageException
 import com.microsoft.azure.storage.blob.CloudBlobContainer
 import fineinsight.app.service.wpias.R
+import fineinsight.app.service.wpias.dataClass.QuestionInfo
+import fineinsight.app.service.wpias.dataClass.pushinfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.public_function.FCM
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionActivity
+import fineinsight.app.service.wpias.user_MyQuestion.MyQuestionAdapter
+import kotlinx.android.synthetic.main.activity_my_question.*
 import kotlinx.android.synthetic.main.activity_my_question_detail.*
+import kotlinx.android.synthetic.main.activity_my_question_detail.Progress_bg
+import kotlinx.android.synthetic.main.activity_my_question_detail.Progress_circle
 import kotlinx.android.synthetic.main.custom_alert.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,7 +36,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @SuppressLint("StaticFieldLeak")
-class AddCaseRequest_AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<InputStream>, var imageLengthArr : ArrayList<Int>, var map:HashMap<String,String>) : AsyncTask<String, Void, Boolean?>() {
+class AddCaseRequest_AzureAsyncTask(var DOCTORUUID:String, var context : Context, var inputStreamArr : ArrayList<InputStream>, var imageLengthArr : ArrayList<Int>, var map:HashMap<String,String>) : AsyncTask<String, Void, Boolean?>() {
 
     lateinit var container : CloudBlobContainer
 
@@ -161,7 +170,52 @@ class AddCaseRequest_AzureAsyncTask(var context : Context, var inputStreamArr : 
     //업로드 성공 알럿
     fun successAlert(){
 
-        FCM.function.SendMsgToTopic(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
+        ///////////////////////////
+        var map = HashMap<String,String>()
+
+        map["IDKEY"] = DOCTORUUID
+
+        ApiUtill().getSELECT_CHECKAGREE().select_checkagree(map).enqueue(object : Callback<ArrayList<pushinfo>>{
+            override fun onFailure(call: Call<ArrayList<pushinfo>>, t: Throwable) {
+                Toast.makeText(context, "${t.message}", Toast.LENGTH_LONG).show()
+                PushSuccess()
+            }
+
+            override fun onResponse(call: Call<ArrayList<pushinfo>>, response: Response<ArrayList<pushinfo>>) {
+
+                if (response.isSuccessful){
+
+                    var arr = response.body() as ArrayList<pushinfo>
+
+
+
+                    if(arr.size == 0){
+                        PushSuccess()
+
+                    } else {
+                        if(arr[0].SWITCH2=="On")
+                        {
+                            FCM.function.SendMsgToTarget(arr[0].TOKEN, "${PubVariable.userInfo.nickname} 님이 추가질문을 등록했습니다.")
+                            PushSuccess()
+                        }
+                    }
+
+
+                } else {
+                    PushSuccess()
+                }
+
+            }
+        })
+        //////////////////////////
+
+
+
+    }
+
+    fun PushSuccess()
+    {
+        FCM.function.SendMsgToTarget(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
 
         var dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -199,7 +253,6 @@ class AddCaseRequest_AzureAsyncTask(var context : Context, var inputStreamArr : 
         }
 
         dialog.show()
-
     }
 
     //업로드 실패 알럿

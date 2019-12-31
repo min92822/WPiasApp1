@@ -388,7 +388,8 @@ class MyQuestionDetailActivity : RootActivity() {
                     map["CONTENTS"] = txt_record_content_add.text.toString()
                     map["DIRECTION"] = direction()
 
-                    AddCaseRequest_AzureAsyncTask(this, inputStreamArr, imageLengthArr, map).execute(storageConnectionString)
+
+                    AddCaseRequest_AzureAsyncTask(m_questionInfo!!.answerdoc, this, inputStreamArr, imageLengthArr, map).execute(storageConnectionString)
 
                     println(map)
 
