@@ -99,6 +99,5 @@ class ApiRequest {
         }
 
         return retrofit
-
     }
 }
