@@ -43,6 +43,8 @@ class LoginActivity : RootActivity(){
     //로그인
     fun login(id : String, pw : String){
 
+        Loading(ProgressBar, ProgressBg, true)
+
         FirebaseAuth.getInstance().signInWithEmailAndPassword(id, pw).addOnSuccessListener {
 
             PubVariable.uid = it.user?.uid!!
@@ -96,16 +98,20 @@ class LoginActivity : RootActivity(){
 
                 if(response.isSuccessful){
 
+                    Loading(ProgressBar, ProgressBg, false)
+
                     if(response.body()?.size != 0){
 
                         FCM.function.TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
 
                         PubVariable.userInfo = response.body()!![0]
 
+
+
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
                     }else{
-
+                        
                         Toast.makeText(this@LoginActivity, "해당하는 계정이 없습니다.", Toast.LENGTH_LONG).show()
 
                     }
@@ -115,6 +121,7 @@ class LoginActivity : RootActivity(){
             }
 
             override fun onFailure(call: Call<ArrayList<UserInfo>>, t: Throwable) {
+                Loading(ProgressBar, ProgressBg, false)
                 Toast.makeText(this@LoginActivity, "${t.message}", Toast.LENGTH_LONG).show()
             }
 

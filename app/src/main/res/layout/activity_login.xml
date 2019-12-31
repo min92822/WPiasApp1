@@ -106,25 +106,20 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/wrap_loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
+        android:id="@+id/ProgressBg"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
+        <ProgressBar
+            android:id="@+id/ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/wpias_logo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
