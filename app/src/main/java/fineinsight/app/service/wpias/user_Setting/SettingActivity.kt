@@ -7,6 +7,7 @@ import fineinsight.app.service.wpias.LoginActivity
 import fineinsight.app.service.wpias.R
 import fineinsight.app.service.wpias.RootActivity
 import fineinsight.app.service.wpias.publicObject.PubVariable
+import fineinsight.app.service.wpias.public_function.FCM
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.title_bar_grey.*
@@ -35,10 +36,7 @@ class SettingActivity : RootActivity() {
 
         btnLogoutWrapper.setOnClickListener {
 
-            PubVariable.init()
-            FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this@SettingActivity, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
-            finish()
+            LOGOUT(PubVariable.uid)
         }
 
         btnChangePwWrapper.setOnClickListener {
@@ -112,6 +110,7 @@ class SettingActivity : RootActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.isSuccessful && response.body()!! == "S"){
                     PubVariable.userInfo.switch1 = map["SWITCH1"].toString()
+                    FCM.function.TopicSetting(PubVariable.userInfo.usertype, PubVariable.userInfo.switch1, PubVariable.userInfo.switch2)
                 }else{
                     println("알림거부")
                 }
@@ -140,6 +139,7 @@ class SettingActivity : RootActivity() {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.isSuccessful && response.body()!! == "S"){
                     PubVariable.userInfo.switch2 = map["SWITCH2"].toString()
+                    FCM.function.TopicSetting(PubVariable.userInfo.usertype, PubVariable.userInfo.switch1, PubVariable.userInfo.switch2)
                 }else{
                     println("알림거부")
                 }
@@ -151,6 +151,45 @@ class SettingActivity : RootActivity() {
 
         })
 
+    }
+
+    fun LOGOUT(UUID:String)
+    {
+        var map = HashMap<String, String>()
+
+
+        map["IDKEY"] = UUID
+
+
+        ApiUtill().getUPDATE_TOKENLOGOUT().update_tokenlogout(map).enqueue(object : Callback<String>{
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.isSuccessful && response.body()!! == "S"){
+
+                    PubVariable.init()
+                    FCM.function.TopicSetting("Doctor", "Off", "Off")
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this@SettingActivity, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                    finish()
+
+                }else{
+                    PubVariable.init()
+                    FCM.function.TopicSetting("Doctor", "Off", "Off")
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this@SettingActivity, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                PubVariable.init()
+                FCM.function.TopicSetting("Doctor", "Off", "Off")
+                FirebaseAuth.getInstance().signOut()
+                startActivity(Intent(this@SettingActivity, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                finish()
+            }
+
+        })
     }
 
 }

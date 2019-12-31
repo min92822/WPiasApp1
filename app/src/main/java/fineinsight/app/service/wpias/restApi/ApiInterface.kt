@@ -61,6 +61,9 @@ interface ApiInterface {
     fun sendFCM(@Body FCMInteraction : Any) : Call<ResponseBody>
 
 
-
+    // 로그아웃시 토큰 공백으로 변경
+    @POST("https://wpias.azurewebsites.net/UPDATE_TOKENLOGOUT")
+    @FormUrlEncoded
+    fun update_tokenlogout(@FieldMap sql : Map<String, String>) : Call<String>
 
 }
