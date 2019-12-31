@@ -10,6 +10,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import fineinsight.app.service.wpias.dataClass.UserInfo
 import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.publicObject.UserToken
+import fineinsight.app.service.wpias.public_function.FCM
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import fineinsight.app.service.wpias.user_Main.MainActivity
 import retrofit2.Call
@@ -102,6 +103,8 @@ class LaunchActivity : RootActivity() {
                     if(response.body()?.size != 0){
 
                         PubVariable.userInfo = response.body()!![0]
+
+                        FCM.function.TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
 
                         startActivity(Intent(this@LaunchActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 

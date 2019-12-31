@@ -1,6 +1,7 @@
 package fineinsight.app.service.wpias.public_function
 
 import android.widget.Toast
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import fineinsight.app.service.wpias.restApi.ApiUtill
@@ -73,6 +74,42 @@ class FCM {
                     }
                 }
             })
+        }
+
+        fun TopicSetting(USERTYPE:String, SWITCH1:String, SWITCH2:String)
+        {
+            if(SWITCH1 == "On")
+            {
+                FirebaseMessaging.getInstance().subscribeToTopic(TOPIC.WpiasAll)
+                    .addOnCompleteListener { task ->
+                        println("${TOPIC.WpiasAll} 구독성공")
+                    }
+            }
+            else
+            {
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(TOPIC.WpiasAll)
+                    .addOnCompleteListener { task ->
+                        println("${TOPIC.WpiasAll} 구독 해")
+                    }
+            }
+
+            if(USERTYPE == "DOCTOR")
+            {
+                if(SWITCH2 == "On")
+                {
+                    FirebaseMessaging.getInstance().subscribeToTopic(TOPIC.NewQuestion)
+                        .addOnCompleteListener { task ->
+                            println("${TOPIC.NewQuestion} 구독성공")
+                        }
+                }
+                else
+                {
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(TOPIC.NewQuestion)
+                        .addOnCompleteListener { task ->
+                            println("${TOPIC.NewQuestion} 구독 해")
+                        }
+                }
+            }
         }
     }
 

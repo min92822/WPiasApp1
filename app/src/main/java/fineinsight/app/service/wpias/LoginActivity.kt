@@ -96,6 +96,8 @@ class LoginActivity : RootActivity(){
 
                     if(response.body()?.size != 0){
 
+                        FCM.function.TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
+
                         PubVariable.userInfo = response.body()!![0]
 
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
