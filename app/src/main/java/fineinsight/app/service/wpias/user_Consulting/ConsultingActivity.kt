@@ -686,7 +686,6 @@ class ConsultingActivity : RootActivity(){
 
             var bitmap = BitmapFactory.decodeFile(currentPhotoPath)
             bitmapToFile(bitmap)
-            imageRotate(bitmap)
             var file = File(currentPhotoPath)
 
             when(requestCode) {
@@ -697,7 +696,7 @@ class ConsultingActivity : RootActivity(){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
-                    shortDistanceShot.setImageBitmap(bitmap)
+                    shortDistanceShot.setImageBitmap(imageRotate(bitmap))
 
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
@@ -706,7 +705,7 @@ class ConsultingActivity : RootActivity(){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
-                    longDistanceShot.setImageBitmap(bitmap)
+                    longDistanceShot.setImageBitmap(imageRotate(bitmap))
 
                 }
 
@@ -735,7 +734,7 @@ class ConsultingActivity : RootActivity(){
                     }
 
                     imageRotate(bitmap!!)
-                    shortDistanceShot.setImageBitmap(bitmap)
+                    shortDistanceShot.setImageBitmap(imageRotate(bitmap))
 
                 }
                 GET_IMAGE_FROM_GALLERY_20 -> {
@@ -752,7 +751,7 @@ class ConsultingActivity : RootActivity(){
                     }
 
                     imageRotate(bitmap!!)
-                    shortDistanceShot.setImageBitmap(bitmap)
+                    shortDistanceShot.setImageBitmap(imageRotate(bitmap))
 
                 }
 

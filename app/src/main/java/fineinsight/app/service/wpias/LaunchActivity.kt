@@ -62,6 +62,8 @@ class LaunchActivity : RootActivity() {
     //로그인 후 파이어베이스에서 가져온 uuid를 파라미터로 azure 서버로 보내 회원 정보를 가져온다
     fun getUserinfo(){
 
+        PubVariable.uid = FirebaseAuth.getInstance().currentUser?.uid!!
+
         var map = HashMap<String,String>()
 
         map["IDKEY"] = FirebaseAuth.getInstance().currentUser?.uid!!
