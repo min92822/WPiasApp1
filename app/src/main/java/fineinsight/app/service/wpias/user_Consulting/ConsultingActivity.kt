@@ -682,15 +682,16 @@ class ConsultingActivity : RootActivity(){
 
         super.onActivityResult(requestCode, resultCode, data)
 
+        var bitmap : Bitmap? = null
+
         //사진 촬영으로 이미지 가져옴
         if(resultCode == Activity.RESULT_OK){
-
-            var bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-            var file = bitmapToFile(bitmap)
 
             when(requestCode) {
 
                 REQUEST_TAKE_PHOTO_10 -> {
+                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                    var file = File(currentPhotoPath)
                     imageUri = Uri.fromFile(file)
                     if(imageUri.toString().isNotEmpty()){
                         Validation.vali.imageUrl1V = imageUri.toString()
@@ -700,6 +701,8 @@ class ConsultingActivity : RootActivity(){
 
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
+                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                    var file = File(currentPhotoPath)
                     imageUri2 = Uri.fromFile(file)
                     if(imageUri2.toString().isNotEmpty()){
                         Validation.vali.imageUrl2V = imageUri2.toString()
@@ -715,8 +718,6 @@ class ConsultingActivity : RootActivity(){
 
         //앨범에서 이미지 가져옴
         if(resultCode == Activity.RESULT_OK){
-
-            var bitmap : Bitmap? = null
 
             when(requestCode) {
 
