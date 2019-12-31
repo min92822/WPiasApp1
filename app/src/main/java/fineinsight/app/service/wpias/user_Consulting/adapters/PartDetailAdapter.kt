@@ -91,6 +91,8 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
 
         }
 
+        chkBoxArr[0].appCompatCheckBox.isChecked = true
+
     }
 
     //화상 입은 부위에 따른 arr 정리 하는 기능
@@ -206,8 +208,6 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
                 appCompatCheckBox.isChecked = true
 
             }
-
-            chkBoxArr[0].appCompatCheckBox.isChecked = true
 
         }
 

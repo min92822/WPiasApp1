@@ -108,6 +108,8 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
 
         }
 
+        viewArr[0].appCompatCheckBox.isChecked = true
+
     }
 
     //카테고리별 상세 원인 체크 박스를 view로 구성하는 펑션
@@ -204,8 +206,6 @@ class CauseOfBurnedDetailAdapter(var category : String) : RecyclerView.Adapter<R
                 viewArr[adapterPosition].appCompatCheckBox.isChecked = true
 
             }
-
-            viewArr[0].appCompatCheckBox.isChecked = true
 
         }
 

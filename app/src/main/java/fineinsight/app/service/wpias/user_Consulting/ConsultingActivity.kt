@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
@@ -685,8 +686,7 @@ class ConsultingActivity : RootActivity(){
         if(resultCode == Activity.RESULT_OK){
 
             var bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-            bitmapToFile(bitmap)
-            var file = File(currentPhotoPath)
+            var file = bitmapToFile(bitmap)
 
             when(requestCode) {
 
@@ -733,8 +733,7 @@ class ConsultingActivity : RootActivity(){
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
                     }
 
-                    imageRotate(bitmap!!)
-                    shortDistanceShot.setImageBitmap(imageRotate(bitmap))
+                    shortDistanceShot.setImageBitmap(imageRotate(bitmap!!))
 
                 }
                 GET_IMAGE_FROM_GALLERY_20 -> {
@@ -750,8 +749,7 @@ class ConsultingActivity : RootActivity(){
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri2)
                     }
 
-                    imageRotate(bitmap!!)
-                    shortDistanceShot.setImageBitmap(imageRotate(bitmap))
+                    shortDistanceShot.setImageBitmap(imageRotate(bitmap!!))
 
                 }
 
@@ -782,15 +780,11 @@ class ConsultingActivity : RootActivity(){
                     imageLengthArr.add(inputStream.available())
                 }
 
-                Loading(ProgressBar, ProgressBg, true)
-
                 AzureAsyncTask(
                     this,
                     inputStreamArr,
                     imageLengthArr
                 ).execute(storageConnectionString)
-
-                Loading(ProgressBar, ProgressBg, false)
 
             }else{
 
@@ -900,7 +894,7 @@ class ConsultingActivity : RootActivity(){
     }
 
     //비트맵을 다시 파일로 바꾸는 펑션
-    fun bitmapToFile(bitmap: Bitmap){
+    fun bitmapToFile(bitmap: Bitmap) : File?{
 
         var file = File(currentPhotoPath)
         var out = FileOutputStream(file)
@@ -913,8 +907,11 @@ class ConsultingActivity : RootActivity(){
 
             bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out)
 
+            return file
+
         }catch (e : Exception){
             e.printStackTrace()
+            return null
         }finally {
             try {
                 out.close()

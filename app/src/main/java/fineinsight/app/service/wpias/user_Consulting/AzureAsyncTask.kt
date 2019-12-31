@@ -18,6 +18,7 @@ import fineinsight.app.service.wpias.publicObject.PubVariable
 import fineinsight.app.service.wpias.publicObject.Validation
 import fineinsight.app.service.wpias.restApi.ApiUtill
 import fineinsight.app.service.wpias.user_Main.MainActivity
+import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.custom_alert.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,11 +36,27 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
 
     var popup = false
 
+    override fun onPreExecute() {
+
+        (context as ConsultingActivity).Loading((context as ConsultingActivity).ProgressBar, (context as ConsultingActivity).ProgressBg, true)
+
+        super.onPreExecute()
+
+    }
+
     override fun doInBackground(vararg params: String?): Boolean? {
 
         container = getContainer(params[0]!!)
 
         return uploadContainerImage(inputStreamArr, imageLengthArr)
+
+    }
+
+    override fun onPostExecute(result: Boolean?) {
+
+        (context as ConsultingActivity).Loading((context as ConsultingActivity).ProgressBar, (context as ConsultingActivity).ProgressBg, false)
+
+        super.onPostExecute(result)
 
     }
 
