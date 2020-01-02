@@ -110,7 +110,25 @@ class LoginActivity : RootActivity(){
 
                         PubVariable.userInfo = response.body()!![0]
 
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                        //                        if(PubVariable.userInfo.usertype == "USER") {
+
+                        startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                MainActivity::class.java
+                            ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                        )
+
+//                        }else{
+//
+//                            startActivity(
+//                                Intent(
+//                                    this@LaunchActivity,
+//                                    DoctorMainActivity::class.java
+//                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//                            )
+//
+//                        }
 
                     }else{
 

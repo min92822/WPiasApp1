@@ -639,7 +639,7 @@ class ConsultingActivity : RootActivity(){
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         this,
-                        "fineinsight.app.service.wpias.fileprovider",
+                        "com.phonegap.WPIAS.fileprovider",
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)

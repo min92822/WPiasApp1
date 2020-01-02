@@ -80,6 +80,9 @@
         <activity
             android:name=".user_Setting.WithdrawalActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".doctor_Main.DoctorMainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

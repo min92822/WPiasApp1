@@ -16,8 +16,8 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
 
     var chkBoxArr = ArrayList<View>()
     var arr = ArrayList<String>()
-    var fHead = arrayListOf("이마", "눈", "코", "입", "귀", "볼", "기타")
-    var bHead = arrayListOf("목", "뒤통수", "목덜미", "기타")
+    var fHead = arrayListOf("이마", "눈", "코", "입", "귀", "볼", "목", "뒤통수", "목덜미", "기타")
+    var bHead = arrayListOf("이마", "눈", "코", "입", "귀", "볼", "목", "뒤통수", "목덜미", "기타")
     var fShoulder = arrayListOf("좌측 어깨", "우측 어깨", "양쪽 어깨", "기타")
     var bShoulder = arrayListOf("좌측 어깨", "우측 어깨", "양쪽 어깨", "기타")
     var chest = arrayListOf("좌측 가슴", "우측 가슴", "가슴 전체", "기타")
@@ -69,6 +69,7 @@ class PartDetailAdapter(fb : String, category : String, var context : Context) :
                 }
 
                 buttonView.isClickable = false
+
 
                 Validation.vali.bodyDetailV = (position + 1).toString().padStart(3, '0')
 

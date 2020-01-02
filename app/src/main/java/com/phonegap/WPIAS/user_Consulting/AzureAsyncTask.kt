@@ -145,7 +145,22 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
         map["BURNDATE"] = Validation.vali.burnDateV
         map["AGE"] = Validation.vali.ageV
         map["GENDER"] = Validation.vali.genderV
-        map["BODYSTYLE"] = Validation.vali.bodyStyleV
+        map["BODYSTYLE"] = when(Validation.vali.bodyStyleV){
+            "머리" -> "001"
+            "어깨" -> "002"
+            "가슴" -> "003"
+            "등" -> "004"
+            "배" -> "005"
+            "허리" -> "006"
+            "팔" -> "007"
+            "손" -> "008"
+            "음부" -> "009"
+            "엉덩이" -> "010"
+            "다리" -> "011"
+            "발" -> "012"
+            "호흡기" -> "013"
+            else -> "001"
+        }
         map["BODYDETAIL"] = Validation.vali.bodyDetailV
         map["BODYGITA"] = Validation.vali.bodyGitaV
         map["BURNSTYLE"] = Validation.vali.burnStyleV
@@ -189,7 +204,7 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
     //업로드 성공 알럿
     fun successAlert(){
 
-        FCM.function.SendMsgToTopic(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
+//        FCM.function.SendMsgToTopic(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
 
         var dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

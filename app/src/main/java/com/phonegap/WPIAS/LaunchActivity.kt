@@ -7,6 +7,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import com.phonegap.WPIAS.dataClass.UserInfo
+import com.phonegap.WPIAS.doctor_Main.DoctorMainActivity
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.publicObject.UserToken
 import com.phonegap.WPIAS.public_function.FCM
@@ -105,7 +106,25 @@ class LaunchActivity : RootActivity() {
 
                         FCM.function.TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
 
-                        startActivity(Intent(this@LaunchActivity, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+//                        if(PubVariable.userInfo.usertype == "USER") {
+
+                            startActivity(
+                                Intent(
+                                    this@LaunchActivity,
+                                    MainActivity::class.java
+                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                            )
+
+//                        }else{
+//
+//                            startActivity(
+//                                Intent(
+//                                    this@LaunchActivity,
+//                                    DoctorMainActivity::class.java
+//                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//                            )
+//
+//                        }
 
                     }else{
 

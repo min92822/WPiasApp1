@@ -121,7 +121,7 @@ class PartListAdapter(var arr : ArrayList<String>) : RecyclerView.Adapter<Recycl
                 }
 
                 whenLoad(adapterPosition)
-                Validation.vali.bodyStyleV = (adapterPosition + 1).toString().padStart(3, '0')
+                Validation.vali.bodyStyleV = viewArr[adapterPosition].bodyPart.text.toString()
 
             }
 
