@@ -463,7 +463,7 @@ class ConsultingActivity : RootActivity(){
                 android.app.AlertDialog.THEME_HOLO_DARK,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     whenBurned.setText("${year}-${(month + 1).toString().padStart(2,'0')}-${dayOfMonth.toString().padStart(2, '0')}")
-                    Validation.vali.burnDateV = "$year + ${month + 1} + $dayOfMonth"
+                    Validation.vali.burnDateV = "$year-${month + 1}-$dayOfMonth"
                 },
                 MYyear,
                 MYmonth,
