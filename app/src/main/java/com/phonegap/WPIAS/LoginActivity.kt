@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.phonegap.WPIAS.dataClass.UserInfo
+import com.phonegap.WPIAS.doctor_Main.DoctorMainActivity
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.publicObject.UserToken
 import com.phonegap.WPIAS.public_function.FCM
@@ -110,20 +111,20 @@ class LoginActivity : RootActivity(){
 
                         PubVariable.userInfo = response.body()!![0]
 
-                        //                        if(PubVariable.userInfo.usertype == "USER") {
+//                        if (PubVariable.userInfo.usertype == "USER") {
 
-                        startActivity(
-                            Intent(
-                                this@LoginActivity,
-                                MainActivity::class.java
-                            ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                        )
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    MainActivity::class.java
+                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                            )
 
-//                        }else{
+//                        } else {
 //
 //                            startActivity(
 //                                Intent(
-//                                    this@LaunchActivity,
+//                                    this@LoginActivity,
 //                                    DoctorMainActivity::class.java
 //                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 //                            )

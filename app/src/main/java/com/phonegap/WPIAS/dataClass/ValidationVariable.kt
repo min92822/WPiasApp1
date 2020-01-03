@@ -18,5 +18,6 @@ data class ValidationVariable(
     var directionV : ArrayList<String>,
     var imageUrl1V : String,
     var imageUrl2V : String,
-    var contentsV : String
+    var contentsV : String,
+    var locationV : String
 )

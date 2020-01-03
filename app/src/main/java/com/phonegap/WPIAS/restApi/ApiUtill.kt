@@ -65,6 +65,14 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
+    // 사용자 질문등록 + 위치추가
+    val insert_questionwitharea_url : String = "https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA/"
+
+    fun getINSERT_QUESTIONWITHAREA() : ApiInterface {
+        return ApiRequest().getStringResponse(insert_questionwitharea_url)!!.create(
+            ApiInterface::class.java)
+    }
+
     // 설정창 스위치1 변경
     val update_switch1_url : String = "https://wpias.azurewebsites.net/UPDATE_SWITCH1/"
 
@@ -104,4 +112,21 @@ class ApiUtill {
         return ApiRequest().getResponse(select_checkagree_url)!!.create(
             ApiInterface::class.java)
     }
+
+    // 시,도 조회
+    val select_city_url : String = "https://wpias.azurewebsites.net/SELECT_CITY/"
+
+    fun getSELECT_CITY() : ApiInterface {
+        return ApiRequest().getResponse(select_city_url)!!.create(
+            ApiInterface::class.java)
+    }
+
+    // 구 조회
+    val select_district_url : String = "https://wpias.azurewebsites.net/SELECT_DISTRICT/"
+
+    fun getSELECT_DISTRICT() : ApiInterface {
+        return ApiRequest().getResponse(select_district_url)!!.create(
+            ApiInterface::class.java)
+    }
+
 }

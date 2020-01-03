@@ -17,33 +17,40 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.EditText
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.view.get
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
+import com.phonegap.WPIAS.dataClass.CityInfo
+import com.phonegap.WPIAS.dataClass.DistrictInfo
+import com.phonegap.WPIAS.publicObject.Location
 import com.phonegap.WPIAS.user_Consulting.adapters.CauseOfBurnedAdapter
 import com.phonegap.WPIAS.user_Consulting.adapters.DeptAdapter
 import com.phonegap.WPIAS.user_Consulting.adapters.PartListAdapter
 import com.phonegap.WPIAS.user_Consulting.adapters.QuestionAdapter
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.publicObject.Validation
+import com.phonegap.WPIAS.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.shot_distance_popup.*
 import kotlinx.android.synthetic.main.title_bar_darkblue.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.*
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class ConsultingActivity : RootActivity(){
 
@@ -81,6 +88,7 @@ class ConsultingActivity : RootActivity(){
     //액티비티 초기화될때 validation 전역 변수들을 초기화 시켜준다
     init {
         Validation.valiInit()
+        Location.init()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,6 +99,8 @@ class ConsultingActivity : RootActivity(){
         SetTransparentBar()
 
         setTitle()
+
+        getCity()
 
         popupCalendar()
 
@@ -124,14 +134,11 @@ class ConsultingActivity : RootActivity(){
 
     //신체 부위 리싸이클러뷰 활성화 및 부위 버튼 활성화
     //validation을 위한 이벤트 이 펑션에 등록
+    //액티비티 시작될때 초기화될 설정들 정리
     @SuppressLint("SimpleDateFormat")
     fun eventInit(){
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-
-        bodyFront.isChecked = true
-
-        male.isChecked = true
 
         whenBurned.addTextChangedListener(object : TextWatcher{
 
@@ -206,6 +213,51 @@ class ConsultingActivity : RootActivity(){
             }
 
         })
+
+        locationMySelf.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                buttonView.isClickable = false
+
+                locationSelect.isChecked = false
+                city.isEnabled = false
+                district.isEnabled = false
+                detailLocation.isEnabled = true
+                city.setSelection(0)
+                district.setSelection(0)
+
+            }else{
+
+                buttonView.isClickable = true
+
+            }
+
+        }
+
+        locationSelect.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                buttonView.isClickable = false
+
+                locationMySelf.isChecked = false
+                city.isEnabled = true
+                district.isEnabled = true
+                detailLocation.isEnabled = false
+                detailLocation.setText("")
+
+            }else{
+
+                buttonView.isClickable = true
+
+            }
+
+        }
+
+        bodyFront.isChecked = true
+
+        male.isChecked = true
 
         checkIdentify.isChecked = true
 
@@ -362,7 +414,6 @@ class ConsultingActivity : RootActivity(){
             }
         }
 
-
     }
 
     //본인 눌렀을때 펑션
@@ -504,7 +555,7 @@ class ConsultingActivity : RootActivity(){
             if(isChecked){
 
                 pastBurned.isChecked = false
-                whenBurned.setText("$MYyear-$MYmonth-$MYday")
+                whenBurned.setText("$MYyear-${MYmonth.toString().padStart(2,'0')}-${MYday.toString().padStart(2,'0')}")
 
                 Validation.vali.burnDateV = whenBurned.text.toString()
                 Validation.vali.scarStyleV = "burn"
@@ -777,6 +828,27 @@ class ConsultingActivity : RootActivity(){
                     imageLengthArr.add(inputStream.available())
                 }
 
+                if(locationSelect.isChecked) {
+
+                    var locationParameter = ""
+
+                    if(city.selectedItem != 0){
+                        locationParameter += city.selectedItem
+                    }else{
+                        locationParameter = " "
+                    }
+
+                    locationParameter += if(district.selectedItem != 0){
+                        " ${district.selectedItem}"
+                    }else{
+                        ""
+                    }
+
+                    Validation.vali.locationV = locationParameter
+                }else{
+                    Validation.vali.locationV = "${detailLocation.text}"
+                }
+
                 AzureAsyncTask(
                     this,
                     inputStreamArr,
@@ -938,8 +1010,6 @@ class ConsultingActivity : RootActivity(){
 
         imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 
-        currentFocus?.clearFocus()
-
     }
 
     //최상위 뷰 태그 및 하위 뷰 태그에 hideKeboard를 적용하는 펑션
@@ -949,7 +1019,7 @@ class ConsultingActivity : RootActivity(){
              view.setOnTouchListener { v, event ->
 
                  hideKeyboard()
-
+                 currentFocus?.clearFocus()
                  return@setOnTouchListener false
 
              }
@@ -960,10 +1030,12 @@ class ConsultingActivity : RootActivity(){
             view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
                 override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
                     hideKeyboard()
+                    currentFocus?.clearFocus()
                 }
 
                 override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                     hideKeyboard()
+                    currentFocus?.clearFocus()
                     return false
                 }
 
@@ -986,6 +1058,141 @@ class ConsultingActivity : RootActivity(){
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
         return Uri.parse(path.toString())
+    }
+
+    //시,도 정보 받아오는 펑션
+    fun getCity(){
+
+        Loading(ProgressBar, ProgressBg, true)
+
+        ApiUtill().getSELECT_CITY().select_city().enqueue(object : Callback<ArrayList<CityInfo>> {
+
+            override fun onResponse(
+                call: Call<ArrayList<CityInfo>>,
+                response: Response<ArrayList<CityInfo>>
+            ) {
+
+                //else, Failure 부분 Toast나 알럿 띄우기
+                if(response.isSuccessful){
+
+                    Loading(ProgressBar, ProgressBg, false)
+
+                    Location.cityInfo = response.body()!!
+
+                    citySpinnerPopUp()
+
+                }else{
+
+                    Loading(ProgressBar, ProgressBg, false)
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<ArrayList<CityInfo>>, t: Throwable) {
+
+                Loading(ProgressBar, ProgressBg, false)
+
+            }
+
+        })
+
+    }
+
+    //시,도 보여주는 spinner
+    fun citySpinnerPopUp(){
+
+        var cityNmArr = ArrayList<String>()
+
+        cityNmArr.add("시/도")
+
+        for(city in Location.cityInfo){
+            cityNmArr.add(city.citynm)
+        }
+
+        var arrayAdapter : ArrayAdapter<String>? = null
+
+        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, cityNmArr)
+
+        city.adapter = arrayAdapter
+
+        city.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                if(position != 0){
+                    for(detailCity in Location.cityInfo){
+
+                        if(detailCity.citynm == city.selectedItem.toString()) {
+                            getDistrict(detailCity.citycd)
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    //지역, 구 조회
+    fun getDistrict(cityCd : String){
+
+        Loading(ProgressBar, ProgressBg, true)
+
+        var map = HashMap<String, String>()
+        map["CITYCD"] = cityCd
+
+        ApiUtill().getSELECT_DISTRICT().select_district(map).enqueue(object : Callback<ArrayList<DistrictInfo>>{
+
+            override fun onResponse(call: Call<ArrayList<DistrictInfo>>, response: Response<ArrayList<DistrictInfo>>) {
+
+                Loading(ProgressBar, ProgressBg, false)
+
+                //else, Failure 부분 Toast나 알럿 띄우기
+                if(response.isSuccessful){
+
+                    Location.districtInfo = response.body()!!
+                    districtSpinnerPopup()
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<ArrayList<DistrictInfo>>, t: Throwable) {
+
+                Loading(ProgressBar, ProgressBg, false)
+
+            }
+
+        })
+
+    }
+
+    // 지역, 구 보여주는 spinner
+    fun districtSpinnerPopup(){
+
+        var districtNmArr = ArrayList<String>()
+
+        districtNmArr.add("구/군/동")
+
+        for(district in Location.districtInfo){
+            districtNmArr.add(district.districtnm)
+        }
+
+        var arrayAdapter : ArrayAdapter<String>? = null
+
+        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, districtNmArr)
+
+        district.adapter = arrayAdapter
+
     }
 
 }

@@ -53,6 +53,11 @@ interface ApiInterface {
     @FormUrlEncoded
     fun insert_question(@FieldMap sql : Map<String, String>) : Call<String>
 
+    // 사용자 질문등록 + 위치추가
+    @POST("https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA")
+    @FormUrlEncoded
+    fun insert_questionwitharea(@FieldMap sql : Map<String, String>) : Call<String>
+
 
     // 설정창 스위치1 상태 변경
     @POST("https://wpias.azurewebsites.net/UPDATE_SWITCH1")
@@ -82,5 +87,14 @@ interface ApiInterface {
     @POST("https://wpias.azurewebsites.net/SELECT_CHECKAGREE")
     @FormUrlEncoded
     fun select_checkagree(@FieldMap sql : Map<String, String>) : Call<ArrayList<pushinfo>>
+
+    // 시,도 조회
+    @POST("https://wpias.azurewebsites.net/SELECT_CITY")
+    fun select_city() : Call<ArrayList<CityInfo>>
+
+    // 구 조회
+    @POST("https://wpias.azurewebsites.net/SELECT_DISTRICT")
+    @FormUrlEncoded
+    fun select_district(@FieldMap sql : Map<String, String>) : Call<ArrayList<DistrictInfo>>
 
 }

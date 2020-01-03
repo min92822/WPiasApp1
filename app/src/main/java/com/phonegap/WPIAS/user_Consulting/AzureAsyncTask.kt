@@ -109,7 +109,7 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
                         "https://storagewpias.blob.core.windows.net/container-wpias-question/${time}${PubVariable.uid}_1.jpg"
                     Validation.vali.imageUrl2V =
                         "https://storagewpias.blob.core.windows.net/container-wpias-question/${time}${PubVariable.uid}_2.jpg"
-                    insert_question()
+                    insertQuestionWithArea()
 
                 }
 
@@ -176,6 +176,78 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
         map["CONTENTS"] = Validation.vali.contentsV
 
         ApiUtill().getINSERT_QUESTION().insert_question(map).enqueue(object : Callback<String>{
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+
+                if(response.isSuccessful && response.body()!! == "S"){
+
+                    successAlert()
+
+                }else{
+
+                    failAlert()
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+
+                failAlert()
+
+            }
+
+        })
+
+    }
+
+    //restApi insert
+    @SuppressLint("SimpleDateFormat")
+    fun insertQuestionWithArea(){
+
+        var map = HashMap<String, String>()
+
+        Validation.vali.directionV.sort()
+
+        map["QKEY"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
+        map["TITLE"] = Validation.vali.consultingTitleV
+        map["UUID"] = PubVariable.uid
+        map["INSERTDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+        map["BURNDATE"] = Validation.vali.burnDateV
+        map["AGE"] = Validation.vali.ageV
+        map["GENDER"] = Validation.vali.genderV
+        map["BODYSTYLE"] = when(Validation.vali.bodyStyleV){
+            "머리" -> "001"
+            "어깨" -> "002"
+            "가슴" -> "003"
+            "등" -> "004"
+            "배" -> "005"
+            "허리" -> "006"
+            "팔" -> "007"
+            "손" -> "008"
+            "음부" -> "009"
+            "엉덩이" -> "010"
+            "다리" -> "011"
+            "발" -> "012"
+            "호흡기" -> "013"
+            else -> "001"
+        }
+        map["BODYDETAIL"] = Validation.vali.bodyDetailV
+        map["BODYGITA"] = Validation.vali.bodyGitaV
+        map["BURNSTYLE"] = Validation.vali.burnStyleV
+        map["BURNDETAIL"] = Validation.vali.burnDetailV
+        map["BURNGITA"] = Validation.vali.burnGitaV
+        map["CARESTYLE"] = Validation.vali.careStyleV
+        map["CAREGITA"] = Validation.vali.careGitaV
+        map["SCARSTYLE"] = Validation.vali.scarStyleV
+        map["PROSTATUS"] = Validation.vali.proStatusV
+        map["DIRECTION"] = Validation.vali.directionV.joinToString("-")
+        map["IMAGEURL1"] = Validation.vali.imageUrl1V
+        map["IMAGEURL2"] = Validation.vali.imageUrl2V
+        map["CONTENTS"] = Validation.vali.contentsV
+        map["CAREAREA"] = Validation.vali.locationV
+
+        ApiUtill().getINSERT_QUESTIONWITHAREA().insert_questionwitharea(map).enqueue(object : Callback<String>{
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
