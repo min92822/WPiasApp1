@@ -20,6 +20,7 @@ data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
                          @SerializedName("SCARSTYLE") @Expose var scarstyle : String,
                          @SerializedName("ANSWERDOC") @Expose var answerdoc : String,
                          @SerializedName("ANSWERDOCNM") @Expose var answerdocnm : String,
+                         @SerializedName("ANSWERDOCREMARK") @Expose var answerdocremark : String,
                          @SerializedName("PROSTATUS") @Expose var prostatus : String,
                          @SerializedName("BURNNM") @Expose var burnnm : String,
                          @SerializedName("IMAGEURL1") @Expose var imageurl1 : String,
@@ -48,6 +49,7 @@ data class QuestionInfo (@SerializedName("QKEY") @Expose var qkey : String,
     SCARSTYLE	        화상, 흉터 종류
     ANSWERDOC	        답변의사 UUID
     ANSWERDOCNM	        답변의사 이름
+    ANSWERDOCREMARK		답변의사 소속병원, 과	베스티안병원_외과
     PROSTATUS	        답변상태
     BURNNM
     IMAGEURL1

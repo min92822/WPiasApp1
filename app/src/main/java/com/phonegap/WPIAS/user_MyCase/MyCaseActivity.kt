@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
 import com.phonegap.WPIAS.dataClass.MycaseInfo
+import com.phonegap.WPIAS.dataClass.QuestionInfo
 import com.phonegap.WPIAS.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_my_case.*
 import kotlinx.android.synthetic.main.custom_alert.*
@@ -27,12 +28,14 @@ import kotlin.collections.HashMap
 class MyCaseActivity : RootActivity() {
 
     var m_myCaseInfo : MycaseInfo? = null
+    var m_myQuestionInfo : QuestionInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_case)
 
         m_myCaseInfo = intent.getSerializableExtra("myCase") as MycaseInfo
+        m_myQuestionInfo = intent.getSerializableExtra("myQuestion") as QuestionInfo
 
         SetTransparentBar()
 
@@ -89,7 +92,16 @@ class MyCaseActivity : RootActivity() {
                 lbl_no_answer.visibility = View.GONE
 
                 txt_mycase_dr.text = "Dr.${m_myCaseInfo!!.answerdocnm}"
-                txt_mycase_dr_detail.text = "화상외과 | 답변수 : ${m_myCaseInfo!!.answerdoccount}"
+                txt_mycase_dr_detail.text = "| 답변수 : ${m_myCaseInfo!!.answerdoccount}"
+                txt_mycase_dr_detail2.text = "${m_myQuestionInfo!!.answerdocremark.replace("_", " ")}"
+
+                var year = m_myCaseInfo!!.answerdate.subSequence(0, 4)
+                var month = m_myCaseInfo!!.answerdate.subSequence(4, 6)
+                var day = m_myCaseInfo!!.answerdate.subSequence(6, 8)
+
+                txt_mycase_dr_detail3.text = "답변일자 ${year}년 ${month}월 ${day}일"
+
+
 
                 txt_mycase_answer.text = m_myCaseInfo!!.answercontents
 

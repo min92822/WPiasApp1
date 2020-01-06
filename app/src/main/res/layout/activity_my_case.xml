@@ -145,7 +145,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/button5">
@@ -153,17 +153,19 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout18"
                             android:layout_width="0dp"
-                            android:layout_height="80dp"
-                            android:background="#BAE5FC"
+                            android:layout_height="wrap_content"
+                            android:background="@color/light_blue_grey"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <ImageView
                                 android:id="@+id/img_mycase_dr"
-                                android:layout_width="65dp"
-                                android:layout_height="65dp"
+                                android:layout_width="75dp"
+                                android:layout_height="75dp"
                                 android:layout_marginStart="24dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
                                 android:src="@drawable/doctor_m"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -176,9 +178,8 @@
                                 android:layout_marginStart="24dp"
                                 android:text="Dr.OOO"
                                 android:textColor="@color/black"
-                                android:textSize="14dp"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toTopOf="@+id/txt_mycase_dr_detail"
+                                android:textSize="15dp"
+                                app:layout_constraintBottom_toTopOf="@+id/txt_mycase_dr_detail2"
                                 app:layout_constraintStart_toEndOf="@+id/img_mycase_dr"
                                 app:layout_constraintTop_toTopOf="@+id/img_mycase_dr"
                                 app:layout_constraintVertical_chainStyle="packed" />
@@ -187,11 +188,33 @@
                                 android:id="@+id/txt_mycase_dr_detail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="화상외과 | 답변수"
+                                android:layout_marginStart="8dp"
+                                android:text="| 답변수 : "
                                 android:textSize="12dp"
-                                app:layout_constraintBottom_toBottomOf="@+id/img_mycase_dr"
+                                app:layout_constraintBottom_toBottomOf="@+id/txt_mycase_dr"
+                                app:layout_constraintStart_toEndOf="@+id/txt_mycase_dr" />
+
+                            <TextView
+                                android:id="@+id/txt_mycase_dr_detail2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="소속병원 진료과"
+                                android:textSize="12dp"
+                                app:layout_constraintBottom_toTopOf="@+id/txt_mycase_dr_detail3"
                                 app:layout_constraintStart_toStartOf="@+id/txt_mycase_dr"
                                 app:layout_constraintTop_toBottomOf="@+id/txt_mycase_dr" />
+
+                            <TextView
+                                android:id="@+id/txt_mycase_dr_detail3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="답변일자"
+                                android:textSize="12dp"
+                                app:layout_constraintBottom_toBottomOf="@+id/img_mycase_dr"
+                                app:layout_constraintStart_toStartOf="@+id/txt_mycase_dr_detail2"
+                                app:layout_constraintTop_toBottomOf="@+id/txt_mycase_dr_detail2" />
+
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView

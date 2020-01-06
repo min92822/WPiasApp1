@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.recycler_my_question_detail_record.view.*
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 
-class MyQuestionRecordAdapter(var activity: Activity, var arr: ArrayList<MycaseInfo>, var qArr: ArrayList<QuestionInfo>) :
+class MyQuestionRecordAdapter(var activity: Activity, var arr: ArrayList<MycaseInfo>, var quetionInfo: QuestionInfo) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -55,7 +55,7 @@ class MyQuestionRecordAdapter(var activity: Activity, var arr: ArrayList<MycaseI
         holder.date.text = "작성일 : ${date.substring(0, 4)}년 ${date.substring(4, 6)}월 ${date.substring(6, 8)}일"
 
 
-        var days = toDate(qArr[0].burndate,"${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6, 8)}")
+        var days = toDate(quetionInfo.burndate,"${date.substring(0, 4)}-${date.substring(4, 6)}-${date.substring(6, 8)}")
         holder.days.text = "${days} 일차"
 
         holder.record_title.text = arr[position].contents
@@ -83,7 +83,7 @@ class MyQuestionRecordAdapter(var activity: Activity, var arr: ArrayList<MycaseI
 
 
         holder.wrap.setOnClickListener {
-            activity.startActivity(Intent(activity, MyCaseActivity::class.java).putExtra("myCase", arr[position]).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+            activity.startActivity(Intent(activity, MyCaseActivity::class.java).putExtra("myCase", arr[position]).putExtra("myQuestion", quetionInfo).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
 
     }
