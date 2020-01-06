@@ -129,4 +129,20 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
+    // 신규 질문 조회
+    val select_newquestion_url : String = "https://wpias.azurewebsites.net/SELECT_NEWQUESTION/"
+
+    fun getSELECT_NEWQUESTION() : ApiInterface {
+        return ApiRequest().getResponse(select_newquestion_url)!!.create(
+            ApiInterface::class.java)
+    }
+
+    // 신규 질문 조회
+    val select_myanswercount_url : String = "https://wpias.azurewebsites.net/SELECT_MYANSWERCOUNT/"
+
+    fun getSELECT_MYANSWERCOUNT() : ApiInterface {
+        return ApiRequest().getResponse(select_myanswercount_url)!!.create(
+            ApiInterface::class.java)
+    }
+
 }

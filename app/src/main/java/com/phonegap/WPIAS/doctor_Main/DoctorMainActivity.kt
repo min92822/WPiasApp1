@@ -1,8 +1,11 @@
 package com.phonegap.WPIAS.doctor_Main
 
+import android.content.Intent
 import android.os.Bundle
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
+import com.phonegap.WPIAS.doctor_Question.DoctorNewQuestionActivity
+import com.phonegap.WPIAS.user_Setting.SettingActivity
 import kotlinx.android.synthetic.main.activity_doctor_main.*
 
 class DoctorMainActivity : RootActivity() {
@@ -15,12 +18,12 @@ class DoctorMainActivity : RootActivity() {
 
         SetTransparentBar()
 
-        initEvent()
+        initActivity()
 
     }
 
-    //뷰 이벤트 리스너 등록
-    fun initEvent(){
+    //액티비티가 시작될때
+    fun initActivity(){
 
         btnPatientQuestion.setOnClickListener {
 
@@ -30,13 +33,13 @@ class DoctorMainActivity : RootActivity() {
 
         btn_setting.setOnClickListener {
 
-
+            startActivity(Intent(this, SettingActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
         }
 
         btnNewQuestion.setOnClickListener {
 
-
+            startActivity(Intent(this, DoctorNewQuestionActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
 
         }
 

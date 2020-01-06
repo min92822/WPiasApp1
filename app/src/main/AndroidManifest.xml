@@ -83,6 +83,12 @@
         <activity
             android:name=".doctor_Main.DoctorMainActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".doctor_Question.DoctorNewQuestionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".doctor_QuestionDetail.DoctorNewQuestionDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

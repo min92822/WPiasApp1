@@ -5,6 +5,7 @@ import com.phonegap.WPIAS.dataClass.QuestionInfo
 import com.phonegap.WPIAS.dataClass.UserInfo
 import com.phonegap.WPIAS.dataClass.pushinfo
 import com.phonegap.WPIAS.dataClass.*
+import com.phonegap.WPIAS.doctor_Question.DoctorNewQuestionActivity
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -96,5 +97,14 @@ interface ApiInterface {
     @POST("https://wpias.azurewebsites.net/SELECT_DISTRICT")
     @FormUrlEncoded
     fun select_district(@FieldMap sql : Map<String, String>) : Call<ArrayList<DistrictInfo>>
+
+    // 신규 질문 조회
+    @POST("https://wpias.azurewebsites.net/SELECT_NEWQUESTION200103")
+    fun select_newquestion() : Call<ArrayList<NewQuestionInfo>>
+
+    // 의사 답변횟수 조회
+    @POST("https://wpias.azurewebsites.net/SELECT_MYANSWERCOUNT")
+    @FormUrlEncoded
+    fun select_myanswercount(@FieldMap sql : Map<String, String>) : Call<Any>
 
 }
