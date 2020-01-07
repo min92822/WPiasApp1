@@ -12,6 +12,8 @@ class DoctorNewQuestionDetailActivity : RootActivity() {
 
         setContentView(R.layout.activity_my_question_detail)
 
+        SetTransparentBar()
+
         initActivity()
 
     }

@@ -137,11 +137,27 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
-    // 신규 질문 조회
+    // 의사 답변횟수 조회
     val select_myanswercount_url : String = "https://wpias.azurewebsites.net/SELECT_MYANSWERCOUNT/"
 
     fun getSELECT_MYANSWERCOUNT() : ApiInterface {
         return ApiRequest().getResponse(select_myanswercount_url)!!.create(
+            ApiInterface::class.java)
+    }
+
+    // 질문 Lock Check
+    val select_lockcheck_url : String = "https://wpias.azurewebsites.net/SELECT_LOCKCHECK/"
+
+    fun getSELECT_LOCKCHECK() : ApiInterface {
+        return ApiRequest().getResponse(select_lockcheck_url)!!.create(
+            ApiInterface::class.java)
+    }
+
+    // Lock 상태 업데이트
+    val update_lock_url : String = "https://wpias.azurewebsites.net/UPDATE_LOCK/"
+
+    fun getUPDATE_LOCK() : ApiInterface {
+        return ApiRequest().getStringResponse(update_lock_url)!!.create(
             ApiInterface::class.java)
     }
 

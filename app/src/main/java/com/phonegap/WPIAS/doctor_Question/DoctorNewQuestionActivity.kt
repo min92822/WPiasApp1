@@ -11,7 +11,11 @@ import com.phonegap.WPIAS.dataClass.NewQuestionInfo
 import com.phonegap.WPIAS.doctor_Question.adapters.NewQuestionAdapter
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.restApi.ApiUtill
+import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.activity_doctor_new_question.*
+import kotlinx.android.synthetic.main.activity_doctor_new_question.ProgressBar
+import kotlinx.android.synthetic.main.activity_doctor_new_question.ProgressBg
+import kotlinx.android.synthetic.main.activity_doctor_new_question.questionRecyclerView
 import kotlinx.android.synthetic.main.title_bar_darkblue.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,9 +53,8 @@ class DoctorNewQuestionActivity : RootActivity() {
         dept.text = PubVariable.userInfo.remark.split('_')[1]
 
         reLoad.setOnClickListener {
-
-            questionRecyclerView.adapter?.notifyDataSetChanged()
-
+            getCount()
+            getNewQuestion()
         }
 
     }
@@ -65,6 +68,7 @@ class DoctorNewQuestionActivity : RootActivity() {
                 if(response.isSuccessful){
                     questionRecyclerView.layoutManager = LinearLayoutManager(this@DoctorNewQuestionActivity)
                     questionRecyclerView.adapter = NewQuestionAdapter(response.body()!!)
+                    viewVisibleControl(true)
                 }else{
                     println()
                 }
@@ -80,6 +84,8 @@ class DoctorNewQuestionActivity : RootActivity() {
 
     //의사 답변수 조회 펑션
     fun getCount(){
+
+        viewVisibleControl(false)
 
         var map = HashMap<String, String>()
 
@@ -105,6 +111,19 @@ class DoctorNewQuestionActivity : RootActivity() {
 
         })
 
+    }
+
+    //서버 통신 완료되기까지 view visible을 컨트롤 한다
+    fun viewVisibleControl(result : Boolean){
+        if(result) {
+            constraintLayout20.visibility = View.VISIBLE
+            questionRecyclerView.visibility = View.VISIBLE
+            Loading(ProgressBar, ProgressBg, !result)
+        }else{
+            constraintLayout20.visibility = View.GONE
+            questionRecyclerView.visibility = View.GONE
+            Loading(ProgressBar, ProgressBg, !result)
+        }
     }
 
 }

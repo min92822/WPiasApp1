@@ -107,4 +107,14 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_myanswercount(@FieldMap sql : Map<String, String>) : Call<Any>
 
+    // 질문 Lock Check
+    @POST("https://wpias.azurewebsites.net/SELECT_LOCKCHECK")
+    @FormUrlEncoded
+    fun select_lockcheck(@FieldMap sql : Map<String, String>) : Call<ArrayList<LockInfo>>
+
+    // Lock 상태 업데이트
+    @POST("https://wpias.azurewebsites.net/UPDATE_LOCK")
+    @FormUrlEncoded
+    fun update_lock(@FieldMap sql : Map<String, String>) : Call<String>
+
 }
