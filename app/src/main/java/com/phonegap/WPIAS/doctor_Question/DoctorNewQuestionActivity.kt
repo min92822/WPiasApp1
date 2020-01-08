@@ -11,7 +11,6 @@ import com.phonegap.WPIAS.dataClass.NewQuestionInfo
 import com.phonegap.WPIAS.doctor_Question.adapters.NewQuestionAdapter
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.restApi.ApiUtill
-import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.activity_doctor_new_question.*
 import kotlinx.android.synthetic.main.activity_doctor_new_question.ProgressBar
 import kotlinx.android.synthetic.main.activity_doctor_new_question.ProgressBg
@@ -42,7 +41,7 @@ class DoctorNewQuestionActivity : RootActivity() {
     //액티비티가 시작될때 기본 설정
     fun initActivity(){
 
-        btn_back.setOnClickListener { finish() }
+        btn_back.setOnClickListener { onBackPressed() }
 
         txt_title.text = "신규 질문"
 
@@ -50,7 +49,7 @@ class DoctorNewQuestionActivity : RootActivity() {
 
         doctorName.text = PubVariable.userInfo.nickname
 
-        dept.text = PubVariable.userInfo.remark.split('_')[1]
+        dept.text = PubVariable.userInfo.remark.replace('_', ' ')
 
         reLoad.setOnClickListener {
             getCount()
@@ -124,6 +123,12 @@ class DoctorNewQuestionActivity : RootActivity() {
             questionRecyclerView.visibility = View.GONE
             Loading(ProgressBar, ProgressBg, !result)
         }
+    }
+
+    override fun onResume() {
+        getCount()
+        getNewQuestion()
+        super.onResume()
     }
 
 }

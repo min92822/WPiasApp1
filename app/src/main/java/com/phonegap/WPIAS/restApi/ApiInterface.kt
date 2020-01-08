@@ -117,4 +117,14 @@ interface ApiInterface {
     @FormUrlEncoded
     fun update_lock(@FieldMap sql : Map<String, String>) : Call<String>
 
+    // 신규질문, 케이스 조회
+    @POST("https://wpias.azurewebsites.net/SELECT_NEWCASE")
+    @FormUrlEncoded
+    fun select_newcase(@FieldMap sql : Map<String, String>) : Call<ArrayList<NewCaseInfo>>
+
+    // 신규질문, 케이스 조회
+    @POST("https://wpias.azurewebsites.net/UPDATE_FIRSTANSWER")
+    @FormUrlEncoded
+    fun update_firstanswer(@FieldMap sql : Map<String, String>) : Call<String>
+
 }

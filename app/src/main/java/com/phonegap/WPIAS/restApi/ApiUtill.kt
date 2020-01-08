@@ -161,4 +161,20 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
+    // Lock 상태 업데이트
+    val select_newcase_url : String = "https://wpias.azurewebsites.net/SELECT_NEWCASE/"
+
+    fun getSELECT_NEWCASE() : ApiInterface {
+        return ApiRequest().getResponse(select_newcase_url)!!.create(
+            ApiInterface::class.java)
+    }
+
+    // Lock 상태 업데이트
+    val update_firstanswer_url : String = "https://wpias.azurewebsites.net/UPDATE_FIRSTANSWER/"
+
+    fun getUPDATE_FIRSTANSWER() : ApiInterface {
+        return ApiRequest().getStringResponse(update_firstanswer_url)!!.create(
+            ApiInterface::class.java)
+    }
+
 }

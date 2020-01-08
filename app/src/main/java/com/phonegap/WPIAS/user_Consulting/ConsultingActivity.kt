@@ -514,7 +514,6 @@ class ConsultingActivity : RootActivity(){
                 android.app.AlertDialog.THEME_HOLO_DARK,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     whenBurned.setText("${year}-${(month + 1).toString().padStart(2,'0')}-${dayOfMonth.toString().padStart(2, '0')}")
-                    Validation.vali.burnDateV = "$year-${month + 1}-$dayOfMonth"
                 },
                 MYyear,
                 MYmonth,
@@ -1010,6 +1009,8 @@ class ConsultingActivity : RootActivity(){
 
         imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
 
+        window?.decorView?.clearFocus()
+
     }
 
     //최상위 뷰 태그 및 하위 뷰 태그에 hideKeboard를 적용하는 펑션
@@ -1019,7 +1020,6 @@ class ConsultingActivity : RootActivity(){
              view.setOnTouchListener { v, event ->
 
                  hideKeyboard()
-                 currentFocus?.clearFocus()
                  return@setOnTouchListener false
 
              }
@@ -1030,12 +1030,10 @@ class ConsultingActivity : RootActivity(){
             view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
                 override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
                     hideKeyboard()
-                    currentFocus?.clearFocus()
                 }
 
                 override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                     hideKeyboard()
-                    currentFocus?.clearFocus()
                     return false
                 }
 

@@ -260,9 +260,9 @@ class NewQuestionAdapter(var arr : ArrayList<NewQuestionInfo>) : RecyclerView.Ad
                 if(response.isSuccessful){
 
                     if(response.body() == "S"){
-                        context?.startActivity(Intent(context, DoctorNewQuestionDetailActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                        context?.startActivity(Intent(context, DoctorNewQuestionDetailActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP).putExtra("newQuestionInfo", arr[position]))
                     }else{
-                        context?.startActivity(Intent(context, DoctorNewQuestionDetailActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                        context?.startActivity(Intent(context, DoctorNewQuestionDetailActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP).putExtra("newQuestionInfo", arr[position]))
                     }
 
                 }else{
