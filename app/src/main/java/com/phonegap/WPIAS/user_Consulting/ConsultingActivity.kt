@@ -47,7 +47,7 @@ import retrofit2.Response
 import java.io.*
 import java.lang.Exception
 import java.text.SimpleDateFormat
-import java.time.LocalDate
+import java.time.LocalDate.*
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -494,10 +494,14 @@ class ConsultingActivity : RootActivity(){
     }
 
     //화상입은 시기 캘린더 팝업 이벤트
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     fun popupCalendar(){
 
-        var now = LocalDate.now().toString()
+        var now = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            now().toString()
+        } else {
+            SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().time)
+        }
 
         var year = now.split("-")[0]
         var month = (now.split("-")[1]).padStart(2, '0')

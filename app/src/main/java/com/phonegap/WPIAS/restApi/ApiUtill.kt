@@ -177,4 +177,12 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
+    // 내가 한 답변 조회(의사)
+    val select_myanswer200106_url : String = "https://wpias.azurewebsites.net/SELECT_MYANSWER200106/"
+
+    fun getSELECT_MYANSWER200106() : ApiInterface {
+        return ApiRequest().getResponse(select_myanswer200106_url)!!.create(
+            ApiInterface::class.java)
+    }
+
 }

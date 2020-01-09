@@ -92,6 +92,12 @@
         <activity
             android:name=".doctor_AnswerQuestion.DoctorAnswerActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".doctor_AnsweredQuestion.DoctorAnsweredActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".doctor_AnsweredQuestionDetail.DoctorAnsweredDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

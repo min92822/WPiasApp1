@@ -121,7 +121,7 @@ class LoginActivity : RootActivity(){
 
                         PubVariable.userInfo = response.body()!![0]
 
-//                        if (PubVariable.userInfo.usertype == "USER") {
+                        if (PubVariable.userInfo.usertype == "USER") {
 
                             startActivity(
                                 Intent(
@@ -130,16 +130,16 @@ class LoginActivity : RootActivity(){
                                 ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             )
 
-//                        } else {
-//
-//                            startActivity(
-//                                Intent(
-//                                    this@LoginActivity,
-//                                    DoctorMainActivity::class.java
-//                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-//                            )
-//
-//                        }
+                        } else {
+
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    DoctorMainActivity::class.java
+                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                            )
+
+                        }
 
                     }else{
 
