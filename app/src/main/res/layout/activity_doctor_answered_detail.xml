@@ -136,7 +136,7 @@
                                 android:layout_height="70dp"
                                 android:scaleType="center"
                                 app:layout_constraintBottom_toTopOf="@+id/doctorAnswerDetailAge"
-                                app:layout_constraintEnd_toStartOf="@+id/doctorNewQuestionDetailBui"
+                                app:layout_constraintEnd_toStartOf="@+id/doctorAnswerDetailBui"
                                 app:layout_constraintStart_toEndOf="@+id/doctorAnswerDetailGender"
                                 app:layout_constraintTop_toTopOf="@+id/doctorAnswerDetailGender" />
 
