@@ -1,5 +1,6 @@
 package com.phonegap.WPIAS
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -8,8 +9,12 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import androidx.core.view.iterator
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_find_password.*
 import kotlinx.android.synthetic.main.custom_alert.*
@@ -24,6 +29,8 @@ class FindPasswordActivity : RootActivity() {
         SetDarkBar()
         titleSetting()
         findPassword()
+        setDescendentViews(window.decorView.rootView)
+
     }
 
     fun titleSetting(){
@@ -130,11 +137,53 @@ class FindPasswordActivity : RootActivity() {
         dialog.show()
     }
 
-    // 화면 터치시 키보드 내리기
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+    //에딧 텍스트 아닌 부분 클릭시 키보드 사라지는 펑션
+    fun hideKeyboard(){
 
-        return true
+        var imm = (this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
+
+        imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
+
+        window?.decorView?.clearFocus()
+
     }
+
+    //최상위 뷰 태그 및 하위 뷰 태그에 hideKeboard를 적용하는 펑션
+    fun setDescendentViews(view : View){
+
+        if(view !is EditText) {
+            view.setOnTouchListener { v, event ->
+
+                hideKeyboard()
+                return@setOnTouchListener false
+
+            }
+        }
+
+        if(view is RecyclerView){
+
+            view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
+                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+                    hideKeyboard()
+                }
+
+                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                    hideKeyboard()
+                    return false
+                }
+
+                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                }
+            })
+
+        }
+
+        if(view is ViewGroup){
+            for(innerview in view) {
+                setDescendentViews(innerview)
+            }
+        }
+
+    }
+
 }
