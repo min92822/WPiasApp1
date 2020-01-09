@@ -1,6 +1,7 @@
 package com.phonegap.WPIAS.doctor_Question
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.google.gson.internal.LinkedTreeMap
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
 import com.phonegap.WPIAS.dataClass.NewQuestionInfo
+import com.phonegap.WPIAS.doctor_Main.DoctorMainActivity
 import com.phonegap.WPIAS.doctor_Question.adapters.NewQuestionAdapter
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.restApi.ApiUtill
@@ -41,7 +43,7 @@ class DoctorNewQuestionActivity : RootActivity() {
     //액티비티가 시작될때 기본 설정
     fun initActivity(){
 
-        btn_back.setOnClickListener { onBackPressed() }
+        btn_back.setOnClickListener { startActivity(Intent(this, DoctorMainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)) }
 
         txt_title.text = "신규 질문"
 
@@ -99,7 +101,8 @@ class DoctorNewQuestionActivity : RootActivity() {
                     var count = ((response.body()!! as ArrayList<*>)[0] as LinkedTreeMap<*, *>).values.toList()[0]
                     answerCount.text = "답변 수 : ${(count as Double).toInt()}"
                 }else{
-                    println()
+                    println(response.message())
+                    println(response.code())
                 }
 
             }

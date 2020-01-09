@@ -106,7 +106,7 @@ class LaunchActivity : RootActivity() {
 
                         FCM.function.TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
 
-                        if(PubVariable.userInfo.usertype == "USER") {
+//                        if(PubVariable.userInfo.usertype == "USER") {
 
                             startActivity(
                                 Intent(
@@ -115,16 +115,16 @@ class LaunchActivity : RootActivity() {
                                 ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                             )
 
-                        }else{
-
-                            startActivity(
-                                Intent(
-                                    this@LaunchActivity,
-                                    DoctorMainActivity::class.java
-                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                            )
-
-                        }
+//                        }else{
+//
+//                            startActivity(
+//                                Intent(
+//                                    this@LaunchActivity,
+//                                    DoctorMainActivity::class.java
+//                                ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+//                            )
+//
+//                        }
 
                     }else{
 
