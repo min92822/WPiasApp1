@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
+import com.phonegap.WPIAS.dataClass.MyAnswerCaseInfo
 import com.phonegap.WPIAS.dataClass.MyAnswerInfo
 import com.phonegap.WPIAS.dataClass.NewCaseInfo
 import com.phonegap.WPIAS.publicObject.PubVariable
@@ -15,7 +16,7 @@ import kotlinx.android.synthetic.main.title_bar_darkblue.*
 
 class DoctorAnsweredCheckActivity : RootActivity() {
 
-    lateinit var patientCase : NewCaseInfo
+    lateinit var patientCase : MyAnswerCaseInfo
 
     lateinit var answerInfo: MyAnswerInfo
 
@@ -36,12 +37,9 @@ class DoctorAnsweredCheckActivity : RootActivity() {
 
         btn_back.setOnClickListener { onBackPressed() }
 
-
         if(intent.hasExtra("patientCase")){
 
-            patientCase = intent.getSerializableExtra("patientCase") as NewCaseInfo
-
-
+            patientCase = intent.getSerializableExtra("patientCase") as MyAnswerCaseInfo
 
         }else{
             finish()
@@ -51,6 +49,8 @@ class DoctorAnsweredCheckActivity : RootActivity() {
         if(intent.hasExtra("answerInfo")){
             answerInfo = intent.getSerializableExtra("answerInfo") as MyAnswerInfo
         }
+
+        txt_title.text = answerInfo.title
 
         Glide.with(this)
             .load(patientCase.imageurl1)
@@ -89,9 +89,14 @@ class DoctorAnsweredCheckActivity : RootActivity() {
         doctorDept.text = PubVariable.userInfo.remark.replace('_', ' ')
 
         //의사답변 어떻게?
-//        doctorAnswer.text = answerInfo.a
+        doctorAnswer.text = patientCase.answercontents
 
         //리뷰확인 어떻게?
+        if(patientCase.feedbacktime.isEmpty()){
+            patientReview.text = "사용자가 리뷰를 작성하지 않았습니다"
+        }else{
+            patientReview.text = patientCase.feedbacktext
+        }
 
     }
 

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
+import com.phonegap.WPIAS.dataClass.MyAnswerCaseInfo
 import com.phonegap.WPIAS.dataClass.MyAnswerInfo
 import com.phonegap.WPIAS.dataClass.NewCaseInfo
 import com.phonegap.WPIAS.doctor_QuestionDetail.adapter.DoctorAnswerDetailAdapter
@@ -21,7 +22,7 @@ class DoctorAnsweredDetailActivity : RootActivity(){
 
     lateinit var questionInfo : MyAnswerInfo
 
-    lateinit var newCaseInfo : ArrayList<NewCaseInfo>
+    lateinit var myAnswerCaseInfo : ArrayList<MyAnswerCaseInfo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -282,16 +283,16 @@ class DoctorAnsweredDetailActivity : RootActivity(){
 
         Loading(ProgressBar, ProgressBg, true)
 
-        ApiUtill().getSELECT_NEWCASE().select_newcase(map).enqueue(object :
-            Callback<ArrayList<NewCaseInfo>> {
+        ApiUtill().getSELECT_MYANSWERCASE().select_myanswercase(map).enqueue(object :
+            Callback<ArrayList<MyAnswerCaseInfo>> {
 
-            override fun onResponse(call: Call<ArrayList<NewCaseInfo>>, response: Response<ArrayList<NewCaseInfo>>) {
+            override fun onResponse(call: Call<ArrayList<MyAnswerCaseInfo>>, response: Response<ArrayList<MyAnswerCaseInfo>>) {
 
                 if(response.isSuccessful){
                     doctorAnswerDetailWrapper.visibility = View.VISIBLE
-                    newCaseInfo = response.body()!!
+                    myAnswerCaseInfo = response.body()!!
                     recyclerDoctorAnswerDetail.layoutManager = LinearLayoutManager(this@DoctorAnsweredDetailActivity)
-                    recyclerDoctorAnswerDetail.adapter = DoctorAnswerDetailAdapter(newCaseInfo, questionInfo)
+                    recyclerDoctorAnswerDetail.adapter = DoctorAnswerDetailAdapter(myAnswerCaseInfo, questionInfo)
                 }else{
 
                     doctorAnswerDetailWrapper.visibility = View.GONE
@@ -301,7 +302,7 @@ class DoctorAnsweredDetailActivity : RootActivity(){
 
             }
 
-            override fun onFailure(call: Call<ArrayList<NewCaseInfo>>, t: Throwable) {
+            override fun onFailure(call: Call<ArrayList<MyAnswerCaseInfo>>, t: Throwable) {
                 doctorAnswerDetailWrapper.visibility = View.GONE
                 println(t.toString())
             }

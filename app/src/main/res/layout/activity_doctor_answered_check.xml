@@ -195,6 +195,15 @@
                             app:layout_constraintStart_toStartOf="@+id/doctorAnswer"
                             app:layout_constraintTop_toBottomOf="@+id/doctorAnswer" />
 
+                        <TextView
+                            android:id="@+id/patientReview"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="@+id/doctorAnswerSubmit"
+                            app:layout_constraintStart_toStartOf="@+id/doctorAnswerSubmit"
+                            app:layout_constraintTop_toBottomOf="@+id/doctorAnswerSubmit" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

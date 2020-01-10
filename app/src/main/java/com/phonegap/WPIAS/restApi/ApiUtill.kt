@@ -185,4 +185,12 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
+    // 의사 계정 내가 한 답변 경과 조회
+    val select_myanswercase_url : String = "https://wpias.azurewebsites.net/SELECT_MYANSWERCASE/"
+
+    fun getSELECT_MYANSWERCASE() : ApiInterface {
+        return ApiRequest().getResponse(select_myanswercase_url)!!.create(
+            ApiInterface::class.java)
+    }
+
 }

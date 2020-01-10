@@ -132,4 +132,9 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_myanswer200106(@FieldMap sql : Map<String, String>) : Call<ArrayList<MyAnswerInfo>>
 
+    // 의사 계정 내가 한 답변 경과 조회
+    @POST("https://wpias.azurewebsites.net/SELECT_MYANSWERCASE")
+    @FormUrlEncoded
+    fun select_myanswercase(@FieldMap sql : Map<String, String>) : Call<ArrayList<MyAnswerCaseInfo>>
+
 }

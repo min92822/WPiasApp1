@@ -247,7 +247,7 @@ class NewQuestionAdapter(var arr : ArrayList<NewQuestionInfo>) : RecyclerView.Ad
 
         var map = HashMap<String, String>()
 
-        map["LOCKUSER"] = lockInfo.lockuser
+        map["LOCKUSER"] = PubVariable.uid
         map["LOCKTIME"] = SimpleDateFormat("yyyy-MM-dd-kk-mm-ss").format(Date(System.currentTimeMillis()).time)
         map["QKEY"] = arr[position].qkey
 

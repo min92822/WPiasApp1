@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.phonegap.WPIAS.R
+import com.phonegap.WPIAS.dataClass.MyAnswerCaseInfo
 import com.phonegap.WPIAS.dataClass.MyAnswerInfo
-import com.phonegap.WPIAS.dataClass.NewCaseInfo
 import com.phonegap.WPIAS.doctor_AnsweredCheck.DoctorAnsweredCheckActivity
 import com.phonegap.WPIAS.doctor_AnsweredQuestionDetail.DoctorAnsweredDetailActivity
 import kotlinx.android.synthetic.main.activity_doctor_answer.*
@@ -21,7 +21,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
 
-class DoctorAnswerDetailAdapter(var arr : ArrayList<NewCaseInfo>, var answerInfo : MyAnswerInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DoctorAnswerDetailAdapter(var arr : ArrayList<MyAnswerCaseInfo>, var answerInfo : MyAnswerInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context : Context? = null
 
