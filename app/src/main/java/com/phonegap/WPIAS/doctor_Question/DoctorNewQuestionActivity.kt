@@ -43,7 +43,7 @@ class DoctorNewQuestionActivity : RootActivity() {
     //액티비티가 시작될때 기본 설정
     fun initActivity(){
 
-        btn_back.setOnClickListener { startActivity(Intent(this, DoctorMainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)) }
+        btn_back.setOnClickListener { onBackPressed() }
 
         txt_title.text = "신규 질문"
 
@@ -126,6 +126,10 @@ class DoctorNewQuestionActivity : RootActivity() {
             questionRecyclerView.visibility = View.GONE
             Loading(ProgressBar, ProgressBg, !result)
         }
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, DoctorMainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
     }
 
     override fun onResume() {
