@@ -8,8 +8,7 @@ import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
 import com.phonegap.WPIAS.dataClass.MyAnswerCaseInfo
 import com.phonegap.WPIAS.dataClass.MyAnswerInfo
-import com.phonegap.WPIAS.dataClass.NewCaseInfo
-import com.phonegap.WPIAS.doctor_QuestionDetail.adapter.DoctorAnswerDetailAdapter
+import com.phonegap.WPIAS.doctor_QuestionDetail.adapter.DoctorAnsweredDetailAdapter
 import com.phonegap.WPIAS.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_doctor_answered_detail.*
 import kotlinx.android.synthetic.main.title_bar_darkblue.*
@@ -292,7 +291,7 @@ class DoctorAnsweredDetailActivity : RootActivity(){
                     doctorAnswerDetailWrapper.visibility = View.VISIBLE
                     myAnswerCaseInfo = response.body()!!
                     recyclerDoctorAnswerDetail.layoutManager = LinearLayoutManager(this@DoctorAnsweredDetailActivity)
-                    recyclerDoctorAnswerDetail.adapter = DoctorAnswerDetailAdapter(myAnswerCaseInfo, questionInfo)
+                    recyclerDoctorAnswerDetail.adapter = DoctorAnsweredDetailAdapter(myAnswerCaseInfo, questionInfo)
                 }else{
 
                     doctorAnswerDetailWrapper.visibility = View.GONE

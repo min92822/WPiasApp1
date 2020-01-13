@@ -51,9 +51,12 @@ class DoctorAnsweredActivity : RootActivity() {
 
         dept.text = PubVariable.userInfo.remark.replace('_', ' ')
 
-        btn_back.setOnClickListener { startActivity(Intent(this, DoctorMainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)) }
+        btn_back.setOnClickListener { onBackPressed() }
 
-        reLoad.setOnClickListener { getCount() }
+        reLoad.setOnClickListener {
+            getCount()
+            loadQuestion()
+        }
 
         loadQuestion()
 
@@ -175,6 +178,9 @@ class DoctorAnsweredActivity : RootActivity() {
     // 진행중인 질문 및 현재 의사가 작성완료한 질문을 불러오는 펑션
     fun loadQuestion(){
 
+        answered.clear()
+        notAnswered.clear()
+
         var map = HashMap<String, String>()
 
         map["ANSWERDOC"] = PubVariable.uid
@@ -215,6 +221,16 @@ class DoctorAnsweredActivity : RootActivity() {
 
         })
 
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, DoctorMainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+    }
+
+    override fun onResume() {
+        getCount()
+        loadQuestion()
+        super.onResume()
     }
 
 }

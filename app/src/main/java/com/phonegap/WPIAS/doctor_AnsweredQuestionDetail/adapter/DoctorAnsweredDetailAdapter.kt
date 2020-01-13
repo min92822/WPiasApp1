@@ -21,7 +21,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.abs
 
-class DoctorAnswerDetailAdapter(var arr : ArrayList<MyAnswerCaseInfo>, var answerInfo : MyAnswerInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DoctorAnsweredDetailAdapter(var arr : ArrayList<MyAnswerCaseInfo>, var answerInfo : MyAnswerInfo) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context : Context? = null
 

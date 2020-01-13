@@ -46,4 +46,9 @@ class DoctorMainActivity : RootActivity() {
 
     }
 
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        CloseAlert(this)
+    }
+
 }
