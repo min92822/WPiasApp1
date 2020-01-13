@@ -54,7 +54,7 @@ class AnswerAdapter(var arr : ArrayList<MyAnswerInfo>) : RecyclerView.Adapter<Re
         if(arr[position].prostatus == "A"){
             holder.stateAnswer.text = "답변 완료"
         }else{
-            holder.stateAnswer.text = "답변 대기"
+            holder.stateAnswer.text = "답변 요청"
         }
 
         holder.answerCount.text = "${arr[position].answercount.toInt()}/${arr[position].totalcount.toInt()}"
