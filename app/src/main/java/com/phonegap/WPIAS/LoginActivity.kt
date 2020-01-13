@@ -17,7 +17,7 @@ import com.phonegap.WPIAS.dataClass.UserInfo
 import com.phonegap.WPIAS.doctor_Main.DoctorMainActivity
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.publicObject.UserToken
-import com.phonegap.WPIAS.public_function.FCM
+import com.phonegap.WPIAS.public_function.FCM.function.TopicSetting
 import com.phonegap.WPIAS.restApi.ApiUtill
 import com.phonegap.WPIAS.user_Main.MainActivity
 import com.phonegap.WPIAS.user_SignUp.SignUpPreActivity
@@ -117,9 +117,11 @@ class LoginActivity : RootActivity(){
                     
                     if(response.body()?.size != 0){
 
-                        FCM.function.TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
+                        TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
 
                         PubVariable.userInfo = response.body()!![0]
+
+
 
                         if (PubVariable.userInfo.usertype == "USER") {
 

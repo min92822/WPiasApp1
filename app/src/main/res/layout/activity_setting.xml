@@ -236,7 +236,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView59">
 
         <TextView
-            android:id="@+id/textView60"
+            android:id="@+id/lblSwitch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공지알림"
@@ -277,7 +277,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view5">
 
         <TextView
-            android:id="@+id/textView61"
+            android:id="@+id/lblSwitch2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="답글알림"

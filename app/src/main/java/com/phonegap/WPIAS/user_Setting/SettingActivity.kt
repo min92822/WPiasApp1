@@ -94,6 +94,18 @@ class SettingActivity : RootActivity() {
         notice.isChecked = PubVariable.userInfo.switch1 == "On"
         reply.isChecked = PubVariable.userInfo.switch2 == "On"
 
+        //사용자 계정
+        if (PubVariable.userInfo.usertype=="USER")
+        {
+            lblSwitch1.text = "공지사항"
+            lblSwitch2.text = "답변알림"
+        }
+        else//의사 계정
+        {
+            lblSwitch1.text = "공지사항"
+            lblSwitch2.text = "질문등록"
+        }
+
     }
 
     //공지알림 스위치 업데이트

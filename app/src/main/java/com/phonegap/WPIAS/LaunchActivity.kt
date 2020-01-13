@@ -104,7 +104,13 @@ class LaunchActivity : RootActivity() {
 
                         PubVariable.userInfo = response.body()!![0]
 
-                        FCM.function.TopicSetting(response.body()!![0].usertype, response.body()!![0].switch1, response.body()!![0].switch2)
+                        FCM.function.TopicSetting(
+                            response.body()!![0].usertype,
+                            response.body()!![0].switch1,
+                            response.body()!![0].switch2
+                        )
+
+
 
                         if(PubVariable.userInfo.usertype == "USER") {
 
