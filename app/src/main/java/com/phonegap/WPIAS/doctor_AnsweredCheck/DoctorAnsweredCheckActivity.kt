@@ -182,6 +182,7 @@ class DoctorAnsweredCheckActivity : RootActivity() {
                 } else {
                     ratedByPatient.rating = patientCase.feedbackstar.toFloat()
                     ratedByPatient.visibility = View.VISIBLE
+                    ratedByPatient.setIsIndicator(true)
                     reviewExist.visibility = View.VISIBLE
                     patientReview.text = patientCase.feedbacktext
                     patientReview.movementMethod = ScrollingMovementMethod()
