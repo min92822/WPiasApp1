@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -115,11 +116,56 @@ class DoctorAnswerActivity : RootActivity() {
 
         }
 
+        patientQuestionContents.movementMethod = ScrollingMovementMethod()
+
+        patientQuestionContents.setOnTouchListener { v, event ->
+
+            if(v.isVerticalScrollBarEnabled) {
+
+                answerScrollView.requestDisallowInterceptTouchEvent(true)
+
+            }else{
+
+                answerScrollView.requestDisallowInterceptTouchEvent(false)
+
+            }
+
+            return@setOnTouchListener false
+
+        }
+
         patientQuestionContents.text = patientCase.contents
 
         doctorName.text = PubVariable.userInfo.nickname
 
         doctorDept.text = PubVariable.userInfo.remark.replace('_', ' ')
+
+        doctorAnswerInput.movementMethod = ScrollingMovementMethod()
+
+        answerScrollView.setOnTouchListener { v, event ->
+
+            doctorAnswerInput.parent.requestDisallowInterceptTouchEvent(false)
+            patientQuestionContents.parent.requestDisallowInterceptTouchEvent(false)
+
+            return@setOnTouchListener false
+
+        }
+
+        doctorAnswerInput.setOnTouchListener { v, event ->
+
+            if(v.isVerticalScrollBarEnabled) {
+
+                answerScrollView.requestDisallowInterceptTouchEvent(true)
+
+            }else{
+
+                answerScrollView.requestDisallowInterceptTouchEvent(false)
+
+            }
+
+            return@setOnTouchListener false
+
+        }
 
         doctorAnswerSubmit.setOnClickListener {
 
@@ -216,6 +262,8 @@ class DoctorAnswerActivity : RootActivity() {
     @SuppressLint("SimpleDateFormat")
     fun insertAnswer(){
 
+        Loading(ProgressBar, ProgressBg, true)
+
         var map = HashMap<String, String>()
 
         map["QKEY"] = patientCase.ckey
@@ -260,6 +308,8 @@ class DoctorAnswerActivity : RootActivity() {
 
             override fun onResponse(call: Call<ArrayList<pushinfo>>,response: Response<ArrayList<pushinfo>>) {
 
+                Loading(ProgressBar, ProgressBg, false)
+
                 if(response.isSuccessful){
 
                     if(response.body()!!.size > 0){
@@ -294,6 +344,7 @@ class DoctorAnswerActivity : RootActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<pushinfo>>, t: Throwable) {
+                Loading(ProgressBar, ProgressBg, false)
                 println(t.toString())
             }
 
@@ -308,6 +359,8 @@ class DoctorAnswerActivity : RootActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_alert)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.setCancelable(false)
 
         var img = dialog.img_alert
         var title = dialog.txt_alert_title
@@ -344,6 +397,8 @@ class DoctorAnswerActivity : RootActivity() {
 
     //답변 등록 실패시 알럿
     fun failAlert(){
+
+        Loading(ProgressBar, ProgressBg, false)
 
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -383,6 +438,8 @@ class DoctorAnswerActivity : RootActivity() {
 
     //다른 선생님이 먼저 등록했을시 알럿
     fun otherDoctorAlert(){
+
+        Loading(ProgressBar, ProgressBg, false)
 
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

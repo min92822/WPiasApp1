@@ -208,7 +208,7 @@ class NewQuestionAdapter(var arr : ArrayList<NewQuestionInfo>) : RecyclerView.Ad
                         }else{
 
                             //10분 초과 경과했으면 updateLock을 실행한다
-                            if(timeDiff/60000 > 10){
+                            if(timeDiff/60000 > 9){
                                 updateLock(lockInfo, position)
                             //경과 시간이 10분 이하일 경우 알럿을띄운다
                             }else{

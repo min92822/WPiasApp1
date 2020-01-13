@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,18 @@ import com.phonegap.WPIAS.doctor_Question.DoctorNewQuestionActivity
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.public_function.FCM
 import com.phonegap.WPIAS.restApi.ApiUtill
+import kotlinx.android.synthetic.main.activity_doctor_answer.*
 import kotlinx.android.synthetic.main.activity_doctor_answered_check.*
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.ProgressBar
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.ProgressBg
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.burnedImage
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.closeImage
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.doctorAnswerInput
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.doctorAnswerSubmit
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.doctorDept
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.doctorName
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.overviewImage
+import kotlinx.android.synthetic.main.activity_doctor_answered_check.patientQuestionContents
 import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.title_bar_darkblue.*
 import retrofit2.Call
@@ -106,6 +118,34 @@ class DoctorAnsweredCheckActivity : RootActivity() {
 
         patientQuestionContents.text = patientCase.contents
 
+        answeredScrollView.setOnTouchListener { v, event ->
+
+            doctorAnswerInput.parent.requestDisallowInterceptTouchEvent(false)
+            doctorAnswer.parent.requestDisallowInterceptTouchEvent(false)
+            patientQuestionContents.parent.requestDisallowInterceptTouchEvent(false)
+
+            return@setOnTouchListener false
+
+        }
+
+        patientQuestionContents.setOnTouchListener { v, event ->
+
+            if(v.isVerticalScrollBarEnabled) {
+
+                answeredScrollView.requestDisallowInterceptTouchEvent(true)
+
+            }else{
+
+                answeredScrollView.requestDisallowInterceptTouchEvent(false)
+
+            }
+
+            return@setOnTouchListener false
+
+        }
+
+        patientQuestionContents.movementMethod = ScrollingMovementMethod()
+
         doctorName.text = PubVariable.userInfo.nickname
 
         doctorDept.text = PubVariable.userInfo.remark.replace('_', ' ')
@@ -119,10 +159,49 @@ class DoctorAnsweredCheckActivity : RootActivity() {
             "A" -> {
                 doctorAnswerSubmit.text = "답변 완료"
                 doctorAnswer.text = patientCase.answercontents
+                doctorAnswer.movementMethod = ScrollingMovementMethod()
+
+                doctorAnswer.setOnTouchListener { v, event ->
+
+                    if(v.isVerticalScrollBarEnabled) {
+
+                        answeredScrollView.requestDisallowInterceptTouchEvent(true)
+
+                    }else{
+
+                        answeredScrollView.requestDisallowInterceptTouchEvent(false)
+
+                    }
+
+                    return@setOnTouchListener false
+
+                }
+
                 if (patientCase.feedbacktime.isEmpty()) {
                     patientReview.text = "사용자가 리뷰를 작성하지 않았습니다"
                 } else {
+                    ratedByPatient.rating = patientCase.feedbackstar.toFloat()
+                    ratedByPatient.visibility = View.VISIBLE
+                    reviewExist.visibility = View.VISIBLE
                     patientReview.text = patientCase.feedbacktext
+                    patientReview.movementMethod = ScrollingMovementMethod()
+
+                    patientReview.setOnTouchListener { v, event ->
+
+                        if(v.isVerticalScrollBarEnabled) {
+
+                            answeredScrollView.requestDisallowInterceptTouchEvent(true)
+
+                        }else{
+
+                            answeredScrollView.requestDisallowInterceptTouchEvent(false)
+
+                        }
+
+                        return@setOnTouchListener false
+
+                    }
+
                 }
             }
             "Q" -> {
@@ -130,6 +209,16 @@ class DoctorAnsweredCheckActivity : RootActivity() {
                 patientReview.visibility = View.GONE
                 doctorAnswer.visibility = View.GONE
                 doctorAnswerInput.visibility = View.VISIBLE
+                doctorAnswerInput.movementMethod = ScrollingMovementMethod()
+
+                doctorAnswerInput.setOnTouchListener { v, event ->
+
+                    v.parent.requestDisallowInterceptTouchEvent(true)
+
+                    return@setOnTouchListener false
+
+                }
+
                 (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).topToBottom = doctorAnswerInput.id
                 (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).startToStart = doctorAnswerInput.id
                 (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).endToEnd = doctorAnswerInput.id
@@ -145,6 +234,8 @@ class DoctorAnsweredCheckActivity : RootActivity() {
     //질문 답변등록 하는 펑션
     @SuppressLint("SimpleDateFormat")
     fun insertAnswer(){
+
+        Loading(ProgressBar, ProgressBg, true)
 
         var map = HashMap<String, String>()
 
@@ -191,6 +282,8 @@ class DoctorAnsweredCheckActivity : RootActivity() {
 
             override fun onResponse(call: Call<ArrayList<pushinfo>>, response: Response<ArrayList<pushinfo>>) {
 
+                Loading(ProgressBar, ProgressBg, false)
+
                 if(response.isSuccessful){
 
                     if(response.body()!!.size > 0){
@@ -225,6 +318,7 @@ class DoctorAnsweredCheckActivity : RootActivity() {
             }
 
             override fun onFailure(call: Call<ArrayList<pushinfo>>, t: Throwable) {
+                Loading(ProgressBar, ProgressBg, false)
                 println(t.toString())
             }
 
@@ -239,6 +333,8 @@ class DoctorAnsweredCheckActivity : RootActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_alert)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.setCancelable(false)
 
         var img = dialog.img_alert
         var title = dialog.txt_alert_title
@@ -275,6 +371,8 @@ class DoctorAnsweredCheckActivity : RootActivity() {
 
     //답변 등록 실패시 알럿
     fun failAlert(){
+
+        Loading(ProgressBar, ProgressBg, false)
 
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

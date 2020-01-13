@@ -34,8 +34,6 @@ class DoctorAnsweredActivity : RootActivity() {
 
         SetTransparentBar()
 
-        getCount()
-
         initActivity()
 
     }
@@ -57,8 +55,6 @@ class DoctorAnsweredActivity : RootActivity() {
             getCount()
             loadQuestion()
         }
-
-        loadQuestion()
 
         rdAnswerSelect()
 
@@ -163,12 +159,10 @@ class DoctorAnsweredActivity : RootActivity() {
     //서버 통신 완료되기까지 view visible을 컨트롤 한다
     fun viewVisibleControl(result : Boolean){
         if(result) {
-            constraintLayout20.visibility = View.VISIBLE
             constraintLayout11.visibility = View.VISIBLE
             questionRecyclerView.visibility = View.VISIBLE
             Loading(ProgressBar, ProgressBg, !result)
         }else{
-            constraintLayout20.visibility = View.GONE
             constraintLayout11.visibility = View.GONE
             questionRecyclerView.visibility = View.GONE
             Loading(ProgressBar, ProgressBg, !result)
