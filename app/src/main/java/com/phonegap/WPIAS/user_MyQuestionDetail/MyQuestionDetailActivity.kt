@@ -347,21 +347,10 @@ class MyQuestionDetailActivity : RootActivity() {
             chk_dr.text = "${m_questionInfo!!.answerdocnm} 의사 선생님에게 추가 답변요청을 합니다."
             chk_dr.visibility = View.VISIBLE
             chk_dr.isChecked = true
-            wrap_direction.visibility = View.VISIBLE
 
         } else {
             chk_dr.visibility = View.GONE
             chk_add.isChecked = true
-            wrap_direction.visibility = View.GONE
-        }
-
-        radioGroup.setOnCheckedChangeListener { radioGroup, i ->
-            if(chk_dr.isChecked){
-                wrap_direction.visibility = View.VISIBLE
-            } else {
-                wrap_direction.visibility = View.GONE
-            }
-
         }
 
         // 사진 촬영
@@ -740,8 +729,6 @@ class MyQuestionDetailActivity : RootActivity() {
                             arr,
                             m_questionInfo!!
                         )
-
-                    wrap_my_question_record.visibility = View.VISIBLE
 
                 } else {
 
