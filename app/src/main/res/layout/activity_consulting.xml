@@ -718,7 +718,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:lineHeight="24dp"
-                android:text="궁금하신 사항을 선택해주세요."
+                android:text="궁금하신 사항을 내용에 자세히 입력해주세요."
                 android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="@+id/textView23"
@@ -730,6 +730,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/textView24"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -739,10 +740,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textColor="#a4a4a4"
                 android:text="* 기타 궁금하신 사항은 내용에 자세히 입력해주세요"
-                app:layout_constraintTop_toBottomOf="@+id/questionRecyclerView"
-                app:layout_constraintStart_toStartOf="@+id/questionRecyclerView"/>
+                android:textColor="#a4a4a4"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/questionRecyclerView" />
 
             <TextView
                 android:id="@+id/textView25"
