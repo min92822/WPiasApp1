@@ -134,7 +134,7 @@
             android:id="@+id/textView33"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="궁금한 사항을 자세히 입력해주세요."
+            android:text="궁금하신 사항을 상세하게 입력해주세요\n(예: 응급처치, 물집관리, 흉터관리, 사후관리 등)"
             android:textColor="@color/windows_blue"
             android:textSize="14dp"
             android:textStyle="bold"

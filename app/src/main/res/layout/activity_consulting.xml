@@ -718,7 +718,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:lineHeight="24dp"
-                android:text="궁금하신 사항을 내용에 자세히 입력해주세요."
+                android:text="궁금하신 사항을 상세하게 입력해주세요\n(예: 응급처치, 물집관리, 흉터관리, 사후관리 등)"
                 android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
                 app:layout_constraintStart_toStartOf="@+id/textView23"
