@@ -835,16 +835,16 @@ class ConsultingActivity : RootActivity(){
 
                     var locationParameter = ""
 
-                    if(city.selectedItem != 0){
-                        locationParameter += city.selectedItem
-                    }else{
+                    if(city.selectedItemPosition == 0 || city.selectedItemPosition == -1){
                         locationParameter = " "
+                    }else{
+                        locationParameter += city.selectedItem
                     }
 
-                    locationParameter += if(district.selectedItem != 0){
-                        " ${district.selectedItem}"
-                    }else{
+                    locationParameter += if(district.selectedItemPosition == 0 || district.selectedItemPosition ==-1){
                         ""
+                    }else{
+                        " ${district.selectedItem}"
                     }
 
                     Validation.vali.locationV = locationParameter
