@@ -144,6 +144,8 @@ class MyCaseActivity : RootActivity() {
             "P" -> {
                 lbl_no_answer.text = "답변을 요청하지 않은 경과입니다."
                 lbl_no_answer.visibility = View.VISIBLE
+
+                wrap_mycase_answer.visibility = View.GONE
             }
         }
 

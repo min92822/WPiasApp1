@@ -730,6 +730,8 @@ class MyQuestionDetailActivity : RootActivity() {
                             m_questionInfo!!
                         )
 
+                    wrap_my_question_record.visibility = View.VISIBLE
+
                 } else {
 
                     ProgressAction(false)
