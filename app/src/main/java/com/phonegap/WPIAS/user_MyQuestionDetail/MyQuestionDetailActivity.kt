@@ -363,55 +363,61 @@ class MyQuestionDetailActivity : RootActivity() {
 
             if(imageUri == null || imageUri2 == null){
 
-                failAlert()
+                failAlert("이미지를 등록해주세요.")
 
             } else {
 
-                inputStreamArr.add(contentResolver.openInputStream(imageUri!!)!!)
-                inputStreamArr.add(contentResolver.openInputStream(imageUri2!!)!!)
+                if(txt_record_content_add.text.isNullOrEmpty()){
 
-                for (inputStream in inputStreamArr) {
-                    imageLengthArr.add(inputStream.available())
-                }
-
-                // 경과추가 - 답변요청
-                if (chk_dr.isChecked) {
-
-                    var map = HashMap<String, String>()
-                    map["QKEY"] = m_questionInfo!!.qkey
-                    map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
-                    map["CONTENTS"] = txt_record_content_add.text.toString()
-                    map["DIRECTION"] = direction()
-
-
-                    AddCaseRequest_AzureAsyncTask(
-                        m_questionInfo!!.answerdoc,
-                        this,
-                        inputStreamArr,
-                        imageLengthArr,
-                        map
-                    ).execute(storageConnectionString)
-
-                    println(map)
+                    failAlert("내용을 입력해주세요.")
 
                 } else {
-                    // 경과추가 - 답변미요청
-                    var map = HashMap<String, String>()
-                    map["QKEY"] = m_questionInfo!!.qkey
-                    map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
-                    map["CONTENTS"] = txt_record_content_add.text.toString()
 
-                    println(map)
+                    inputStreamArr.add(contentResolver.openInputStream(imageUri!!)!!)
+                    inputStreamArr.add(contentResolver.openInputStream(imageUri2!!)!!)
 
-                    AddCase_AzureAsyncTask(
-                        this,
-                        inputStreamArr,
-                        imageLengthArr,
-                        map
-                    ).execute(storageConnectionString)
+                    for (inputStream in inputStreamArr) {
+                        imageLengthArr.add(inputStream.available())
+                    }
 
+                    // 경과추가 - 답변요청
+                    if (chk_dr.isChecked) {
+
+                        var map = HashMap<String, String>()
+                        map["QKEY"] = m_questionInfo!!.qkey
+                        map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+                        map["CONTENTS"] = txt_record_content_add.text.toString()
+                        map["DIRECTION"] = direction()
+
+
+                        AddCaseRequest_AzureAsyncTask(
+                            m_questionInfo!!.answerdoc,
+                            this,
+                            inputStreamArr,
+                            imageLengthArr,
+                            map
+                        ).execute(storageConnectionString)
+
+                        println(map)
+
+                    } else {
+                        // 경과추가 - 답변미요청
+                        var map = HashMap<String, String>()
+                        map["QKEY"] = m_questionInfo!!.qkey
+                        map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+                        map["CONTENTS"] = txt_record_content_add.text.toString()
+
+                        println(map)
+
+                        AddCase_AzureAsyncTask(
+                            this,
+                            inputStreamArr,
+                            imageLengthArr,
+                            map
+                        ).execute(storageConnectionString)
+
+                    }
                 }
-
             }
 
         }
@@ -537,7 +543,7 @@ class MyQuestionDetailActivity : RootActivity() {
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         this,
-                        "fineinsight.app.service.wpias.fileprovider",
+                        "com.phonegap.WPIAS.fileprovider",
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
@@ -769,7 +775,7 @@ class MyQuestionDetailActivity : RootActivity() {
     }
 
     //업로드 실패 알럿
-    fun failAlert(){
+    fun failAlert(str: String){
 
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -785,7 +791,7 @@ class MyQuestionDetailActivity : RootActivity() {
         img.setImageResource(R.drawable.alert_end)
 
         title.text = "실패"
-        sub.text = "이미지를 등록해주세요."
+        sub.text = str
 
         btn_left.visibility = View.GONE
 
@@ -876,4 +882,8 @@ class MyQuestionDetailActivity : RootActivity() {
         return Uri.parse(path.toString())
     }
 
+    override fun onResume() {
+        super.onResume()
+        detailQuestion()
+    }
 }
