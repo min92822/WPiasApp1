@@ -20,7 +20,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.view.get
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -1106,7 +1105,7 @@ class ConsultingActivity : RootActivity(){
 
         var cityNmArr = ArrayList<String>()
 
-        cityNmArr.add("시/도")
+        cityNmArr.add("지역선택")
 
         for(city in Location.cityInfo){
             cityNmArr.add(city.citynm)
@@ -1183,7 +1182,7 @@ class ConsultingActivity : RootActivity(){
 
         var districtNmArr = ArrayList<String>()
 
-        districtNmArr.add("구/군/동")
+        districtNmArr.add("시/군/구 선택")
 
         for(district in Location.districtInfo){
             districtNmArr.add(district.districtnm)

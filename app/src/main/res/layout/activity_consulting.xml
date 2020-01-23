@@ -19,9 +19,9 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:layout_marginTop="85dp"
         android:background="@color/white"
+        android:fillViewport="true"
         android:overScrollMode="never"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -33,8 +33,8 @@
                 android:id="@+id/textView5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
                 android:layout_marginStart="21dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginEnd="25dp"
                 android:lineHeight="27dp"
                 android:text="상처부위 촬영"
@@ -62,8 +62,8 @@
                 android:layout_marginTop="8dp"
                 android:lineHeight="24dp"
                 android:text="상처부위를 촬영해주세요."
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView5"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -173,8 +173,8 @@
                 android:layout_marginTop="14dp"
                 android:lineHeight="24dp"
                 android:text="질문하고자 하는 항목을 선택하여 주세요."
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -246,8 +246,8 @@
                 android:layout_marginTop="15dp"
                 android:lineHeight="24dp"
                 android:text="언제 화상을 입었나요?"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/recentlyBurnedWrapper" />
 
@@ -257,10 +257,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="18dp"
-                android:paddingLeft="9dp"
                 android:background="@drawable/edit_text_shape2"
                 android:drawableRight="@drawable/ck_box"
                 android:focusable="false"
+                android:paddingLeft="9dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -298,8 +298,8 @@
                 android:layout_marginTop="26dp"
                 android:lineHeight="24dp"
                 android:text="어디에 화상을 입었나요?"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/whenBurned"
                 app:layout_constraintTop_toBottomOf="@+id/view3" />
 
@@ -387,8 +387,8 @@
                 android:layout_marginTop="33dp"
                 android:lineHeight="24dp"
                 android:text="촬영한 부위를 선택해주세요."
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout11"
                 app:layout_constraintTop_toBottomOf="@+id/bodyImage" />
 
@@ -409,8 +409,8 @@
                 android:layout_marginTop="48dp"
                 android:lineHeight="24dp"
                 android:text="어떻게 화상을 입었나요?"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/bodyPartDetailRecyclerView" />
 
@@ -419,25 +419,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                app:layout_constraintEnd_toEndOf="@+id/bodyPartDetailRecyclerView"
                 app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintEnd_toEndOf="@+id/bodyPartDetailRecyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/causeOfBurnedDetailRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/causeOfBurnedRecyclerView"
+                app:layout_constraintEnd_toEndOf="@+id/causeOfBurnedRecyclerView"
                 app:layout_constraintStart_toStartOf="@+id/causeOfBurnedRecyclerView"
-                app:layout_constraintEnd_toEndOf="@+id/causeOfBurnedRecyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/causeOfBurnedRecyclerView" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
                 android:layout_marginStart="21dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginEnd="25dp"
                 android:lineHeight="27dp"
                 android:text="환자의 정보"
@@ -465,8 +465,8 @@
                 android:layout_marginTop="12dp"
                 android:lineHeight="24dp"
                 android:text="본인이 아닐 경우 체크박스를 해제해 주세요."
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView19"
                 app:layout_constraintTop_toBottomOf="@+id/view4" />
 
@@ -508,8 +508,8 @@
                 android:layout_marginTop="20dp"
                 android:lineHeight="24dp"
                 android:text="성별"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/checkIdentifyWrapper"
                 app:layout_constraintTop_toBottomOf="@+id/checkIdentifyWrapper" />
 
@@ -564,8 +564,8 @@
                 android:layout_marginTop="20dp"
                 android:lineHeight="24dp"
                 android:text="연령"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView11"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout13" />
 
@@ -575,8 +575,8 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="15dp"
-                android:paddingLeft="9dp"
                 android:background="@drawable/edit_text_shape2"
+                android:paddingLeft="9dp"
                 android:spinnerMode="dialog"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
@@ -586,9 +586,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ck_box"
+                app:layout_constraintBottom_toBottomOf="@id/age"
                 app:layout_constraintEnd_toEndOf="@+id/age"
-                app:layout_constraintTop_toTopOf="@+id/age"
-                app:layout_constraintBottom_toBottomOf="@id/age" />
+                app:layout_constraintTop_toTopOf="@+id/age" />
 
             <TextView
                 android:id="@+id/textView29"
@@ -597,8 +597,8 @@
                 android:layout_marginTop="20dp"
                 android:lineHeight="24dp"
                 android:text="최근 치료받은 곳을 선택해주세요"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/age" />
 
@@ -608,19 +608,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView29"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView29"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:lineHeight="24dp"
+                android:text="치료받은 곳의 지역을 선택해주세요 (선택사항)"
+                android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
+                app:layout_constraintStart_toStartOf="@+id/recentlyVisitRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/recentlyVisitRecyclerView" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/locationWrapper"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/recentlyVisitRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/recentlyVisitRecyclerView"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/textView36">
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/locationSelect"
@@ -648,41 +660,41 @@
                     android:id="@+id/city"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:paddingLeft="9dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/edit_text_shape2"
+                    android:paddingLeft="9dp"
                     android:spinnerMode="dialog"
-                    app:layout_constraintTop_toTopOf="@+id/locationSelect"
-                    app:layout_constraintStart_toEndOf="@+id/locationSelect"
+                    app:layout_constraintBottom_toBottomOf="@+id/locationSelect"
                     app:layout_constraintEnd_toStartOf="@+id/district"
-                    app:layout_constraintBottom_toBottomOf="@+id/locationSelect"/>
+                    app:layout_constraintStart_toEndOf="@+id/locationSelect"
+                    app:layout_constraintTop_toTopOf="@+id/locationSelect" />
 
                 <Spinner
                     android:id="@+id/district"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:paddingLeft="9dp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/edit_text_shape2"
+                    android:paddingLeft="9dp"
                     android:spinnerMode="dialog"
-                    app:layout_constraintTop_toTopOf="@+id/city"
+                    app:layout_constraintBottom_toBottomOf="@+id/city"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/city"
-                    app:layout_constraintBottom_toBottomOf="@+id/city"/>
+                    app:layout_constraintTop_toTopOf="@+id/city" />
 
                 <EditText
                     android:id="@+id/detailLocation"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="9dp"
                     android:background="@drawable/edit_text_shape2"
                     android:drawableRight="@drawable/ck_box"
-                    android:maxLines="1"
                     android:maxLength="15"
+                    android:maxLines="1"
+                    android:paddingLeft="9dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/locationMySelf"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/locationMySelf"
-                    app:layout_constraintTop_toTopOf="@+id/locationMySelf"
-                    app:layout_constraintBottom_toBottomOf="@+id/locationMySelf"/>
+                    app:layout_constraintTop_toTopOf="@+id/locationMySelf" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -690,8 +702,8 @@
                 android:id="@+id/textView23"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginStart="21dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="25dp"
                 android:lineHeight="27dp"
                 android:text="상세한 질문 내용"
@@ -719,8 +731,8 @@
                 android:layout_marginTop="12dp"
                 android:lineHeight="24dp"
                 android:text="궁금하신 사항을 상세하게 입력해주세요\n(예: 응급처치, 물집관리, 흉터관리, 사후관리 등)"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView23"
                 app:layout_constraintTop_toBottomOf="@+id/view5" />
 
@@ -731,9 +743,9 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/textView24"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <TextView
                 android:id="@+id/textView30"
@@ -753,8 +765,8 @@
                 android:layout_marginTop="24dp"
                 android:lineHeight="24dp"
                 android:text="제목"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -766,9 +778,9 @@
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/edit_text_shape2"
                 android:hint="예 : 커피에 화상"
+                android:maxLines="1"
                 android:paddingLeft="9dp"
                 android:textColorHint="@color/warm_grey"
-                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView25"
                 app:layout_constraintTop_toBottomOf="@+id/textView25" />
@@ -780,8 +792,8 @@
                 android:layout_marginTop="12dp"
                 android:lineHeight="24dp"
                 android:text="내용"
-                android:textSize="16dp"
                 android:textColor="@color/greyish_brown"
+                android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView25"
                 app:layout_constraintTop_toBottomOf="@+id/consultingTitle" />
 
@@ -792,10 +804,10 @@
                 android:layout_marginTop="9dp"
                 android:layout_marginEnd="15dp"
                 android:background="@drawable/edit_text_shape2"
+                android:gravity="top|left"
                 android:hint="예 : 식탁 위에서 뜨거운 커피를 손에 쏟았습니다."
                 android:paddingLeft="9dp"
                 android:textColorHint="@color/warm_grey"
-                android:gravity="top|left"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView26"
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
@@ -807,8 +819,8 @@
                 android:layout_marginTop="24dp"
                 android:lineHeight="20dp"
                 android:text="* 질문 작성시에 가격문의, 비속어, 불필요한 상담요청\n시 운영자에 의해 수정 또는 제재 될 수 있습니다."
-                android:textSize="14dp"
                 android:textColor="@color/ocean_blue"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@+id/consultingContents"
                 app:layout_constraintTop_toBottomOf="@+id/consultingContents" />
 
@@ -819,8 +831,8 @@
                 android:layout_marginTop="9dp"
                 android:lineHeight="20dp"
                 android:text="* 답변 내용은 참고용으로 전문가 및 위피아스의 법적\n책임은 없으며, 의학적 판단이나 진료행위로 해석할 수\n없습니다."
-                android:textSize="14dp"
                 android:textColor="@color/ocean_blue"
+                android:textSize="14dp"
                 app:layout_constraintStart_toStartOf="@+id/textView27"
                 app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -830,22 +842,22 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="200dp"
                 android:background="@drawable/bg_titlebar_2"
-                app:layout_constraintTop_toBottomOf="@+id/textView28"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/textView28">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:lineHeight="24dp"
                     android:text="등록하기"
-                    android:textSize="16dp"
                     android:textColor="@color/white"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -855,19 +867,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ProgressBg"
-        android:visibility="gone"
-        android:background="@color/progress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/progress"
+        android:visibility="gone">
 
         <ProgressBar
             android:id="@+id/ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
