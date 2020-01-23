@@ -85,6 +85,8 @@ class MyCaseActivity : RootActivity() {
                 lbl_no_answer.text = "답변을 기다리는 중입니다."
                 lbl_no_answer.visibility = View.VISIBLE
 
+                wrap_mycase_answer.visibility = View.GONE
+
             }
             "A" -> {
 
