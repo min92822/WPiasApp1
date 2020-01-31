@@ -246,8 +246,9 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
         map["IMAGEURL2"] = Validation.vali.imageUrl2V
         map["CONTENTS"] = Validation.vali.contentsV
         map["CAREAREA"] = Validation.vali.locationV
+        map["HOMEAREA"] = Validation.vali.homeAreaV
 
-        ApiUtill().getINSERT_QUESTIONWITHAREA().insert_questionwitharea(map).enqueue(object : Callback<String>{
+        ApiUtill().getINSERT_QUESTIONWITHAREA2().insert_questionwitharea2(map).enqueue(object : Callback<String>{
 
             override fun onResponse(call: Call<String>, response: Response<String>) {
 
@@ -276,7 +277,7 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
     //업로드 성공 알럿
     fun successAlert(){
 
-        FCM.function.SendMsgToTopic(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
+//        FCM.function.SendMsgToTopic(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
 
         var dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

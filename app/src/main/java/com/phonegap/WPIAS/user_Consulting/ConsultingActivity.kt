@@ -139,6 +139,12 @@ class ConsultingActivity : RootActivity(){
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
+        residentCity.isEnabled = false
+
+        residentDistrict.isEnabled = false
+
+        residentDetailLocation.isEnabled = false
+
         whenBurned.addTextChangedListener(object : TextWatcher{
 
             override fun afterTextChanged(s: Editable?) {
@@ -242,9 +248,48 @@ class ConsultingActivity : RootActivity(){
 
                 locationMySelf.isChecked = false
                 city.isEnabled = true
-                district.isEnabled = true
                 detailLocation.isEnabled = false
                 detailLocation.setText("")
+
+            }else{
+
+                buttonView.isClickable = true
+
+            }
+
+        }
+
+        residentMySelf.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                buttonView.isClickable = false
+
+                residentSelect.isChecked = false
+                residentCity.isEnabled = false
+                residentDistrict.isEnabled = false
+                residentDetailLocation.isEnabled = true
+                residentCity.setSelection(0)
+                residentDistrict.setSelection(0)
+
+            }else{
+
+                buttonView.isClickable = true
+
+            }
+
+        }
+
+        residentSelect.setOnCheckedChangeListener { buttonView, isChecked ->
+
+            if(isChecked){
+
+                buttonView.isClickable = false
+
+                residentMySelf.isChecked = false
+                residentCity.isEnabled = true
+                residentDetailLocation.isEnabled = false
+                residentDetailLocation.setText("")
 
             }else{
 
@@ -851,6 +896,27 @@ class ConsultingActivity : RootActivity(){
                     Validation.vali.locationV = "${detailLocation.text}"
                 }
 
+                if(residentSelect.isChecked) {
+
+                    var homeAreaParameter = ""
+
+                    if(residentCity.selectedItemPosition == 0 || residentCity.selectedItemPosition == -1){
+                        homeAreaParameter = " "
+                    }else{
+                        homeAreaParameter += residentCity.selectedItem
+                    }
+
+                    homeAreaParameter += if(residentDistrict.selectedItemPosition == 0 || residentDistrict.selectedItemPosition ==-1){
+                        ""
+                    }else{
+                        " ${residentDistrict.selectedItem}"
+                    }
+
+                    Validation.vali.homeAreaV = homeAreaParameter
+                }else{
+                    Validation.vali.homeAreaV = "${residentDetailLocation.text}"
+                }
+
                 AzureAsyncTask(
                     this,
                     inputStreamArr,
@@ -1131,12 +1197,46 @@ class ConsultingActivity : RootActivity(){
             ) {
 
                 if(position != 0){
+                    district.isEnabled = true
                     for(detailCity in Location.cityInfo){
 
                         if(detailCity.citynm == city.selectedItem.toString()) {
-                            getDistrict(detailCity.citycd)
+                            getDistrict(detailCity.citycd, city)
                         }
                     }
+                }else{
+                    district.isEnabled = false
+                    district.setSelection(0)
+                }
+            }
+        }
+
+        residentCity.adapter = arrayAdapter
+
+        residentCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                if(position != 0){
+                    residentDistrict.isEnabled = true
+                    for(detailCity in Location.cityInfo){
+
+                        if(detailCity.citynm == residentCity.selectedItem.toString()) {
+                            getDistrict(detailCity.citycd, residentCity)
+                        }
+                    }
+                }else{
+                    residentDistrict.isEnabled = false
+                    residentDistrict.setSelection(0)
                 }
             }
         }
@@ -1144,7 +1244,7 @@ class ConsultingActivity : RootActivity(){
     }
 
     //지역, 구 조회
-    fun getDistrict(cityCd : String){
+    fun getDistrict(cityCd : String, view : View){
 
         Loading(ProgressBar, ProgressBg, true)
 
@@ -1161,7 +1261,7 @@ class ConsultingActivity : RootActivity(){
                 if(response.isSuccessful){
 
                     Location.districtInfo = response.body()!!
-                    districtSpinnerPopup()
+                    districtSpinnerPopup(view)
 
                 }
 
@@ -1178,7 +1278,7 @@ class ConsultingActivity : RootActivity(){
     }
 
     // 지역, 구 보여주는 spinner
-    fun districtSpinnerPopup(){
+    fun districtSpinnerPopup(view : View){
 
         var districtNmArr = ArrayList<String>()
 
@@ -1192,7 +1292,10 @@ class ConsultingActivity : RootActivity(){
 
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, districtNmArr)
 
-        district.adapter = arrayAdapter
+        when (view.id) {
+            R.id.city -> district.adapter = arrayAdapter
+            R.id.residentCity -> residentDistrict.adapter = arrayAdapter
+        }
 
     }
 

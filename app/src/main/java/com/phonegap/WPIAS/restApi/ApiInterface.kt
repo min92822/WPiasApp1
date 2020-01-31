@@ -137,4 +137,9 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_myanswercase(@FieldMap sql : Map<String, String>) : Call<ArrayList<MyAnswerCaseInfo>>
 
+    // 사용자 질문등록 + 위치추가 + 거주지 추가
+    @POST("https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA2")
+    @FormUrlEncoded
+    fun insert_questionwitharea2(@FieldMap sql : Map<String, String>) : Call<String>
+
 }

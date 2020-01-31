@@ -193,4 +193,13 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
+    // 사용자 질문등록 + 위치추가 + 거주지 추가
+    val insert_questionwitharea_url2 : String = "https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA2/"
+
+    fun getINSERT_QUESTIONWITHAREA2() : ApiInterface {
+        return ApiRequest().getStringResponse(insert_questionwitharea_url2)!!.create(
+            ApiInterface::class.java)
+    }
+
+
 }
