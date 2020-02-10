@@ -1,22 +1,33 @@
 package com.phonegap.WPIAS.doctor_AnsweredQuestion.adapter
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.dataClass.MyAnswerInfo
 import com.phonegap.WPIAS.doctor_AnsweredQuestionDetail.DoctorAnsweredDetailActivity
 import kotlinx.android.synthetic.main.answer_question.view.*
+import kotlinx.android.synthetic.main.custom_alert.*
 import java.text.SimpleDateFormat
+import android.content.ClipData
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.ClipboardManager
+import android.widget.Toast
 
 class AnswerAdapter(var arr : ArrayList<MyAnswerInfo>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var context : Context? = null
+
+    var popup = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -58,6 +69,12 @@ class AnswerAdapter(var arr : ArrayList<MyAnswerInfo>) : RecyclerView.Adapter<Re
         }
 
         holder.answerCount.text = "${arr[position].answercount.toInt()}/${arr[position].totalcount.toInt()}"
+
+        holder.email.setOnClickListener {
+
+            emailAlert(position)
+
+        }
 
     }
 
@@ -158,6 +175,63 @@ class AnswerAdapter(var arr : ArrayList<MyAnswerInfo>) : RecyclerView.Adapter<Re
 
     }
 
+    // 이메일 작업 alert
+    @SuppressLint("SetTextI18n")
+    fun emailAlert(position : Int){
+
+        var dialog = Dialog(context!!)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_alert)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        dialog.img_alert.setImageResource(R.drawable.alert_ck)
+
+        dialog.txt_alert_title.text = "수행할 작업을 선택해주세요."
+
+        dialog.txt_alert_sub.text = "이메일 주소 : ${arr[position].email}"
+
+        dialog.btn_alert_left.background = context?.getDrawable(R.drawable.btn_blue)
+
+        dialog.btn_alert_left.text = "이메일 전송"
+
+        dialog.btn_alert_right.text = "이메일 주소 복사"
+
+        popup = true
+
+        dialog.setOnDismissListener {
+            popup = false
+            dialog = Dialog(context!!)
+        }
+
+        dialog.btn_alert_left.setOnClickListener {
+
+            val email = Intent(Intent.ACTION_SEND)
+            email.type = "plain/Text"
+            email.putExtra(Intent.EXTRA_EMAIL, arrayOf(arr[position].email))
+            context?.startActivity(email)
+
+            dialog.dismiss()
+
+        }
+
+        dialog.btn_alert_right.setOnClickListener {
+
+            val clipboardManager = context?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+
+            val clipData = ClipData.newPlainText("email", arr[position].email)
+
+            clipboardManager!!.setPrimaryClip(clipData)
+
+            Toast.makeText(context, "이메일이 복사되었습니다.", Toast.LENGTH_LONG).show()
+
+            dialog.dismiss()
+
+        }
+
+        dialog.show()
+
+    }
+
     inner class AnswerViewHolder(view : View) : RecyclerView.ViewHolder(view){
 
         var answerQuestionWrapper = view.answerQuestionWrapper
@@ -168,6 +242,7 @@ class AnswerAdapter(var arr : ArrayList<MyAnswerInfo>) : RecyclerView.Adapter<Re
         var questionTitle = view.questionTitle
         var stateAnswer = view.stateAnswer
         var answerCount = view.answerCount
+        var email = view.email
 
         init {
 
