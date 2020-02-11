@@ -88,7 +88,7 @@
                         app:layout_constraintStart_toEndOf="@+id/closeImage"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
+                    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
                         android:id="@+id/burnedImage"
                         android:layout_width="0dp"
                         android:layout_height="350dp"

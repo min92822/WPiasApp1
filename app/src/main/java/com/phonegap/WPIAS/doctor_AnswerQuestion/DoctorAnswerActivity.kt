@@ -21,9 +21,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.Request
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.SizeReadyCallback
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
@@ -95,15 +100,26 @@ class DoctorAnswerActivity : RootActivity() {
             questionInfo = intent.getSerializableExtra("newQuestionInfo") as NewQuestionInfo
         }
 
-        Glide.with(this)
-            .load(patientCase.imageurl1)
-            .into(burnedImage)
+        burnedImage.maxScale = 6.0f
 
         closeImage.setOnClickListener {
 
             Glide.with(this)
+                .asBitmap()
                 .load(patientCase.imageurl1)
-                .into(burnedImage)
+                .into(object : CustomTarget<Bitmap>(){
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        burnedImage.setImage(ImageSource.bitmap(resource))
+                    }
+
+                })
 
             closeImage.setBackgroundResource(R.color.windows_blue)
             closeImage.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -115,8 +131,21 @@ class DoctorAnswerActivity : RootActivity() {
         overviewImage.setOnClickListener {
 
             Glide.with(this)
+                .asBitmap()
                 .load(patientCase.imageurl2)
-                .into(burnedImage)
+                .into(object : CustomTarget<Bitmap>(){
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                    }
+
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        burnedImage.setImage(ImageSource.bitmap(resource))
+                    }
+
+                })
 
             overviewImage.setBackgroundResource(R.color.windows_blue)
             overviewImage.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -124,6 +153,23 @@ class DoctorAnswerActivity : RootActivity() {
             closeImage.setTextColor(ContextCompat.getColor(this, R.color.windows_blue))
 
         }
+
+        Glide.with(this)
+            .asBitmap()
+            .load(patientCase.imageurl1)
+            .into(object : CustomTarget<Bitmap>(){
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    burnedImage.setImage(ImageSource.bitmap(resource))
+                }
+
+            })
 
         patientQuestionContents.movementMethod = ScrollingMovementMethod()
 
