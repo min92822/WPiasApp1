@@ -29,6 +29,7 @@ class MainActivity : RootActivity() {
         setupPermissions()
         mainViewPager()
         SetTransparentBar()
+
     }
 
     override fun onBackPressed() {

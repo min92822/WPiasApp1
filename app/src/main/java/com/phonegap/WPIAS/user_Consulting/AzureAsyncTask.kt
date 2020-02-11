@@ -77,7 +77,7 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
 
         var result = true
         var count = 0
-        var time = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+        var time = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
 
         for((i, inputStream) in inputStreamArr.withIndex()){
 
@@ -138,10 +138,10 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
 
         Validation.vali.directionV.sort()
 
-        map["QKEY"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
+        map["QKEY"] = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
         map["TITLE"] = Validation.vali.consultingTitleV
         map["UUID"] = PubVariable.uid
-        map["INSERTDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+        map["INSERTDATE"] = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
         map["BURNDATE"] = Validation.vali.burnDateV
         map["AGE"] = Validation.vali.ageV
         map["GENDER"] = Validation.vali.genderV
@@ -209,10 +209,10 @@ class AzureAsyncTask(var context : Context, var inputStreamArr : ArrayList<Input
 
         Validation.vali.directionV.sort()
 
-        map["QKEY"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
+        map["QKEY"] = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time) + "_" + PubVariable.uid
         map["TITLE"] = Validation.vali.consultingTitleV
         map["UUID"] = PubVariable.uid
-        map["INSERTDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+        map["INSERTDATE"] = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
         map["BURNDATE"] = Validation.vali.burnDateV
         map["AGE"] = Validation.vali.ageV
         map["GENDER"] = Validation.vali.genderV

@@ -385,7 +385,7 @@ class MyQuestionDetailActivity : RootActivity() {
 
                         var map = HashMap<String, String>()
                         map["QKEY"] = m_questionInfo!!.qkey
-                        map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+                        map["CASEDATE"] = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
                         map["CONTENTS"] = txt_record_content_add.text.toString()
                         map["DIRECTION"] = direction()
 
@@ -404,7 +404,7 @@ class MyQuestionDetailActivity : RootActivity() {
                         // 경과추가 - 답변미요청
                         var map = HashMap<String, String>()
                         map["QKEY"] = m_questionInfo!!.qkey
-                        map["CASEDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+                        map["CASEDATE"] = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
                         map["CONTENTS"] = txt_record_content_add.text.toString()
 
                         println(map)
@@ -562,7 +562,7 @@ class MyQuestionDetailActivity : RootActivity() {
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val timeStamp: String = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
         val storageDir: File = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */

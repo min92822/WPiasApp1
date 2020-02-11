@@ -75,7 +75,7 @@ class AddCase_AzureAsyncTask(var context : Context, var inputStreamArr : ArrayLi
 
         var result = true
         var count = 0
-        var time = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+        var time = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
 
         for((i, inputStream) in inputStreamArr.withIndex()){
 

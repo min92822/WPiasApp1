@@ -78,7 +78,7 @@ class AddCaseRequest_AzureAsyncTask(var DOCTORUUID:String, var context : Context
 
         var result = true
         var count = 0
-        var time = SimpleDateFormat("yyyyMMddkkmmss").format(Calendar.getInstance().time)
+        var time = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
 
         for((i, inputStream) in inputStreamArr.withIndex()){
 

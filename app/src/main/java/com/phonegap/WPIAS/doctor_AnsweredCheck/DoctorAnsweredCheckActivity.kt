@@ -8,15 +8,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.RecyclerView
@@ -27,11 +22,9 @@ import com.phonegap.WPIAS.dataClass.MyAnswerCaseInfo
 import com.phonegap.WPIAS.dataClass.MyAnswerInfo
 import com.phonegap.WPIAS.dataClass.pushinfo
 import com.phonegap.WPIAS.doctor_AnsweredQuestion.DoctorAnsweredActivity
-import com.phonegap.WPIAS.doctor_Question.DoctorNewQuestionActivity
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.public_function.FCM
 import com.phonegap.WPIAS.restApi.ApiUtill
-import kotlinx.android.synthetic.main.activity_doctor_answer.*
 import kotlinx.android.synthetic.main.activity_doctor_answered_check.*
 import kotlinx.android.synthetic.main.activity_doctor_answered_check.ProgressBar
 import kotlinx.android.synthetic.main.activity_doctor_answered_check.ProgressBg
@@ -244,7 +237,7 @@ class DoctorAnsweredCheckActivity : RootActivity() {
         map["UUID"] = PubVariable.uid
         map["CNUMBER"] = patientCase.cnumber
         map["ANSWERCONTENTS"] = doctorAnswerInput.text.toString()
-        map["ANSWERDATE"] = SimpleDateFormat("yyyyMMddkkmmss").format(System.currentTimeMillis())
+        map["ANSWERDATE"] = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
 
         ApiUtill().getUPDATE_FIRSTANSWER().update_firstanswer(map).enqueue(object :
             Callback<String> {
