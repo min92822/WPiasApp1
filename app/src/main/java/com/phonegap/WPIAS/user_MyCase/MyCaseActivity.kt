@@ -14,6 +14,7 @@ import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
 import com.phonegap.WPIAS.dataClass.MycaseInfo
 import com.phonegap.WPIAS.dataClass.QuestionInfo
+import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.restApi.ApiUtill
 import kotlinx.android.synthetic.main.activity_my_case.*
 import kotlinx.android.synthetic.main.custom_alert.*
@@ -83,7 +84,8 @@ class MyCaseActivity : RootActivity() {
         when (m_myCaseInfo!!.casestatus) {
             "Q" -> {
                 lbl_no_answer.text = "답변을 기다리는 중입니다."
-                lbl_no_answer.visibility = View.VISIBLE
+                img_no_answer.setImageResource(R.drawable.qa_chat)
+                wrap_no_answer.visibility = View.VISIBLE
 
                 wrap_mycase_answer.visibility = View.GONE
 
@@ -91,10 +93,10 @@ class MyCaseActivity : RootActivity() {
             "A" -> {
 
                 wrap_mycase_answer.visibility = View.VISIBLE
-                lbl_no_answer.visibility = View.GONE
+                wrap_no_answer.visibility = View.GONE
 
                 txt_mycase_dr.text = "Dr.${m_myCaseInfo!!.answerdocnm}"
-                txt_mycase_dr_detail.text = "| 답변수 : ${m_myCaseInfo!!.answerdoccount}"
+                txt_mycase_dr_detail.text = "|  답변수 : ${m_myCaseInfo!!.answerdoccount}"
                 txt_mycase_dr_detail2.text = "${m_myQuestionInfo!!.answerdocremark.replace("_", " ")}"
 
                 var year = m_myCaseInfo!!.answerdate.subSequence(0, 4)
@@ -128,24 +130,47 @@ class MyCaseActivity : RootActivity() {
                 {
                     rating_mycase.rating = m_myCaseInfo!!.feedbackstar.toFloat()
                     rating_mycase.setIsIndicator(true)
-                    btn_mycase_review_submit.visibility = View.GONE
+                    wrap_mycase_rating.visibility = View.GONE
 
-                    if(m_myCaseInfo!!.feedbacktext.isNullOrEmpty()){
-                        txt_mycase_review.hint = ""
+                    textView38.text = "소중한 리뷰 감사합니다."
+
+                    wrap_mycase_review.visibility = View.VISIBLE
+
+                    if (PubVariable.userInfo.gender == "F") {
+                        img_mycase_review.setImageResource(R.drawable.female)
+                    } else {
+                        img_mycase_review.setImageResource(R.drawable.male)
                     }
+                    lbl_mycase_review_name.text = PubVariable.userInfo.nickname
+                    lbl_mycase_review_content.text = m_myCaseInfo!!.feedbacktext
 
-                    txt_mycase_review.setText(m_myCaseInfo!!.feedbacktext)
+                    var reviewYear = m_myCaseInfo!!.feedbacktime.subSequence(0, 4)
+                    var reviewMonth = m_myCaseInfo!!.feedbacktime.subSequence(4, 6)
+                    var reviewDay = m_myCaseInfo!!.feedbacktime.subSequence(6, 8)
 
-                    txt_mycase_review.isEnabled = false
-                    textView38.setText("소중한 리뷰 감사합니다.")
+                    lbl_mycase_review_time.text = "${reviewYear}년 ${reviewMonth}월 ${reviewDay}일"
+
+                    // 별점 리뷰에 의사 답변
+                    if(m_myCaseInfo!!.feedbackreplytime.isNullOrBlank()){
+                        wrap_mycase_feedback.visibility = View.GONE
+
+                    } else {
+                        wrap_mycase_feedback.visibility = View.VISIBLE
+                        lbl_mycase_feedback_name.text = "Dr.${m_myCaseInfo!!.answerdocnm}"
+                        lbl_mycase_feedback_content.text = m_myCaseInfo!!.feedbackreply
+
+                        var feedbackYear = m_myCaseInfo!!.feedbackreplytime.subSequence(0, 4)
+                        var feedbackMonth = m_myCaseInfo!!.feedbackreplytime.subSequence(4, 6)
+                        var feedbackDay = m_myCaseInfo!!.feedbackreplytime.subSequence(6, 8)
+
+                        lbl_mycase_feedback_time.text = "${feedbackYear}년 ${feedbackMonth}월 ${feedbackDay}일"
+                    }
                 }
-
-
-
             }
             "P" -> {
                 lbl_no_answer.text = "답변을 요청하지 않은 경과입니다."
-                lbl_no_answer.visibility = View.VISIBLE
+                img_no_answer.setImageResource(R.drawable.qa_chat_1)
+                wrap_no_answer.visibility = View.VISIBLE
 
                 wrap_mycase_answer.visibility = View.GONE
             }
@@ -159,10 +184,11 @@ class MyCaseActivity : RootActivity() {
         ProgressAction(true)
 
         var map = HashMap<String, String>()
+        var writeTime = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
 
         map["FEEDBACKSTAR"] = rating_mycase.rating.toString()
         map["FEEDBACKTEXT"] = txt_mycase_review.text.toString()
-        map["FEEDBACKTIME"] = SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().time)
+        map["FEEDBACKTIME"] = writeTime
         map["CKEY"] = m_myCaseInfo!!.ckey
         map["CNUMBER"] = m_myCaseInfo!!.cnumber
 
@@ -178,10 +204,25 @@ class MyCaseActivity : RootActivity() {
                     ProgressAction(false)
 
                     rating_mycase.setIsIndicator(true)
-                    btn_mycase_review_submit.visibility = View.GONE
-                    txt_mycase_review.isEnabled = false
-                    txt_mycase_review.hint = ""
-                    textView38.setText("소중한 리뷰 감사합니다.")
+                    wrap_mycase_rating.visibility = View.GONE
+
+                    textView38.text = "소중한 리뷰 감사합니다."
+
+                    wrap_mycase_review.visibility = View.VISIBLE
+
+                    if (PubVariable.userInfo.gender == "F") {
+                        img_mycase_review.setImageResource(R.drawable.female)
+                    } else {
+                        img_mycase_review.setImageResource(R.drawable.male)
+                    }
+                    lbl_mycase_review_name.text = PubVariable.userInfo.nickname
+                    lbl_mycase_review_content.text = map["FEEDBACKTEXT"]
+
+                    var reviewYear = writeTime.subSequence(0, 4)
+                    var reviewMonth = writeTime.subSequence(4, 6)
+                    var reviewDay = writeTime.subSequence(6, 8)
+
+                    lbl_mycase_review_time.text = "${reviewYear}년 ${reviewMonth}월 ${reviewDay}일"
 
                     successAlert()
                 }
@@ -260,14 +301,14 @@ class MyCaseActivity : RootActivity() {
         {
 
             this.Progress_circle.visibility = View.VISIBLE
-            this!!.Progress_bg.visibility = View.VISIBLE
-            this!!.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            this.Progress_bg.visibility = View.VISIBLE
+            this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
         else
         {
-            this!!.Progress_circle.visibility = View.GONE
-            this!!.Progress_bg.visibility = View.GONE
-            this!!.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            this.Progress_circle.visibility = View.GONE
+            this.Progress_bg.visibility = View.GONE
+            this.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
     }
 

@@ -19,6 +19,8 @@ data class MycaseInfo(@SerializedName("CKEY") @Expose var ckey : String,
                       @SerializedName("FEEDBACKSTAR") @Expose var feedbackstar : String,
                       @SerializedName("FEEDBACKTEXT") @Expose var feedbacktext : String,
                       @SerializedName("FEEDBACKTIME") @Expose var feedbacktime : String,
+                      @SerializedName("FEEDBACKREPLY") @Expose var feedbackreply : String,
+                      @SerializedName("FEEDBACKREPLYTIME") @Expose var feedbackreplytime : String,
                       @SerializedName("ANSWERCONTENTS") @Expose var answercontents : String,
                       @SerializedName("ANSWERDATE") @Expose var answerdate : String,
                       @SerializedName("ANSWERDOC") @Expose var answerdoc : String,
@@ -26,24 +28,26 @@ data class MycaseInfo(@SerializedName("CKEY") @Expose var ckey : String,
                       @SerializedName("ANSWERDOCCOUNT") @Expose var answerdoccount : Int) : Serializable
 
 /*
-    CKEY		    질문 KEY
-    CNUMBER		    케이스 KEY
-    CASEDATE		작성시간 (yyyyMMddhhmmss)
-    DIRECTION	    궁금한점
-    IMAGEURL1		이미지1 URL
-    IMAGEURL2		이미지1 URL
-    CONTENTS		질문내용
-    ISLOCK	    	락 여부
-    LOCKTIME		락 시간
-    LOCKUSER		락 유저 UIUID
-    CASESTATUS		CASE 상태
-    VISIBLE		    공개여부
-    FEEDBACKSTAR	별점
-    FEEDBACKTEXT	후기 내용
-    FEEDBACKTIME	후기 등록 시간
-    ANSWERCONTENTS	의사 답변
-    ANSWERDATE		의사 답변 시간 (yyyyMMddhhmmss)
-    ANSWERDOC		의사 UUID
-    ANSWERDOCNM     의사 이름
-    ANSWERDOCCOUNT	의사 답변 건수
+    CKEY		        질문 KEY
+    CNUMBER		        케이스 KEY
+    CASEDATE		    작성시간 (yyyyMMddhhmmss)
+    DIRECTION	        궁금한점
+    IMAGEURL1		    이미지1 URL
+    IMAGEURL2		    이미지1 URL
+    CONTENTS		    질문내용
+    ISLOCK	    	    락 여부
+    LOCKTIME		    락 시간
+    LOCKUSER		    락 유저 UIUID
+    CASESTATUS		    CASE 상태
+    VISIBLE		        공개여부
+    FEEDBACKSTAR	    별점
+    FEEDBACKTEXT	    후기 내용
+    FEEDBACKTIME	    후기 등록 시간
+    FEEDBACKREPLY		의사 리뷰답변 내용
+    FEEDBACKREPLYTIME	의사 리뷰답변 시간 (yyyyMMddhhmmss)
+    ANSWERCONTENTS	    의사 답변
+    ANSWERDATE		    의사 답변 시간 (yyyyMMddhhmmss)
+    ANSWERDOC		    의사 UUID
+    ANSWERDOCNM         의사 이름
+    ANSWERDOCCOUNT	    의사 답변 건수
  */

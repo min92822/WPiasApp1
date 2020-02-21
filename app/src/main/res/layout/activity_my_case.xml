@@ -46,18 +46,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout40"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_alert"
                     android:paddingBottom="50dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toTopOf="parent">
 
 
                     <Button
@@ -103,58 +101,83 @@
                         android:id="@+id/txt_mycase_content"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:text="TextView"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="32dp"
+                        android:lineSpacingExtra="4dp"
                         android:textSize="16dp"
-                        app:layout_constraintEnd_toEndOf="@+id/img_mycase"
-                        app:layout_constraintStart_toStartOf="@+id/img_mycase"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/img_mycase" />
 
-                    <Button
-                        android:id="@+id/button5"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:background="@color/windows_blue"
-                        android:text="내용수정"
-                        android:textColor="@color/white"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="@+id/img_mycase"
-                        app:layout_constraintStart_toStartOf="@+id/img_mycase"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_mycase_content" />
 
-                    <TextView
-                        android:id="@+id/lbl_no_answer"
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/bg_alert"
+                    android:paddingBottom="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout40"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/wrap_no_answer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:layout_marginEnd="24dp"
                         android:text="답변을 요청하지 않은 경과입니다."
                         android:textAlignment="center"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/button5" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/img_no_answer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/qa_chat_1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/lbl_no_answer"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="답변을 요청하지 않은 경과입니다."
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/img_no_answer" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/wrap_mycase_answer"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/button5">
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout18"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:background="@color/light_blue_grey"
+                            android:background="@drawable/bg_skyblue_radius_top"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -164,8 +187,8 @@
                                 android:layout_width="75dp"
                                 android:layout_height="75dp"
                                 android:layout_marginStart="24dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 android:src="@drawable/doctor_m"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +212,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="| 답변수 : "
+                                android:text="|  답변수 : "
                                 android:textSize="12dp"
                                 app:layout_constraintBottom_toBottomOf="@+id/txt_mycase_dr"
                                 app:layout_constraintStart_toEndOf="@+id/txt_mycase_dr" />
@@ -221,10 +244,10 @@
                             android:id="@+id/txt_mycase_answer"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="24dp"
-                            android:text="TextView"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="32dp"
+                            android:lineSpacingExtra="4dp"
                             android:textSize="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -249,8 +272,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="24dp"
-                            android:text="답변이 어떠셨나요?"
-                            android:textSize="14dp"
+                            android:text="답변이 만족스러우셨나요?"
+                            android:textSize="16dp"
                             app:layout_constraintEnd_toEndOf="@+id/constraintLayout19"
                             app:layout_constraintStart_toStartOf="@+id/constraintLayout19"
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
@@ -266,37 +289,185 @@
                             app:layout_constraintStart_toStartOf="@+id/textView38"
                             app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
-                        <EditText
-                            android:id="@+id/txt_mycase_review"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/wrap_mycase_rating"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="@+id/constraintLayout19"
+                            app:layout_constraintStart_toStartOf="@+id/constraintLayout19"
+                            app:layout_constraintTop_toBottomOf="@+id/rating_mycase">
+
+                            <EditText
+                                android:id="@+id/txt_mycase_review"
+                                android:layout_width="0dp"
+                                android:layout_height="100dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="@drawable/btn_cause_unfocused"
+                                android:ems="10"
+                                android:gravity="top"
+                                android:hint="답변에 대한 리뷰를 작성해주세요"
+                                android:inputType="textMultiLine"
+                                android:padding="10dp"
+                                android:textSize="14dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/btn_mycase_review_submit"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/btn_blue"
+                                android:text="리뷰 등록"
+                                android:textColor="@color/white"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="@+id/txt_mycase_review"
+                                app:layout_constraintStart_toStartOf="@+id/txt_mycase_review"
+                                app:layout_constraintTop_toBottomOf="@+id/txt_mycase_review" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/wrap_mycase_review"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:background="@color/white_two"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/wrap_mycase_rating">
+
+                            <ImageView
+                                android:id="@+id/img_mycase_review"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="16dp"
+                                android:src="@drawable/male"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/lbl_mycase_review_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="환자임"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/img_mycase_review"
+                                app:layout_constraintStart_toEndOf="@+id/img_mycase_review"
+                                app:layout_constraintTop_toTopOf="@+id/img_mycase_review" />
+
+                            <TextView
+                                android:id="@+id/lbl_mycase_review_content"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="30dp"
+                                android:lineSpacingExtra="4dp"
+                                android:textSize="16dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/lbl_mycase_review_name"
+                                app:layout_constraintTop_toBottomOf="@+id/img_mycase_review" />
+
+                            <TextView
+                                android:id="@+id/lbl_mycase_review_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="24dp"
+                                android:text="2020년 00월 00일"
+                                android:textColor="@color/warm_grey"
+                                android:textSize="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/lbl_mycase_review_content"
+                                app:layout_constraintTop_toBottomOf="@+id/lbl_mycase_review_content" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/wrap_mycase_feedback"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginEnd="16dp"
-                            android:ems="10"
-                            android:hint="리뷰를 작성해주세요"
-                            android:inputType="textPersonName"
-                            android:textSize="14dp"
-                            app:layout_constraintEnd_toEndOf="@+id/constraintLayout19"
-                            app:layout_constraintStart_toStartOf="@+id/constraintLayout19"
-                            app:layout_constraintTop_toBottomOf="@+id/rating_mycase" />
+                            android:background="@color/white_two"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/wrap_mycase_review">
 
-                        <Button
-                            android:id="@+id/btn_mycase_review_submit"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="wrap_content"
-                            android:layout_height="35dp"
-                            android:layout_marginTop="16dp"
-                            android:background="@drawable/btn_blue"
-                            android:text="확인"
-                            android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/txt_mycase_review"
-                            app:layout_constraintStart_toStartOf="@+id/txt_mycase_review"
-                            app:layout_constraintTop_toBottomOf="@+id/txt_mycase_review" />
+                            <View
+                                android:id="@+id/view8"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginEnd="24dp"
+                                android:background="@color/warm_grey"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ImageView
+                                android:id="@+id/img_mycase_feedback"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginStart="24dp"
+                                android:layout_marginTop="24dp"
+                                android:src="@drawable/doctor_m"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+                            <TextView
+                                android:id="@+id/lbl_mycase_feedback_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="Dr.의사임"
+                                android:textSize="14dp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/img_mycase_feedback"
+                                app:layout_constraintStart_toEndOf="@+id/img_mycase_feedback"
+                                app:layout_constraintTop_toTopOf="@+id/img_mycase_feedback" />
+
+                            <TextView
+                                android:id="@+id/lbl_mycase_feedback_content"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="30dp"
+                                android:lineSpacingExtra="4dp"
+                                android:textSize="16dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/lbl_mycase_feedback_name"
+                                app:layout_constraintTop_toBottomOf="@+id/img_mycase_feedback" />
+
+                            <TextView
+                                android:id="@+id/lbl_mycase_feedback_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="24dp"
+                                android:text="2020년 00월 00일"
+                                android:textColor="@color/warm_grey"
+                                android:textSize="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/lbl_mycase_feedback_content"
+                                app:layout_constraintTop_toBottomOf="@+id/lbl_mycase_feedback_content" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
@@ -304,10 +475,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -315,20 +484,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0.4"
-            android:elevation="4dp"
             android:background="#000000"
+            android:elevation="4dp"
             android:visibility="gone">
 
-        </androidx.constraintlayout.widget.ConstraintLayout
-            >
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
             android:id="@+id/Progress_circle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:elevation="4dp"
             android:indeterminateTint="@color/colorPrimaryDark"
             android:visibility="gone"
-            android:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
