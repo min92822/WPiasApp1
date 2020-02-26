@@ -192,7 +192,7 @@ class AddCaseRequest_AzureAsyncTask(var DOCTORUUID:String, var context : Context
                     } else {
                         if(arr[0].SWITCH2=="On")
                         {
-                            FCM.function.SendMsgToTarget(arr[0].TOKEN, "${PubVariable.userInfo.nickname} 님이 추가질문을 등록했습니다.")
+                            FCM.function.SendMsgToTarget(arr[0].TOKEN, "${PubVariable.userInfo.nickname} 님이 추가질문을 등록했습니다.", FCM.UserType.DOCTOR, FCM.PushType.DOCTOR_REQUESTION)
                             PushSuccess()
                         }
                     }
@@ -212,7 +212,7 @@ class AddCaseRequest_AzureAsyncTask(var DOCTORUUID:String, var context : Context
 
     fun PushSuccess()
     {
-        FCM.function.SendMsgToTarget(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
+//        FCM.function.SendMsgToTarget(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
 
         var dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

@@ -32,10 +32,6 @@ class DoctorNewQuestionActivity : RootActivity() {
 
         SetTransparentBar()
 
-        getCount()
-
-        getNewQuestion()
-
         initActivity()
 
     }
@@ -66,16 +62,18 @@ class DoctorNewQuestionActivity : RootActivity() {
         ApiUtill().getSELECT_NEWQUESTION().select_newquestion().enqueue(object : Callback<ArrayList<NewQuestionInfo>>{
 
             override fun onResponse(call: Call<ArrayList<NewQuestionInfo>>, response: Response<ArrayList<NewQuestionInfo>>) {
+                viewVisibleControl(true)
                 if(response.isSuccessful){
                     questionRecyclerView.layoutManager = LinearLayoutManager(this@DoctorNewQuestionActivity)
                     questionRecyclerView.adapter = NewQuestionAdapter(response.body()!!)
-                    viewVisibleControl(true)
                 }else{
-                    println()
+                    println(response.code())
+                    println(response.message())
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<NewQuestionInfo>>, t: Throwable) {
+                viewVisibleControl(true)
                 println(t.toString())
             }
 
@@ -89,14 +87,12 @@ class DoctorNewQuestionActivity : RootActivity() {
         viewVisibleControl(false)
 
         var map = HashMap<String, String>()
-
         map["IDKEY"] = PubVariable.userInfo.idkey
 
         ApiUtill().getSELECT_MYANSWERCOUNT().select_myanswercount(map).enqueue(object : Callback<Any>{
-
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
-
+                viewVisibleControl(true)
                 if(response.isSuccessful){
                     var count = ((response.body()!! as ArrayList<*>)[0] as LinkedTreeMap<*, *>).values.toList()[0]
                     answerCount.text = "답변 수 : ${(count as Double).toInt()}"
@@ -104,15 +100,13 @@ class DoctorNewQuestionActivity : RootActivity() {
                     println(response.message())
                     println(response.code())
                 }
-
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
+                viewVisibleControl(true)
                 println(t.toString())
             }
-
         })
-
     }
 
     //서버 통신 완료되기까지 view visible을 컨트롤 한다

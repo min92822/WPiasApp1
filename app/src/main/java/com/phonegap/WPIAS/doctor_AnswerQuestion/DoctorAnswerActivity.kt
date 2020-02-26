@@ -373,7 +373,7 @@ class DoctorAnswerActivity : RootActivity() {
 
                         if(pushinfo.SWITCH2 == "On"){
 
-                            FCM.function.SendMsgToTarget(pushinfo.TOKEN, "${PubVariable.userInfo.nickname} 선생님이 답변을 등록되었습니다.")
+                            FCM.function.SendMsgToTarget(pushinfo.TOKEN, "${PubVariable.userInfo.nickname} 선생님이 답변을 등록하였습니다.", FCM.UserType.USER, FCM.PushType.USER_MYQUESTION)
 
                         }else{
 

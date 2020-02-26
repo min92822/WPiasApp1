@@ -66,7 +66,6 @@ class DoctorAnsweredActivity : RootActivity() {
     fun rdAnswerSelect(){
 
         rdAnswered.setOnCheckedChangeListener { buttonView, isChecked ->
-
             if(isChecked){
                 buttonView.setTextColor(
                     ContextCompat.getColor(this,
@@ -76,10 +75,8 @@ class DoctorAnsweredActivity : RootActivity() {
                     ContextCompat.getColor(this,
                         R.color.windows_blue
                     ))
-
                 questionRecyclerView.layoutManager = LinearLayoutManager(this)
                 questionRecyclerView.adapter = AnswerAdapter(answered)
-
             }else{
                 buttonView.setTextColor(
                     ContextCompat.getColor(this,
@@ -90,11 +87,9 @@ class DoctorAnsweredActivity : RootActivity() {
                         R.color.white
                     ))
             }
-
         }
 
         rdNotAnswered.setOnCheckedChangeListener { buttonView, isChecked ->
-
             if(isChecked){
                 buttonView.setTextColor(
                     ContextCompat.getColor(this,
@@ -118,9 +113,7 @@ class DoctorAnsweredActivity : RootActivity() {
                         R.color.white
                     ))
             }
-
         }
-
     }
 
     //의사 답변수 조회 펑션
@@ -129,7 +122,6 @@ class DoctorAnsweredActivity : RootActivity() {
         viewVisibleControl(false)
 
         var map = HashMap<String, String>()
-
         map["IDKEY"] = PubVariable.userInfo.idkey
 
         ApiUtill().getSELECT_MYANSWERCOUNT().select_myanswercount(map).enqueue(object :
@@ -137,7 +129,6 @@ class DoctorAnsweredActivity : RootActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
-
                 if(response.isSuccessful){
                     var count = ((response.body()!! as ArrayList<*>)[0] as LinkedTreeMap<*, *>).values.toList()[0]
                     answerCount.text = "답변 수 : ${(count as Double).toInt()}"
@@ -145,15 +136,11 @@ class DoctorAnsweredActivity : RootActivity() {
                     println(response.message())
                     println(response.code())
                 }
-
             }
-
             override fun onFailure(call: Call<Any>, t: Throwable) {
                 println(t.toString())
             }
-
         })
-
     }
 
     //서버 통신 완료되기까지 view visible을 컨트롤 한다
@@ -174,45 +161,31 @@ class DoctorAnsweredActivity : RootActivity() {
         notAnswered.clear()
 
         var map = HashMap<String, String>()
-
         map["ANSWERDOC"] = PubVariable.uid
 
         ApiUtill().getSELECT_MYANSWER200106().select_myanswer200106(map).enqueue(object : Callback<ArrayList<MyAnswerInfo>>{
-
             override fun onResponse(call: Call<ArrayList<MyAnswerInfo>>,response: Response<ArrayList<MyAnswerInfo>>) {
-
                 viewVisibleControl(true)
-
                 if(response.isSuccessful){
-
                     myAnswerInfo = response.body()!!
 
                     for(info in myAnswerInfo){
-
                         if(info.prostatus == "A"){
                             answered.add(info)
                         }else{
                             notAnswered.add(info)
                         }
-
                     }
-
                 }else{
-
                     println(response.code())
                     println(response.message())
-
                 }
-
             }
-
             override fun onFailure(call: Call<ArrayList<MyAnswerInfo>>, t: Throwable) {
                 viewVisibleControl(true)
                 println(t.toString())
             }
-
         })
-
     }
 
     override fun onBackPressed() {

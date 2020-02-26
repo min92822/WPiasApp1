@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.phonegap.WPIAS.R
 import com.phonegap.WPIAS.RootActivity
+import com.phonegap.WPIAS.camera2Api.CameraActivity
 import com.phonegap.WPIAS.dataClass.CityInfo
 import com.phonegap.WPIAS.dataClass.DistrictInfo
 import com.phonegap.WPIAS.publicObject.Location
@@ -724,6 +725,11 @@ class ConsultingActivity : RootActivity(){
     //핸드폰에 내장된 카메라 관련 어플들을 불러오는 펑션
     //촬영 모드 구분
     private fun dispatchTakePictureIntent() {
+//        if(cameraMode == "short") {
+//            startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_10)
+//        }else{
+//            startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_20)
+//        }
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)?.also {
                 // Create the File where the photo should go
@@ -778,19 +784,23 @@ class ConsultingActivity : RootActivity(){
         //사진 촬영으로 이미지 가져옴
         if(resultCode == Activity.RESULT_OK){
 
-
             when(requestCode) {
 
                 REQUEST_TAKE_PHOTO_10 -> {
+//                    var path = data?.getStringExtra("path")
+//                    bitmap = BitmapFactory.decodeFile(path)
+//                    var file = bitmapToFile(bitmap, path!!)
                     bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-                    var file = bitmapToFile(bitmap)
+                    var file = bitmapToFile(bitmap, "")
                     imageUri = Uri.fromFile(file)
+//                    imageUri = Uri.parse(path)
                     if(imageUri.toString().isNotEmpty()){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
                     imageUri = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
-                    shortDistanceShot.setImageBitmap(imageRotate(bitmap))
+                    shortDistanceShot.setImageBitmap(imageResizing(bitmap))
+//                    shortDistanceShot.setImageBitmap(bitmap/*imageRotate(bitmap)*/)
 
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
@@ -801,8 +811,8 @@ class ConsultingActivity : RootActivity(){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
-                    imageUri2 = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
-                    longDistanceShot.setImageBitmap(imageRotate(bitmap))
+//                    imageUri2 = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
+                    longDistanceShot.setImageBitmap(imageResizing(bitmap))
 
                 }
 
@@ -828,7 +838,7 @@ class ConsultingActivity : RootActivity(){
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
                     }
 
-                    shortDistanceShot.setImageBitmap(imageRotate(bitmap!!))
+                    shortDistanceShot.setImageBitmap(imageResizing(bitmap!!))
 
                 }
                 GET_IMAGE_FROM_GALLERY_20 -> {
@@ -844,7 +854,7 @@ class ConsultingActivity : RootActivity(){
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri2)
                     }
 
-                    longDistanceShot.setImageBitmap(imageRotate(bitmap!!))
+                    longDistanceShot.setImageBitmap(imageResizing(bitmap!!))
 
                 }
 
@@ -1024,32 +1034,41 @@ class ConsultingActivity : RootActivity(){
 
         var matrix = Matrix()
 
-        if(bitmap.width >= bitmap.height){
-
-            matrix.postRotate(90f)
-
-        }
+        matrix.postRotate(90f)
 
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
 
     }
 
+    //사진 1:1비율로 만드는 펑션
+    fun imageResizing(bitmap : Bitmap) : Bitmap?{
+
+//        var matrix = Matrix()
+//
+//        if(bitmap.width > bitmap.height) {
+//
+//            matrix.postRotate(90f)
+//
+//        }
+
+        return Bitmap.createScaledBitmap(bitmap/*Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)*/, 480, 480, true)
+
+    }
+
     //비트맵을 다시 파일로 바꾸는 펑션
-    fun bitmapToFile(bitmap: Bitmap) : File?{
+    fun bitmapToFile(bitmap: Bitmap, path : String) : File?{
 
         var file = File(currentPhotoPath)
+//        var file = File(path)
         var out = FileOutputStream(file)
 
         try{
-
             file.createNewFile()
-
-            imageRotate(bitmap)
-
+//            imageRotate(bitmap)
+            imageResizing(bitmap)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 25, out)
 
             return file
-
         }catch (e : Exception){
             e.printStackTrace()
             return null
@@ -1087,10 +1106,8 @@ class ConsultingActivity : RootActivity(){
 
          if(view !is EditText) {
              view.setOnTouchListener { v, event ->
-
                  hideKeyboard()
                  return@setOnTouchListener false
-
              }
          }
 

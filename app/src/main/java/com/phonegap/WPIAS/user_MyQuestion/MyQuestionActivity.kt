@@ -1,5 +1,6 @@
 package com.phonegap.WPIAS.user_MyQuestion
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -11,6 +12,7 @@ import com.phonegap.WPIAS.RootActivity
 import com.phonegap.WPIAS.dataClass.QuestionInfo
 import com.phonegap.WPIAS.publicObject.PubVariable
 import com.phonegap.WPIAS.restApi.ApiUtill
+import com.phonegap.WPIAS.user_Main.MainActivity
 import kotlinx.android.synthetic.main.activity_my_question.*
 import kotlinx.android.synthetic.main.title_bar_skyblue.*
 import retrofit2.Call
@@ -115,8 +117,7 @@ class MyQuestionActivity : RootActivity() {
     }
 
     override fun onBackPressed() {
-        finish()
+        startActivity(Intent(this, MainActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
     }
-
 
 }

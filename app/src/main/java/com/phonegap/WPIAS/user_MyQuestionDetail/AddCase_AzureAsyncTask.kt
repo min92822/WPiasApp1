@@ -164,7 +164,7 @@ class AddCase_AzureAsyncTask(var context : Context, var inputStreamArr : ArrayLi
     //업로드 성공 알럿
     fun successAlert(){
 
-        FCM.function.SendMsgToTopic(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.")
+        FCM.function.SendMsgToTopic(FCM.TOPIC.NewQuestion, "신규 질문이 등록되었습니다.", FCM.UserType.DOCTOR, FCM.PushType.DOCTOR_NEWQUESTION)
 
         var dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

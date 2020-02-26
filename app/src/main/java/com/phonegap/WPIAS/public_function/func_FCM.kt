@@ -11,25 +11,41 @@ import retrofit2.Response
 
 class FCM {
 
+//    data class FCMInteraction(@SerializedName("to") @Expose var to : String,
+//                              @SerializedName("notification") @Expose var notification : Notification
+//    )
     data class FCMInteraction(@SerializedName("to") @Expose var to : String,
-                              @SerializedName("notification") @Expose var notification : Notification
+                              @SerializedName("notification") @Expose var notification : Notification,
+                              @SerializedName("data") @Expose var data : Data
     )
-
     data class Notification(var title : String, var body : String)
+    data class Data(var USERTYPE : String, var PUSHTYPE : String/*, var param : PARAM*/)
+    /*data class PARAM(var idkey : String)*/
 
     object TOPIC{
         val WpiasAll = "WpiasAll"
         val NewQuestion = "NewQuestion"
     }
 
+    object UserType{
+        val USER = "USER"
+        val DOCTOR = "DOCTOR"
+    }
+
+    object PushType{
+        val USER_MYQUESTION = "USER_MYQUESTION"
+        val USER_FEEDBACKREPLY = "USER_FEEDBACKREPLY"
+        val DOCTOR_NEWQUESTION = "DOCTOR_NEWQUESTION"
+        val DOCTOR_REQUESTION = "DOCTOR_REQUESTION"
+    }
 
     object function
     {
-        fun SendMsgToTarget(TARGET:String, MSG:String)
+        fun SendMsgToTarget(TARGET:String, MSG:String, USERTYPE: String, PUSHTYPE : String)
         {
             var NOTIFICTION = Notification("WPIAS", MSG)
             var FCM_BODY =
-                FCMInteraction(TARGET, NOTIFICTION)
+                FCMInteraction(TARGET, NOTIFICTION, Data(USERTYPE, PUSHTYPE))
 
             ApiUtill().sendFCM().sendFCM(FCM_BODY).enqueue(object : Callback<ResponseBody> {
                 override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -52,12 +68,13 @@ class FCM {
         }
 
 
-        fun SendMsgToTopic(TOPIC:String, MSG:String)
+        fun SendMsgToTopic(TOPIC:String, MSG:String, USERTYPE: String, PUSHTYPE: String)
         {
             var NOTIFICTION = Notification("WPIAS", MSG)
             var FCM_BODY = FCMInteraction(
                 "/topics/${TOPIC}",
-                NOTIFICTION
+                NOTIFICTION,
+                Data(USERTYPE, PUSHTYPE)
             )
 
             ApiUtill().sendFCM().sendFCM(FCM_BODY).enqueue(object : Callback<ResponseBody> {
