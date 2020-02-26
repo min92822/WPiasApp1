@@ -798,7 +798,10 @@ class ConsultingActivity : RootActivity(){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
-                    imageUri = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
+                    imageUri = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
+
+
+
                     shortDistanceShot.setImageBitmap(imageResizing(bitmap))
 //                    shortDistanceShot.setImageBitmap(bitmap/*imageRotate(bitmap)*/)
 
@@ -811,7 +814,7 @@ class ConsultingActivity : RootActivity(){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
-//                    imageUri2 = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
+                    imageUri2 = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
                     longDistanceShot.setImageBitmap(imageResizing(bitmap))
 
                 }
@@ -1043,16 +1046,25 @@ class ConsultingActivity : RootActivity(){
     //사진 1:1비율로 만드는 펑션
     fun imageResizing(bitmap : Bitmap) : Bitmap?{
 
-//        var matrix = Matrix()
-//
-//        if(bitmap.width > bitmap.height) {
-//
-//            matrix.postRotate(90f)
-//
-//        }
+        var matrix = Matrix()
+        println("bitmap.width: ${bitmap.width}")
+        println("bitmap.height: ${bitmap.height}")
 
-        return Bitmap.createScaledBitmap(bitmap/*Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)*/, 480, 480, true)
 
+//
+        if(bitmap.width > bitmap.height)
+        {
+            //가로가 짧은 사진이 들어오는 곳
+            println("ddd")
+            matrix.postRotate(90f)
+            return Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+        }
+        else
+        {
+            //가로가 긴 사진이 들어와야하는데 안들어옴
+            println("bbb")
+            return Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+        }
     }
 
     //비트맵을 다시 파일로 바꾸는 펑션
