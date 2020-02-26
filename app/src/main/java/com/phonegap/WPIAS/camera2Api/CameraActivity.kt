@@ -260,17 +260,13 @@ class CameraActivity : RootActivity() {
     fun imageResizing(bitmap : Bitmap) : Bitmap?{
 
         var matrix = Matrix()
-        println("bitmap.width: ${bitmap.width}")
-        println("bitmap.height: ${bitmap.height}")
 
         return if(bitmap.width > bitmap.height) {
             //가로가 짧은 사진이 들어오는 곳
-            println("ddd")
             matrix.postRotate(90f)
             Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
         } else {
             //가로가 긴 사진이 들어와야하는데 안들어옴
-            println("bbb")
             Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
         }
     }

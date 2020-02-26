@@ -30,6 +30,7 @@ import com.phonegap.WPIAS.dataClass.MycaseInfo
 import com.phonegap.WPIAS.dataClass.QuestionInfo
 import com.phonegap.WPIAS.publicObject.Validation
 import com.phonegap.WPIAS.restApi.ApiUtill
+import kotlinx.android.synthetic.main.activity_consulting.*
 import kotlinx.android.synthetic.main.activity_my_question_detail.*
 import kotlinx.android.synthetic.main.custom_alert.*
 import kotlinx.android.synthetic.main.in_my_question_detail_add_record.*
@@ -606,28 +607,47 @@ class MyQuestionDetailActivity : RootActivity() {
             when(requestCode) {
 
                 REQUEST_TAKE_PHOTO_10 -> {
+//                    var path = data?.getStringExtra("path")
+//                    bitmap = BitmapFactory.decodeFile(path)
+//                    imageUri = Uri.fromFile(File(path))
+//
+//                    if(imageUri.toString().isNotEmpty()){
+//                        Validation.vali.imageUrl1V = imageUri.toString()
+//                    }
+//
+//                    btn_photo_close.setImageBitmap(bitmap)
                     bitmap = BitmapFactory.decodeFile(currentPhotoPath)
                     var file = File(currentPhotoPath)
                     imageUri = Uri.fromFile(file)
+
                     if(imageUri.toString().isNotEmpty()){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
-                    imageUri = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
-                    btn_photo_close.setImageBitmap(imageRotate(bitmap))
+                    imageUri = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
+                    btn_photo_close.setImageBitmap(imageResizing(bitmap))
 
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
+//                    var path = data?.getStringExtra("path")
+//                    bitmap = BitmapFactory.decodeFile(path)
+//                    imageUri2 = Uri.fromFile(File(path))
+//
+//                    if(imageUri2.toString().isNotEmpty()){
+//                        Validation.vali.imageUrl2V = imageUri2.toString()
+//                    }
+//
+//                    btn_photo_over.setImageBitmap(bitmap)
                     bitmap = BitmapFactory.decodeFile(currentPhotoPath)
                     var file = File(currentPhotoPath)
                     imageUri2 = Uri.fromFile(file)
+
                     if(imageUri2.toString().isNotEmpty()){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
-                    imageUri2 = getImageUriFromBitmap(this, imageRotate(bitmap)!!)
-                    btn_photo_over.setImageBitmap(imageRotate(bitmap))
-
+                    imageUri2 = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
+                    btn_photo_over.setImageBitmap(imageResizing(bitmap))
                 }
 
             }
@@ -652,7 +672,7 @@ class MyQuestionDetailActivity : RootActivity() {
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
                     }
 
-                    btn_photo_close.setImageBitmap(imageRotate(bitmap!!))
+                    btn_photo_close.setImageBitmap(imageResizing(bitmap!!))
 
                 }
                 GET_IMAGE_FROM_GALLERY_20 -> {
@@ -668,7 +688,7 @@ class MyQuestionDetailActivity : RootActivity() {
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri2)
                     }
 
-                    btn_photo_over.setImageBitmap(imageRotate(bitmap!!))
+                    btn_photo_over.setImageBitmap(imageResizing(bitmap!!))
 
                 }
 
@@ -678,22 +698,24 @@ class MyQuestionDetailActivity : RootActivity() {
 
     }
 
-
-    //사진 세로로 세우는 펑션
-    fun imageRotate(bitmap : Bitmap) : Bitmap?{
-
+    //사진 1:1비율로 만드는 펑션
+    fun imageResizing(bitmap : Bitmap) : Bitmap?{
         var matrix = Matrix()
 
-        if(bitmap.width >= bitmap.height){
+        println("bitmap.width: ${bitmap.width}")
+        println("bitmap.height: ${bitmap.height}")
 
+        return if(bitmap.width > bitmap.height) {
+            //가로가 짧은 사진이 들어오는 곳
+            println("ddd")
             matrix.postRotate(90f)
-
+            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+        } else {
+            //가로가 긴 사진이 들어와야하는데 안들어옴
+            println("bbb")
+            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
         }
-
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-
     }
-
 
     // 상처 경과기록
     fun detailQuestion(){

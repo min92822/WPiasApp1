@@ -635,7 +635,7 @@ class ConsultingActivity : RootActivity(){
                     shortDistanceShot.setImageBitmap(imageResizing(bitmap))
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
-//                    var path = data?.getStringExtra("path")
+                    var path = data?.getStringExtra("path")
 //                    bitmap = BitmapFactory.decodeFile(path)
 //                    imageUri2 = Uri.fromFile(File(path))
 //
