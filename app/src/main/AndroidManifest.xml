@@ -18,9 +18,10 @@
         android:allowBackup="true"
         android:icon="@drawable/w_logo"
         android:label="@string/app_name"
+        android:roundIcon="@drawable/w_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        android:roundIcon="@drawable/w_logo"
+
         <activity android:name=".FindPasswordActivity"></activity>
 
         <provider
@@ -104,8 +105,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".camera2Api.CameraActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".FcmService"
             android:screenOrientation="portrait">
