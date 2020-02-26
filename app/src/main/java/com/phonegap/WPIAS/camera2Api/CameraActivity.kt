@@ -149,7 +149,7 @@ class CameraActivity : RootActivity() {
                 cameraDevice?.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
             captureBuilder?.addTarget(reader.surface)
             captureBuilder?.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO)
-            captureBuilder?.set(CaptureRequest.JPEG_QUALITY, 100.toByte())
+            captureBuilder?.set(CaptureRequest.JPEG_QUALITY, 50.toByte())
 
             var rotation = windowManager.defaultDisplay.rotation
 
@@ -242,26 +242,37 @@ class CameraActivity : RootActivity() {
         try {
 
             out = FileOutputStream(file!!)
-            var bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeByteArray(byte, 0, byte.size), 480, 480, true)
-
-//            var oldExif = ExifInterface(file!!.absolutePath)
-//            var oldExifOrientation = oldExif.getAttribute(ExifInterface.TAG_ORIENTATION)
+            var bitmap = BitmapFactory.decodeByteArray(byte, 0, byte.size)
+            bitmap = imageResizing(bitmap)
 
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream)
-//            bitmap.recycle()
-
-//            var newExif = ExifInterface(file!!.absolutePath)
-//            newExif.setAttribute(ExifInterface.TAG_ORIENTATION, oldExifOrientation)
-//            newExif.saveAttributes()
+            bitmap.recycle()
 
             out.write(byteStream.toByteArray())
-
-//            out.write(byte)
 
         } finally {
             out?.close()
         }
 
+    }
+
+    //사진 1:1비율로 만드는 펑션
+    fun imageResizing(bitmap : Bitmap) : Bitmap?{
+
+        var matrix = Matrix()
+        println("bitmap.width: ${bitmap.width}")
+        println("bitmap.height: ${bitmap.height}")
+
+        return if(bitmap.width > bitmap.height) {
+            //가로가 짧은 사진이 들어오는 곳
+            println("ddd")
+            matrix.postRotate(90f)
+            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+        } else {
+            //가로가 긴 사진이 들어와야하는데 안들어옴
+            println("bbb")
+            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+        }
     }
 
     private fun createCameraPreview() {
