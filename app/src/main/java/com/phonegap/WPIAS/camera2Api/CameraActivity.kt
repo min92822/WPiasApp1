@@ -17,7 +17,9 @@ import android.os.HandlerThread
 import android.util.Size
 import android.view.TextureView
 import android.util.SparseIntArray
+import android.util.TypedValue
 import android.view.Surface
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.phonegap.WPIAS.R
@@ -129,15 +131,15 @@ class CameraActivity : RootActivity() {
                 cameraCharacteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)!!
                     .getOutputSizes(ImageFormat.JPEG)
 
-            var width = 1024
+            var width = 768
             var height = 1024
 
-//            if (jpegSize != null && jpegSize.isNotEmpty()) {
-//
-//                width = jpegSize[0].width
-//                height = jpegSize[0].height
-//
-//            }
+            if (jpegSize != null && jpegSize.isNotEmpty()) {
+
+                width = jpegSize[0].width
+                height = jpegSize[0].height
+
+            }
 
             var reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1)
             var outputSurface = ArrayList<Surface>()
@@ -156,7 +158,8 @@ class CameraActivity : RootActivity() {
             captureBuilder?.set(CaptureRequest.JPEG_ORIENTATION, Orientations.get(rotation))
 
             file = File(
-                this.getExternalFilesDir(null)!!.absolutePath + "/" + SimpleDateFormat("yyyyMMddHHmmss").format(
+                this.getExternalFilesDir(null)!!.absolutePath + "/"
+                        + SimpleDateFormat("yyyyMMddHHmmss").format(
                     Date()
                 ) + ".jpg"
             )
@@ -243,7 +246,19 @@ class CameraActivity : RootActivity() {
 
             out = FileOutputStream(file!!)
             var bitmap = BitmapFactory.decodeByteArray(byte, 0, byte.size)
-            bitmap = imageResizing(bitmap)
+            bitmap = imageRotate(bitmap)
+
+            var point = Point()
+
+            windowManager.defaultDisplay.getSize(point)
+
+            var screenWidth = point.x
+            var screenHeight = point.y
+
+            var tempBitmap = Bitmap.createBitmap(bitmap,
+                angle.left * bitmap.width / screenWidth, angle.top * bitmap.height / screenHeight,
+                angle.width * bitmap.width / screenWidth, angle.height * bitmap.height / screenHeight)
+            bitmap = imageResizing(tempBitmap)
 
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteStream)
             bitmap.recycle()
@@ -256,19 +271,30 @@ class CameraActivity : RootActivity() {
 
     }
 
-    //사진 1:1비율로 만드는 펑션
-    fun imageResizing(bitmap : Bitmap) : Bitmap?{
+    fun dpToPixel(intResources : Int) : Int{
+        return (intResources * (resources.displayMetrics.density)).toInt()
+    }
+
+    fun imageRotate(bitmap : Bitmap) : Bitmap?{
 
         var matrix = Matrix()
 
         return if(bitmap.width > bitmap.height) {
             //가로가 짧은 사진이 들어오는 곳
             matrix.postRotate(90f)
-            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+            Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height,
+                matrix, false)
         } else {
             //가로가 긴 사진이 들어와야하는데 안들어옴
-            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+            Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height,
+                matrix, false)
         }
+
+    }
+
+    //사진 1:1비율로 만드는 펑션
+    fun imageResizing(bitmap : Bitmap) : Bitmap?{
+        return Bitmap.createScaledBitmap(bitmap, 1200, 1200, true)/*Bitmap.createScaledBitmap(bitmap, 1200, 1200, true)*/
     }
 
     private fun createCameraPreview() {

@@ -556,36 +556,36 @@ class ConsultingActivity : RootActivity(){
     //핸드폰에 내장된 카메라 관련 어플들을 불러오는 펑션
     //촬영 모드 구분
     private fun dispatchTakePictureIntent() {
-//        if(cameraMode == "short") {
-//            startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_10)
-//        }else{
-//            startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_20)
-//        }
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(packageManager)?.also {
-                // Create the File where the photo should go
-                val photoFile: File? = try {
-                    createImageFile()
-                } catch (ex: IOException) {
-                    // Error occurred while creating the File
-                    null
-                }
-                // Continue only if the File was successfully created
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        this,
-                        "com.phonegap.WPIAS.fileprovider",
-                        it
-                    )
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    if(cameraMode == "short") {
-                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO_10)
-                    }else{
-                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO_20)
-                    }
-                }
-            }
+        if(cameraMode == "short") {
+            startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_10)
+        }else{
+            startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_20)
         }
+//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+//            takePictureIntent.resolveActivity(packageManager)?.also {
+//                // Create the File where the photo should go
+//                val photoFile: File? = try {
+//                    createImageFile()
+//                } catch (ex: IOException) {
+//                    // Error occurred while creating the File
+//                    null
+//                }
+//                // Continue only if the File was successfully created
+//                photoFile?.also {
+//                    val photoURI: Uri = FileProvider.getUriForFile(
+//                        this,
+//                        "com.phonegap.WPIAS.fileprovider",
+//                        it
+//                    )
+//                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+//                    if(cameraMode == "short") {
+//                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO_10)
+//                    }else{
+//                        startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO_20)
+//                    }
+//                }
+//            }
+//        }
     }
 
     //앨범에서 이미지 가져오는 펑션
@@ -614,46 +614,46 @@ class ConsultingActivity : RootActivity(){
         if(resultCode == Activity.RESULT_OK){
             when(requestCode) {
                 REQUEST_TAKE_PHOTO_10 -> {
-//                    var path = data?.getStringExtra("path")
-//                    bitmap = BitmapFactory.decodeFile(path)
-//                    imageUri = Uri.fromFile(File(path))
-//
-//                    if(imageUri.toString().isNotEmpty()){
-//                        Validation.vali.imageUrl1V = imageUri.toString()
-//                    }
-//
-//                    shortDistanceShot.setImageBitmap(bitmap)
-                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-                    var file = File(currentPhotoPath)
-                    imageUri = Uri.fromFile(file)
+                    var path = data?.getStringExtra("path")
+                    bitmap = BitmapFactory.decodeFile(path)
+                    imageUri = Uri.fromFile(File(path))
 
                     if(imageUri.toString().isNotEmpty()){
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
-                    imageUri = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
-                    shortDistanceShot.setImageBitmap(imageResizing(bitmap))
+                    shortDistanceShot.setImageBitmap(bitmap)
+//                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+//                    var file = File(currentPhotoPath)
+//                    imageUri = Uri.fromFile(file)
+//
+//                    if(imageUri.toString().isNotEmpty()){
+//                        Validation.vali.imageUrl1V = imageUri.toString()
+//                    }
+//
+//                    imageUri = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
+//                    shortDistanceShot.setImageBitmap(imageResizing(bitmap))
                 }
                 REQUEST_TAKE_PHOTO_20 -> {
                     var path = data?.getStringExtra("path")
-//                    bitmap = BitmapFactory.decodeFile(path)
-//                    imageUri2 = Uri.fromFile(File(path))
-//
-//                    if(imageUri2.toString().isNotEmpty()){
-//                        Validation.vali.imageUrl2V = imageUri2.toString()
-//                    }
-//
-//                    longDistanceShot.setImageBitmap(bitmap)
-                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-                    var file = File(currentPhotoPath)
-                    imageUri2 = Uri.fromFile(file)
+                    bitmap = BitmapFactory.decodeFile(path)
+                    imageUri2 = Uri.fromFile(File(path))
 
                     if(imageUri2.toString().isNotEmpty()){
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
-                    imageUri2 = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
-                    longDistanceShot.setImageBitmap(imageResizing(bitmap))
+                    longDistanceShot.setImageBitmap(bitmap)
+//                    bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+//                    var file = File(currentPhotoPath)
+//                    imageUri2 = Uri.fromFile(file)
+//
+//                    if(imageUri2.toString().isNotEmpty()){
+//                        Validation.vali.imageUrl2V = imageUri2.toString()
+//                    }
+//
+//                    imageUri2 = getImageUriFromBitmap(this, imageResizing(bitmap)!!)
+//                    longDistanceShot.setImageBitmap(imageResizing(bitmap))
                 }
             }
         }
