@@ -103,6 +103,7 @@
                         android:layout_height="350dp"
                         android:layout_marginTop="10dp"
                         android:scaleType="centerCrop"
+                        android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="@+id/overviewImage"
                         app:layout_constraintStart_toStartOf="@+id/closeImage"
                         app:layout_constraintTop_toBottomOf="@+id/closeImage" />
