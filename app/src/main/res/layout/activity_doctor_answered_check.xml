@@ -132,7 +132,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="32dp"
                     android:background="@drawable/bg_alert"
-                    android:paddingBottom="50dp"
+                    android:paddingBottom="300dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
