@@ -13,7 +13,7 @@ import android.text.method.ScrollingMovementMethod
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.iterator
 import androidx.recyclerview.widget.RecyclerView
@@ -160,108 +160,177 @@ class DoctorAnsweredCheckActivity : RootActivity() {
         answeredScrollView.setOnTouchListener { v, event ->
 
             doctorAnswerInput.parent.requestDisallowInterceptTouchEvent(false)
-            doctorAnswer.parent.requestDisallowInterceptTouchEvent(false)
-            patientQuestionContents.parent.requestDisallowInterceptTouchEvent(false)
+//            doctorAnswer.parent.requestDisallowInterceptTouchEvent(false)
+//            patientQuestionContents.parent.requestDisallowInterceptTouchEvent(false)
 
             return@setOnTouchListener false
 
         }
 
-        patientQuestionContents.setOnTouchListener { v, event ->
+//        patientQuestionContents.setOnTouchListener { v, event ->
+//
+//            if(v.isVerticalScrollBarEnabled) {
+//
+//                answeredScrollView.requestDisallowInterceptTouchEvent(true)
+//
+//            }else{
+//
+//                answeredScrollView.requestDisallowInterceptTouchEvent(false)
+//
+//            }
+//
+//            return@setOnTouchListener false
+//
+//        }
+//
+//        patientQuestionContents.movementMethod = ScrollingMovementMethod()
 
-            if(v.isVerticalScrollBarEnabled) {
-
-                answeredScrollView.requestDisallowInterceptTouchEvent(true)
-
-            }else{
-
-                answeredScrollView.requestDisallowInterceptTouchEvent(false)
-
-            }
-
-            return@setOnTouchListener false
-
-        }
-
-        patientQuestionContents.movementMethod = ScrollingMovementMethod()
-
-        doctorName.text = PubVariable.userInfo.nickname
+        doctorName.text = "Dr.${PubVariable.userInfo.nickname}"
 
         doctorDept.text = PubVariable.userInfo.remark.replace('_', ' ')
 
         when (patientCase.casestatus) {
+            // 답변미요청
             "P" -> {
-                doctorAnswerSubmit.text = "답변 미요청"
-                doctorAnswer.text = "사용자가 답변요청을 하지 않은 경과 입니다."
-                patientReview.visibility = View.GONE
+//                doctorAnswerSubmit.text = "답변 미요청"
+//                doctorAnswer.text = "사용자가 답변요청을 하지 않은 경과 입니다."
+//                patientReview.visibility = View.GONE
+                wrapDoctorAnswerRequest.visibility = View.GONE
+                wrapDoctorAnswerNotRequest.visibility = View.VISIBLE
+
+                imgDoctorAnswerNotRequest.setImageResource(R.drawable.qa_chat_1)
+                lblDoctorAnswerNotRequest.text = "사용자가 답변요청을 하지 않은 경과 입니다."
+
             }
+
+            // 답변 완료
             "A" -> {
-                doctorAnswerSubmit.text = "답변 완료"
+                wrapDoctorAnswerNotRequest.visibility = View.GONE
+                wrapDoctorAnswerRequest.visibility = View.VISIBLE
+                wrapDoctorAnswerAnswered.visibility = View.VISIBLE
+
+                ratedByPatient.visibility = View.GONE
+                wrapDoctorAnswerSubmit.visibility = View.GONE
+
+//                doctorAnswerSubmit.text = "답변 완료"
                 doctorAnswer.text = patientCase.answercontents
-                doctorAnswer.movementMethod = ScrollingMovementMethod()
+//                doctorAnswer.movementMethod = ScrollingMovementMethod()
+//
+//                doctorAnswer.setOnTouchListener { v, event ->
+//
+//                    if(v.isVerticalScrollBarEnabled) {
+//
+//                        answeredScrollView.requestDisallowInterceptTouchEvent(true)
+//
+//                    }else{
+//
+//                        answeredScrollView.requestDisallowInterceptTouchEvent(false)
+//
+//                    }
+//
+//                    return@setOnTouchListener false
+//
+//                }
 
-                doctorAnswer.setOnTouchListener { v, event ->
 
-                    if(v.isVerticalScrollBarEnabled) {
+                if (patientCase.feedbacktime.isNullOrBlank()) {
+                    reviewExist.text = "사용자가 리뷰를 작성하지 않았습니다."
 
-                        answeredScrollView.requestDisallowInterceptTouchEvent(true)
+                } else {
+                    // 사용자가 리뷰를 등록했을 때
+                    ratedByPatient.rating = patientCase.feedbackstar.toFloat()
+                    ratedByPatient.setIsIndicator(true)
+                    ratedByPatient.visibility = View.VISIBLE
+                    reviewExist.text = "사용자가 리뷰를 작성했습니다."
 
-                    }else{
+                    wrapDoctorAnswerReview.visibility = View.VISIBLE
+                    wrapDoctorAnswerPatientReview.visibility = View.VISIBLE
 
-                        answeredScrollView.requestDisallowInterceptTouchEvent(false)
+                    lblDoctorAnswerPatientReviewName.text = answerInfo.nickname
+                    lblDoctorAnswerPatientReviewContent.text = patientCase.feedbacktext
 
+                    if (answerInfo.gender == "F") {
+                        imgDoctorAnswerPatientReview.setImageResource(R.drawable.female)
+                    } else {
+                        imgDoctorAnswerPatientReview.setImageResource(R.drawable.male)
                     }
 
-                    return@setOnTouchListener false
+                    var year = patientCase!!.answerdate.subSequence(0, 4)
+                    var month = patientCase!!.answerdate.subSequence(4, 6)
+                    var day = patientCase!!.answerdate.subSequence(6, 8)
+                    lblDoctorAnswerPatientReviewTime.text = "답변일자 ${year}년 ${month}월 ${day}일"
 
-                }
+                    if(patientCase.feedbackreplytime.isNullOrBlank()){
+                        // 리뷰에 의사 댓글 없을 때
+                        wrapDoctorAnswerFeedbackAdd.visibility = View.VISIBLE
+                        wrapDoctorAnswerFeedback.visibility = View.GONE
 
-                if (patientCase.feedbacktime.isEmpty()) {
-                    patientReview.text = "사용자가 리뷰를 작성하지 않았습니다"
-                } else {
-                    ratedByPatient.rating = patientCase.feedbackstar.toFloat()
-                    ratedByPatient.visibility = View.VISIBLE
-                    ratedByPatient.setIsIndicator(true)
-                    reviewExist.visibility = View.VISIBLE
-                    patientReview.text = patientCase.feedbacktext
-                    patientReview.movementMethod = ScrollingMovementMethod()
-
-                    patientReview.setOnTouchListener { v, event ->
-
-                        if(v.isVerticalScrollBarEnabled) {
-
-                            answeredScrollView.requestDisallowInterceptTouchEvent(true)
-
-                        }else{
-
-                            answeredScrollView.requestDisallowInterceptTouchEvent(false)
-
+                        btnDoctorAnswerFeedbackSubmit.setOnClickListener {
+                            insertReply()
                         }
 
-                        return@setOnTouchListener false
+                    } else {
+                        // 리뷰에 의사 댓글 있을 때
+                        wrapDoctorAnswerFeedbackAdd.visibility = View.GONE
+                        wrapDoctorAnswerFeedback.visibility = View.VISIBLE
+
+                        imgDoctorAnswerFeedback.setImageResource(R.drawable.doctor_m)
+                        lblDoctorAnswerFeedbackName.text = "Dr.${PubVariable.userInfo.nickname}"
+                        lblDoctorAnswerFeedbackContent.text = patientCase.feedbackreply
+                        lblDoctorAnswerFeedbackTime.text =
+                            "답변일자 ${patientCase.feedbackreplytime.subSequence(0, 4)}년" +
+                                    " ${patientCase.feedbackreplytime.subSequence(4, 6)}월" +
+                                    " ${patientCase.feedbackreplytime.subSequence(6, 8)}일"
 
                     }
 
+//                    reviewExist.visibility = View.VISIBLE
+//                    patientReview.text = patientCase.feedbacktext
+//                    patientReview.movementMethod = ScrollingMovementMethod()
+//
+//                    patientReview.setOnTouchListener { v, event ->
+//
+//                        if(v.isVerticalScrollBarEnabled) {
+//
+//                            answeredScrollView.requestDisallowInterceptTouchEvent(true)
+//
+//                        }else{
+//
+//                            answeredScrollView.requestDisallowInterceptTouchEvent(false)
+//
+//                        }
+//
+//                        return@setOnTouchListener false
+//
+//                    }
+
                 }
             }
+            // 답변 미작성
             "Q" -> {
-                doctorAnswerSubmit.text = "답변 등록"
-                patientReview.visibility = View.GONE
-                doctorAnswer.visibility = View.GONE
-                doctorAnswerInput.visibility = View.VISIBLE
-                doctorAnswerInput.movementMethod = ScrollingMovementMethod()
+//                doctorAnswerSubmit.text = "답변 등록"
+//                patientReview.visibility = View.GONE
+//                doctorAnswer.visibility = View.GONE
+//                doctorAnswerInput.visibility = View.VISIBLE
+//                doctorAnswerInput.movementMethod = ScrollingMovementMethod()
+//
+//                doctorAnswerInput.setOnTouchListener { v, event ->
+//
+//                    v.parent.requestDisallowInterceptTouchEvent(true)
+//
+//                    return@setOnTouchListener false
+//
+//                }
+//
+//                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).topToBottom = doctorAnswerInput.id
+//                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).startToStart = doctorAnswerInput.id
+//                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).endToEnd = doctorAnswerInput.id
 
-                doctorAnswerInput.setOnTouchListener { v, event ->
 
-                    v.parent.requestDisallowInterceptTouchEvent(true)
+                wrapDoctorAnswerNotRequest.visibility = View.GONE
+                wrapDoctorAnswerRequest.visibility = View.VISIBLE
+                wrapDoctorAnswerSubmit.visibility = View.VISIBLE
 
-                    return@setOnTouchListener false
-
-                }
-
-                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).topToBottom = doctorAnswerInput.id
-                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).startToStart = doctorAnswerInput.id
-                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).endToEnd = doctorAnswerInput.id
                 doctorAnswerSubmit.setOnClickListener {
                     insertAnswer()
                 }
@@ -310,6 +379,67 @@ class DoctorAnsweredCheckActivity : RootActivity() {
 
     }
 
+    fun insertReply(){
+
+        if(txtDoctorAnswerFeedback.text.isNullOrBlank()){
+
+            Toast.makeText(this@DoctorAnsweredCheckActivity, "글을 입력해주세요.", Toast.LENGTH_SHORT).show()
+
+        } else {
+
+            var map = HashMap<String, String>()
+            map["FEEDBACKREPLY"] = txtDoctorAnswerFeedback.text.toString()
+            map["FEEDBACKREPLYTIME"] = SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
+            map["CKEY"] = patientCase.ckey
+            map["CNUMBER"] = patientCase.cnumber
+
+            ApiUtill().getUPDATE_REPLY().update_reply(map).enqueue(object : Callback<String>{
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Toast.makeText(this@DoctorAnsweredCheckActivity, "리뷰에 대한 답글을 등록하는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+
+                    if(response.isSuccessful){
+
+                        if(response.body() == "S") {
+
+                            // 성공
+                            Toast.makeText(this@DoctorAnsweredCheckActivity, "답글등록성공", Toast.LENGTH_SHORT).show()
+
+                            checkPushInfo2()
+
+                            wrapDoctorAnswerFeedbackAdd.visibility = View.GONE
+                            wrapDoctorAnswerFeedback.visibility = View.VISIBLE
+
+                            imgDoctorAnswerFeedback.setImageResource(R.drawable.doctor_m)
+                            lblDoctorAnswerFeedbackName.text = "Dr.${PubVariable.userInfo.nickname}"
+                            lblDoctorAnswerFeedbackContent.text = map["FEEDBACKREPLY"]
+                            lblDoctorAnswerFeedbackTime.text =
+                                "답변일자" +
+                                " ${map["FEEDBACKREPLYTIME"].toString().subSequence(0, 4)}년" +
+                                " ${map["FEEDBACKREPLYTIME"].toString() .subSequence(4, 6)}월" +
+                                " ${map["FEEDBACKREPLYTIME"].toString() .subSequence(6, 8)}일"
+
+                        } else {
+                            Toast.makeText(this@DoctorAnsweredCheckActivity, "리뷰에 대한 답글을 등록하는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    } else {
+                        Toast.makeText(this@DoctorAnsweredCheckActivity, "리뷰에 대한 답글을 등록하는 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+
+
+
+        }
+
+
+    }
+
+
     //해당 환자의 푸시알림 동의 여부를 확인하는 펑션
     fun checkPushInfo(){
 
@@ -333,6 +463,62 @@ class DoctorAnsweredCheckActivity : RootActivity() {
                         if(pushinfo.SWITCH2 == "On"){
 
                             FCM.function.SendMsgToTarget(pushinfo.TOKEN, "${PubVariable.userInfo.nickname} 선생님이 답변을 등록하였습니다.", FCM.UserType.USER, FCM.PushType.USER_MYQUESTION)
+
+                        }else{
+
+                            println("동의 OFF")
+
+                        }
+
+                        successAlert()
+
+                    }else{
+
+                        successAlert()
+
+                    }
+
+                }else{
+
+                    println(response.message())
+                    println(response.code())
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<ArrayList<pushinfo>>, t: Throwable) {
+                Loading(ProgressBar, ProgressBg, false)
+                println(t.toString())
+            }
+
+        })
+
+    }
+
+    //해당 환자의 푸시알림 동의 여부를 확인하는 펑션
+    fun checkPushInfo2(){
+
+        var map = HashMap<String, String>()
+
+        map["IDKEY"] = answerInfo.uuid
+
+        ApiUtill().getSELECT_CHECKAGREE().select_checkagree(map).enqueue(object :
+            Callback<ArrayList<pushinfo>> {
+
+            override fun onResponse(call: Call<ArrayList<pushinfo>>, response: Response<ArrayList<pushinfo>>) {
+
+                Loading(ProgressBar, ProgressBg, false)
+
+                if(response.isSuccessful){
+
+                    if(response.body()!!.size > 0){
+
+                        var pushinfo : pushinfo = response.body()!![0]
+
+                        if(pushinfo.SWITCH2 == "On"){
+
+                            FCM.function.SendMsgToTarget(pushinfo.TOKEN, "${PubVariable.userInfo.nickname} 선생님이 ${answerInfo.title}질문의 리뷰에 답변을 등록하였습니다.", FCM.UserType.USER, FCM.PushType.USER_FEEDBACKREPLY)
 
                         }else{
 

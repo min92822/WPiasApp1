@@ -2,6 +2,8 @@ package com.phonegap.WPIAS.restApi
 
 class ApiUtill {
 
+    // **************************** U S E R ****************************
+
     // 회원가입
     val insert_user_url : String = "https://wpias.azurewebsites.net/INSERT_USER/"
 
@@ -129,6 +131,17 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
+    // 사용자 질문등록 + 위치추가 + 거주지 추가
+    val insert_questionwitharea_url2 : String = "https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA2/"
+
+    fun getINSERT_QUESTIONWITHAREA2() : ApiInterface {
+        return ApiRequest().getStringResponse(insert_questionwitharea_url2)!!.create(
+            ApiInterface::class.java)
+    }
+
+
+    // **************************** DOCTOR ****************************
+
     // 신규 질문 조회
     val select_newquestion_url : String = "https://wpias.azurewebsites.net/SELECT_NEWQUESTION/"
 
@@ -193,13 +206,10 @@ class ApiUtill {
             ApiInterface::class.java)
     }
 
-    // 사용자 질문등록 + 위치추가 + 거주지 추가
-    val insert_questionwitharea_url2 : String = "https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA2/"
+    // 사용자 리뷰에 댓글 등록
+    val update_reply_url : String = "https://wpias.azurewebsites.net/UPDATE_REPLY/"
 
-    fun getINSERT_QUESTIONWITHAREA2() : ApiInterface {
-        return ApiRequest().getStringResponse(insert_questionwitharea_url2)!!.create(
-            ApiInterface::class.java)
+    fun getUPDATE_REPLY() : ApiInterface {
+        return ApiRequest().getStringResponse(update_reply_url)!!.create(ApiInterface::class.java)
     }
-
-
 }

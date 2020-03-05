@@ -310,4 +310,9 @@ class DoctorAnsweredDetailActivity : RootActivity(){
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadPatientCase()
+    }
+
 }

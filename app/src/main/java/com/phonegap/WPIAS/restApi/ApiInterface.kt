@@ -12,6 +12,8 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
+    // **************************** U S E R ****************************
+
     // 회원가입
     @POST("https://wpias.azurewebsites.net/INSERT_USER")
     @FormUrlEncoded
@@ -98,6 +100,16 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_district(@FieldMap sql : Map<String, String>) : Call<ArrayList<DistrictInfo>>
 
+    // 사용자 질문등록 + 위치추가 + 거주지 추가
+    @POST("https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA2")
+    @FormUrlEncoded
+    fun insert_questionwitharea2(@FieldMap sql : Map<String, String>) : Call<String>
+
+
+
+
+    // **************************** DOCTOR ****************************
+
     // 신규 질문 조회
     @POST("https://wpias.azurewebsites.net/SELECT_NEWQUESTION200103")
     fun select_newquestion() : Call<ArrayList<NewQuestionInfo>>
@@ -137,9 +149,10 @@ interface ApiInterface {
     @FormUrlEncoded
     fun select_myanswercase(@FieldMap sql : Map<String, String>) : Call<ArrayList<MyAnswerCaseInfo>>
 
-    // 사용자 질문등록 + 위치추가 + 거주지 추가
-    @POST("https://wpias.azurewebsites.net/INSERT_QUESTIONWITHAREA2")
+    // 사용자 리뷰에 댓글 등록
+    @POST("https://wpias.azurewebsites.net/UPDATE_REPLY")
     @FormUrlEncoded
-    fun insert_questionwitharea2(@FieldMap sql : Map<String, String>) : Call<String>
+    fun update_reply(@FieldMap sql : Map<String, String>) : Call<String>
+
 
 }

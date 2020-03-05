@@ -15,6 +15,8 @@ data class MyAnswerCaseInfo(@SerializedName("CKEY") @Expose var ckey : String,
                             @SerializedName("FEEDBACKSTAR") @Expose var feedbackstar : String,
                             @SerializedName("FEEDBACKTEXT") @Expose var feedbacktext : String,
                             @SerializedName("FEEDBACKTIME") @Expose var feedbacktime : String,
+                            @SerializedName("FEEDBACKREPLY") @Expose var feedbackreply : String,
+                            @SerializedName("FEEDBACKREPLYTIME") @Expose var feedbackreplytime : String,
                             @SerializedName("ANSWERCONTENTS") @Expose var answercontents : String,
                             @SerializedName("ANSWERDATE") @Expose var answerdate : String) : Serializable
 
@@ -30,6 +32,8 @@ CASESTATUS	String	질문 상태 (Q: 답변요청 A: 답변완료 P:답변미요�
 FEEDBACKSTAR	String	별점
 FEEDBACKTEXT	String	리뷰내용
 FEEDBACKTIME	String	리뷰시간 (값이 ""이면 리뷰 등록 x) yyyyMMddhhmmss
+FEEDBACKREPLY	String	리뷰답글내용
+FEEDBACKREPLYTIME	String	리뷰답글시간 (값이 ""이면 답글 등록 x) yyyyMMddhhmmss
 ANSWERCONTENTS	String	답변내용
 ANSWERDATE	String	yyyyMMddhhmmss
 */

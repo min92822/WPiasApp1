@@ -37,6 +37,7 @@ BURNDATE	String	상처 발생일 yyyy-MM-dd
 NICKNAME	String	사용자 이름
 AGE	String	나이
 GENDER	String	성별 (M/F)
+EMAIL	String	작성자 이메일
 BURNSTYLE	String	화상원인 코드
 BURNNM	String	화상원인 이름
 BURNDETAILCD	String	화상원인 디테일 코드

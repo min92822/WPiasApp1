@@ -48,17 +48,16 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout14"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/bg_alert"
-                    android:paddingBottom="300dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:paddingBottom="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <Button
                         android:id="@+id/closeImage"
@@ -101,28 +100,82 @@
                     <TextView
                         android:id="@+id/patientQuestionContents"
                         android:layout_width="0dp"
-                        android:layout_height="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
                         android:layout_marginTop="16dp"
+                        android:layout_marginEnd="32dp"
                         android:scrollbars="vertical"
                         android:textSize="16dp"
-                        app:layout_constraintEnd_toEndOf="@+id/burnedImage"
-                        app:layout_constraintStart_toStartOf="@+id/burnedImage"
-                        app:layout_constraintTop_toBottomOf="@+id/burnedImage" />
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/doctorAnswerWrapper"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/patientQuestionContents">
+                        app:layout_constraintTop_toBottomOf="@+id/burnedImage" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/doctorAnswerWrapper"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/bg_alert"
+                    android:paddingBottom="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout14"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/wrapDoctorAnswerNotRequest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imgDoctorAnswerNotRequest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/qa_chat_1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/lblDoctorAnswerNotRequest"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="사용자가 답변요청을 하지 않은 경과 입니다."
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imgDoctorAnswerNotRequest" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/wrapDoctorAnswerRequest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout18"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:background="@color/light_blue_grey"
+                            android:background="@drawable/bg_skyblue_radius_top"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -132,8 +185,8 @@
                                 android:layout_width="75dp"
                                 android:layout_height="75dp"
                                 android:layout_marginStart="24dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 android:src="@drawable/doctor_m"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -171,83 +224,294 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <TextView
-                            android:id="@+id/doctorAnswer"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/wrapDoctorAnswerAnswered"
                             android:layout_width="0dp"
-                            android:layout_height="200dp"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="24dp"
-                            android:gravity="top|left"
-                            android:textSize="16dp"
-                            android:scrollbars="vertical"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout18" />
+                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
 
-                        <EditText
-                            android:id="@+id/doctorAnswerInput"
+                            <TextView
+                                android:id="@+id/doctorAnswer"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="32dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="32dp"
+                                android:gravity="top|left"
+                                android:scrollbars="vertical"
+                                android:textSize="16dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/wrapDoctorAnswerReview"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="50dp"
+                                android:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/doctorAnswer">
+
+                                <View
+                                    android:id="@+id/view9"
+                                    android:layout_width="0dp"
+                                    android:layout_height="1dp"
+                                    android:layout_marginStart="50dp"
+                                    android:layout_marginEnd="50dp"
+                                    android:background="@color/warm_grey"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/reviewExist"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:textSize="16dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+                                <RatingBar
+                                    android:id="@+id/ratedByPatient"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:theme="@style/ratingBar"
+                                    android:visibility="gone"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/reviewExist" />
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/wrapDoctorAnswerPatientReview"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:background="@color/white_two"
+                                    android:visibility="gone"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/ratedByPatient">
+
+                                    <ImageView
+                                        android:id="@+id/imgDoctorAnswerPatientReview"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:layout_marginStart="24dp"
+                                        android:layout_marginTop="16dp"
+                                        android:src="@drawable/male"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/lblDoctorAnswerPatientReviewName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="환자임"
+                                        android:textSize="14dp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imgDoctorAnswerPatientReview"
+                                        app:layout_constraintStart_toEndOf="@+id/imgDoctorAnswerPatientReview"
+                                        app:layout_constraintTop_toTopOf="@+id/imgDoctorAnswerPatientReview" />
+
+                                    <TextView
+                                        android:id="@+id/lblDoctorAnswerPatientReviewContent"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="30dp"
+                                        android:lineSpacingExtra="4dp"
+                                        android:textSize="16dp"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/lblDoctorAnswerPatientReviewName"
+                                        app:layout_constraintTop_toBottomOf="@id/imgDoctorAnswerPatientReview" />
+
+                                    <TextView
+                                        android:id="@+id/lblDoctorAnswerPatientReviewTime"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="24dp"
+                                        android:text="2020년 00월 00일"
+                                        android:textColor="@color/warm_grey"
+                                        android:textSize="12dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="@id/lblDoctorAnswerPatientReviewContent"
+                                        app:layout_constraintTop_toBottomOf="@id/lblDoctorAnswerPatientReviewContent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/wrapDoctorAnswerFeedbackAdd"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/wrapDoctorAnswerPatientReview">
+
+                                    <EditText
+                                        android:id="@+id/txtDoctorAnswerFeedback"
+                                        android:layout_width="0dp"
+                                        android:layout_height="100dp"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_marginTop="16dp"
+                                        android:layout_marginEnd="16dp"
+                                        android:background="@drawable/btn_cause_unfocused"
+                                        android:ems="10"
+                                        android:gravity="top"
+                                        android:hint="리뷰에 대한 답글을 작성해주세요"
+                                        android:inputType="textMultiLine"
+                                        android:padding="10dp"
+                                        android:textSize="14dp"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <Button
+                                        android:id="@+id/btnDoctorAnswerFeedbackSubmit"
+                                        style="@style/Widget.AppCompat.Button.Borderless"
+                                        android:layout_width="0dp"
+                                        android:layout_height="40dp"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@drawable/btn_blue"
+                                        android:text="답글 등록"
+                                        android:textColor="@color/white"
+                                        android:textSize="14dp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintEnd_toEndOf="@id/txtDoctorAnswerFeedback"
+                                        app:layout_constraintStart_toStartOf="@id/txtDoctorAnswerFeedback"
+                                        app:layout_constraintTop_toBottomOf="@id/txtDoctorAnswerFeedback" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/wrapDoctorAnswerFeedback"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginEnd="16dp"
+                                    android:background="@color/white_two"
+                                    android:visibility="gone"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/wrapDoctorAnswerFeedbackAdd">
+
+                                    <View
+                                        android:id="@+id/view8"
+                                        android:layout_width="0dp"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="24dp"
+                                        android:layout_marginEnd="24dp"
+                                        android:background="@color/warm_grey"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/imgDoctorAnswerFeedback"
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:layout_marginStart="24dp"
+                                        android:layout_marginTop="24dp"
+                                        android:src="@drawable/doctor_m"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+                                    <TextView
+                                        android:id="@+id/lblDoctorAnswerFeedbackName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="Dr.의사임"
+                                        android:textSize="14dp"
+                                        android:textStyle="bold"
+                                        app:layout_constraintBottom_toBottomOf="@+id/imgDoctorAnswerFeedback"
+                                        app:layout_constraintStart_toEndOf="@+id/imgDoctorAnswerFeedback"
+                                        app:layout_constraintTop_toTopOf="@+id/imgDoctorAnswerFeedback" />
+
+                                    <TextView
+                                        android:id="@+id/lblDoctorAnswerFeedbackContent"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="30dp"
+                                        android:lineSpacingExtra="4dp"
+                                        android:textSize="16dp"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/lblDoctorAnswerFeedbackName"
+                                        app:layout_constraintTop_toBottomOf="@+id/imgDoctorAnswerFeedback" />
+
+                                    <TextView
+                                        android:id="@+id/lblDoctorAnswerFeedbackTime"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="24dp"
+                                        android:text="2020년 00월 00일"
+                                        android:textColor="@color/warm_grey"
+                                        android:textSize="12dp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/lblDoctorAnswerFeedbackContent"
+                                        app:layout_constraintTop_toBottomOf="@+id/lblDoctorAnswerFeedbackContent" />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/wrapDoctorAnswerSubmit"
                             android:layout_width="0dp"
-                            android:layout_height="200dp"
-                            android:layout_marginStart="24dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
-                            android:layout_marginEnd="24dp"
-                            android:paddingTop="8dp"
-                            android:paddingLeft="9dp"
-                            android:gravity="top|left"
-                            android:textSize="16dp"
-                            android:background="@drawable/edit_text_shape2"
-                            android:scrollbars="vertical"
+                            android:layout_marginEnd="16dp"
                             android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout18" />
+                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout18">
 
-                        <Button
-                            android:id="@+id/doctorAnswerSubmit"
-                            style="@style/Widget.AppCompat.Button.Borderless"
-                            android:layout_width="0dp"
-                            android:layout_height="35dp"
-                            android:layout_marginTop="50dp"
-                            android:background="@drawable/btn_blue"
-                            android:textColor="@color/white"
-                            app:layout_constraintEnd_toEndOf="@+id/doctorAnswer"
-                            app:layout_constraintStart_toStartOf="@+id/doctorAnswer"
-                            app:layout_constraintTop_toBottomOf="@+id/doctorAnswer" />
+                            <Button
+                                android:id="@+id/doctorAnswerSubmit"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="16dp"
+                                android:background="@drawable/btn_blue"
+                                android:text="답변 등록"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/doctorAnswerInput" />
 
-                        <TextView
-                            android:id="@+id/reviewExist"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="48dp"
-                            android:text="사용자가 리뷰를 작성했습니다"
-                            android:visibility="gone"
-                            app:layout_constraintTop_toBottomOf="@+id/doctorAnswerSubmit"
-                            app:layout_constraintStart_toStartOf="@+id/doctorAnswerSubmit"
-                            app:layout_constraintEnd_toEndOf="@id/doctorAnswerSubmit" />
+                            <EditText
+                                android:id="@+id/doctorAnswerInput"
+                                android:layout_width="0dp"
+                                android:layout_height="250dp"
+                                android:background="@drawable/edit_text_shape2"
+                                android:gravity="top|left"
+                                android:paddingLeft="9dp"
+                                android:paddingTop="8dp"
+                                android:scrollbars="vertical"
+                                android:textSize="16dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <RatingBar
-                            android:id="@+id/ratedByPatient"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="60dp"
-                            android:theme="@style/ratingBar"
-                            android:visibility="gone"
-                            app:layout_constraintEnd_toEndOf="@+id/reviewExist"
-                            app:layout_constraintStart_toStartOf="@+id/reviewExist"
-                            app:layout_constraintTop_toBottomOf="@+id/reviewExist" />
-
-                        <TextView
-                            android:id="@+id/patientReview"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:scrollbars="vertical"
-                            app:layout_constraintEnd_toEndOf="@+id/doctorAnswerSubmit"
-                            app:layout_constraintStart_toStartOf="@+id/doctorAnswerSubmit"
-                            app:layout_constraintTop_toBottomOf="@+id/ratedByPatient" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
