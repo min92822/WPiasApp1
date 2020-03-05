@@ -97,6 +97,16 @@
                         app:layout_constraintStart_toStartOf="@+id/closeImage"
                         app:layout_constraintTop_toBottomOf="@+id/closeImage" />
 
+                    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+                        android:id="@+id/burnedImage2"
+                        android:layout_width="0dp"
+                        android:layout_height="350dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="@+id/overviewImage"
+                        app:layout_constraintStart_toStartOf="@+id/closeImage"
+                        app:layout_constraintTop_toBottomOf="@+id/closeImage" />
+
                     <TextView
                         android:id="@+id/patientQuestionContents"
                         android:layout_width="0dp"

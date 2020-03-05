@@ -84,58 +84,6 @@ class DoctorAnsweredCheckActivity : RootActivity() {
 
         btn_back.setOnClickListener { onBackPressed() }
 
-        closeImage.setOnClickListener {
-
-            Glide.with(this)
-                .asBitmap()
-                .load(patientCase.imageurl1)
-                .into(object : CustomTarget<Bitmap>(){
-
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                    }
-
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?
-                    ) {
-                        burnedImage.setImage(ImageSource.bitmap(resource))
-                    }
-
-                })
-
-            closeImage.setBackgroundResource(R.color.windows_blue)
-            closeImage.setTextColor(ContextCompat.getColor(this, R.color.white))
-            overviewImage.setBackgroundResource(R.drawable.btn_stroke)
-            overviewImage.setTextColor(ContextCompat.getColor(this, R.color.windows_blue))
-
-        }
-
-        overviewImage.setOnClickListener {
-
-            Glide.with(this)
-                .asBitmap()
-                .load(patientCase.imageurl2)
-                .into(object : CustomTarget<Bitmap>(){
-
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                    }
-
-                    override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?
-                    ) {
-                        burnedImage.setImage(ImageSource.bitmap(resource))
-                    }
-
-                })
-
-            overviewImage.setBackgroundResource(R.color.windows_blue)
-            overviewImage.setTextColor(ContextCompat.getColor(this, R.color.white))
-            closeImage.setBackgroundResource(R.drawable.btn_stroke)
-            closeImage.setTextColor(ContextCompat.getColor(this, R.color.windows_blue))
-
-        }
-
         Glide.with(this)
             .asBitmap()
             .load(patientCase.imageurl1)
@@ -153,54 +101,60 @@ class DoctorAnsweredCheckActivity : RootActivity() {
 
             })
 
-        txt_title.text = answerInfo.title
+        Glide.with(this)
+            .asBitmap()
+            .load(patientCase.imageurl2)
+            .into(object : CustomTarget<Bitmap>(){
 
+                override fun onLoadCleared(placeholder: Drawable?) {
+                }
+
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    burnedImage2.setImage(ImageSource.bitmap(resource))
+                }
+
+            })
+
+        closeImage.setOnClickListener {
+            burnedImage.visibility = View.VISIBLE
+            burnedImage2.visibility = View.INVISIBLE
+            closeImage.setBackgroundResource(R.color.windows_blue)
+            closeImage.setTextColor(ContextCompat.getColor(this, R.color.white))
+            overviewImage.setBackgroundResource(R.drawable.btn_stroke)
+            overviewImage.setTextColor(ContextCompat.getColor(this, R.color.windows_blue))
+        }
+
+        overviewImage.setOnClickListener {
+            burnedImage.visibility = View.INVISIBLE
+            burnedImage2.visibility = View.VISIBLE
+            overviewImage.setBackgroundResource(R.color.windows_blue)
+            overviewImage.setTextColor(ContextCompat.getColor(this, R.color.white))
+            closeImage.setBackgroundResource(R.drawable.btn_stroke)
+            closeImage.setTextColor(ContextCompat.getColor(this, R.color.windows_blue))
+        }
+
+        txt_title.text = answerInfo.title
         patientQuestionContents.text = patientCase.contents
 
         answeredScrollView.setOnTouchListener { v, event ->
-
             doctorAnswerInput.parent.requestDisallowInterceptTouchEvent(false)
-//            doctorAnswer.parent.requestDisallowInterceptTouchEvent(false)
-//            patientQuestionContents.parent.requestDisallowInterceptTouchEvent(false)
-
             return@setOnTouchListener false
-
         }
 
-//        patientQuestionContents.setOnTouchListener { v, event ->
-//
-//            if(v.isVerticalScrollBarEnabled) {
-//
-//                answeredScrollView.requestDisallowInterceptTouchEvent(true)
-//
-//            }else{
-//
-//                answeredScrollView.requestDisallowInterceptTouchEvent(false)
-//
-//            }
-//
-//            return@setOnTouchListener false
-//
-//        }
-//
-//        patientQuestionContents.movementMethod = ScrollingMovementMethod()
-
         doctorName.text = "Dr.${PubVariable.userInfo.nickname}"
-
         doctorDept.text = PubVariable.userInfo.remark.replace('_', ' ')
 
         when (patientCase.casestatus) {
             // 답변미요청
             "P" -> {
-//                doctorAnswerSubmit.text = "답변 미요청"
-//                doctorAnswer.text = "사용자가 답변요청을 하지 않은 경과 입니다."
-//                patientReview.visibility = View.GONE
                 wrapDoctorAnswerRequest.visibility = View.GONE
                 wrapDoctorAnswerNotRequest.visibility = View.VISIBLE
 
                 imgDoctorAnswerNotRequest.setImageResource(R.drawable.qa_chat_1)
                 lblDoctorAnswerNotRequest.text = "사용자가 답변요청을 하지 않은 경과 입니다."
-
             }
 
             // 답변 완료
@@ -212,26 +166,7 @@ class DoctorAnsweredCheckActivity : RootActivity() {
                 ratedByPatient.visibility = View.GONE
                 wrapDoctorAnswerSubmit.visibility = View.GONE
 
-//                doctorAnswerSubmit.text = "답변 완료"
                 doctorAnswer.text = patientCase.answercontents
-//                doctorAnswer.movementMethod = ScrollingMovementMethod()
-//
-//                doctorAnswer.setOnTouchListener { v, event ->
-//
-//                    if(v.isVerticalScrollBarEnabled) {
-//
-//                        answeredScrollView.requestDisallowInterceptTouchEvent(true)
-//
-//                    }else{
-//
-//                        answeredScrollView.requestDisallowInterceptTouchEvent(false)
-//
-//                    }
-//
-//                    return@setOnTouchListener false
-//
-//                }
-
 
                 if (patientCase.feedbacktime.isNullOrBlank()) {
                     reviewExist.text = "사용자가 리뷰를 작성하지 않았습니다."
@@ -283,50 +218,10 @@ class DoctorAnsweredCheckActivity : RootActivity() {
                                     " ${patientCase.feedbackreplytime.subSequence(6, 8)}일"
 
                     }
-
-//                    reviewExist.visibility = View.VISIBLE
-//                    patientReview.text = patientCase.feedbacktext
-//                    patientReview.movementMethod = ScrollingMovementMethod()
-//
-//                    patientReview.setOnTouchListener { v, event ->
-//
-//                        if(v.isVerticalScrollBarEnabled) {
-//
-//                            answeredScrollView.requestDisallowInterceptTouchEvent(true)
-//
-//                        }else{
-//
-//                            answeredScrollView.requestDisallowInterceptTouchEvent(false)
-//
-//                        }
-//
-//                        return@setOnTouchListener false
-//
-//                    }
-
                 }
             }
             // 답변 미작성
             "Q" -> {
-//                doctorAnswerSubmit.text = "답변 등록"
-//                patientReview.visibility = View.GONE
-//                doctorAnswer.visibility = View.GONE
-//                doctorAnswerInput.visibility = View.VISIBLE
-//                doctorAnswerInput.movementMethod = ScrollingMovementMethod()
-//
-//                doctorAnswerInput.setOnTouchListener { v, event ->
-//
-//                    v.parent.requestDisallowInterceptTouchEvent(true)
-//
-//                    return@setOnTouchListener false
-//
-//                }
-//
-//                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).topToBottom = doctorAnswerInput.id
-//                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).startToStart = doctorAnswerInput.id
-//                (doctorAnswerSubmit.layoutParams as ConstraintLayout.LayoutParams).endToEnd = doctorAnswerInput.id
-
-
                 wrapDoctorAnswerNotRequest.visibility = View.GONE
                 wrapDoctorAnswerRequest.visibility = View.VISIBLE
                 wrapDoctorAnswerSubmit.visibility = View.VISIBLE
