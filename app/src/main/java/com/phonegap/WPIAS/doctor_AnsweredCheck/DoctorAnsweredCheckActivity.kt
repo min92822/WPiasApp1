@@ -222,6 +222,7 @@ class DoctorAnsweredCheckActivity : RootActivity() {
             }
             // 답변 미작성
             "Q" -> {
+                wrapDoctorAnswerAnswered.visibility = View.GONE
                 wrapDoctorAnswerNotRequest.visibility = View.GONE
                 wrapDoctorAnswerRequest.visibility = View.VISIBLE
                 wrapDoctorAnswerSubmit.visibility = View.VISIBLE

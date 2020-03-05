@@ -15,6 +15,7 @@ import com.phonegap.WPIAS.publicObject.UserToken
 import com.phonegap.WPIAS.public_function.FCM
 import com.phonegap.WPIAS.restApi.ApiUtill
 import com.phonegap.WPIAS.user_Main.MainActivity
+import com.phonegap.WPIAS.user_MyCase.MyCaseActivity
 import com.phonegap.WPIAS.user_MyQuestion.MyQuestionActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -132,7 +133,7 @@ class LaunchActivity : RootActivity() {
                                     startActivity(
                                         Intent(
                                             this@LaunchActivity,
-                                            MyQuestionActivity::class.java
+                                            MyCaseActivity::class.java
                                         ).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                     )
                                 }

@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".user_MyCase.MyCaseActivity">
 
     <include
@@ -119,9 +121,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="32dp"
+                    android:layout_marginBottom="180dp"
                     android:background="@drawable/bg_alert"
-                    android:paddingBottom="50dp"
+                    android:paddingBottom="150dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
