@@ -52,7 +52,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class ConsultingActivity : RootActivity(){
+class ConsultingActivity : RootActivity() {
 
     //on Activity Result Request Code 상수
     val REQUEST_TAKE_PHOTO_10 = 1
@@ -61,11 +61,11 @@ class ConsultingActivity : RootActivity(){
     val GET_IMAGE_FROM_GALLERY_20 = 4
 
     //storage 문자열
-    val storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=storagewpias;AccountKey=G+ZyYwRLvxTFebMpLqsSeNI/V+1ALImJqs1MAG1rD315BN1TRO7Q8CpcKv0KOmRB9hasKF4pJqZkTEJ3TEAlPw=="
+    val storageConnectionString = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
     //AzureAsyncTask에 들어가는 image uri 및 input stream 배열
-    lateinit var imageUri : Uri
-    lateinit var imageUri2 : Uri
+    lateinit var imageUri: Uri
+    lateinit var imageUri2: Uri
     var inputStreamArr = ArrayList<InputStream>()
     var imageLengthArr = ArrayList<Int>()
 
@@ -118,63 +118,69 @@ class ConsultingActivity : RootActivity(){
     //validation을 위한 이벤트 이 펑션에 등록
     //액티비티 시작될때 초기화될 설정들 정리
     @SuppressLint("SimpleDateFormat")
-    fun eventInit(){
+    fun eventInit() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         residentCity.isEnabled = false
         residentDistrict.isEnabled = false
         residentDetailLocation.isEnabled = false
-        whenBurned.addTextChangedListener(object : TextWatcher{
+        whenBurned.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Validation.vali.burnDateV = s.toString()
             }
         })
 
         consultingTitle.setOnTouchListener { v, event ->
-            if(v.id == R.id.consultingTitle){
+            if (v.id == R.id.consultingTitle) {
                 v.parent.requestDisallowInterceptTouchEvent(true)
-                when(event.action){
+                when (event.action) {
                     MotionEvent.ACTION_UP -> v.parent.requestDisallowInterceptTouchEvent(false)
                 }
             }
             return@setOnTouchListener false
         }
 
-        consultingTitle.addTextChangedListener(object : TextWatcher{
+        consultingTitle.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Validation.vali.consultingTitleV = s.toString()
             }
         })
 
         consultingContents.setOnTouchListener { v, event ->
-            if(v.id == R.id.consultingContents){
+            if (v.id == R.id.consultingContents) {
                 v.parent.requestDisallowInterceptTouchEvent(true)
-                when(event.action){
+                when (event.action) {
                     MotionEvent.ACTION_UP -> v.parent.requestDisallowInterceptTouchEvent(false)
                 }
             }
             return@setOnTouchListener false
         }
 
-        consultingContents.addTextChangedListener(object : TextWatcher{
+        consultingContents.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 Validation.vali.contentsV = s.toString()
             }
         })
 
         locationMySelf.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 buttonView.isClickable = false
                 locationSelect.isChecked = false
                 city.isEnabled = false
@@ -182,25 +188,25 @@ class ConsultingActivity : RootActivity(){
                 detailLocation.isEnabled = true
                 city.setSelection(0)
                 district.setSelection(0)
-            }else{
+            } else {
                 buttonView.isClickable = true
             }
         }
 
         locationSelect.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 buttonView.isClickable = false
                 locationMySelf.isChecked = false
                 city.isEnabled = true
                 detailLocation.isEnabled = false
                 detailLocation.setText("")
-            }else{
+            } else {
                 buttonView.isClickable = true
             }
         }
 
         residentMySelf.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 buttonView.isClickable = false
                 residentSelect.isChecked = false
                 residentCity.isEnabled = false
@@ -208,19 +214,19 @@ class ConsultingActivity : RootActivity(){
                 residentDetailLocation.isEnabled = true
                 residentCity.setSelection(0)
                 residentDistrict.setSelection(0)
-            }else{
+            } else {
                 buttonView.isClickable = true
             }
         }
 
         residentSelect.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 buttonView.isClickable = false
                 residentMySelf.isChecked = false
                 residentCity.isEnabled = true
                 residentDetailLocation.isEnabled = false
                 residentDetailLocation.setText("")
-            }else{
+            } else {
                 buttonView.isClickable = true
             }
         }
@@ -231,49 +237,73 @@ class ConsultingActivity : RootActivity(){
 
     //앞 뒤 구분 버튼 체크 이벤트
     //버튼 및 버튼 글자 색 변환이 이벤트에 걸려있음
-    fun bodyPartCheck(){
+    fun bodyPartCheck() {
 
         bodyFront.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
-                bodyBack.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
+            if (isChecked) {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+                bodyBack.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
                 frontActivated()
-            }else{
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
-                bodyBack.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
+            } else {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
+                bodyBack.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
         }
 
         bodyBack.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
-                bodyFront.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
+            if (isChecked) {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+                bodyFront.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
                 backActivated()
-            }else{
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
-                bodyFront.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
+            } else {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
+                bodyFront.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
         }
     }
 
     //앞 버튼 터치시 실행되는 리싸이클러 뷰
-    fun frontActivated(){
+    fun frontActivated() {
         var partListAdapter =
             PartListAdapter(bodyPartFront)
 
@@ -282,7 +312,7 @@ class ConsultingActivity : RootActivity(){
     }
 
     //뒤 버튼 터치시 실행되는 리싸이클러 뷰
-    fun backActivated(){
+    fun backActivated() {
         var partListAdapter =
             PartListAdapter(bodyPartBack)
 
@@ -291,65 +321,101 @@ class ConsultingActivity : RootActivity(){
     }
 
     //성별 버튼 터치 펑션
-    fun genderTouch(){
+    fun genderTouch() {
         male.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
-                female.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
+            if (isChecked) {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+                female.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
                 Validation.vali.genderV = "M"
-            }else{
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
-                female.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
+            } else {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
+                female.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
         }
 
         female.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
-                male.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
+            if (isChecked) {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
+                male.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
                 Validation.vali.genderV = "F"
-            }else{
-                buttonView.setTextColor(ContextCompat.getColor(this,
-                    R.color.ocean_blue
-                ))
-                male.setTextColor(ContextCompat.getColor(this,
-                    R.color.white
-                ))
+            } else {
+                buttonView.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.ocean_blue
+                    )
+                )
+                male.setTextColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.white
+                    )
+                )
             }
         }
     }
 
     //연령 spinner 펑션
-    fun ageSpinnerPopup(){
-        var arrayAdapter : ArrayAdapter<String>? = null
-        var generation = arrayListOf("", "0~3세", "4~6세", "7~15세", "16~20세", "21~30세", "31~40세", "41~50세", "51~60세", "61세이상")
+    fun ageSpinnerPopup() {
+        var arrayAdapter: ArrayAdapter<String>? = null
+        var generation = arrayListOf(
+            "",
+            "0~3세",
+            "4~6세",
+            "7~15세",
+            "16~20세",
+            "21~30세",
+            "31~40세",
+            "41~50세",
+            "51~60세",
+            "61세이상"
+        )
 
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, generation)
         age.adapter = arrayAdapter
-        age.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        age.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                Validation.vali.ageV = if(position == 0){
+                Validation.vali.ageV = if (position == 0) {
                     ""
-                }else{
+                } else {
                     age.selectedItem.toString()
                 }
             }
@@ -358,11 +424,11 @@ class ConsultingActivity : RootActivity(){
 
     //본인 눌렀을때 펑션
     //spinner age에 본인 연령대에 맞는 아이템으로 셀렉션을 한다.
-    fun identifySetSpinnerAndGender(){
+    fun identifySetSpinnerAndGender() {
 
         checkIdentify.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                when{
+            if (isChecked) {
+                when {
                     getAge(PubVariable.userInfo.birthday) > 60 -> age.setSelection(9)
                     getAge(PubVariable.userInfo.birthday) > 50 -> age.setSelection(8)
                     getAge(PubVariable.userInfo.birthday) > 40 -> age.setSelection(7)
@@ -374,22 +440,22 @@ class ConsultingActivity : RootActivity(){
                     getAge(PubVariable.userInfo.birthday) >= 0 -> age.setSelection(1)
                 }
 
-                when(PubVariable.userInfo.gender){
+                when (PubVariable.userInfo.gender) {
                     "M" -> male.isChecked = true
                     "F" -> female.isChecked = true
                 }
 
-            }else{
+            } else {
                 age.setSelection(0)
             }
         }
     }
 
     //나이 구하는 펑션
-    fun getAge(birthYear : String) : Int{
+    fun getAge(birthYear: String): Int {
         var current = Calendar.getInstance()
-        var currentYear  = current.get(Calendar.YEAR)
-        var age = currentYear - birthYear.substring(0,4).toInt()
+        var currentYear = current.get(Calendar.YEAR)
+        var age = currentYear - birthYear.substring(0, 4).toInt()
 
         return age
     }
@@ -404,14 +470,14 @@ class ConsultingActivity : RootActivity(){
     }
 
     //최근 치료받은 진료과 뿌려주는 펑션
-    fun deptRecyclerViewActivated(){
+    fun deptRecyclerViewActivated() {
         recentlyVisitRecyclerView.layoutManager = GridLayoutManager(this, 3)
         recentlyVisitRecyclerView.adapter =
             DeptAdapter()
     }
 
     //질문 사항 체크박스
-    fun questionRecyclerViewActivated(){
+    fun questionRecyclerViewActivated() {
         questionRecyclerView.layoutManager = GridLayoutManager(this, 3)
         questionRecyclerView.adapter =
             QuestionAdapter()
@@ -419,7 +485,7 @@ class ConsultingActivity : RootActivity(){
 
     //화상입은 시기 캘린더 팝업 이벤트
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    fun popupCalendar(){
+    fun popupCalendar() {
         var now = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             now().toString()
         } else {
@@ -434,12 +500,17 @@ class ConsultingActivity : RootActivity(){
         MYmonth = month.toInt()
         MYday = day.toInt()
 
-        whenBurned.setOnClickListener{
+        whenBurned.setOnClickListener {
             val dp = DatePickerDialog(
                 this,
                 android.app.AlertDialog.THEME_HOLO_DARK,
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    whenBurned.setText("${year}-${(month + 1).toString().padStart(2,'0')}-${dayOfMonth.toString().padStart(2, '0')}")
+                    whenBurned.setText(
+                        "${year}-${(month + 1).toString().padStart(
+                            2,
+                            '0'
+                        )}-${dayOfMonth.toString().padStart(2, '0')}"
+                    )
                 },
                 MYyear,
                 MYmonth,
@@ -455,7 +526,7 @@ class ConsultingActivity : RootActivity(){
 
     //화상입은 시기 체크박스 이벤트
     @SuppressLint("SetTextI18n")
-    fun burnedHistory(){
+    fun burnedHistory() {
         recentlyBurnedWrapper.setOnClickListener {
             recentlyBurned.isChecked = true
         }
@@ -464,40 +535,45 @@ class ConsultingActivity : RootActivity(){
         }
 
         recentlyBurned.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 pastBurned.isChecked = false
-                whenBurned.setText("$MYyear-${MYmonth.toString().padStart(2,'0')}-${MYday.toString().padStart(2,'0')}")
+                whenBurned.setText(
+                    "$MYyear-${MYmonth.toString().padStart(
+                        2,
+                        '0'
+                    )}-${MYday.toString().padStart(2, '0')}"
+                )
                 Validation.vali.burnDateV = whenBurned.text.toString()
                 Validation.vali.scarStyleV = "burn"
             }
         }
 
         pastBurned.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
+            if (isChecked) {
                 recentlyBurned.isChecked = false
                 whenBurned.setText("")
                 whenBurned.hint = "화상을 입은 날짜를 입력해주세요."
                 Validation.vali.scarStyleV = "scar"
             }
         }
-        recentlyBurned.isChecked =true
+        recentlyBurned.isChecked = true
     }
 
     //본인 체크박스 이벤트
-    fun identifyCheckBox(){
+    fun identifyCheckBox() {
         checkIdentifyWrapper.setOnClickListener {
             checkIdentify.isChecked = !checkIdentify.isChecked
         }
     }
 
     //부위 촬영 클릭시 팝업 이벤트
-    fun photoGraphingAlert(){
+    fun photoGraphingAlert() {
         shortDistanceShot.setOnClickListener { shortDistancePopup() }
         longDistanceShot.setOnClickListener { longDistancePopup() }
     }
 
     //부위 촬영 팝업(10cm)
-    fun shortDistancePopup(){
+    fun shortDistancePopup() {
         cameraMode = "short"
 
         var dialog = Dialog(this)
@@ -524,7 +600,7 @@ class ConsultingActivity : RootActivity(){
 
     //부위 촬영 팝업(20cm)
     @SuppressLint("SetTextI18n")
-    fun longDistancePopup(){
+    fun longDistancePopup() {
         cameraMode = "long"
 
         var dialog = Dialog(this)
@@ -556,9 +632,9 @@ class ConsultingActivity : RootActivity(){
     //핸드폰에 내장된 카메라 관련 어플들을 불러오는 펑션
     //촬영 모드 구분
     private fun dispatchTakePictureIntent() {
-        if(cameraMode == "short") {
+        if (cameraMode == "short") {
             startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_10)
-        }else{
+        } else {
             startActivityForResult(Intent(this, CameraActivity::class.java), REQUEST_TAKE_PHOTO_20)
         }
 //        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -589,13 +665,13 @@ class ConsultingActivity : RootActivity(){
     }
 
     //앨범에서 이미지 가져오는 펑션
-    fun fromAlbum(){
-        if(cameraMode == "short") {
+    fun fromAlbum() {
+        if (cameraMode == "short") {
             startActivityForResult(
                 Intent(Intent.ACTION_PICK).setType(MediaStore.Images.Media.CONTENT_TYPE),
                 GET_IMAGE_FROM_GALLERY_10
             )
-        }else{
+        } else {
             startActivityForResult(
                 Intent(Intent.ACTION_PICK).setType(MediaStore.Images.Media.CONTENT_TYPE),
                 GET_IMAGE_FROM_GALLERY_20
@@ -608,17 +684,17 @@ class ConsultingActivity : RootActivity(){
 
         super.onActivityResult(requestCode, resultCode, data)
 
-        var bitmap : Bitmap? = null
+        var bitmap: Bitmap? = null
 
         //사진 촬영으로 이미지 가져옴
-        if(resultCode == Activity.RESULT_OK){
-            when(requestCode) {
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
                 REQUEST_TAKE_PHOTO_10 -> {
                     var path = data?.getStringExtra("path")
                     bitmap = BitmapFactory.decodeFile(path)
                     imageUri = Uri.fromFile(File(path))
 
-                    if(imageUri.toString().isNotEmpty()){
+                    if (imageUri.toString().isNotEmpty()) {
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
@@ -639,7 +715,7 @@ class ConsultingActivity : RootActivity(){
                     bitmap = BitmapFactory.decodeFile(path)
                     imageUri2 = Uri.fromFile(File(path))
 
-                    if(imageUri2.toString().isNotEmpty()){
+                    if (imageUri2.toString().isNotEmpty()) {
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
@@ -659,18 +735,23 @@ class ConsultingActivity : RootActivity(){
         }
 
         //앨범에서 이미지 가져옴
-        if(resultCode == Activity.RESULT_OK){
-            when(requestCode) {
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
                 GET_IMAGE_FROM_GALLERY_10 -> {
                     imageUri = data?.data!!
 
-                    if(imageUri.toString().isNotEmpty()){
+                    if (imageUri.toString().isNotEmpty()) {
                         Validation.vali.imageUrl1V = imageUri.toString()
                     }
 
                     bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, imageUri))
-                    }else{
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                contentResolver,
+                                imageUri
+                            )
+                        )
+                    } else {
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
                     }
                     shortDistanceShot.setImageBitmap(imageResizing(bitmap!!))
@@ -678,13 +759,18 @@ class ConsultingActivity : RootActivity(){
                 GET_IMAGE_FROM_GALLERY_20 -> {
                     imageUri2 = data?.data!!
 
-                    if(imageUri2.toString().isNotEmpty()){
+                    if (imageUri2.toString().isNotEmpty()) {
                         Validation.vali.imageUrl2V = imageUri2.toString()
                     }
 
                     bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        ImageDecoder.decodeBitmap(ImageDecoder.createSource(contentResolver, imageUri2))
-                    }else{
+                        ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                contentResolver,
+                                imageUri2
+                            )
+                        )
+                    } else {
                         MediaStore.Images.Media.getBitmap(contentResolver, imageUri2)
                     }
                     longDistanceShot.setImageBitmap(imageResizing(bitmap!!))
@@ -696,11 +782,11 @@ class ConsultingActivity : RootActivity(){
     //최종적으로 글 올리는 펑션
     //inputStream 배열에 imageUri를 다 넣은다음 imageuri와 imageurlv를 초기화 한다
     @SuppressLint("SimpleDateFormat")
-    fun submitBurnConsulting(){
+    fun submitBurnConsulting() {
 
         consultingSubmit.setOnClickListener {
 
-            if(validationConsulting()) {
+            if (validationConsulting()) {
                 inputStreamArr.add(contentResolver.openInputStream(imageUri)!!)
                 inputStreamArr.add(contentResolver.openInputStream(imageUri2)!!)
 
@@ -713,44 +799,44 @@ class ConsultingActivity : RootActivity(){
                     imageLengthArr.add(inputStream.available())
                 }
 
-                if(locationSelect.isChecked) {
+                if (locationSelect.isChecked) {
                     var locationParameter = ""
 
-                    if(city.selectedItemPosition == 0 || city.selectedItemPosition == -1){
+                    if (city.selectedItemPosition == 0 || city.selectedItemPosition == -1) {
                         locationParameter = " "
-                    }else{
+                    } else {
                         locationParameter += city.selectedItem
                     }
 
-                    locationParameter += if(district.selectedItemPosition == 0 || district.selectedItemPosition ==-1){
+                    locationParameter += if (district.selectedItemPosition == 0 || district.selectedItemPosition == -1) {
                         ""
-                    }else{
+                    } else {
                         " ${district.selectedItem}"
                     }
 
                     Validation.vali.locationV = locationParameter
-                }else{
+                } else {
                     Validation.vali.locationV = "${detailLocation.text}"
                 }
 
-                if(residentSelect.isChecked) {
+                if (residentSelect.isChecked) {
 
                     var homeAreaParameter = ""
 
-                    if(residentCity.selectedItemPosition == 0 || residentCity.selectedItemPosition == -1){
+                    if (residentCity.selectedItemPosition == 0 || residentCity.selectedItemPosition == -1) {
                         homeAreaParameter = " "
-                    }else{
+                    } else {
                         homeAreaParameter += residentCity.selectedItem
                     }
 
-                    homeAreaParameter += if(residentDistrict.selectedItemPosition == 0 || residentDistrict.selectedItemPosition ==-1){
+                    homeAreaParameter += if (residentDistrict.selectedItemPosition == 0 || residentDistrict.selectedItemPosition == -1) {
                         ""
-                    }else{
+                    } else {
                         " ${residentDistrict.selectedItem}"
                     }
 
                     Validation.vali.homeAreaV = homeAreaParameter
-                }else{
+                } else {
                     Validation.vali.homeAreaV = "${residentDetailLocation.text}"
                 }
 
@@ -760,8 +846,8 @@ class ConsultingActivity : RootActivity(){
                     imageLengthArr
                 ).execute(storageConnectionString)
 
-            }else{
-                when{
+            } else {
+                when {
                     Validation.vali.imageUrl1V.isEmpty() -> failAlert("상세사진 촬영을 진행해주세요")
                     Validation.vali.imageUrl2V.isEmpty() -> failAlert("전체사진 촬영을 진행해주세요")
                     Validation.vali.scarStyleV.isEmpty() -> failAlert("화상 시기를 확인해주세요")
@@ -783,17 +869,17 @@ class ConsultingActivity : RootActivity(){
     }
 
     //등록하기전 app 내 validation 체크
-    fun validationConsulting() : Boolean{
+    fun validationConsulting(): Boolean {
         return Validation.vali.consultingTitleV.isNotEmpty() && Validation.vali.burnDateV.isNotEmpty() && Validation.vali.ageV.isNotEmpty()
-                && Validation.vali.genderV.isNotEmpty()&& (Validation.vali.bodyDetailV.isNotEmpty() || Validation.vali.bodyGitaV.isNotEmpty())
+                && Validation.vali.genderV.isNotEmpty() && (Validation.vali.bodyDetailV.isNotEmpty() || Validation.vali.bodyGitaV.isNotEmpty())
                 && Validation.vali.burnStyleV.isNotEmpty() && (Validation.vali.burnDetailV.isNotEmpty() || Validation.vali.burnGitaV.isNotEmpty())
-                && (Validation.vali.careStyleV.isNotEmpty() || Validation.vali.careGitaV.isNotEmpty())&& Validation.vali.scarStyleV.isNotEmpty()
-                && Validation.vali.proStatusV.isNotEmpty()&& Validation.vali.imageUrl1V.isNotEmpty() && Validation.vali.imageUrl2V.isNotEmpty()
+                && (Validation.vali.careStyleV.isNotEmpty() || Validation.vali.careGitaV.isNotEmpty()) && Validation.vali.scarStyleV.isNotEmpty()
+                && Validation.vali.proStatusV.isNotEmpty() && Validation.vali.imageUrl1V.isNotEmpty() && Validation.vali.imageUrl2V.isNotEmpty()
                 && Validation.vali.contentsV.isNotEmpty()
     }
 
     //업로드 실패 알럿
-    fun failAlert(ment : String){
+    fun failAlert(ment: String) {
         var dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.custom_alert)
@@ -848,26 +934,46 @@ class ConsultingActivity : RootActivity(){
     }
 
     //사진 1:1비율로 만드는 펑션
-    fun imageResizing(bitmap : Bitmap) : Bitmap?{
+    fun imageResizing(bitmap: Bitmap): Bitmap? {
         var matrix = Matrix()
 
         println("bitmap.width: ${bitmap.width}")
         println("bitmap.height: ${bitmap.height}")
 
-        return if(bitmap.width > bitmap.height) {
+        return if (bitmap.width > bitmap.height) {
             //가로가 짧은 사진이 들어오는 곳
             println("ddd")
             matrix.postRotate(90f)
-            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+            Bitmap.createScaledBitmap(
+                Bitmap.createBitmap(
+                    bitmap,
+                    0,
+                    0,
+                    bitmap.width,
+                    bitmap.height,
+                    matrix,
+                    true
+                ), 1200, 1200, true
+            )
         } else {
             //가로가 긴 사진이 들어와야하는데 안들어옴
             println("bbb")
-            Bitmap.createScaledBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true), 1200, 1200, true)
+            Bitmap.createScaledBitmap(
+                Bitmap.createBitmap(
+                    bitmap,
+                    0,
+                    0,
+                    bitmap.width,
+                    bitmap.height,
+                    matrix,
+                    true
+                ), 1200, 1200, true
+            )
         }
     }
 
     //타이틀바 set Text 펑션
-    fun setTitle(){
+    fun setTitle() {
         txt_title.text = "상처상담하기"
         btn_back.setOnClickListener {
             onBackPressed()
@@ -875,7 +981,7 @@ class ConsultingActivity : RootActivity(){
     }
 
     //에딧 텍스트 아닌 부분 클릭시 키보드 사라지는 펑션
-    fun hideKeyboard(){
+    fun hideKeyboard() {
         var imm = (this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager)
 
         imm.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
@@ -883,45 +989,48 @@ class ConsultingActivity : RootActivity(){
     }
 
     //최상위 뷰 태그 및 하위 뷰 태그에 hideKeboard를 적용하는 펑션
-    fun setDescendentViews(view : View){
+    fun setDescendentViews(view: View) {
 
-         if(view !is EditText) {
-             view.setOnTouchListener { v, event ->
-                 hideKeyboard()
-                 return@setOnTouchListener false
-             }
-         }
+        if (view !is EditText) {
+            view.setOnTouchListener { v, event ->
+                hideKeyboard()
+                return@setOnTouchListener false
+            }
+        }
 
-        if(view is RecyclerView){
-            view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener{
+        if (view is RecyclerView) {
+            view.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
                 override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
                     hideKeyboard()
                 }
+
                 override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                     hideKeyboard()
                     return false
                 }
+
                 override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
                 }
             })
         }
 
-        if(view is ViewGroup){
-            for(innerview in view) {
+        if (view is ViewGroup) {
+            for (innerview in view) {
                 setDescendentViews(innerview)
             }
         }
     }
 
-    fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri{
+    fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri {
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        val path =
+            MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
         return Uri.parse(path.toString())
     }
 
     //시,도 정보 받아오는 펑션
-    fun getCity(){
+    fun getCity() {
 
         Loading(ProgressBar, ProgressBg, true)
 
@@ -931,11 +1040,11 @@ class ConsultingActivity : RootActivity(){
                 response: Response<ArrayList<CityInfo>>
             ) {
                 //else, Failure 부분 Toast나 알럿 띄우기
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     Loading(ProgressBar, ProgressBg, false)
                     Location.cityInfo = response.body()!!
                     citySpinnerPopUp()
-                }else{
+                } else {
                     Loading(ProgressBar, ProgressBg, false)
                 }
             }
@@ -947,37 +1056,38 @@ class ConsultingActivity : RootActivity(){
     }
 
     //시,도 보여주는 spinner
-    fun citySpinnerPopUp(){
+    fun citySpinnerPopUp() {
 
         var cityNmArr = ArrayList<String>()
 
         cityNmArr.add("지역선택")
 
-        for(city in Location.cityInfo){
+        for (city in Location.cityInfo) {
             cityNmArr.add(city.citynm)
         }
 
-        var arrayAdapter : ArrayAdapter<String>? = null
+        var arrayAdapter: ArrayAdapter<String>? = null
 
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, cityNmArr)
         city.adapter = arrayAdapter
-        city.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        city.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                if(position != 0){
+                if (position != 0) {
                     district.isEnabled = true
-                    for(detailCity in Location.cityInfo){
-                        if(detailCity.citynm == city.selectedItem.toString()) {
+                    for (detailCity in Location.cityInfo) {
+                        if (detailCity.citynm == city.selectedItem.toString()) {
                             getDistrict(detailCity.citycd, city)
                         }
                     }
-                }else{
+                } else {
                     district.isEnabled = false
                     district.setSelection(0)
                 }
@@ -986,23 +1096,24 @@ class ConsultingActivity : RootActivity(){
 
         residentCity.adapter = arrayAdapter
 
-        residentCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        residentCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
+
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                if(position != 0){
+                if (position != 0) {
                     residentDistrict.isEnabled = true
-                    for(detailCity in Location.cityInfo){
-                        if(detailCity.citynm == residentCity.selectedItem.toString()) {
+                    for (detailCity in Location.cityInfo) {
+                        if (detailCity.citynm == residentCity.selectedItem.toString()) {
                             getDistrict(detailCity.citycd, residentCity)
                         }
                     }
-                }else{
+                } else {
                     residentDistrict.isEnabled = false
                     residentDistrict.setSelection(0)
                 }
@@ -1011,43 +1122,47 @@ class ConsultingActivity : RootActivity(){
     }
 
     //지역, 구 조회
-    fun getDistrict(cityCd : String, view : View){
+    fun getDistrict(cityCd: String, view: View) {
 
         Loading(ProgressBar, ProgressBg, true)
 
         var map = HashMap<String, String>()
         map["CITYCD"] = cityCd
 
-        ApiUtill().getSELECT_DISTRICT().select_district(map).enqueue(object : Callback<ArrayList<DistrictInfo>>{
+        ApiUtill().getSELECT_DISTRICT().select_district(map)
+            .enqueue(object : Callback<ArrayList<DistrictInfo>> {
 
-            override fun onResponse(call: Call<ArrayList<DistrictInfo>>, response: Response<ArrayList<DistrictInfo>>) {
-                Loading(ProgressBar, ProgressBg, false)
+                override fun onResponse(
+                    call: Call<ArrayList<DistrictInfo>>,
+                    response: Response<ArrayList<DistrictInfo>>
+                ) {
+                    Loading(ProgressBar, ProgressBg, false)
 
-                //else, Failure 부분 Toast나 알럿 띄우기
-                if(response.isSuccessful){
-                    Location.districtInfo = response.body()!!
-                    districtSpinnerPopup(view)
+                    //else, Failure 부분 Toast나 알럿 띄우기
+                    if (response.isSuccessful) {
+                        Location.districtInfo = response.body()!!
+                        districtSpinnerPopup(view)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ArrayList<DistrictInfo>>, t: Throwable) {
-                Loading(ProgressBar, ProgressBg, false)
-            }
-        })
+                override fun onFailure(call: Call<ArrayList<DistrictInfo>>, t: Throwable) {
+                    Loading(ProgressBar, ProgressBg, false)
+                }
+            })
     }
 
     // 지역, 구 보여주는 spinner
-    fun districtSpinnerPopup(view : View){
+    fun districtSpinnerPopup(view: View) {
 
         var districtNmArr = ArrayList<String>()
 
         districtNmArr.add("시/군/구 선택")
 
-        for(district in Location.districtInfo){
+        for (district in Location.districtInfo) {
             districtNmArr.add(district.districtnm)
         }
 
-        var arrayAdapter : ArrayAdapter<String>? = null
+        var arrayAdapter: ArrayAdapter<String>? = null
 
         arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, districtNmArr)
 

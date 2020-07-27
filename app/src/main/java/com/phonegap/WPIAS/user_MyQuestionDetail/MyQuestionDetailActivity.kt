@@ -74,7 +74,7 @@ class MyQuestionDetailActivity : RootActivity() {
     var imageLengthArr = ArrayList<Int>()
 
     //storage 문자열
-    val storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=storagewpias;AccountKey=G+ZyYwRLvxTFebMpLqsSeNI/V+1ALImJqs1MAG1rD315BN1TRO7Q8CpcKv0KOmRB9hasKF4pJqZkTEJ3TEAlPw=="
+    val storageConnectionString = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
